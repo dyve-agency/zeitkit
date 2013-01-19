@@ -1,0 +1,7 @@
+= simple_form_for(:session, url: sessions_path) do |f|
+  = f.input :username
+  = f.input :password
+  .form-actions
+    .btn-group
+      = f.button :submit, "Log in"
+      = link_to "Create account", signup_path, class: "btn"

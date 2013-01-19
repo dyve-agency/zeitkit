@@ -10,3 +10,9 @@
         ul.nav
           li
             = link_to "Home", root_path
+          - if current_user
+            li
+              = link_to "Sign out", logout_path
+          - if !current_user
+            li
+              = link_to "Register", signup_path
