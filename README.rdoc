@@ -1,0 +1,2 @@
+== Rails Timetracker
+An open source rails timetracker.

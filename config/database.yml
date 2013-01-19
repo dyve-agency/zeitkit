@@ -1,0 +1,13 @@
+development:
+  adapter: postgresql
+  database: db/development_time
+  pool: 5
+  username: hendricius
+  password:
+
+production:
+  adapter: postgresql
+  database: db/production_time
+  pool: 5
+  username: hendricius
+  password:
