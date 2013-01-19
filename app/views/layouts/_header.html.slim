@@ -8,9 +8,11 @@
       a.brand href="/"= Timetracker
       .nav-collapse.collapse
         ul.nav
-          li
-            = link_to "Home", root_path
           - if current_user
+            li
+              = link_to "My account", user_path(current_user)
+            li
+              = link_to "Clients", user_clients_path(current_user)
             li
               = link_to "Sign out", logout_path
           - if !current_user
