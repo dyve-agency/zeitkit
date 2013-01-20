@@ -14,6 +14,9 @@ table.table
         td = client.hourly_rate
         td
           .btn-group
+            = link_to new_user_worklog_path(client: client), class: "btn" do
+              i.icon-time
+              | Log
             = link_to 'Edit', edit_client_path(client), class: "btn"
             = link_to 'Delete', client, :confirm => 'Are you sure?', method: :delete,
               class: "btn btn-danger"

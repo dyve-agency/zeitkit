@@ -28,6 +28,7 @@ class WorklogsController < ApplicationController
     @worklog = Worklog.new
     @worklog.user = current_user
     @worklog.client = current_user.clients ? current_user.clients.first : nil
+    params[:client] ? @worklog.client = current_user.clients.find(params[:client]) : nil
 
     respond_to do |format|
       format.html # new.html.erb
