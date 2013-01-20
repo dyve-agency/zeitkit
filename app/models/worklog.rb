@@ -10,6 +10,11 @@ class Worklog < ActiveRecord::Base
   belongs_to :user
   belongs_to :client
 
+  validates :user, :client, :start_time, :end_time, presence: true
+
+  validate :end_time_greater_than_start_time
+  validate :duration_less_than_a_year
+
   before_save :set_hourly_rate, on: :create
   before_save :set_price
 
@@ -46,4 +51,21 @@ class Worklog < ActiveRecord::Base
     self.price = self.calc_price.round(2)
   end
 
+  def end_time_ok
+    end_time > start_time
+  end
+
+  # Validations #
+  def duration_less_than_a_year
+    if duration > 1.year && end_time_ok
+      errors.add(:start_time, "Must be smaller than a year.")
+      errors.add(:end_time, "Must be smaller than a year.")
+    end
+  end
+
+  def end_time_greater_than_start_time
+    if !end_time_ok
+      errors.add(:end_time, "Must be greater than start time.")
+    end
+  end
 end
