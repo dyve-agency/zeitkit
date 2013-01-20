@@ -2,7 +2,8 @@ class ClientsController < ApplicationController
   # GET /clients
   # GET /clients.json
   def index
-    @clients = Client.all
+    @user = User.find(params[:user_id])
+    @clients = @user.clients.order("created_at DESC")
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @clients }
@@ -24,6 +25,7 @@ class ClientsController < ApplicationController
   # GET /clients/new.json
   def new
     @client = Client.new
+    @client.user = current_user
 
     respond_to do |format|
       format.html # new.html.erb
@@ -40,6 +42,7 @@ class ClientsController < ApplicationController
   # POST /clients.json
   def create
     @client = Client.new(params[:client])
+    @client.user = current_user
 
     respond_to do |format|
       if @client.save

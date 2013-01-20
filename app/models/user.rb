@@ -9,5 +9,6 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :email
 
   has_many :clients
+  has_many :worklogs
 
 end

@@ -1,0 +1,18 @@
+p#notice = notice
+
+p
+  strong Start:
+  = @worklog.start
+p
+  strong End:
+  = @worklog.end
+p
+  strong User:
+  = @worklog.user_id
+p
+  strong Client:
+  = @worklog.client_id
+
+= link_to 'Edit', edit_worklog_path(@worklog)
+'|
+= link_to 'Back', user_worklogs_path(current_user)

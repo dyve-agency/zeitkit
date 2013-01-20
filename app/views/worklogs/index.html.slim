@@ -1,0 +1,22 @@
+h1 Listing worklogs
+
+table.table
+  thead
+    tr
+      th Client
+      th Start
+      th End
+      th Controls
+  tbody
+    - @worklogs.each do |worklog|
+      tr
+        td = worklog.client.name
+        td = worklog.start
+        td = worklog.end
+        td
+          .btn-group
+            = link_to 'Edit', edit_worklog_path(worklog), class: "btn"
+            = link_to 'Destroy', worklog, :confirm => 'Are you sure?', :method => :delete,
+              class: "btn btn-danger"
+
+= link_to 'New Worklog', new_user_worklog_path, class: "btn btn-primary"

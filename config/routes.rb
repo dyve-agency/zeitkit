@@ -1,8 +1,10 @@
 Timetracker::Application.routes.draw do
+
   root :to => "static#home"
 
   resources :users, only: [:new, :create, :show], shallow: true do
     resources :clients
+    resources :worklogs
   end
 
   resources :sessions

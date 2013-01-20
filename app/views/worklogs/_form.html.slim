@@ -1,0 +1,6 @@
+= simple_form_for @worklog, :url => user_worklogs_path(current_user, @worklog) do |f|
+  = f.input :start
+  = f.input :end
+  = f.input :client_id, collection: current_user.clients
+  .form-actions
+    = f.button :submit
