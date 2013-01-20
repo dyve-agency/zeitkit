@@ -10,8 +10,8 @@ table.table
   tbody
     - @clients.each do |client|
       tr
-        td = client.name
-        td = client.hourly_rate
+        td= client.name
+        td= number_to_currency(client.hourly_rate, :unit => "€")
         td
           .btn-group
             = link_to new_user_worklog_path(client: client), class: "btn" do

@@ -4,4 +4,6 @@ class Client < ActiveRecord::Base
   belongs_to :user
   has_many :worklogs
 
+  validates :user, :name, :hourly_rate, presence: true
+
 end
