@@ -15,8 +15,11 @@ table.table
         td
           .btn-group
             = link_to new_user_worklog_path(client: client), class: "btn" do
-              i.icon-time
-              | Log
+              i.icon-plus
+              | Worklog
+            = link_to user_worklogs_path(client: client), class: "btn" do
+              i.icon-eye-open
+              | Worklogs
             = link_to 'Edit', edit_client_path(client), class: "btn"
             = link_to 'Delete', client, :confirm => 'Are you sure?', method: :delete,
               class: "btn btn-danger"

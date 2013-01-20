@@ -4,6 +4,7 @@ class WorklogsController < ApplicationController
   def index
     @user = User.find(params[:user_id])
     @worklogs = @user.worklogs.order("created_at DESC")
+    params[:client] ? @worklogs = Client.find(params[:client]).worklogs.order("created_at DESC") : nil
 
     respond_to do |format|
       format.html # index.html.erb
