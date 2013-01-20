@@ -6,13 +6,19 @@ table.table
       th Client
       th Start
       th End
+      th Duration hours
+      th Duration min
+      th Price
       th Controls
   tbody
     - @worklogs.each do |worklog|
       tr
-        td = worklog.client.name
-        td = worklog.start
-        td = worklog.end
+        td= worklog.client.name
+        td= worklog.start_time
+        td= worklog.end_time
+        td= worklog.duration_hours
+        td= worklog.duration_minutes
+        td= number_to_currency(worklog.price, :unit => "€")
         td
           .btn-group
             = link_to 'Edit', edit_worklog_path(worklog), class: "btn"

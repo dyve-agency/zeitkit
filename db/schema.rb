@@ -32,8 +32,8 @@ ActiveRecord::Schema.define(:version => 20130120003045) do
   end
 
   create_table "worklogs", :force => true do |t|
-    t.datetime "start"
-    t.datetime "end"
+    t.datetime "start_time"
+    t.datetime "end_time"
     t.integer  "user_id"
     t.integer  "client_id"
     t.datetime "created_at", :null => false
