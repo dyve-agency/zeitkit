@@ -1,0 +1,16 @@
+en:
+  simple_form:
+    required:
+      text: 'required'
+      mark: '*'
+    labels:
+    hints:
+      worklog:
+        hourly_rate: Change the hourly rate that was saved when you created the worklog.
+    placeholders:
+      user:
+        email: "i.e. me@me.com"
+        password: "i.e. mypassword"
+        password_confirmation: "i.e. mypassword"
+        username: "i.e. TheDonut"
+

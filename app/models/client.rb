@@ -4,7 +4,4 @@ class Client < ActiveRecord::Base
   belongs_to :user
   has_many :worklogs
 
-  def secondly_rate
-    hourly_rate / 3600
-  end
 end
