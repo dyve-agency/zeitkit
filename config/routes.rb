@@ -4,7 +4,11 @@ Timetracker::Application.routes.draw do
 
   resources :users, only: [:new, :create, :show], shallow: true do
     resources :clients
-    resources :worklogs
+    resources :worklogs do
+      member do
+        post "toggle_paid"
+      end
+    end
   end
 
   resources :sessions

@@ -47,6 +47,10 @@ class Worklog < ActiveRecord::Base
     end_time > start_time
   end
 
+  def toggle_paid
+    paid ? self.paid = false : self.paid = true
+  end
+
   # Active record callbacks #
 
   def set_hourly_rate

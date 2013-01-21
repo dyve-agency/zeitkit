@@ -86,4 +86,18 @@ class WorklogsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def toggle_paid
+    @worklog = Worklog.find(params[:id])
+    @worklog.toggle_paid
+    respond_to do |format|
+      if @worklog.save
+        format.html { redirect_to user_worklogs_path(current_user), notice: 'Worklog was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @worklog.errors, status: :unprocessable_entity }
+      end
+    end
+  end
 end

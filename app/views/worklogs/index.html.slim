@@ -21,6 +21,7 @@ table.table
         td= number_to_currency(worklog.price, :unit => "€")
         td
           .btn-group
+            = render "set_paid", worklog: worklog
             = link_to 'Edit', edit_worklog_path(worklog), class: "btn"
             = link_to 'Delete', worklog, :confirm => 'Are you sure?', :method => :delete,
               class: "btn btn-danger"
