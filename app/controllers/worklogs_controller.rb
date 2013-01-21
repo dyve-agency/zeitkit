@@ -8,6 +8,8 @@ class WorklogsController < ApplicationController
     params[:client] ? @worklogs = @worklogs.where(client_id: params[:client]) : @worklogs
     params[:paid] == "true" ? @worklogs = @worklogs.paid : @worklogs
     params[:paid] == "false" ? @worklogs = @worklogs.unpaid : @worklogs
+    params[:time] == "this_month" ? @worklogs = @worklogs.this_month : @worklogs
+    params[:time] == "last_month" ? @worklogs = @worklogs.last_month : @worklogs
     @sum = @worklogs.sum(:price)
 
     respond_to do |format|

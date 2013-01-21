@@ -34,27 +34,4 @@ table.table
       td
       td= number_to_currency(@sum, unit: "€")
       td
-.row
-  .span6
-    .btn-group
-      = link_to 'New Worklog', new_user_worklog_path, class: "btn btn-primary"
-      = link_to user_worklogs_path(format: :csv), class: "btn" do
-        i.icon-cloud-download
-        span Download CSV
-  .span6
-    .row
-      .span2
-        p.lead.pull-right Client
-      .span4
-        select.span4.client-filter
-          option data-url="#{user_worklogs_path(current_user, paid: params[:paid])}"
-          - @clients.each do |c|
-            = select_worklog_if_params(c)
-    .row
-      .span2
-        p.lead.pull-right Status
-      .span4
-        .btn-group
-          = link_to "Paid", user_worklogs_path(paid: true, client: params[:client]), class: "btn paid #{check_paid}"
-          = link_to "Unpaid", user_worklogs_path(paid: false, client: params[:client]), class: "btn paid #{check_unpaid}"
-          = link_to "All", user_worklogs_path(client: params[:client]), class: "btn #{check_no_paid}"
+= render "below_worklog_index"

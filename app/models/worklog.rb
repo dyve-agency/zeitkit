@@ -1,4 +1,7 @@
 class Worklog < ActiveRecord::Base
+
+  include TimeFilter
+
   attr_accessible :client_id,
     :end_time,
     :start_time,

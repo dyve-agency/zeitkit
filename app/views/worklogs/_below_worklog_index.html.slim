@@ -1,0 +1,44 @@
+.row
+  .span6
+    .btn-group
+      = link_to 'New Worklog', new_user_worklog_path, class: "btn btn-primary"
+      = link_to user_worklogs_path(format: :csv), class: "btn" do
+        i.icon-cloud-download
+        span Download CSV
+  .span6
+    .row
+      .span2
+        p.lead.pull-right Client
+      .span4
+        select.span4.client-filter
+          option data-url="#{user_worklogs_path(merge_params(client: nil))}"
+          - @clients.each do |c|
+            = select_worklog_if_params(c)
+    .row
+      .span2
+        p.lead.pull-right Status
+      .span4
+        .btn-group
+          = link_to "All",
+            user_worklogs_path(merge_params(paid: nil)),
+            class: "btn #{check_no_paid}"
+          = link_to "Paid",
+            user_worklogs_path(merge_params(paid: true)),
+            class: "btn paid #{check_paid}"
+          = link_to "Unpaid",
+            user_worklogs_path(merge_params(paid: false)),
+            class: "btn paid #{check_unpaid}"
+    .row
+      .span2
+        p.lead.pull-right Time
+      .span4
+        .btn-group
+          = link_to "All",
+            user_worklogs_path(merge_params(time: nil)),
+            class: "btn paid #{check_no_month}"
+          = link_to "This month",
+            user_worklogs_path(merge_params(time: "this_month")),
+            class: "btn paid #{check_this_month}"
+          = link_to "Last month",
+            user_worklogs_path(merge_params(time: "last_month")),
+            class: "btn #{check_last_month}"
