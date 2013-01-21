@@ -1,4 +1,4 @@
-= simple_form_for @client, :url => user_clients_path(current_user, @client) do |f|
+= simple_form_for shallow_args(current_user, @client) do |f|
   = f.input :name
   = f.input :hourly_rate
   .form-actions
