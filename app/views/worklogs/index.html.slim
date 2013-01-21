@@ -25,6 +25,15 @@ table.table
             = link_to 'Edit', edit_worklog_path(worklog), class: "btn"
             = link_to 'Delete', worklog, :confirm => 'Are you sure?', :method => :delete,
               class: "btn btn-danger"
+  tfoot
+    tr
+      td Sums:
+      td
+      td
+      td
+      td
+      td= number_to_currency(@sum, unit: "€")
+      td
 .row
   .span6
     .btn-group
@@ -38,7 +47,7 @@ table.table
         p.lead.pull-right Client
       .span4
         select.span4.client-filter
-          option
+          option data-url="#{user_worklogs_path(current_user, paid: params[:paid])}"
           - @clients.each do |c|
             = select_worklog_if_params(c)
     .row
