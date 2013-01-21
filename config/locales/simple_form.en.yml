@@ -13,4 +13,5 @@ en:
         password: "i.e. mypassword"
         password_confirmation: "i.e. mypassword"
         username: "i.e. TheDonut"
-
+      worklog:
+        summary: "e.g. -Fix a bug, finish project b."

@@ -4,8 +4,8 @@ class Worklog < ActiveRecord::Base
     :start_time,
     :user_id,
     :hourly_rate,
-    :price
-
+    :price,
+    :summary
 
   belongs_to :user
   belongs_to :client

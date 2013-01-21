@@ -2,6 +2,7 @@
   = f.input :start_time
   = f.input :end_time
   = f.input :client_id, collection: current_user.clients, required: true
+  = f.input :summary
   - if !@worklog.new_record?
     = f.input :hourly_rate
   .form-actions
