@@ -7,6 +7,7 @@ en:
     hints:
       worklog:
         hourly_rate: Change the hourly rate that was saved when you created the worklog.
+        paid: This worklog has been paid.
     placeholders:
       user:
         email: "i.e. me@me.com"

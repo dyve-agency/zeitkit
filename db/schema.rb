@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130121052313) do
+ActiveRecord::Schema.define(:version => 20130121053109) do
 
   create_table "clients", :force => true do |t|
     t.string   "name"
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(:version => 20130121052313) do
     t.decimal  "hourly_rate"
     t.decimal  "price"
     t.text     "summary"
+    t.boolean  "paid"
   end
 
 end

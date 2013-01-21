@@ -5,7 +5,8 @@ class Worklog < ActiveRecord::Base
     :user_id,
     :hourly_rate,
     :price,
-    :summary
+    :summary,
+    :paid
 
   belongs_to :user
   belongs_to :client
@@ -15,6 +16,7 @@ class Worklog < ActiveRecord::Base
   validate :end_time_greater_than_start_time
   validate :duration_less_than_a_year
 
+  before_validation :ensure_paid_not_nil
   before_save :set_hourly_rate, on: :create
   before_save :set_price
 
@@ -41,6 +43,10 @@ class Worklog < ActiveRecord::Base
     hour_rate / 3600
   end
 
+  def end_time_ok
+    end_time > start_time
+  end
+
   # Active record callbacks #
 
   def set_hourly_rate
@@ -51,8 +57,8 @@ class Worklog < ActiveRecord::Base
     self.price = self.calc_price.round(2)
   end
 
-  def end_time_ok
-    end_time > start_time
+  def ensure_paid_not_nil
+    self.paid = false if paid.nil?
   end
 
   # Validations #
