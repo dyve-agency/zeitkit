@@ -1,3 +1,8 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
+$ ->
+  $('.client-filter').on 'change', ->
+    Worklogs.filterClient()
+Worklogs = {
+  filterClient: ->
+    new_url = $('.client-filter option:selected').data().url
+    window.location.href = window.location.origin + new_url
+}

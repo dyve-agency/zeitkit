@@ -20,13 +20,32 @@ table.table
         td= worklog.duration_minutes
         td= number_to_currency(worklog.price, :unit => "€")
         td
-          .btn-group
+          .btn-group.pull-right
             = render "set_paid", worklog: worklog
             = link_to 'Edit', edit_worklog_path(worklog), class: "btn"
             = link_to 'Delete', worklog, :confirm => 'Are you sure?', :method => :delete,
               class: "btn btn-danger"
-.btn-group
-  = link_to 'New Worklog', new_user_worklog_path, class: "btn btn-primary"
-  = link_to user_worklogs_path(format: :csv), class: "btn" do
-    i.icon-cloud-download
-    span Download CSV
+.row
+  .span6
+    .btn-group
+      = link_to 'New Worklog', new_user_worklog_path, class: "btn btn-primary"
+      = link_to user_worklogs_path(format: :csv), class: "btn" do
+        i.icon-cloud-download
+        span Download CSV
+  .span6
+    .row
+      .span2
+        p.lead.pull-right Client
+      .span4
+        select.span4.client-filter
+          option
+          - @clients.each do |c|
+            = select_worklog_if_params(c)
+    .row
+      .span2
+        p.lead.pull-right Status
+      .span4
+        .btn-group
+          = link_to "Paid", user_worklogs_path(paid: true, client: params[:client]), class: "btn paid #{check_paid}"
+          = link_to "Unpaid", user_worklogs_path(paid: false, client: params[:client]), class: "btn paid #{check_unpaid}"
+          = link_to "All", user_worklogs_path(client: params[:client]), class: "btn #{check_no_paid}"

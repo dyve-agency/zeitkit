@@ -20,6 +20,9 @@ class Worklog < ActiveRecord::Base
   before_save :set_hourly_rate, on: :create
   before_save :set_price
 
+  scope :paid, where(paid: true)
+  scope :unpaid, where(paid: false)
+
   def self.to_csv
     CSV.generate do |csv|
       csv << self.columns_to_export

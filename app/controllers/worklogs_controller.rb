@@ -4,7 +4,12 @@ class WorklogsController < ApplicationController
   def index
     @user = User.find(params[:user_id])
     @worklogs = @user.worklogs.order("created_at DESC")
-    params[:client] ? @worklogs = Client.find(params[:client]).worklogs.order("created_at DESC") : nil
+    @clients = @user.clients
+    params[:client] ? @worklogs = @worklogs.where(client_id: params[:client]) : @worklogs
+    params[:paid] == "true" ? @worklogs = @worklogs.paid : @worklogs
+    params[:paid] == "false" ? @worklogs = @worklogs.unpaid : @worklogs
+    Rails.logger.fatal("SUUUUP")
+    Rails.logger.fatal(params[:paid])
 
     respond_to do |format|
       format.html # index.html.erb
