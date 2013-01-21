@@ -9,6 +9,7 @@ class WorklogsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @worklogs }
+      format.csv { render text: @worklogs.to_csv }
     end
   end
 

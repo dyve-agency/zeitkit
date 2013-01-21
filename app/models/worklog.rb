@@ -20,6 +20,35 @@ class Worklog < ActiveRecord::Base
   before_save :set_hourly_rate, on: :create
   before_save :set_price
 
+  def self.to_csv
+    CSV.generate do |csv|
+      csv << self.columns_to_export
+      all.each do |worklog|
+        csv << worklog.array_data_to_export
+      end
+    end
+  end
+
+  def self.columns_to_export
+    %w(Client_name Start_time End_time Hours Minutes Hourly_rate Price Summary Paid)
+  end
+
+  def array_data_to_export
+    [client.name,
+    start_time,
+    end_time,
+    duration_hours,
+    duration_minutes,
+    hourly_rate,
+    price,
+    summary,
+    yes_or_no_boolean(paid)]
+  end
+
+  def yes_or_no_boolean(boolean_var)
+    boolean_var ? "Yes" : "No"
+  end
+
   def duration
     (end_time - start_time).to_i
   end
