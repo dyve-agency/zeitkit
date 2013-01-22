@@ -8,10 +8,14 @@
       blockquote
         p Finally no more excel sheets. Time tracking made easy.
         small Thomas, Entrepreneur
-      .signup-links
-        = simple_form_for "", url: signup_email_path do |f|
-          input.span3#signup-email name="signup_email" type="email" placeholder="e.g. me@mymail.com"
-          = f.button :submit, "Get started »", class: "btn-large"
-      p Signup is completely free.
+      - if !current_user
+        .signup-links
+          = simple_form_for "", url: signup_email_path do |f|
+            input.span3#signup-email name="signup_email" type="email" placeholder="e.g. me@mymail.com"
+            = f.button :submit, "Get started »", class: "btn-large"
+        p Signup is completely free.
+      - else
+        = link_to "My Account", user_path(current_user), class: "btn btn-primary"
+
     .span3.offset1
       i.icon-time.large-icon
