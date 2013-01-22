@@ -11,6 +11,9 @@ class WorklogsController < ApplicationController
     params[:time] == "this_month" ? @worklogs = @worklogs.this_month : @worklogs
     params[:time] == "last_month" ? @worklogs = @worklogs.last_month : @worklogs
     @sum = @worklogs.sum(:price)
+    seconds = Worklog.range_duration_seconds(@worklogs)
+    @hours = Worklog.hours_from_seconds seconds
+    @minutes = Worklog.remaining_minutes_from_seconds seconds
 
     respond_to do |format|
       format.html # index.html.erb

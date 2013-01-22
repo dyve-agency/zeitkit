@@ -30,8 +30,9 @@ table.table
       td Sums:
       td
       td
-      td
-      td
+      td= @hours
+      td= @minutes
       td= number_to_currency(@sum, unit: "€")
       td
 = render "below_worklog_index"
+= @time_difference

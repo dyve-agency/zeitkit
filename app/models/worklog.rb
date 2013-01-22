@@ -35,6 +35,21 @@ class Worklog < ActiveRecord::Base
     end
   end
 
+  def self.range_duration_seconds(worklogs)
+    return 0 if worklogs.empty?
+    sum_start = worklogs.map{|w| w.start_time.to_i}.reduce(:+)
+    sum_end = worklogs.map{|w| w.end_time.to_i}.reduce(:+)
+    sum_end - sum_start
+  end
+
+  def self.hours_from_seconds(seconds)
+    seconds / 1.hour
+  end
+
+  def self.remaining_minutes_from_seconds(seconds)
+    seconds / 1.minute % 60
+  end
+
   def self.columns_to_export
     %w(Client_name Start_time End_time Hours Minutes Hourly_rate Price Summary Paid)
   end
@@ -60,11 +75,11 @@ class Worklog < ActiveRecord::Base
   end
 
   def duration_hours
-    duration / 1.hour
+    self.class.hours_from_seconds duration
   end
 
   def duration_minutes
-    duration / 1.minute % 60
+    self.class.remaining_minutes_from_seconds duration
   end
 
   def calc_price
