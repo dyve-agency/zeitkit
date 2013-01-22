@@ -32,4 +32,12 @@ class UsersController < ApplicationController
     end
   end
 
+  def dynamic_home
+    if current_user
+      redirect_to current_user
+    else
+      redirect_to root_url
+    end
+  end
+
 end
