@@ -25,7 +25,7 @@ class UsersController < ApplicationController
     @user.set_temp_password temp_pw
     if @user.save
       user = login(@user.email, temp_pw, true)
-      redirect_to new_user_client_path(@user), :notice => "Get started by creating your first client."
+      redirect_to new_user_client_path(@user), :notice => "Get started by creating your first client. Your temporary password: #{temp_pw}"
     else
       flash[:alert] = "Sorry, that email has already been taken/is invalid. Please try again."
       redirect_to root_path
