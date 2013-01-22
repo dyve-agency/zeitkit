@@ -9,9 +9,9 @@
         p Finally no more excel sheets. Time tracking made easy.
         small Thomas, Entrepreneur
       .signup-links
-        -# TODO not finished
-        input.span3#signup-email type="email" placeholder="e.g. me@mymail.com"
-        = link_to "Get started »", "", :class =>"btn btn-primary btn-large"
+        = simple_form_for "", url: signup_email_path do |f|
+          input.span3#signup-email name="signup_email" type="email" placeholder="e.g. me@mymail.com"
+          = f.button :submit, "Get started »", class: "btn-large"
       p Signup is completely free.
     .span3.offset1
       i.icon-time.large-icon

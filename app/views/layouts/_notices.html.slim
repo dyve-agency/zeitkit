@@ -1,0 +1,18 @@
+.container
+  .row
+    .span12
+      - if flash[:notice]
+        .alert.alert-success
+          a.close data-dismiss="alert" ×
+          = flash[:notice]
+      - if flash[:alert]
+        .alert.alert-error
+          a.close data-dismiss="alert" ×
+          = flash[:alert]
+      - if flash[:error]
+        .alert.alert-error
+          a.close data-dismiss="alert" ×
+          ul.error-list
+            - flash[:error].each do |error|
+              li= error
+

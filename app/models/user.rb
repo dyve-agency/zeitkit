@@ -11,4 +11,9 @@ class User < ActiveRecord::Base
   has_many :clients
   has_many :worklogs
 
+  def set_temp_password(temp_pw)
+    self.password = temp_pw
+    self.password_confirmation = temp_pw
+  end
+
 end
