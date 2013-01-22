@@ -1,3 +1,5 @@
+source 'https://rubygems.org'
+
 gem 'rails', '3.2.11'
 
 gem 'pg'
@@ -6,7 +8,6 @@ gem 'slim-rails'
 gem 'sorcery'
 gem 'simple_form', git: 'https://github.com/plataformatec/simple_form.git', branch: :master
 gem 'jquery-rails'
-gem "rake", "~> 10.0.3"
 
 # Gems used only for assets and not required
 # in production environments by default.
