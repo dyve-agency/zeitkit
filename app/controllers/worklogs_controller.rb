@@ -102,7 +102,7 @@ class WorklogsController < ApplicationController
     @worklog.toggle_paid
     respond_to do |format|
       if @worklog.save
-        format.html { redirect_to user_worklogs_path(current_user), notice: 'Worklog was successfully updated.' }
+        format.html { redirect_to user_worklogs_path(current_user, params[:old_params]), notice: 'Worklog was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

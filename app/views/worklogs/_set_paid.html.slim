@@ -1,8 +1,8 @@
 - if worklog.paid
-  = link_to toggle_paid_worklog_path(worklog), class: "btn", method: :post do
+  = link_to toggle_paid_worklog_path(worklog, old_params: request.parameters), class: "btn", method: :post do
     i.icon-remove
     span Set unpaid
 - else
-  = link_to toggle_paid_worklog_path(worklog), class: "btn", method: :post do
+  = link_to toggle_paid_worklog_path(worklog, old_params: request.parameters), class: "btn", method: :post do
     i.icon-ok
     span Set paid
