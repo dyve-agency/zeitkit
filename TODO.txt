@@ -1,0 +1,3 @@
+-Email password on auto user creation.
+-Allow password reset.
+-Clean up controllers
