@@ -164,6 +164,7 @@ DEPENDENCIES
   quiet_assets
   railroady
   rails (= 3.2.11)
+  rake (~> 10.0.3)
   sass-rails (~> 3.2.3)
   simple_form!
   slim
