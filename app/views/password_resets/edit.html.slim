@@ -1,0 +1,7 @@
+h1 Choose a new password
+= simple_form_for @user, :url => password_reset_path(@user), :html => {:method => :put} do |f|
+  = f.input :email
+  = f.input :password
+  = f.input :password_confirmation
+  input name="token" value="#{@token}" type="hidden"
+  = f.button :submit, "Save password"

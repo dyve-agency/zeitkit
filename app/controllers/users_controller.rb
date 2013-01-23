@@ -25,7 +25,7 @@ class UsersController < ApplicationController
     @user.set_temp_password temp_pw
     if @user.save
       begin
-        UserMailer.temp_password_mail(temp_pw, @user).deliver
+        UserMailer.temp_password_email(temp_pw, @user).deliver
       ensure
         user = login(@user.email, temp_pw, true)
         redirect_to new_user_client_path(@user), :notice => "Get started by creating your first client. Your temporary password: #{temp_pw}"

@@ -1,0 +1,3 @@
+= simple_form_for :user, url: password_resets_path, :method => :post do |f|
+  = f.input :email, input_html: {value: params[:email]}
+  = f.button :submit, "Request new password"

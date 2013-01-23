@@ -12,7 +12,4 @@
       - if flash[:error]
         .alert.alert-error
           a.close data-dismiss="alert" ×
-          ul.error-list
-            - flash[:error].each do |error|
-              li= error
-
+          = flash[:error]
