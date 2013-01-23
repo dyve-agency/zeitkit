@@ -1,9 +1,8 @@
 development:
-  adapter: postgresql
-  database: db/development_time
+  adapter: sqlite3
+  database: db/development.sqlite3
   pool: 5
-  username: hendricius
-  password:
+  timeout: 5000
 
 production:
   adapter: postgresql
