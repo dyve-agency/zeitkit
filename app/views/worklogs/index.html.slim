@@ -14,8 +14,8 @@ table.table
     - @worklogs.each do |worklog|
       tr
         td= worklog.client.name
-        td= worklog.start_time
-        td= worklog.end_time
+        td= l worklog.start_time
+        td= l worklog.end_time
         td= worklog.duration_hours
         td= worklog.duration_minutes
         td= number_to_currency(worklog.price, :unit => "€")
