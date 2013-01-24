@@ -38,7 +38,7 @@ class WorklogsController < ApplicationController
   def new
     @worklog = Worklog.new
     @worklog.user = current_user
-    @worklog.client = current_user.clients ? current_user.clients.first : nil
+    @worklog.client = current_user.worklogs ? current_user.worklogs.last.client : nil
     params[:client] ? @worklog.client = current_user.clients.find(params[:client]) : nil
 
     respond_to do |format|
