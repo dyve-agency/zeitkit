@@ -60,7 +60,10 @@ class WorklogsController < ApplicationController
 
     respond_to do |format|
       if @worklog.save
-        format.html { redirect_to @worklog, notice: 'Worklog was successfully created.' }
+        format.html {
+          redirect_to new_user_worklog_path,
+            notice: "Worklog was successfully created. Create another one - or: <a href='#{user_worklogs_path}'>Go back.</a>".html_safe
+        }
         format.json { render json: @worklog, status: :created, location: @worklog }
       else
         format.html { render action: "new" }
