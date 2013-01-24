@@ -8,4 +8,8 @@ module ApplicationHelper
     child.try(:new_record?) ? [parent, child] : child
   end
 
+  def notices?
+    flash[:notice] || flash[:alert] || flash[:error]
+  end
+
 end

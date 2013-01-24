@@ -9,10 +9,11 @@ html lang="en"
     = javascript_include_tag "application"
     = csrf_meta_tags
   body
-    = render "layouts/header"
-    = render "layouts/notices"
-    .container.content
-      .row
-        .span12
-          = yield
-    = render "layouts/footer"
+    #wrapper
+      = render "layouts/header"
+      = render "layouts/notices"
+      .container.content.clearfix
+        .row
+          .span12
+            = yield
+      = render "layouts/footer"

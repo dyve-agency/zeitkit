@@ -1,3 +1,4 @@
+@import "compass"
 .large-icon
   font-size: 300px
 #signup-email
@@ -5,15 +6,26 @@
   height: 28px
 .signup-links
   margin-bottom: 15px
-.footer-wrapper
-  border-top: 1px solid #ddd
-  margin-top: 20px
-  padding-top: 20px
-  background: #fff
-  .lead
-    font-size: 16px
 .brand-font
   font-family: "Pacifico", cursive
 .footer-logo
   font-size: 22px
   color: #777
+.content
+  padding: 70px 0px 100px 0px
+  @include box-sizing(border-box)
+#wrapper
+  min-height: 100%
+  position: relative
+.footer-wrapper
+  border-top: 1px solid #ddd
+  background: #fff
+  position: absolute
+  width: 100%
+  height: 100px
+  left: 0px
+  bottom: 0px
+  @include box-sizing(border-box)
+  padding-top: 20px
+  .lead
+    font-size: 16px
