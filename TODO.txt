@@ -1,8 +1,4 @@
--Email password on auto user creation.
--Allow password reset.
 -Clean up controllers
--On creating worklog -> redirect to new worklog right away.
--Pick client from last worklog on worklog creation.
 -Allow entering time without end date
 -Scope partially entered
 -Implement this: http://jdewit.github.com/bootstrap-timepicker/
