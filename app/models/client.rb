@@ -5,7 +5,7 @@ class Client < ActiveRecord::Base
   has_many :worklogs
 
   validates :user, :name, :hourly_rate, presence: true
-
-  # TODO validate only one client with same name per user.
+  validates :name, :uniqueness => { :scope => :user_id,
+      :message => "You can only have the client once." }
 
 end
