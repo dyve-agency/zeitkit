@@ -1,16 +1,14 @@
 - if notices?
-  .container
-    .row
-      .span12
-        - if flash[:notice]
-          .alert.alert-success
-            a.close data-dismiss="alert" ×
-            = flash[:notice]
-        - if flash[:alert]
-          .alert.alert-error
-            a.close data-dismiss="alert" ×
-            = flash[:alert]
-        - if flash[:error]
-          .alert.alert-error
-            a.close data-dismiss="alert" ×
-            = flash[:error]
+  .notices
+    - if flash[:notice]
+      .alert.alert-success
+        a.close data-dismiss="alert" ×
+        = flash[:notice]
+    - if flash[:alert]
+      .alert.alert-error
+        a.close data-dismiss="alert" ×
+        = flash[:alert]
+    - if flash[:error]
+      .alert.alert-error
+        a.close data-dismiss="alert" ×
+        = flash[:error]

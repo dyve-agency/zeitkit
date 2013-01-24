@@ -11,9 +11,9 @@ html lang="en"
   body
     #wrapper
       = render "layouts/header"
-      = render "layouts/notices"
       .container.content.clearfix
         .row
           .span12
+            = render "layouts/notices"
             = yield
       = render "layouts/footer"
