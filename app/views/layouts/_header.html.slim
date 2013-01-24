@@ -1,11 +1,11 @@
-.navbar.navbar-fixed-top
+.navbar.navbar-fixed-top.navbar-inverse
   .navbar-inner
     .container
       button.btn.btn-navbar data-target=".nav-collapse" data-toggle="collapse" type="button"
         span.icon-bar
         span.icon-bar
         span.icon-bar
-      a.brand href="#{dynamic_home_path}"= Timetracker
+      a.brand href="#{dynamic_home_path}" Zeittracker
       .nav-collapse.collapse
         ul.nav
           - if current_user
