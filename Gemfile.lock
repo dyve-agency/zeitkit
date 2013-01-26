@@ -52,6 +52,7 @@ GEM
       sass (>= 3.2.0)
       thor
     builder (3.0.4)
+    cancan (1.6.8)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
       railties (~> 3.2.0)
@@ -154,6 +155,7 @@ PLATFORMS
 DEPENDENCIES
   bootstrap-sass (~> 2.1.1.0)
   bourbon
+  cancan
   coffee-rails (~> 3.2.1)
   font-awesome-sass-rails (~> 3.0.0.0)!
   jquery-rails
