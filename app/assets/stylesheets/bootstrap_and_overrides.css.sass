@@ -1,7 +1,8 @@
 @import "bootstrap"
 @import "bootstrap-responsive"
 @import "font-awesome"
-@import "compass"
+$light-pink: #ec6197
+$dark-pink: #ea4c89
 .btn
   i
     margin-right: 3px
@@ -40,9 +41,14 @@ h1, h2, h3, h4, h5, h6, .hero-unit h1
 .navbar-inverse .brand, .navbar-inverse .nav > li > a
   text-shadow: none
 .navbar-inverse .brand
-  color: #ea5c89
+  color: $light-pink
 .navbar-inverse .nav > li > a
   color: #aaa
 .navbar
   .dropdown-menu
     min-width: 192px
+.btn-primary
+  border: 1px solid $light-pink
+  @include linear-gradient(top, $light-pink 0%, $light-pink 50%, $dark-pink 51%, $dark-pink 100%)
+  &:hover, &:active
+    @include linear-gradient(top, $light-pink 0%, $light-pink 50%, $dark-pink 51%, $dark-pink 100%)

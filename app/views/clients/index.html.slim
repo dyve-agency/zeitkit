@@ -16,11 +16,13 @@ table.table
           .btn-group
             = link_to new_user_worklog_path(client: client), class: "btn" do
               i.icon-plus
-              | Worklog
+              span Worklog
             = link_to user_worklogs_path(client: client), class: "btn" do
               i.icon-eye-open
-              | Worklogs
-            = link_to 'Edit', edit_client_path(client), class: "btn"
-            = link_to 'Delete', client, :confirm => 'Are you sure?', method: :delete,
-              class: "btn btn-danger"
+              span Worklogs
+            = link_to edit_client_path(client), class: "btn" do
+              span Edit
+            = link_to client, :confirm => 'Are you sure?', method: :delete,
+              class: "btn" do
+              span Delete
 = link_to 'New client', new_user_client_path, class: "btn btn-primary"

@@ -14,7 +14,7 @@ gem 'jquery-rails'
 group :assets do
   gem 'coffee-rails', '~> 3.2.1'
   gem 'bootstrap-sass', '~> 2.1.1.0'
-  gem 'compass-rails'
+  gem 'bourbon'
   gem 'font-awesome-sass-rails', '~> 3.0.0.0', git: "https://github.com/nicoles/font-awesome-sass-rails.git"
   gem 'uglifier', '>= 1.0.3'
   gem 'sass-rails',   '~> 3.2.3'
