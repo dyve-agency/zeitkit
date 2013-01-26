@@ -12,4 +12,8 @@ module ApplicationHelper
     flash[:notice] || flash[:alert] || flash[:error]
   end
 
+  def check_if_css_class
+    @css_class ? @css_class : ""
+  end
+
 end

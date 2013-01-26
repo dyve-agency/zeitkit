@@ -1,6 +1,7 @@
+$light-pink: #ec6197
+$dark-pink: #ea4c89
 .large-icon
   font-size: 300px
-  color: #ea5c89
 #signup-email
   margin: 0px 10px 0px 0px
   height: 28px
@@ -17,6 +18,18 @@
 #wrapper
   min-height: 100%
   position: relative
+.home-design
+  @include linear-gradient(top, $light-pink 0%, $dark-pink 50%)
+  h1, h2, h3, h4, h5, h6, .hero-unit h1
+    color: #333
+  .home-submit
+    background: #fff
+    color: #000
+    text-shadow: none
+  .content
+    color: #fff
+    blockquote small
+      color: inherit
 .footer-wrapper
   border-top: 1px solid #ddd
   background: #fff

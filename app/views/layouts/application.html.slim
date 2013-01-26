@@ -10,7 +10,7 @@ html lang="en"
     = javascript_include_tag "application"
     = csrf_meta_tags
   body
-    #wrapper
+    #wrapper class="#{check_if_css_class}"
       = render "layouts/header"
       .container.content.clearfix
         .row
