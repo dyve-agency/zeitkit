@@ -38,7 +38,7 @@ class UsersController < ApplicationController
 
   def dynamic_home
     if current_user
-      redirect_to current_user
+      redirect_to user_clients_path(current_user)
     else
       redirect_to root_url
     end
