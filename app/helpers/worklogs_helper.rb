@@ -24,6 +24,14 @@ module WorklogsHelper
     return "active" if !params[:time]
   end
 
+  def check_this_week
+    active_if_value_true(params[:time], "this_week")
+  end
+
+  def check_today
+    active_if_value_true(params[:time], "today")
+  end
+
   def check_this_month
     active_if_value_true(params[:time], "this_month")
   end

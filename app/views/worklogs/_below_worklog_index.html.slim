@@ -36,6 +36,12 @@
           = link_to "All",
             user_worklogs_path(merge_params(time: nil)),
             class: "btn paid #{check_no_month}"
+          = link_to "Today",
+            user_worklogs_path(merge_params(time: "today")),
+            class: "btn paid #{check_today}"
+          = link_to "This week",
+            user_worklogs_path(merge_params(time: "this_week")),
+            class: "btn paid #{check_this_week}"
           = link_to "This month",
             user_worklogs_path(merge_params(time: "this_month")),
             class: "btn paid #{check_this_month}"
