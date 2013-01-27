@@ -57,8 +57,8 @@ class Worklog < ActiveRecord::Base
 
   def array_data_to_export
     [client.name,
-    start_time,
-    end_time,
+    I18n.localize(start_time),
+    I18n.localize(end_time),
     duration_hours,
     duration_minutes,
     hourly_rate,
