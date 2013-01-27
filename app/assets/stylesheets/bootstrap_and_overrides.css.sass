@@ -5,8 +5,10 @@ $light-pink: #ec6197
 $dark-pink: #ea4c89
 $light-orange: #f47a33
 $dark-orange: #f26234
-$light-color: $light-orange
-$dark-color: $dark-orange
+$light-blue: #afe4ec
+$dark-blue: #68cad8
+$light-color: $light-blue
+$dark-color: $dark-blue
 .btn
   i
     margin-right: 3px
@@ -56,9 +58,14 @@ h1, h2, h3, h4, h5, h6, .hero-unit h1
   .dropdown-menu
     min-width: 192px
 .btn-primary
-  border: 1px solid $light-pink
-  @include linear-gradient(top, $light-color 0%, $light-color 50%, $dark-color 51%, $dark-color 100%)
+  border: 1px solid #40a9b8
+  color: #156571
+  text-shadow: 0px 1px #b2e4eb
+  @include linear-gradient(top, $light-color 0%, $dark-color 100%)
   &:hover, &:active
-    @include linear-gradient(top, $light-color 0%, $light-color 50%, $dark-color 51%, $dark-color 100%)
+    //@include linear-gradient(top, $dark-color 0%, $light-color 100%)
+    background-image: none
+    background-color: #afe4ec
+    color: #156571
 blockquote
   border-left: 2px solid #fff
