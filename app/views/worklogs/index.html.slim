@@ -4,28 +4,28 @@ table.table
   thead
     tr
       th Client
-      th Start
-      th End
+      th.hidden-phone Start
+      th.hidden-phone End
       th Duration hours
       th Duration min
-      th Price
+      th.hidden-phone Price
       th Controls
   tbody
     - @worklogs.each do |worklog|
       tr
         td= worklog.client.name
-        td= l worklog.start_time
-        td= l worklog.end_time
+        td.hidden-phone= l worklog.start_time
+        td.hidden-phone= l worklog.end_time
         td= worklog.duration_hours
         td= worklog.duration_minutes
-        td= number_to_currency(worklog.price, :unit => "€")
+        td.hidden-phone= number_to_currency(worklog.price, :unit => "€")
         td
           .btn-group.pull-right
             = render "set_paid", worklog: worklog
             = link_to 'Edit', edit_worklog_path(worklog), class: "btn"
             = link_to 'Delete', worklog, :confirm => 'Are you sure?', :method => :delete,
-              class: "btn"
-  tfoot
+              class: "btn hidden-phone"
+  tfoot.hidden-phone
     tr
       td Sums:
       td

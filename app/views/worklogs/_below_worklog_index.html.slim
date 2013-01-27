@@ -1,4 +1,4 @@
-.row
+.row.worklog-filters
   .span6
     .btn-group
       = link_to 'New Worklog', new_user_worklog_path, class: "btn btn-primary"
@@ -42,6 +42,9 @@
           = link_to "This week",
             user_worklogs_path(merge_params(time: "this_week")),
             class: "btn paid #{check_this_week}"
+    .row
+      .span4.offset2
+        .btn-group
           = link_to "This month",
             user_worklogs_path(merge_params(time: "this_month")),
             class: "btn paid #{check_this_month}"
