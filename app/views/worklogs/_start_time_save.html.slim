@@ -1,6 +1,7 @@
 - if @start_time_save
   .alert.alert-info
-    a.close data-dismiss="alert" ×
+    = link_to "x", start_time_save_path(@start_time_save),
+      method: :delete, class: "close dismiss-save-time"
     span It seems you did not save your last worklog. 
     = link_to "Recover start time.", new_user_worklog_path(current_user,
       recover_time: true), class: "btn"

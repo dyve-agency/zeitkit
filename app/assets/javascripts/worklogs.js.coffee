@@ -1,5 +1,6 @@
 $ ->
   Worklog.setTimeInit()
+  SaveTime.init()
 
 Worklog =
   setTimeInit: ->
@@ -35,3 +36,18 @@ Worklog =
     minute: ->
       $('#worklog_end_time_5i')
   }
+SaveTime =
+  init: ->
+    _this = this
+    $('.dismiss-save-time').on 'click touchstart', (e) ->
+      _this.dismissSaveTime($(e.currentTarget))
+      return false
+  dismissSaveTime: (elem)->
+      url = elem.attr('href')
+      $.ajax url,
+        type: 'DELETE'
+        dataType: 'json'
+        success: ->
+          $('.alert').remove()
+        error: ->
+          alert "There has been an error"
