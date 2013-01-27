@@ -3,8 +3,8 @@ Timetracker::Application.routes.draw do
   root :to => "static#home"
 
   resources :users, only: [:new, :create, :show], shallow: true do
-    resources :clients
-    resources :worklogs do
+    resources :clients, except: [:show]
+    resources :worklogs, except: [:show] do
       member do
         post "toggle_paid"
       end

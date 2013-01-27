@@ -51,7 +51,7 @@ class WorklogsController < ApplicationController
 
   def update
     if @worklog.update_attributes(params[:worklog])
-      redirect_to @worklog, notice: 'Worklog was successfully updated.'
+      redirect_to user_worklogs_path(current_user), notice: 'Worklog was successfully updated.'
     else
       render action: "edit"
     end
