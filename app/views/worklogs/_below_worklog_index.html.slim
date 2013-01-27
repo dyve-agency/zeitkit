@@ -2,7 +2,7 @@
   .span6
     .btn-group
       = link_to 'New Worklog', new_user_worklog_path, class: "btn btn-primary"
-      = link_to user_worklogs_path(format: :csv), class: "btn" do
+      = link_to user_worklogs_path(merge_params(format: :csv)), class: "btn" do
         i.icon-cloud-download
         span Download CSV
   .span6

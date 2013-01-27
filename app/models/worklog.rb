@@ -27,10 +27,10 @@ class Worklog < ActiveRecord::Base
   scope :paid, where(paid: true)
   scope :unpaid, where(paid: false)
 
-  def self.to_csv
+  def self.to_csv(worklogs)
     CSV.generate do |csv|
       csv << self.columns_to_export
-      all.each do |worklog|
+      worklogs.each do |worklog|
         csv << worklog.array_data_to_export
       end
     end
