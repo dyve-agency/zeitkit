@@ -3,6 +3,10 @@
 @import "font-awesome"
 $light-pink: #ec6197
 $dark-pink: #ea4c89
+$light-orange: #f47a33
+$dark-orange: #f26234
+$light-color: $light-orange
+$dark-color: $dark-orange
 .btn
   i
     margin-right: 3px
@@ -25,11 +29,15 @@ body, input, button, select, textarea
 .navbar .brand
   font-family: 'Pacifico', cursive
 h1, h2, h3, h4, h5, h6, .hero-unit h1
-  font-family: 'Bree Serif', serif
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif
   margin-bottom: 12px
   color: #444
 .hero-unit
   background-color: inherit
+  padding-top: 0px
+  blockquote
+    p
+      font-size: 15px
 .table th
   font-weight: 600
 .navbar-fixed-top .navbar-inner, .navbar-static-top .navbar-inner
@@ -41,7 +49,7 @@ h1, h2, h3, h4, h5, h6, .hero-unit h1
 .navbar-inverse .brand, .navbar-inverse .nav > li > a
   text-shadow: none
 .navbar-inverse .brand
-  color: $light-pink
+  color: #fff
 .navbar-inverse .nav > li > a
   color: #aaa
 .navbar
@@ -49,6 +57,8 @@ h1, h2, h3, h4, h5, h6, .hero-unit h1
     min-width: 192px
 .btn-primary
   border: 1px solid $light-pink
-  @include linear-gradient(top, $light-pink 0%, $light-pink 50%, $dark-pink 51%, $dark-pink 100%)
+  @include linear-gradient(top, $light-color 0%, $light-color 50%, $dark-color 51%, $dark-color 100%)
   &:hover, &:active
-    @include linear-gradient(top, $light-pink 0%, $light-pink 50%, $dark-pink 51%, $dark-pink 100%)
+    @include linear-gradient(top, $light-color 0%, $light-color 50%, $dark-color 51%, $dark-color 100%)
+blockquote
+  border-left: 2px solid #fff

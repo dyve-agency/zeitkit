@@ -1,7 +1,12 @@
 $light-pink: #ec6197
 $dark-pink: #ea4c89
+$light-orange: #f47a33
+$dark-orange: #f26234
+$light-color: $light-orange
+$dark-color: $dark-orange
 .large-icon
   font-size: 300px
+  text-shadow: 0px 2px 2px #af5422
 #signup-email
   margin: 0px 10px 0px 0px
   height: 28px
@@ -19,9 +24,13 @@ $dark-pink: #ea4c89
   min-height: 100%
   position: relative
 .home-design
-  @include linear-gradient(top, $light-pink 0%, $dark-pink 50%)
+  @include linear-gradient(top, #f47a33 0%, #f26234 50%)
   h1, h2, h3, h4, h5, h6, .hero-unit h1
-    color: #333
+    color: #fff
+    text-shadow: 0px 2px 2px #af5422
+    line-height: 90px
+    text-align: center
+    margin-bottom: 50px
   .home-submit
     background: #fff
     color: #000
@@ -30,6 +39,9 @@ $dark-pink: #ea4c89
     color: #fff
     blockquote small
       color: inherit
+  .large-icon
+    margin-top: -11px
+    display: block
 .footer-wrapper
   border-top: 1px solid #ddd
   background: #fff
