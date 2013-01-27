@@ -4,6 +4,7 @@ Timetracker::Application.routes.draw do
 
   resources :users, only: [:new, :create, :show], shallow: true do
     resources :clients, except: [:show]
+    resources :start_time_saves, only: [:update]
     resources :worklogs, except: [:show] do
       member do
         post "toggle_paid"
