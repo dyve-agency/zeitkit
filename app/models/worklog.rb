@@ -22,6 +22,7 @@ class Worklog < ActiveRecord::Base
   before_validation :ensure_paid_not_nil
   before_save :set_hourly_rate, on: :create
   before_save :set_price
+  after_create :drop_start_time_save
 
   scope :paid, where(paid: true)
   scope :unpaid, where(paid: false)
@@ -128,4 +129,11 @@ class Worklog < ActiveRecord::Base
       errors.add(:end_time, "Must be greater than start time.")
     end
   end
+
+  def drop_start_time_save
+    if user.start_time_save
+      user.start_time_save.destroy
+    end
+  end
+
 end

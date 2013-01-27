@@ -18,4 +18,14 @@ class User < ActiveRecord::Base
     self.password_confirmation = temp_pw
   end
 
+  def check_or_build_start_time
+    # if there is a start time save return in
+    if start_time_save
+      start_time_save
+    else
+      build_start_time_save(start_time: Time.now).save
+      nil
+    end
+  end
+
 end
