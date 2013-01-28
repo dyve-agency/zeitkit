@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
 
   has_many :clients
   has_many :worklogs
+  has_many :invoices
 
   has_one :start_time_save
 

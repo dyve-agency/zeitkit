@@ -10,6 +10,7 @@ Timetracker::Application.routes.draw do
         post "toggle_paid"
       end
     end
+    resources :invoices
     member do
       post "update_savetime"
     end

@@ -1,0 +1,18 @@
+p#notice = notice
+
+p
+  strong User:
+  = @invoice.user_id
+p
+  strong Client:
+  = @invoice.client_id
+p
+  strong Includes vat:
+  = @invoice.includes_vat
+p
+  strong Vat:
+  = @invoice.vat
+
+= link_to 'Edit', edit_invoice_path(@invoice)
+'|
+= link_to 'Back', invoices_path
