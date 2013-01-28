@@ -31,7 +31,7 @@ class WorklogsController < ApplicationController
   def new
     @worklog = Worklog.new
     @worklog.user = current_user
-    @worklog.client = current_user.worklogs ? current_user.worklogs.last.client : nil
+    @worklog.client = current_user.worklogs.any? ? current_user.worklogs.last.client : nil
     params[:client] ? @worklog.client = current_user.clients.find(params[:client]) : nil
     @start_time_save = current_user.check_or_build_start_time
     if params[:recover_time]
