@@ -2,9 +2,9 @@
 = simple_form_for shallow_args(current_user, @worklog) do |f|
   = f.input :start_time
   = f.input :end_time
-  a.btn.set-time
-    i.icon-time
-    span End time: Now
+  .set-time
+    a.btn.end-time-now
+      span End time: Now
   = f.input :client_id, collection: current_user.clients, required: true
   = f.input :summary
   = f.input :paid, label: false

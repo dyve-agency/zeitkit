@@ -1,13 +1,18 @@
 $ ->
   Worklog.setTimeInit()
+  Worklog.autoEndTimeInit()
   SaveTime.init()
 
 Worklog =
   setTimeInit: ->
     _this = this
-    $('.set-time').on 'click touchstart', (e) ->
+    $('.end-time-now').on 'click touchstart', (e) ->
       e.preventDefault()
       _this.setCurrentTime()
+  autoEndTimeInit: ->
+    _this = this
+    $('.worklog_start_time').on 'change', 'select', (e) ->
+      _this.updateEndTimeStartTime($(e.currentTarget))
   setCurrentTime: ->
     current = this.getCurrentTime()
     views = this.getViews()
@@ -25,6 +30,10 @@ Worklog =
     return [this.elems.year(), this.elems.month(), this.elems.day(),
       this.elems.hour(), this.elems.minute()]
   elems: {
+    start_all: ->
+      $('.worklog_start_time select')
+    end_all: ->
+      $('.worklog_end_time select')
     year: ->
       $('#worklog_end_time_1i')
     month: ->
@@ -36,6 +45,12 @@ Worklog =
     minute: ->
       $('#worklog_end_time_5i')
   }
+  updateEndTimeStartTime: (elem)->
+    return if !elem
+    end_time = this.relatedEndTime(elem)
+    end_time.val(elem.val())
+  relatedEndTime: (elem)->
+    return $(this.elems.end_all()[elem.index()])
 SaveTime =
   init: ->
     _this = this
