@@ -3,7 +3,7 @@ class WorklogsController < ApplicationController
 
   def index
     @user = User.find(params[:user_id])
-    @worklogs = @worklogs.order("created_at DESC")
+    @worklogs = @worklogs.order("start_time DESC")
     @clients = @user.clients
     params[:client] ? @worklogs = @worklogs.where(client_id: params[:client]) : @worklogs
     params[:paid] == "true" ? @worklogs = @worklogs.paid : @worklogs
