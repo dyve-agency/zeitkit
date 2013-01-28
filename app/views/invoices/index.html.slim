@@ -1,25 +1,23 @@
 h1 Listing invoices
 
-table
-  tr
-    th User
-    th Client
-    th Includes vat
-    th Vat
-    th
-    th
-    th
+table.table
+  thead
+    tr
+      th Number
+      th Client
+      th Paid
+      th Total
+      th Controls
 
+  tbody
   - @invoices.each do |invoice|
     tr
-      td = invoice.user_id
-      td = invoice.client_id
-      td = invoice.includes_vat
-      td = invoice.vat
-      td = link_to 'Show', invoice
-      td = link_to 'Edit', edit_invoice_path(invoice)
-      td = link_to 'Destroy', invoice, :confirm => 'Are you sure?', :method => :delete
-
-br
-
-= link_to 'New Invoice', new_invoice_path
+      td = invoice.number
+      td = invoice.client.name
+      td = invoice.total
+      td = invoice.paid
+      td
+        .btn-group
+          = link_to 'Details', invoice, class: "btn"
+          = link_to 'Edit', edit_invoice_path(invoice), class: "btn"
+          = link_to 'Delete', invoice, :confirm => 'Are you sure?', :method => :delete, class: "btn"

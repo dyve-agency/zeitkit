@@ -24,8 +24,12 @@ ActiveRecord::Schema.define(:version => 20130128184316) do
   create_table "invoices", :force => true do |t|
     t.integer  "user_id"
     t.integer  "client_id"
+    t.integer  "number"
+    t.integer  "total"
     t.boolean  "includes_vat"
+    t.datetime "paid_on"
     t.float    "vat"
+    t.text     "note"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
   end
