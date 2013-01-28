@@ -44,4 +44,14 @@ class UsersController < ApplicationController
     end
   end
 
+  def update_savetime
+    @user = current_user
+    @sts = @user.start_time_save
+    @sts.start_time = params[:start_time]
+    @sts.save
+    respond_to do |format|
+      format.json {render json: @user}
+    end
+  end
+
 end
