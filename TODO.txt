@@ -1,4 +1,0 @@
--Clean up controllers
--Allow entering time without end date
--Scope partially entered
--Implement this: http://jdewit.github.com/bootstrap-timepicker/
