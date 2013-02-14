@@ -80,6 +80,7 @@ GEM
     mime-types (1.19)
     multi_json (1.5.0)
     multipart-post (1.1.5)
+    newrelic_rpm (3.5.5.38)
     oauth (0.4.7)
     oauth2 (0.6.1)
       faraday (~> 0.7)
@@ -159,6 +160,7 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   font-awesome-sass-rails (~> 3.0.0.0)!
   jquery-rails
+  newrelic_rpm
   pg
   quiet_assets
   railroady

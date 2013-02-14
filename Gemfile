@@ -9,6 +9,7 @@ gem 'sorcery'
 gem 'simple_form', git: 'https://github.com/plataformatec/simple_form.git', branch: :master
 gem 'jquery-rails'
 gem 'cancan'
+gem 'newrelic_rpm'
 
 # Gems used only for assets and not required
 # in production environments by default.
