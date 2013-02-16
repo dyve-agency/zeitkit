@@ -2,7 +2,7 @@ class NotesController < ApplicationController
   load_and_authorize_resource except: :public
 
   def index
-    @notes = Note.all
+    @notes = current_user.notes
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @notes }
