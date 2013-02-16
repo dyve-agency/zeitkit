@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
 
   has_many :clients
   has_many :worklogs
+  has_many :notes
 
   has_one :start_time_save
 

@@ -1,4 +1,5 @@
 class NotesController < ApplicationController
+  load_and_authorize_resource
   # GET /notes
   # GET /notes.json
   def index
@@ -75,11 +76,11 @@ class NotesController < ApplicationController
   # DELETE /notes/1
   # DELETE /notes/1.json
   def destroy
-    @note = Note.find(params[:id])
+    @note = current_user.notes.find(params[:id])
     @note.destroy
 
     respond_to do |format|
-      format.html { redirect_to notes_url }
+      format.html { redirect_to user_notes_path(current_user) }
       format.json { head :no_content }
     end
   end
