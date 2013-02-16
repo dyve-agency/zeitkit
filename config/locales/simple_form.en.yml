@@ -4,6 +4,8 @@ en:
       text: 'required'
       mark: '*'
     labels:
+      session:
+        username: "Email"
     hints:
       worklog:
         hourly_rate: Change the hourly rate that was saved when you created the worklog.
