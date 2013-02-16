@@ -1,0 +1,5 @@
+= simple_form_for shallow_args(current_user, @note) do |f|
+  = f.input :content, input_html: {class: "span12"}
+  = f.input :client_id, collection: current_user.clients
+  .form-actions
+    = f.button :submit

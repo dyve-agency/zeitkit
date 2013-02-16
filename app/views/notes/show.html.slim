@@ -1,0 +1,12 @@
+p#notice = notice
+
+p
+  strong Content:
+  = @note.content
+
+- if @note.client
+  p
+    strong Client:
+    = @note.client.name
+
+= link_to 'Edit', edit_note_path(@note)
