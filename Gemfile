@@ -11,6 +11,8 @@ gem 'jquery-rails'
 gem 'cancan'
 gem 'newrelic_rpm'
 gem 'redcarpet'
+gem 'rack-force_domain'
+
 
 # Gems used only for assets and not required
 # in production environments by default.
