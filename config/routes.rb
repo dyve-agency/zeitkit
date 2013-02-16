@@ -5,7 +5,14 @@ Timetracker::Application.routes.draw do
   resources :users, only: [:new, :create, :show], shallow: true do
     resources :clients, except: [:show]
     resources :start_time_saves, only: [:destroy], as: "start_time_save"
-    resources :notes
+    resources :notes do
+      member do
+        get "public"
+        post "share"
+        post "new_share_link"
+        post "unshare"
+      end
+    end
     resources :worklogs, except: [:show] do
       member do
         post "toggle_paid"

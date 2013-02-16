@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130215195458) do
+ActiveRecord::Schema.define(:version => 20130216131851) do
 
   create_table "clients", :force => true do |t|
     t.string   "name"
@@ -38,8 +38,9 @@ ActiveRecord::Schema.define(:version => 20130215195458) do
     t.text     "content"
     t.integer  "user_id"
     t.integer  "client_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.string   "share_token"
   end
 
   create_table "start_time_saves", :force => true do |t|
