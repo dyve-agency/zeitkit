@@ -7,4 +7,8 @@ class Note < ActiveRecord::Base
   belongs_to :client
 
   validates :user, presence: true
+
+  def markdown_converted_content
+    Redcarpet::Markdown.new(Redcarpet::Render::HTML).render(content).html_safe
+  end
 end

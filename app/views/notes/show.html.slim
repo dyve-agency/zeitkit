@@ -1,12 +1,13 @@
-p#notice = notice
-
-p
-  strong Content:
-  = @note.content
-
-- if @note.client
-  p
-    strong Client:
-    = @note.client.name
-
-= link_to 'Edit', edit_note_path(@note)
+.row
+  .span8
+    h1.content-heading Details
+    .note-content
+      = @content
+  .span4
+    h1.content-heading Info
+    - if @note.client
+      p.lead Client: #{@note.client.name}
+    p.lead Created on: #{l @note.created_at}
+    p.lead Last updated: #{l @note.updated_at}
+hr
+= link_to 'Edit', edit_note_path(@note), class: "btn"
