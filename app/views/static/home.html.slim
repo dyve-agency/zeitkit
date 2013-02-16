@@ -1,20 +1,28 @@
 .hero-unit
-  h1 A simple and lightweight timetracker.
+  h1 A Zeit toolset for developers.
   .row
     .span6
-      p Zeittracker changes the way time tracking works. With an intuitive and
-        easy to use interface time tracking becomes fun.
+      p Zeitkit is a collection tools for developers to save time on daily
+        tasks. Focus on your work. Reduce overhead and bill more time.
+      ul.feature-list
+        li Track the time you worked for clients.
+        li Log what you worked on.
+        li
+          span Log meetings with clients in 
+          a href="http://daringfireball.net/projects/markdown/syntax" markdown
+        li Share notes with your clients.
+
       blockquote.hidden-phone
-        p "With Zeittracker my billing is more accurate. I bill an average of
-          16% more. Working with Zeittracker is fun, I leave the bad parts to
-          them."
-        small Thomas, Entrepreneur
+        p "With Zeitkit I have set of tools creating no overhead. I bill an average of
+          16% more. Working with Zeitkit is fun, I leave the annoyances of
+          being a freelancer to them."
+        small Thomas, Django developer
       - if !current_user
         .signup-links
           = simple_form_for "", url: signup_email_path do |f|
             input.span3#signup-email name="signup_email" type="email" placeholder="e.g. me@mymail.com"
             = f.button :submit, "Get started »", class: "home-submit btn-large"
-        p Zeittracker is still in beta, thus free.
+        p Test Zeitkit free for 30 days, afterwards 5$ per month.
       - else
         = link_to "My Account", user_path(current_user), class: "btn btn-large"
 
