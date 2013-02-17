@@ -6,7 +6,10 @@ class Invoice < ActiveRecord::Base
     :paid_on,
     :total,
     :note,
-    :number
+    :number,
+    :content,
+    :payment_terms,
+    :payment_info
 
   belongs_to :user
   belongs_to :client

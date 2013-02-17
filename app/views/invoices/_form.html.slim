@@ -1,6 +1,9 @@
 = simple_form_for shallow_args(current_user, @invoice) do |f|
   = f.input :client_id, collection: current_user.clients
   = f.input :number
+  = f.input :content
+  = f.input :payment_info
+  = f.input :payment_terms
   = f.input :note
   = f.input :vat
   = f.input :includes_vat, label: false, hint: "The total includes value added tax."

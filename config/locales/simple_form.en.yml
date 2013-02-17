@@ -6,6 +6,8 @@ en:
     labels:
       session:
         username: "Email"
+      invoice:
+        note: "Note to client"
     hints:
       worklog:
         hourly_rate: Change the hourly rate that was saved when you created the worklog.
