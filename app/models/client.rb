@@ -4,6 +4,7 @@ class Client < ActiveRecord::Base
   belongs_to :user
   has_many :worklogs
   has_many :invoices
+  has_many :notes
 
   validates :user, :name, :hourly_rate, presence: true
   validates :name, :uniqueness => { :scope => :user_id,

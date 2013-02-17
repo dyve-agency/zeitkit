@@ -64,5 +64,6 @@ module Timetracker
     config.assets.initialize_on_precompile = false
 
     # Forces to use a domain.
+    config.middleware.use Rack::ForceDomain, ENV["ZDOMAIN"]
   end
 end

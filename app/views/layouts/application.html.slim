@@ -3,11 +3,21 @@ html lang="en"
   head
     meta charset="utf-8"
     meta content="width=device-width, initial-scale=1.0" name="viewport"
-    title Zeittracker
+    title Zeitkit
     link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600|Pacifico|Bree+Serif' rel='stylesheet' type='text/css'
     link rel="icon" href="/assets/favicon.png" type="image/png"
     = stylesheet_link_tag    "application", :media => "all"
     = javascript_include_tag "application"
+    javascript:
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-1502391-49']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
     = csrf_meta_tags
   body
     #wrapper class="#{check_if_css_class}"

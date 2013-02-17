@@ -1,0 +1,21 @@
+.row
+  .span8
+    h1.content-heading Details
+    .note-content
+      = @content
+  .span4
+    h1.content-heading Info
+    - if @note.client
+      p.lead Client: #{@note.client.name}
+    p.lead Created on: #{l @note.created_at}
+    p.lead Last updated: #{l @note.updated_at}
+hr
+.btn-group
+  = link_to 'Edit', edit_note_path(@note), class: "btn"
+  = link_to 'Share', share_note_path(@note), class: "btn", method: :post
+  = link_to 'Unshare', unshare_note_path(@note), class: "btn", method: :post
+  = link_to 'New share link', new_share_link_note_path(@note), class: "btn", method: :post
+- if @note.is_shared?
+  .share-note
+    h3 Share link
+    input type="text" value="#{@note.share_link}"

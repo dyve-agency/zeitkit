@@ -5,7 +5,7 @@
         span.icon-bar
         span.icon-bar
         span.icon-bar
-      a.brand href="#{dynamic_home_path}" Zeittracker
+      a.brand href="#{dynamic_home_path}" Zeitkit
       .nav-collapse.collapse
         ul.nav
           - if current_user
@@ -13,6 +13,8 @@
               = link_to "Clients", user_clients_path(current_user)
             li
               = link_to "Worklogs", user_worklogs_path(current_user)
+            li
+              = link_to "Notes", user_notes_path(current_user)
             li class="dropdown"
               a.dropdown-toggle data-toggle="dropdown" href="#dropdown-menu"
                 = current_user.email
