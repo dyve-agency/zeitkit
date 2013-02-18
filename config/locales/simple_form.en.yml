@@ -7,7 +7,11 @@ en:
       session:
         username: "Email"
       invoice:
-        note: "Note to client"
+        note: Footer notes (Markdown)
+        number: Invoice number
+        content: Invoice content
+        payment_info: Payment info (Markdown)
+        payment_terms: Payment terms (Markdown)
     hints:
       worklog:
         hourly_rate: Change the hourly rate that was saved when you created the worklog.
@@ -20,3 +24,8 @@ en:
         username: "i.e. TheDonut"
       worklog:
         summary: "e.g. -Fix a bug, finish project b."
+      invoice:
+        content: "e.g. * 10 hours á 100 € = 2500"
+        total: "e.g. 2500"
+        payment_info: "e.g. * Wire to: 2691929, Gerbank, 250000. Or Paypal: payments@zeitkit.com"
+        payment_terms: "e.g. * Amount is due opon invoice receival."

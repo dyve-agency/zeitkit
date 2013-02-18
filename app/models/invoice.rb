@@ -14,4 +14,12 @@ class Invoice < ActiveRecord::Base
   belongs_to :user
   belongs_to :client
   has_many :worklogs
+
+  def calc_vat_total
+    if includes_vat
+      total
+    else
+      total * 100/vat
+    end
+  end
 end

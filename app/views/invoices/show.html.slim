@@ -1,14 +1,51 @@
-p#notice = notice
+.alert.alert-info Please open the print dialog of your browser. Then save it as a .pdf and email it your client.
+.invoice-writer
+  h3 Contractor
+  p User company name
+  p User street
+  p User city
+.row
+  .span6.invoice-client
+    h3 Client
+    p Client Name
+    p Client Address
+    p Client Zip, City.
+  .span6.invoice-quick-total
+    h3 Invoice summary
+    p.key-value
+      |Invoice number:
+      span #{@invoice.number}
+    p.key-value
+      |Invoice date:
+      span #{l @invoice.created_at}
+    p.key-value
+      |Inovice total:
+      span #{@invoice.total}
+.inovice-content
+  h3 Invoice content
+  p.text-bar Invoice content
+  = @invoice.content
+.row
+  .span4.offset8.invoice-total
+    h3 Invoice total
+    p.key-value
+      |Subtotal:
+      span #{@invoice.total}
+    p.key-value
+      |VAT
+      span Invoices #{@invoice.includes_vat ? "includes" : "excludes" } #{@invoice.vat}% VAT
+    p.key-value
+      |Total
+      span= @invoice.calc_vat_total
+hr
+.row
+  .span4
+    h3 Payment Info
+    p= @invoice.payment_info
+  .span4
+    h3 Payment Terms
+    p= @invoice.payment_terms
+  .span4.grey-box
+    h3 Note
+    p= @invoice.note
 
-p
-  strong User:
-  = @invoice.user_id
-p
-  strong Client:
-  = @invoice.client_id
-p
-  strong Includes vat:
-  = @invoice.includes_vat
-p
-  strong Vat:
-  = @invoice.vat
