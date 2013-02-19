@@ -16,4 +16,8 @@ module ApplicationHelper
     @css_class ? @css_class : ""
   end
 
+  def val_or_nil_string(obj)
+    obj.nil? ? "-" : obj
+  end
+
 end
