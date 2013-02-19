@@ -1,4 +1,7 @@
 class Invoice < ActiveRecord::Base
+
+  include NilStrings
+
   attr_accessible :client_id,
     :includes_vat,
     :user_id,
@@ -22,4 +25,9 @@ class Invoice < ActiveRecord::Base
       total * 100/vat
     end
   end
+
+  def string_fields_to_nil
+    [:payment_terms, :payment_info, :note]
+  end
+
 end

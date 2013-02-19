@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   authenticates_with_sorcery!
+  include NilStrings
 
   attr_accessible :email,
     :password,
@@ -35,6 +36,10 @@ class User < ActiveRecord::Base
       build_start_time_save(start_time: Time.now).save
       nil
     end
+  end
+
+  def string_fields_to_nil
+    [:company_name, :zip, :street, :city]
   end
 
 end
