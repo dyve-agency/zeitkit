@@ -9,7 +9,7 @@ en:
       invoice:
         note: Footer notes (Markdown)
         number: Invoice number
-        content: Invoice content
+        content: Invoice content (Markdown)
         payment_info: Payment info (Markdown)
         payment_terms: Payment terms (Markdown)
     hints:
@@ -29,3 +29,4 @@ en:
         total: "e.g. 2500"
         payment_info: "e.g. * Wire to: 2691929, Gerbank, 250000. Or Paypal: payments@zeitkit.com"
         payment_terms: "e.g. * Amount is due opon invoice receival."
+        note: "e.g. * VAT-Number: 502123 or other important info in your country."
