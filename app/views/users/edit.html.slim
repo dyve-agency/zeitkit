@@ -1,0 +1,9 @@
+= simple_form_for @user do |f|
+  = f.input :email
+  = f.input :company_name
+  = f.input :street
+  = f.input :city
+  = f.input :zip
+
+  .form-actions
+    = f.button :submit, "Update"

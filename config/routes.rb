@@ -2,7 +2,7 @@ Timetracker::Application.routes.draw do
 
   root :to => "static#home"
 
-  resources :users, only: [:new, :create, :show], shallow: true do
+  resources :users, only: [:new, :create, :show, :edit, :update], shallow: true do
     resources :clients, except: [:show]
     resources :start_time_saves, only: [:destroy], as: "start_time_save"
     resources :notes do

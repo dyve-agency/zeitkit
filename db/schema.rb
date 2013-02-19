@@ -11,14 +11,29 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130217183548) do
+ActiveRecord::Schema.define(:version => 20130219074819) do
 
   create_table "clients", :force => true do |t|
     t.string   "name"
-    t.decimal  "hourly_rate", :precision => 8, :scale => 2
-    t.integer  "user_id",                                   :null => false
-    t.datetime "created_at",                                :null => false
-    t.datetime "updated_at",                                :null => false
+    t.decimal  "hourly_rate",  :precision => 8, :scale => 2
+    t.integer  "user_id",                                    :null => false
+    t.datetime "created_at",                                 :null => false
+    t.datetime "updated_at",                                 :null => false
+    t.string   "city"
+    t.string   "street"
+    t.string   "zip"
+    t.string   "company_name"
+  end
+
+  create_table "contact_data", :force => true do |t|
+    t.string   "company"
+    t.string   "street"
+    t.string   "zip_code"
+    t.string   "city"
+    t.integer  "user_id"
+    t.integer  "client_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "invoices", :force => true do |t|
@@ -65,6 +80,10 @@ ActiveRecord::Schema.define(:version => 20130217183548) do
     t.string   "reset_password_token"
     t.datetime "reset_password_token_expires_at"
     t.datetime "reset_password_email_sent_at"
+    t.string   "city"
+    t.string   "street"
+    t.string   "zip"
+    t.string   "company_name"
   end
 
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token"

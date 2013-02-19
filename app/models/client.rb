@@ -1,5 +1,11 @@
 class Client < ActiveRecord::Base
-  attr_accessible :hourly_rate, :name
+  attr_accessible :hourly_rate,
+    :name,
+    :company_name,
+    :zip,
+    :street,
+    :city
+
 
   belongs_to :user
   has_many :worklogs
