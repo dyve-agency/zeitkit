@@ -23,6 +23,10 @@
                 b.caret
               ul.dropdown-menu
                 li
+                  = link_to "Edit account", edit_user_path(current_user)
+                li
+                  = link_to "Howto markdown", "http://daringfireball.net/projects/markdown/syntax"
+                li
                   = link_to "Sign out", logout_path
           - if !current_user
             li

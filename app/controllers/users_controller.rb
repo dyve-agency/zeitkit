@@ -39,6 +39,7 @@ class UsersController < ApplicationController
   end
 
   def dynamic_home
+    flash.keep
     if current_user
       redirect_to user_clients_path(current_user)
     else
