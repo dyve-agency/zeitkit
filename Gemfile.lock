@@ -78,6 +78,8 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.19)
+    money (5.1.0)
+      i18n (~> 0.6.0)
     multi_json (1.5.0)
     multipart-post (1.1.5)
     newrelic_rpm (3.5.5.38)
@@ -162,6 +164,7 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   font-awesome-sass-rails (~> 3.0.0.0)!
   jquery-rails
+  money
   newrelic_rpm
   pg
   quiet_assets

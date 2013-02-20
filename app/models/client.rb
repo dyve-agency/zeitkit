@@ -1,4 +1,5 @@
 class Client < ActiveRecord::Base
+  include HourlyRateHelper
 
   include NilStrings
 
@@ -22,5 +23,6 @@ class Client < ActiveRecord::Base
   def string_fields_to_nil
     [:company_name, :zip, :street, :city]
   end
+
 
 end
