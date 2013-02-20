@@ -19,7 +19,7 @@ class InvoicesController < ApplicationController
   # GET /invoices/new
   # GET /invoices/new.json
   def new
-    @invoice.set_number!
+    @invoice.set_initial_values!
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @invoice }

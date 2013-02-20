@@ -1,12 +1,22 @@
 = simple_form_for shallow_args(current_user, @invoice) do |f|
-  = f.input :client_id, collection: current_user.clients
-  = f.input :number
+  .row
+    .span3
+      = f.input :client_id, collection: current_user.clients
+      = f.input :number
+    .span3
+      = f.input :total
+      = f.input :vat
+    .span3.includes-vat
+      = f.input :includes_vat, label: false, hint: "The total includes value added tax."
+  hr
   = f.input :content
-  = f.input :total
-  = f.input :payment_info
-  = f.input :payment_terms
-  = f.input :note
-  = f.input :vat
-  = f.input :includes_vat, label: false, hint: "The total includes value added tax."
+  hr
+  .row
+    .span4
+      = f.input :payment_info
+    .span4
+      = f.input :payment_terms
+    .span4
+      = f.input :note
   .form-actions
     = f.button :submit, "Save"

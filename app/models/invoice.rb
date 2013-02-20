@@ -39,7 +39,13 @@ class Invoice < ActiveRecord::Base
     user.invoices.last.number + 1
   end
 
-  def set_number!
+  def vat_last_invoice
+    return 19.0 if user.invoices.empty?
+    user.invoices.last.vat
+  end
+
+  def set_initial_values!
+    self.vat = vat_last_invoice
     self.number = generate_number
   end
 
