@@ -6,8 +6,16 @@
     .span3
       = f.input :total
       = f.input :vat
-    .span3.includes-vat.mobile-no-padding
-      = f.input :includes_vat, label: false, hint: "The total includes value added tax."
+    .span3.client-unpaid-list
+      - if @unpaid_worklogs.any?
+        h3 Clients owing you:
+        ul.alert.alert-success.unpaid-worklogs
+          - @unpaid_worklogs.each do |unpaid|
+            li
+              span.client-name= unpaid[:client] + ": "
+              span.unpaid-total= unpaid[:total]  
+              a href="#" (Bill)
+  = f.input :includes_vat, label: false, hint: "The total includes value added tax."
   hr
   = f.input :content
   hr

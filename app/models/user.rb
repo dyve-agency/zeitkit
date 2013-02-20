@@ -49,4 +49,17 @@ class User < ActiveRecord::Base
     self.build_invoice_default.save
   end
 
+
+  def unpaid_worklogs_by_client
+    unpaid = []
+    clients.each do |client|
+      total = Worklog.unpaid.where(client_id: client.id).sum(:price)
+      next if total == 0
+      unpaid.push({client: client.name,
+        total: total
+      })
+    end
+    unpaid
+  end
+
 end
