@@ -8,4 +8,8 @@ class InvoiceDefault < ActiveRecord::Base
   def string_fields_to_nil
     [:payment_terms, :payment_info, :note]
   end
+
+  def self.defaults
+    [:payment_terms, :payment_info, :note, :vat, :includes_vat]
+  end
 end

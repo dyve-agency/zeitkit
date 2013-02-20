@@ -45,8 +45,15 @@ class Invoice < ActiveRecord::Base
   end
 
   def set_initial_values!
-    self.vat = vat_last_invoice
+    merge_with_invoice_defaults!
+    self.vat = vat_last_invoice if !vat
     self.number = generate_number
+  end
+
+  def merge_with_invoice_defaults!
+    InvoiceDefault.defaults.each do |field|
+      self[field.to_s] = user.invoice_default[field.to_s]
+    end
   end
 
 end
