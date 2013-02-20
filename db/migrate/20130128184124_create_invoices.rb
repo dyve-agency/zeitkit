@@ -3,7 +3,7 @@ class CreateInvoices < ActiveRecord::Migration
     create_table :invoices do |t|
       t.integer :user_id
       t.integer :client_id
-      t.integer :number
+      t.string :number
       t.integer :total
       t.boolean :includes_vat
       t.datetime :paid_on

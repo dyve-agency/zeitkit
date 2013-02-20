@@ -1,13 +1,14 @@
 .alert.alert-info Please open the print dialog of your browser. Then save it as a .pdf and email it your client.
 .invoice-writer
   h3 Contractor
-  p = val_or_nil_string current_user.company_name
-  p = val_or_nil_string current_user.street
-  p = "#{val_or_nil_string current_user.zip} #{val_or_nil_string current_user.city}"
+  p= link_to val_or_nil_string(current_user.company_name), edit_user_path(current_user)
+  p= val_or_nil_string current_user.street
+  p= "#{val_or_nil_string current_user.zip} #{val_or_nil_string current_user.city}"
 .row
   .span6.invoice-client
     h3 Client
-    p Client Name
+    p
+      = link_to @invoice.client.name, edit_client_path(@invoice.client)
     p Client Address
     p Client Zip, City.
   .span6.invoice-quick-total
@@ -20,8 +21,7 @@
       span #{l @invoice.created_at}
 .inovice-content
   h3 Invoice content
-  p.text-bar Invoice content
-  = @invoice.content
+  = markdown @invoice.content
 .row
   .span4.offset8.invoice-total
     h3 Invoice total
@@ -38,10 +38,10 @@ hr
 .row
   .span4
     h3 Payment Info
-    p= @invoice.payment_info
+    p= markdown @invoice.payment_info
   .span4
     h3 Payment Terms
-    p= @invoice.payment_terms
+    p= markdown @invoice.payment_terms
   .span4.grey-box
     h3 Note
-    p= @invoice.note
+    p= markdown @invoice.note

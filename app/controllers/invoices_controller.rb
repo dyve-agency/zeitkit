@@ -1,20 +1,15 @@
 class InvoicesController < ApplicationController
-  # GET /invoices
-  # GET /invoices.json
-  def index
-    @invoices = Invoice.all
+  load_and_authorize_resource
 
+  def index
+    @invoices = current_user.invoices
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @invoices }
     end
   end
 
-  # GET /invoices/1
-  # GET /invoices/1.json
   def show
-    @invoice = Invoice.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @invoice }
@@ -24,23 +19,20 @@ class InvoicesController < ApplicationController
   # GET /invoices/new
   # GET /invoices/new.json
   def new
-    @invoice = Invoice.new
-
+    @invoice.set_number!
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @invoice }
     end
   end
 
-  # GET /invoices/1/edit
   def edit
-    @invoice = Invoice.find(params[:id])
   end
 
-  # POST /invoices
-  # POST /invoices.json
   def create
     @invoice = Invoice.new(params[:invoice])
+    @invoice.user = current_user
+    @invoice.client = current_user.clients.find(@invoice.client.id)
 
     respond_to do |format|
       if @invoice.save
@@ -53,11 +45,7 @@ class InvoicesController < ApplicationController
     end
   end
 
-  # PUT /invoices/1
-  # PUT /invoices/1.json
   def update
-    @invoice = Invoice.find(params[:id])
-
     respond_to do |format|
       if @invoice.update_attributes(params[:invoice])
         format.html { redirect_to @invoice, notice: 'Invoice was successfully updated.' }
@@ -69,14 +57,10 @@ class InvoicesController < ApplicationController
     end
   end
 
-  # DELETE /invoices/1
-  # DELETE /invoices/1.json
   def destroy
-    @invoice = Invoice.find(params[:id])
     @invoice.destroy
-
     respond_to do |format|
-      format.html { redirect_to invoices_url }
+      format.html { redirect_to user_invoices_path(current_user) }
       format.json { head :no_content }
     end
   end

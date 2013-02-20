@@ -5,17 +5,17 @@ table.table
     tr
       th Number
       th Client
-      th Paid
       th Total
+      th Paid on
       th Controls
 
   tbody
   - @invoices.each do |invoice|
     tr
-      td = invoice.number
-      td = invoice.client.name
-      td = invoice.total
-      td = invoice.paid_on
+      td= invoice.number
+      td= link_to invoice.client.name, edit_client_path(invoice.client)
+      td= invoice.total
+      td= invoice.paid_on
       td
         .btn-group
           = link_to 'Details', invoice, class: "btn"

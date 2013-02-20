@@ -3,6 +3,6 @@ class Ability
 
   def initialize(user)
     user ||= User.new # guest user (not logged in)
-    can :manage, [Client, Worklog, Note], user_id: user.id
+    can :manage, [Client, Worklog, Note, Invoice], user_id: user.id
   end
 end
