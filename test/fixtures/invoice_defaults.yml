@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  vat: 1.5
+  includes_vat: false
+  payment_terms: MyString
+  payment_info: MyString
+  note: MyString
+
+two:
+  vat: 1.5
+  includes_vat: false
+  payment_terms: MyString
+  payment_info: MyString
+  note: MyString

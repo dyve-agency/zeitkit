@@ -11,17 +11,20 @@ class User < ActiveRecord::Base
     :street,
     :city
 
-  validates_confirmation_of :password
-  validates_presence_of :password, :on => :create
-  validates_presence_of :email
-  validates_uniqueness_of :email
-
   has_many :clients
   has_many :worklogs
   has_many :invoices
   has_many :notes
 
   has_one :start_time_save
+  has_one :invoice_default
+
+  validates_confirmation_of :password
+  validates_presence_of :password, :on => :create
+  validates_presence_of :email
+  validates_uniqueness_of :email
+
+  after_create :build_invoice_default
 
   def set_temp_password(temp_pw)
     self.password = temp_pw
@@ -40,6 +43,10 @@ class User < ActiveRecord::Base
 
   def string_fields_to_nil
     [:company_name, :zip, :street, :city]
+  end
+
+  def build_invoice_default
+    self.build_invoice_default.save
   end
 
 end

@@ -3,6 +3,9 @@ Timetracker::Application.routes.draw do
   root :to => "static#home"
 
   resources :users, only: [:new, :create, :show, :edit, :update], shallow: true do
+    member do
+      post "update_savetime"
+    end
     resources :clients, except: [:show]
     resources :start_time_saves, only: [:destroy], as: "start_time_save"
     resources :notes do
@@ -19,9 +22,7 @@ Timetracker::Application.routes.draw do
       end
     end
     resources :invoices
-    member do
-      post "update_savetime"
-    end
+    resources :invoice_default, only: [:update, :edit]
   end
 
   resources :sessions

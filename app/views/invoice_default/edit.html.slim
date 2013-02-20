@@ -1,15 +1,10 @@
-= simple_form_for shallow_args(current_user, @invoice) do |f|
+= simple_form_for shallow_args(current_user, @invoice_default) do |f|
+  .alert.alert-info Create a template that is used for new invoices. #{link_to "You can use the markdown language.", "http://daringfireball.net/projects/markdown/syntax"}
   .row
     .span3
-      = f.input :client_id, collection: current_user.clients
-      = f.input :number
-    .span3
-      = f.input :total
       = f.input :vat
-    .span3.includes-vat.mobile-no-padding
+    .span3.default-includes-vat.mobile-no-padding
       = f.input :includes_vat, label: false, hint: "The total includes value added tax."
-  hr
-  = f.input :content
   hr
   .row
     .span4
