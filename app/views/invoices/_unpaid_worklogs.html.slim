@@ -1,0 +1,16 @@
+- if @unpaid_worklogs.any?
+  h3 Clients owing you:
+  .unpaid-worklogs.alert.alert-success
+    table.table
+      thead
+        tr
+          th Client
+          th Unpaid
+          th Set as total
+      tbody
+        - @unpaid_worklogs.each do |unpaid|
+          tr
+            td= unpaid[:client]
+            td= unpaid[:total]
+            td
+              a href="#" (Set total)
