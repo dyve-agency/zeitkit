@@ -19,9 +19,11 @@ class User < ActiveRecord::Base
   has_one :start_time_save
   has_one :invoice_default
 
+  before_validation :set_initial_currency, on: :create
+
   validates_confirmation_of :password
   validates_presence_of :password, :on => :create
-  validates_presence_of :email
+  validates_presence_of :email, :currency
   validates_uniqueness_of :email
 
   after_create :build_invoice_default
@@ -60,6 +62,14 @@ class User < ActiveRecord::Base
       })
     end
     unpaid
+  end
+
+  def currency
+    Money.default_currency
+  end
+
+  def set_initial_currency
+    self.currency = Money.default_currency.iso_code.to_s
   end
 
 end

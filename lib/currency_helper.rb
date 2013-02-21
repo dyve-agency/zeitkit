@@ -1,16 +1,9 @@
 module CurrencyHelper
-  def self.included(base)
-    base.validates :currency, presence: true
-  end
+  extend ActiveSupport::Concern
 
-  # For now every currency defaults to Euro
+  # Checks for the associated user for the currency
   def currency
-    read_attribute(:currency) ? Money::Currency.new(read_attribute(:currency)) : nil
-  end
-
-  # For now every currency defaults to Euro
-  def currency=(new_currency)
-    write_attribute(:currency, Money.default_currency.iso_code.to_s)
+    user.currency
   end
 
 end

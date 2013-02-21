@@ -23,18 +23,6 @@ ActiveRecord::Schema.define(:version => 20130220214815) do
     t.string   "street"
     t.string   "zip"
     t.string   "company_name"
-    t.string   "currency"
-  end
-
-  create_table "contact_data", :force => true do |t|
-    t.string   "company"
-    t.string   "street"
-    t.string   "zip_code"
-    t.string   "city"
-    t.integer  "user_id"
-    t.integer  "client_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
   end
 
   create_table "invoice_defaults", :force => true do |t|
@@ -51,7 +39,7 @@ ActiveRecord::Schema.define(:version => 20130220214815) do
   create_table "invoices", :force => true do |t|
     t.integer  "user_id"
     t.integer  "client_id"
-    t.integer  "number"
+    t.string   "number"
     t.integer  "total_cents"
     t.boolean  "includes_vat"
     t.datetime "paid_on"
@@ -59,11 +47,9 @@ ActiveRecord::Schema.define(:version => 20130220214815) do
     t.text     "note"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
-    t.text     "items"
     t.text     "content"
     t.text     "payment_terms"
     t.text     "payment_info"
-    t.string   "currency"
   end
 
   create_table "notes", :force => true do |t|
@@ -97,6 +83,7 @@ ActiveRecord::Schema.define(:version => 20130220214815) do
     t.string   "street"
     t.string   "zip"
     t.string   "company_name"
+    t.string   "currency"
   end
 
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token"
@@ -113,7 +100,6 @@ ActiveRecord::Schema.define(:version => 20130220214815) do
     t.text     "summary"
     t.boolean  "paid"
     t.integer  "invoice_id"
-    t.string   "currency"
   end
 
 end

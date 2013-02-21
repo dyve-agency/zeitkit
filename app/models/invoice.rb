@@ -1,6 +1,7 @@
 class Invoice < ActiveRecord::Base
 
   include NilStrings
+  include TotalHelper
 
   attr_accessible :client_id,
     :includes_vat,

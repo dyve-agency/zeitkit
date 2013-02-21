@@ -12,7 +12,7 @@ class WorklogsController < ApplicationController
     params[:time] == "this_week" ? @worklogs = @worklogs.this_week : @worklogs
     params[:time] == "this_month" ? @worklogs = @worklogs.this_month : @worklogs
     params[:time] == "last_month" ? @worklogs = @worklogs.last_month : @worklogs
-    @sum = @worklogs.sum(:price)
+    @sum = Money.new @worklogs.sum(:total_cents), @user.currency
     seconds = Worklog.range_duration_seconds(@worklogs)
     @hours = Worklog.hours_from_seconds seconds
     @minutes = Worklog.remaining_minutes_from_seconds seconds
