@@ -48,7 +48,8 @@ class User < ActiveRecord::Base
   end
 
   def build_invoice_default
-    self.build_invoice_default.save
+    id = InvoiceDefault.new(user_id: id)
+    id.save
   end
 
 
