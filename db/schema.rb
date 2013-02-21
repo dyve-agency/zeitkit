@@ -25,17 +25,6 @@ ActiveRecord::Schema.define(:version => 20130220194357) do
     t.string   "company_name"
   end
 
-  create_table "contact_data", :force => true do |t|
-    t.string   "company"
-    t.string   "street"
-    t.string   "zip_code"
-    t.string   "city"
-    t.integer  "user_id"
-    t.integer  "client_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
   create_table "invoice_defaults", :force => true do |t|
     t.float    "vat"
     t.boolean  "includes_vat"
@@ -50,7 +39,7 @@ ActiveRecord::Schema.define(:version => 20130220194357) do
   create_table "invoices", :force => true do |t|
     t.integer  "user_id"
     t.integer  "client_id"
-    t.integer  "number"
+    t.string   "number"
     t.integer  "total"
     t.boolean  "includes_vat"
     t.datetime "paid_on"
@@ -58,7 +47,6 @@ ActiveRecord::Schema.define(:version => 20130220194357) do
     t.text     "note"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
-    t.text     "items"
     t.text     "content"
     t.text     "payment_terms"
     t.text     "payment_info"
