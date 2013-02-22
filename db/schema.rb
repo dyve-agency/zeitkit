@@ -11,14 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130220214815) do
+ActiveRecord::Schema.define(:version => 20130222081713) do
 
   create_table "clients", :force => true do |t|
     t.string   "name"
-    t.decimal  "hourly_rate_cents", :precision => 8, :scale => 2
-    t.integer  "user_id",                                         :null => false
-    t.datetime "created_at",                                      :null => false
-    t.datetime "updated_at",                                      :null => false
+    t.integer  "hourly_rate_cents", :limit => 8
+    t.integer  "user_id",                        :null => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
     t.string   "city"
     t.string   "street"
     t.string   "zip"
@@ -95,8 +95,8 @@ ActiveRecord::Schema.define(:version => 20130220214815) do
     t.integer  "client_id"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
-    t.decimal  "hourly_rate_cents"
-    t.decimal  "total_cents"
+    t.integer  "hourly_rate_cents"
+    t.integer  "total_cents"
     t.text     "summary"
     t.boolean  "paid"
     t.integer  "invoice_id"
