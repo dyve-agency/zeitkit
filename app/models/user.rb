@@ -74,4 +74,8 @@ class User < ActiveRecord::Base
     self.currency = Money.default_currency.iso_code.to_s
   end
 
+  def total_all_invoices
+    Money.new invoices.sum(:total_cents), currency
+  end
+
 end
