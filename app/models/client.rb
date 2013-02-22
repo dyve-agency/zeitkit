@@ -10,7 +10,6 @@ class Client < ActiveRecord::Base
     :city,
     :hourly_rate
 
-
   belongs_to :user
   has_many :worklogs
   has_many :invoices
@@ -23,6 +22,5 @@ class Client < ActiveRecord::Base
   def string_fields_to_nil
     [:company_name, :zip, :street, :city]
   end
-
 
 end

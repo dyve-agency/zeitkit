@@ -1,6 +1,6 @@
 = simple_form_for shallow_args(current_user, @client) do |f|
   = f.input :name
-  = f.input :hourly_rate
+  = f.input :hourly_rate, as: :string, required: true
   - if !@client.new_record?
     = f.input :company_name
     = f.input :street

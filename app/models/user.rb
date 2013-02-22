@@ -48,7 +48,7 @@ class User < ActiveRecord::Base
   end
 
   def build_invoice_default
-    id = InvoiceDefault.new(user_id: id)
+    id = InvoiceDefault.new(user_id: self.id)
     id.save
   end
 
@@ -56,10 +56,10 @@ class User < ActiveRecord::Base
   def unpaid_worklogs_by_client
     unpaid = []
     clients.each do |client|
-      total = Worklog.unpaid.where(client_id: client.id).sum(:price)
+      total = Worklog.unpaid.where(client_id: client.id).sum(:total_cents)
       next if total == 0
       unpaid.push({client: client.name,
-        total: total
+        total: Money.new(total, currency)
       })
     end
     unpaid

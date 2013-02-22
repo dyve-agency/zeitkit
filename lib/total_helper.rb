@@ -16,7 +16,6 @@ module TotalHelper
 
     if new_amount.is_a?(Money)
       write_attribute(:total_cents, new_amount.cents)
-      self.currency = new_amount.currency
       result = new_amount
     elsif new_amount.is_a?(Integer)
       write_attribute(:total_cents, new_amount)

@@ -9,6 +9,8 @@ class ClientsController < ApplicationController
   def new
     @client = Client.new
     @client.user = current_user
+    @client.hourly_rate = "0"
+    @client.currency
   end
 
   def edit

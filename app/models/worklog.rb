@@ -23,7 +23,7 @@ class Worklog < ActiveRecord::Base
   validate :duration_less_than_a_year
 
   before_validation :ensure_paid_not_nil
-  before_save :set_hourly_rate, on: :create
+  before_validation :set_hourly_rate, on: :create
   before_save :set_total
   after_create :drop_start_time_save
 
