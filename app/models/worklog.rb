@@ -87,14 +87,11 @@ class Worklog < ActiveRecord::Base
   end
 
   def calc_total
-    rate = secondly_rate(hourly_rate)
-    return if !rate
-    rate * duration
+    Money.new cent_rate_per_second * duration, currency
   end
 
-  def secondly_rate(hour_rate)
-    return if !hour_rate
-    hour_rate / 3600
+  def cent_rate_per_second
+    hourly_rate_cents.to_f / 3600
   end
 
   def end_time_ok
