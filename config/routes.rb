@@ -21,7 +21,11 @@ Timetracker::Application.routes.draw do
         post "toggle_paid"
       end
     end
-    resources :invoices
+    resources :invoices do
+      member do
+        post "toggle_paid"
+      end
+    end
     resources :invoice_default, only: [:update, :edit]
   end
 

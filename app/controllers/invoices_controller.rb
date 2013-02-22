@@ -66,4 +66,13 @@ class InvoicesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def toggle_paid
+    @invoice.toggle_paid
+    if @invoice.save
+      redirect_to user_invoices_path(current_user, params[:old_params]), notice: 'Invoice was successfully updated.'
+    else
+      render action: "edit"
+    end
+  end
 end

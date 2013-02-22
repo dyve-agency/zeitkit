@@ -15,9 +15,10 @@ table.table
       td= invoice.number
       td= link_to invoice.client.name, edit_client_path(invoice.client)
       td= with_currency invoice.total
-      td= invoice.paid_on
+      td= invoice.paid_on ? l(invoice.paid_on) : "-"
       td
         .btn-group
+          = render "set_paid", invoice: invoice
           = link_to 'Details', invoice, class: "btn"
           = link_to 'Edit', edit_invoice_path(invoice), class: "btn"
           = link_to 'Delete', invoice, :confirm => 'Are you sure?', :method => :delete, class: "btn"
