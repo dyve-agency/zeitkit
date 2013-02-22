@@ -20,4 +20,7 @@
     .span4
       = f.input :note
   .form-actions
-    = f.button :submit, "Save"
+    .btn-group
+      = f.button :submit, "Save"
+      - if !@invoice.new_record?
+        = link_to '<i class="icon-zoom-in"></i> Details'.html_safe, @invoice, class: "btn"
