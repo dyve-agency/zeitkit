@@ -28,6 +28,7 @@ class InvoicesController < ApplicationController
   end
 
   def edit
+    @unpaid_worklogs = current_user.unpaid_worklogs_by_client
   end
 
   def create
