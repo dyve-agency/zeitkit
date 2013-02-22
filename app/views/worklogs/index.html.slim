@@ -18,7 +18,7 @@ table.table
         td.hidden-phone= l worklog.end_time
         td= worklog.duration_hours
         td= worklog.duration_minutes
-        td.hidden-phone= worklog.total
+        td.hidden-phone= with_currency worklog.total
         td
           .btn-group.pull-right
             = render "set_paid", worklog: worklog
@@ -32,6 +32,6 @@ table.table
       td
       td= @hours
       td= @minutes
-      td= @sum
+      td= with_currency @sum
       td
 = render "below_worklog_index"

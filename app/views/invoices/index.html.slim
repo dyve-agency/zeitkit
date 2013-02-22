@@ -14,7 +14,7 @@ table.table
     tr
       td= invoice.number
       td= link_to invoice.client.name, edit_client_path(invoice.client)
-      td= invoice.total
+      td= with_currency invoice.total
       td= invoice.paid_on
       td
         .btn-group

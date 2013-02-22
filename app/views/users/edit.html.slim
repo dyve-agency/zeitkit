@@ -1,6 +1,7 @@
 = simple_form_for @user do |f|
   = f.input :email
   = f.input :company_name
+  = f.input :currency, :as => :select, :collection => Money::Currency.pretty_currency_names, label_method: :first, value_method: :last, include_blank: false
   = f.input :street
   = f.input :city
   = f.input :zip
