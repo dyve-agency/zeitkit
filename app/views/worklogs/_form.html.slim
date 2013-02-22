@@ -9,7 +9,7 @@
   = f.input :summary
   = f.input :paid, label: false
   - if !@worklog.new_record?
-    = f.input :hourly_rate
+    = f.input :hourly_rate, as: :string
   .form-actions
     = f.button :submit
 = link_to "", update_savetime_user_path(current_user),

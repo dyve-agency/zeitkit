@@ -28,6 +28,7 @@ class InvoicesController < ApplicationController
   end
 
   def edit
+    @unpaid_worklogs = current_user.unpaid_worklogs_by_client
   end
 
   def create
@@ -63,6 +64,15 @@ class InvoicesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to user_invoices_path(current_user) }
       format.json { head :no_content }
+    end
+  end
+
+  def toggle_paid
+    @invoice.toggle_paid
+    if @invoice.save
+      redirect_to user_invoices_path(current_user, params[:old_params]), notice: 'Invoice was successfully updated.'
+    else
+      render action: "edit"
     end
   end
 end

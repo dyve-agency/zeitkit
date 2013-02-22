@@ -14,13 +14,21 @@ table.table
     tr
       td= invoice.number
       td= link_to invoice.client.name, edit_client_path(invoice.client)
-      td= invoice.total
-      td= invoice.paid_on
+      td= with_currency invoice.total
+      td= invoice.paid_on ? l(invoice.paid_on) : "-"
       td
         .btn-group
+          = render "set_paid", invoice: invoice
           = link_to 'Details', invoice, class: "btn"
           = link_to 'Edit', edit_invoice_path(invoice), class: "btn"
           = link_to 'Delete', invoice, :confirm => 'Are you sure?', :method => :delete, class: "btn"
+  tfoot.hidden-phone
+    tr
+      td Sums:
+      td
+      td= with_currency current_user.total_all_invoices
+      td
+      td
 .btn-group
   = link_to "New invoice", new_user_invoice_path(current_user), class: "btn btn-primary"
   = link_to "<i class='icon-edit'></i> Template".html_safe,

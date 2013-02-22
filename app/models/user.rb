@@ -9,7 +9,8 @@ class User < ActiveRecord::Base
     :company_name,
     :zip,
     :street,
-    :city
+    :city,
+    :currency
 
   has_many :clients
   has_many :worklogs
@@ -19,9 +20,11 @@ class User < ActiveRecord::Base
   has_one :start_time_save
   has_one :invoice_default
 
+  before_validation :set_initial_currency, on: :create
+
   validates_confirmation_of :password
   validates_presence_of :password, :on => :create
-  validates_presence_of :email
+  validates_presence_of :email, :currency
   validates_uniqueness_of :email
 
   after_create :build_invoice_default
@@ -46,20 +49,33 @@ class User < ActiveRecord::Base
   end
 
   def build_invoice_default
-    self.build_invoice_default.save
+    id = InvoiceDefault.new(user_id: self.id)
+    id.save
   end
 
 
   def unpaid_worklogs_by_client
     unpaid = []
     clients.each do |client|
-      total = Worklog.unpaid.where(client_id: client.id).sum(:price)
+      total = Worklog.unpaid.where(client_id: client.id).sum(:total_cents)
       next if total == 0
       unpaid.push({client: client.name,
-        total: total
+        total: Money.new(total, currency)
       })
     end
     unpaid
+  end
+
+  def currency
+    Money.default_currency
+  end
+
+  def set_initial_currency
+    self.currency = Money.default_currency.iso_code.to_s
+  end
+
+  def total_all_invoices
+    Money.new invoices.sum(:total_cents), currency
   end
 
 end

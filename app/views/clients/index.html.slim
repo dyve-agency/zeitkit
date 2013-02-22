@@ -11,7 +11,7 @@ table.table
     - @clients.each do |client|
       tr
         td= client.name
-        td= number_to_currency(client.hourly_rate, :unit => "€")
+        td= with_currency client.hourly_rate
         td
           .btn-group
             = link_to new_user_worklog_path(client: client), class: "btn" do

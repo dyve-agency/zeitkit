@@ -1,4 +1,6 @@
 class Worklog < ActiveRecord::Base
+  include HourlyRateHelper
+  include TotalHelper
 
   include TimeFilter
 
@@ -7,7 +9,7 @@ class Worklog < ActiveRecord::Base
     :start_time,
     :user_id,
     :hourly_rate,
-    :price,
+    :total,
     :summary,
     :paid
 
@@ -21,8 +23,8 @@ class Worklog < ActiveRecord::Base
   validate :duration_less_than_a_year
 
   before_validation :ensure_paid_not_nil
-  before_save :set_hourly_rate, on: :create
-  before_save :set_price
+  before_validation :set_hourly_rate, on: :create
+  before_save :set_total
   after_create :drop_start_time_save
 
   scope :paid, where(paid: true)
@@ -53,7 +55,7 @@ class Worklog < ActiveRecord::Base
   end
 
   def self.columns_to_export
-    %w(Client_name Start_time End_time Hours Minutes Hourly_rate Price Summary Paid)
+    %w(Client_name Start_time End_time Hours Minutes Hourly_rate Total_cents Summary Paid)
   end
 
   def array_data_to_export
@@ -63,7 +65,7 @@ class Worklog < ActiveRecord::Base
     duration_hours,
     duration_minutes,
     hourly_rate,
-    price,
+    total_cents,
     summary,
     yes_or_no_boolean(paid)]
   end
@@ -84,7 +86,7 @@ class Worklog < ActiveRecord::Base
     self.class.remaining_minutes_from_seconds duration
   end
 
-  def calc_price
+  def calc_total
     rate = secondly_rate(hourly_rate)
     return if !rate
     rate * duration
@@ -109,8 +111,8 @@ class Worklog < ActiveRecord::Base
     self.hourly_rate = client.hourly_rate
   end
 
-  def set_price
-    self.price = self.calc_price.round(2)
+  def set_total
+    self.total = self.calc_total
   end
 
   def ensure_paid_not_nil

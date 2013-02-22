@@ -11,14 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130220194357) do
+ActiveRecord::Schema.define(:version => 20130222081713) do
 
   create_table "clients", :force => true do |t|
     t.string   "name"
-    t.decimal  "hourly_rate",  :precision => 8, :scale => 2
-    t.integer  "user_id",                                    :null => false
-    t.datetime "created_at",                                 :null => false
-    t.datetime "updated_at",                                 :null => false
+    t.integer  "hourly_rate_cents", :limit => 8
+    t.integer  "user_id",                        :null => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
     t.string   "city"
     t.string   "street"
     t.string   "zip"
@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(:version => 20130220194357) do
     t.integer  "user_id"
     t.integer  "client_id"
     t.string   "number"
-    t.integer  "total"
+    t.integer  "total_cents"
     t.boolean  "includes_vat"
     t.datetime "paid_on"
     t.float    "vat"
@@ -83,6 +83,7 @@ ActiveRecord::Schema.define(:version => 20130220194357) do
     t.string   "street"
     t.string   "zip"
     t.string   "company_name"
+    t.string   "currency"
   end
 
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token"
@@ -92,10 +93,10 @@ ActiveRecord::Schema.define(:version => 20130220194357) do
     t.datetime "end_time"
     t.integer  "user_id"
     t.integer  "client_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-    t.decimal  "hourly_rate"
-    t.decimal  "price"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+    t.integer  "hourly_rate_cents"
+    t.integer  "total_cents"
     t.text     "summary"
     t.boolean  "paid"
     t.integer  "invoice_id"

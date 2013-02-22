@@ -29,8 +29,8 @@
       |Subtotal:
       span #{@invoice.total}
     p.key-value
-      |VAT
-      span Invoices #{@invoice.includes_vat ? "includes" : "excludes" } #{@invoice.vat}% VAT
+      span #{@invoice.includes_vat ? "Including" : "Excluding"} VAT:
+      span #{@invoice.total_vat}
     p.key-value
       |Total
       span= @invoice.calc_vat_total
@@ -45,3 +45,7 @@ hr
   .span4.grey-box
     h3 Note
     p= markdown @invoice.note
+.invoice-controls
+  hr
+  = link_to "<i class='icon-edit'></i> Edit invoice".html_safe,
+    edit_invoice_path(@invoice), class: "btn btn-primary"
