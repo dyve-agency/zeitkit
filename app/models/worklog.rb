@@ -55,7 +55,7 @@ class Worklog < ActiveRecord::Base
   end
 
   def self.columns_to_export
-    %w(Client_name Start_time End_time Hours Minutes Hourly_rate Total_cents Summary Paid)
+    ["Client", "Start time", "End time", "Hours", "Minutes", "Hourly Rate", "Total", "Summary"]
   end
 
   def array_data_to_export
@@ -66,8 +66,7 @@ class Worklog < ActiveRecord::Base
     duration_minutes,
     hourly_rate,
     total.to_s,
-    summary,
-    yes_or_no_boolean(paid)]
+    summary]
   end
 
   def yes_or_no_boolean(boolean_var)
