@@ -1,7 +1,7 @@
 - if @unpaid_worklogs.any?
   h3 Unpaid worklogs:
-  .unpaid-worklogs.alert.alert-success
-    table.table
+  .unpaid-worklogs
+    table.table.table-bordered
       thead
         tr
           th Client
@@ -9,7 +9,7 @@
           th Set as total
       tbody
         - @unpaid_worklogs.each do |unpaid|
-          tr
+          tr.warning
             td= unpaid[:client]
             td.unpaid-total= unpaid[:total]
             td
