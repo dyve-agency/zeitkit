@@ -30,7 +30,7 @@ class UsersController < ApplicationController
       ensure
         user = login(@user.email, temp_pw, true)
         redirect_to new_user_client_path(@user),
-          notice: "Get started by creating your first client. Your temporary password: #{temp_pw}.<script>_gaq.push(['_trackPageview', '/register_success']);</script>".html_safe
+          notice: "Thanks for signing up. Get by creating your first client.<script>_gaq.push(['_trackPageview', '/register_success']);</script>".html_safe
       end
     else
       flash[:alert] = "Sorry, that email has already been taken/is invalid. Please try again."
