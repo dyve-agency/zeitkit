@@ -65,7 +65,7 @@ class Worklog < ActiveRecord::Base
     duration_hours,
     duration_minutes,
     hourly_rate,
-    total_cents,
+    total.to_s,
     summary,
     yes_or_no_boolean(paid)]
   end
