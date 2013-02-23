@@ -3,19 +3,19 @@ h1 Listing invoices
 table.table.table-bordered
   thead
     tr
-      th Number
+      th.hidden-phone Number
       th Client
       th Total
-      th Paid on
+      th.hidden-phone Paid on
       th Controls
 
   tbody
   - @invoices.each do |invoice|
     tr class="#{success_or_warning invoice.paid_on}"
-      td= invoice.number
+      td.hidden-phone= invoice.number
       td= link_to invoice.client.name, edit_client_path(invoice.client)
       td= with_currency invoice.total
-      td= invoice.paid_on ? l(invoice.paid_on) : "-"
+      td.hidden-phone= invoice.paid_on ? l(invoice.paid_on) : "-"
       td
         .btn-group
           = render "set_paid", invoice: invoice

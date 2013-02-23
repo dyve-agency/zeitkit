@@ -5,7 +5,7 @@ table.table.table-bordered.table-striped
     tr
       th Content
       th Client
-      th
+      th Controls
   tbody
     - @notes.each do |note|
       tr
@@ -17,6 +17,6 @@ table.table.table-bordered.table-striped
             = link_to '<i class="icon-zoom-in"></i> Details'.html_safe, note, class: "btn"
             = link_to 'Edit', edit_note_path(note), class: "btn"
             = link_to 'Delete', note, :confirm => 'Are you sure?',
-              :method => :delete, class: "btn"
+              :method => :delete, class: "btn hidden-phone"
 
 = link_to 'New Note', new_user_note_path, class: "btn btn-primary"
