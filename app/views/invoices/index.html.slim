@@ -1,6 +1,6 @@
 h1 Listing invoices
 
-table.table
+table.table.table-bordered.table-striped
   thead
     tr
       th Number
@@ -11,7 +11,7 @@ table.table
 
   tbody
   - @invoices.each do |invoice|
-    tr
+    tr class="#{success_or_warning invoice.paid_on}"
       td= invoice.number
       td= link_to invoice.client.name, edit_client_path(invoice.client)
       td= with_currency invoice.total

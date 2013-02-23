@@ -20,4 +20,8 @@ module ApplicationHelper
     obj.nil? ? "-" : obj
   end
 
+  def success_or_warning(value_check)
+    value_check ? "success" : "warning"
+  end
+
 end

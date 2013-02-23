@@ -1,6 +1,6 @@
 h1 Listing worklogs
 
-table.table
+table.table.table-bordered.table-striped
   thead
     tr
       th Client
@@ -12,7 +12,7 @@ table.table
       th Controls
   tbody
     - @worklogs.each do |worklog|
-      tr
+      tr class="#{success_or_warning worklog.paid}"
         td= worklog.client.name
         td.hidden-phone= l worklog.start_time
         td.hidden-phone= l worklog.end_time
