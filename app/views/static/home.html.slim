@@ -22,9 +22,9 @@
       - if !current_user
         .signup-links
           = simple_form_for "", url: signup_email_path do |f|
-            input.span3#signup-email name="signup_email" type="email" placeholder="e.g. me@mymail.com"
+            input.span3#signup-email name="signup_email" type="email" placeholder="e.g. me@mymail.com" required="required"
             = f.button :submit, "Get started »", class: "home-submit btn-large"
-        p Test Zeitkit free for 30 days, afterwards 5$ per month.
+        p Test Zeitkit free for 30 days, afterwards 19$ per month.
       - else
         = link_to "My Account", user_path(current_user), class: "btn btn-large"
 
