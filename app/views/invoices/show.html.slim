@@ -39,12 +39,14 @@ hr
   .span4
     h3 Payment Info
     p= markdown @invoice.payment_info
-  .span4
-    h3 Payment Terms
-    p= markdown @invoice.payment_terms
-  .span4.grey-box
-    h3 Note
-    p= markdown @invoice.note
+  - if @invoice.payment_terms
+    .span4
+      h3 Payment Terms
+      p= markdown @invoice.payment_terms
+  - if @invoice.note
+    .span4
+      h3 Note
+      p= markdown @invoice.note
 .invoice-controls
   hr
   = link_to "<i class='icon-edit'></i> Edit invoice".html_safe,
