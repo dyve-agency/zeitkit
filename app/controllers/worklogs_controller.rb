@@ -65,7 +65,7 @@ class WorklogsController < ApplicationController
 
   def destroy
     @worklog.destroy
-    redirect_to worklogs_url
+    redirect_to user_worklogs_path(current_user)
   end
 
   def toggle_paid
