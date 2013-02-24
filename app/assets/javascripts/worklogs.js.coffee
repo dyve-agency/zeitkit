@@ -22,8 +22,13 @@ Worklog =
     )
   getCurrentTime: ->
     d = new Date()
-    return [d.getFullYear(), this.getMonth()[d.getMonth()], d.getDate(),
-      d.getHours(), d.getMinutes()]
+    return [d.getFullYear(), d.getMonth() + 1, d.getDate(),
+      d.getHours(), this.convertMinutes(d.getMinutes())]
+  convertMinutes: (minutes)->
+    if minutes < 10
+      return "0" + minutes
+    else
+      return minutes
   getMonth: ->
     ["January","February","March","April","May","June",
       "July","August","September","October","November","December"]
@@ -84,8 +89,6 @@ SaveTime =
       data: {
         start_time: _this.getStartTime()
       }
-      success: ->
-        console.log("success")
       error: ->
         alert "There has been an error"
 

@@ -4,7 +4,8 @@
   = f.input :end_time
   .set-time
     a.btn.end-time-now
-      span End time: Now
+      i.icon-time
+      span Set Endtime to now.
   = f.input :client_id, collection: current_user.clients, required: true
   = f.input :summary
   = f.input :paid, label: false
