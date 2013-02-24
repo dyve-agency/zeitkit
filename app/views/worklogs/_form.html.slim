@@ -1,4 +1,8 @@
 = render "start_time_save"
+- if current_user.worklogs.empty?
+  .alert.alert-info
+    = link_to "x", "#", class: "close dismiss-save-time"
+    span Here you can log your work. Once you are done, click the 'Set endtime' button to log the exact time you worked.
 = simple_form_for shallow_args(current_user, @worklog) do |f|
   = f.input :start_time
   = f.input :end_time
