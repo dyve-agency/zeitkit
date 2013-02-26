@@ -23,12 +23,12 @@ Worklog =
   getCurrentTime: ->
     d = new Date()
     return [d.getFullYear(), d.getMonth() + 1, d.getDate(),
-      d.getHours(), this.convertMinutes(d.getMinutes())]
-  convertMinutes: (minutes)->
-    if minutes < 10
-      return "0" + minutes
+      this.convertToZeroBased(d.getHours()), this.convertToZeroBased(d.getMinutes())]
+  convertToZeroBased: (number)->
+    if number < 10
+      return "0" + number
     else
-      return minutes
+      return number
   getMonth: ->
     ["January","February","March","April","May","June",
       "July","August","September","October","November","December"]
