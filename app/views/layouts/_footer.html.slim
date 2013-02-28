@@ -9,9 +9,12 @@
         ul
           - if current_user
             li
+              i.icon-heart
               = link_to "Please send us feedback", "/contact-us/"
           - else
             li
+              i.icon-heart
               = link_to "Feedback", "/contact-us/"
           li
+            i.icon-envelope
             = link_to "Contact", "/contact-us/"
