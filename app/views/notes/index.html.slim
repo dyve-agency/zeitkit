@@ -1,4 +1,13 @@
-h1 Listing notes
+h1 Notes
+- if current_user.worklogs.empty?
+  .alert.alert-info
+    = link_to "x", "#", class: "close", data: {dismiss: "alert"}
+    span.intro Notes allow you to:
+    ul
+      li Take notes for a particular client.
+      li Write down meeting notes. (We write em in markdown VIM, then copy paste here.)
+      li Share notes via a public link.
+      li All possibile in the markup language.
 
 table.table.table-bordered.table-striped
   thead

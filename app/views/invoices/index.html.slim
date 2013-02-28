@@ -1,4 +1,13 @@
-h1 Listing invoices
+h1 Invoices
+- if current_user.invoices.empty?
+  .alert.alert-info
+    = link_to "x", "#", class: "close", data: {dismiss: "alert"}
+    span.intro With invoices you can:
+    ul
+      li Create invoices based on your worklogs.
+      li Create arbitrary invoices based on other work you did.
+      li Send a client invoices as a .pdf
+      li Create a standardized template.
 
 table.table.table-bordered
   thead
