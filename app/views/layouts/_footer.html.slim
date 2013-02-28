@@ -1,7 +1,17 @@
 .footer-wrapper
   .container
     .row
-      .span12
+      .span2
         .footer
           .footer-logo.brand-font Zeitkit
           p.lead The kit for saving time.
+      .span10
+        ul
+          - if current_user
+            li
+              = link_to "Please send us feedback", "/contact-us/"
+          - else
+            li
+              = link_to "Feedback", "/contact-us/"
+          li
+            = link_to "Contact", "/contact-us/"

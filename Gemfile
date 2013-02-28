@@ -13,7 +13,7 @@ gem 'newrelic_rpm'
 gem 'redcarpet'
 gem 'rack-force_domain'
 gem 'money'
-
+gem 'contact_us', '~> 0.4.0'
 
 # Gems used only for assets and not required
 # in production environments by default.
