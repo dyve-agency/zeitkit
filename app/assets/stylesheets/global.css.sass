@@ -18,18 +18,28 @@ $dark-color: $dark-orange
   font-size: 22px
   color: #777
 .content
-  padding: 70px 0px 120px 0px
-  @include box-sizing(border-box)
+  padding: 10px 30px 30px 30px
+  background: #fff
+  @include box-shadow(0px 2px 3px 0px #bbb)
+  position: relative
+  top: 80px
+
+
 #wrapper
   min-height: 100%
   position: relative
 .home-design
+  .content
+    padding: 100px 0px 0px 0px
+    position: static
+    top: 0px
+    @include box-shadow(none)
+    background: none
   @include linear-gradient(top, #f47a33 0%, #f26234 50%)
   h1, h2, h3, h4, h5, h6, .hero-unit h1
     color: #fff
     text-shadow: 0px 2px 2px #af5422
     line-height: 90px
-    text-align: center
     margin-bottom: 50px
   .home-submit
     color: #278276
