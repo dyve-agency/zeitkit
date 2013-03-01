@@ -2,8 +2,8 @@
   h1 The collection of tools for developers.
   .row
     .span6
-      p Zeitkit is a collection of tools for developers. Reduce overhead and
-        leave the annoying parts of your work to Zeitkit.
+      p Zeitkit is a simple management companion for developers. Focus on
+        coding, do management with standardized tools.
       ul.feature-list
         li
           i.icon-ok
@@ -29,9 +29,11 @@
             = f.button :submit, "Get started »",
               class: "home-submit btn-large",
               onclick: "_gaq.push(['_trackEvent', 'Signup', 'Click', 'Submit']);"
-        p Signup is free. For more than three clients: 6.99$ per month.
+        p
+          strong Signup is free.
+          span.next-to-free For more than three clients: 6.99$ per month.
       - else
         = link_to "My Account", user_path(current_user), class: "btn btn-large"
 
     .span3.offset1
-      i.icon-time.large-icon.hidden-phone
+      i.icon-briefcase.large-icon.hidden-phone
