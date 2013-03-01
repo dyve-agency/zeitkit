@@ -90,3 +90,11 @@ hr
   background: #f9f9f9
 .table-striped tbody tr:nth-child(odd) td, .table-striped tbody tr:nth-child(odd) th
   background: #fefefe
+.alert
+  @include box-shadow(0px 2px 3px 0px #bbbbbb)
+  ul
+    margin: 0px 0px 0px 25px
+  .intro
+    font-weight: bold
+a
+  @include transition(color 0.2s ease-in-out)
