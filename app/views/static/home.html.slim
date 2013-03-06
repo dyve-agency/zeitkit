@@ -34,8 +34,8 @@
               class: "home-submit btn-large",
               onclick: "_gaq.push(['_trackEvent', 'Signup', 'Click', 'Submit']);"
         p
-          strong Signup is free.
-          span.next-to-free For more than three clients: 6.99$ per month.
+          strong Signup is free for a limited amount of time.
+          - #span.next-to-free For more than three clients: 6.99$ per month.
       - else
         = link_to "My Account", user_path(current_user), class: "btn btn-large"
 
