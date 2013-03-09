@@ -10,7 +10,7 @@ class UsersController < ApplicationController
     if @user.save
       user = login(params[:user][:email], params[:user][:password], true)
       redirect_to user_clients_path(@user),
-        notice: "You are a real ninja. Thanks for signing up. Next steps should be to create a client, then your first worklogs. Don't forget to email us your feedback/ideas to improve Zeitkit. <script>_gaq.push(['_trackPageview', '/register_success']);</script>".html_safe
+        notice: welcome_message
     else
       render :new
     end
@@ -30,7 +30,7 @@ class UsersController < ApplicationController
       ensure
         user = login(@user.email, temp_pw, true)
         redirect_to user_clients_path(@user),
-          notice: "You are a real ninja. Thanks for signing up. Next steps should be to create a client, then your first worklogs. Don't forget to email us your feedback/ideas to improve Zeitkit. <script>_gaq.push(['_trackPageview', '/register_success']);</script>".html_safe
+          notice: welcome_message
       end
     else
       flash[:alert] = "Sorry, that email has already been taken/is invalid. Please try again."
@@ -68,6 +68,10 @@ class UsersController < ApplicationController
     else
       render action: "edit"
     end
+  end
+
+  def welcome_message
+    "Hi. Check out the header to get to know your tools <i class='icon-arrow-up'></i> <script>_gaq.push(['_trackPageview', '/register_success']);</script>".html_safe
   end
 
 end
