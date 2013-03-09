@@ -1,5 +1,5 @@
 <h2><%= t('.contact_us') %></h2>
-<p>Please send us feedback, we can still learn from your ninja skills.</p>
+<p>Please send us feedback. Nobody knows better what to improve than actual developers.</p>
 <%= simple_form_for @contact, :url => contacts_path do |f| %>
   <%= f.input :name, :label => t('.name') if ContactUs.require_name %>
   <%= f.input :email, :label => t('.email') %>
