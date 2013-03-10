@@ -36,12 +36,16 @@ ul.nav.nav-tabs.unpaid-tabs
           thead
             tr
               th Client
+              th Reason
               th Total
               th Add to total
           tbody
             - @unpaid_expenses.each do |expense|
               tr.warning
                 td= expense.client.name
+                td
+                  a.tooltip-init[href="#" data-toggle="tooltip" data-original-title="#{expense.reason}"]
+                    = expense.reason[0..20] + "..."
                 td= with_currency expense.total
                 td
                   a.add-total data-total="#{expense.total.cents}" href="#"
