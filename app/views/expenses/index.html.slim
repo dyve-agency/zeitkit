@@ -1,0 +1,37 @@
+h1 Expenses
+- if current_user.expenses.empty?
+  .alert.alert-info
+    = link_to "x", "#", class: "close", data: {dismiss: "alert"}
+    span.intro Expenses allow you to:
+    ul
+      li Track time of expenses you have for a client.
+      li Examples are: Flights, train rides, licenses or sub contractors.
+
+table.table.table-bordered
+  thead
+    tr
+      th Client
+      th Reason
+      th Total
+      th Controls
+  tbody
+    - @expenses.each do |expense|
+      tr class="#{success_or_warning expense.paid}"
+        td= expense.client.name
+        td
+          = link_to expense.reason[0..20] + "...", edit_expense_path(expense)
+        td= with_currency expense.total
+        td
+          .btn-group.pull-right
+            = render "set_paid", expense: expense
+            = link_to 'Edit', edit_expense_path(expense), class: "btn"
+            = link_to 'Delete', expense, :confirm => 'Are you sure?', :method => :delete,
+              class: "btn hidden-phone"
+  tfoot.hidden-phone
+    tr
+      td Sums:
+      td
+      td= with_currency Money.new @expenses.sum(:total_cents), current_user.currency
+      td
+.btn-group
+  = link_to "New expense", new_user_expense_path(current_user), class: "btn btn-primary"

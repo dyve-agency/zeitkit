@@ -1,0 +1,18 @@
+p#notice = notice
+
+p
+  strong User:
+  = @expense.user_id
+p
+  strong Client:
+  = @expense.client_id
+p
+  strong Total cents:
+  = @expense.total_cents
+p
+  strong Paid:
+  = @expense.paid
+
+= link_to 'Edit', edit_expense_path(@expense)
+'|
+= link_to 'Back', expenses_path

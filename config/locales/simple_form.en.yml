@@ -20,6 +20,8 @@ en:
       worklog:
         hourly_rate: Change the hourly rate that was saved when you created the worklog.
         paid: This worklog has been paid.
+      expense:
+        reason: Make sure to keep receipts in case the client want more details on this expense.
     placeholders:
       user:
         email: "i.e. me@me.com"
@@ -40,3 +42,5 @@ en:
         note: "e.g. * VAT-Number: 502123 or other important info in your country."
       client:
         name: e.g. My Client
+      expense:
+        reason: e.g. Train ride 16/03/2013

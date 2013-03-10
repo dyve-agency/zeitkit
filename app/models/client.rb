@@ -14,6 +14,7 @@ class Client < ActiveRecord::Base
   has_many :worklogs
   has_many :invoices
   has_many :notes
+  has_many :expenses
 
   validates :user, :name, presence: true
   validates :name, uniqueness: {scope: :user_id, message: "You can only have the client once."}

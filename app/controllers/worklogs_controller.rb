@@ -24,10 +24,6 @@ class WorklogsController < ApplicationController
     end
   end
 
-  def show
-    @worklog = Worklog.find(params[:id])
-  end
-
   def new
     @worklog = Worklog.new
     @worklog.user = current_user
