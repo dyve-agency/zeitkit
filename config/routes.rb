@@ -6,7 +6,7 @@ Timetracker::Application.routes.draw do
     member do
       post "update_savetime"
     end
-    resources :clients, except: [:show]
+    resources :clients
     resources :start_time_saves, only: [:destroy], as: "start_time_save"
     resources :notes do
       member do

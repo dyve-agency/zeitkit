@@ -44,3 +44,5 @@ en:
         name: e.g. My Client
       expense:
         reason: e.g. Train ride 16/03/2013
+      note:
+        content: "e.g. * TODO get back with more details"

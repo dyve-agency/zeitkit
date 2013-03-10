@@ -4,8 +4,9 @@ h1 Clients
     = link_to "x", "#", class: "close", data: {dismiss: "alert"}
     span.intro Clients allows you to:
     ul
-      li Create clients to keep track of whom you work with.
-      li You can then assign worklogs, invoices and notes.
+      li Keep track of whom you work with.
+      li Take notes to keep track on progress to close more deals.
+      li Create worklogs, and invoices
 
 table.table.table-bordered.table-striped
   thead
@@ -17,16 +18,16 @@ table.table.table-bordered.table-striped
   tbody
     - @clients.each do |client|
       tr
-        td= client.name
+        td= link_to client.name, client
         td= with_currency client.hourly_rate
         td
           .btn-group
+            = link_to client, class: "btn" do
+              i.icon-zoom-in
+              span Details
             = link_to new_user_worklog_path(client: client), class: "btn" do
               i.icon-plus
               span Worklog
-            = link_to user_worklogs_path(client: client), class: "btn hidden-phone" do
-              i.icon-arrow-right
-              span Worklogs
             = link_to edit_client_path(client), class: "btn hidden-phone" do
               span Edit
             = link_to client, :confirm => 'Are you sure?', method: :delete,

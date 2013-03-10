@@ -48,14 +48,22 @@ class NotesController < ApplicationController
   def edit
   end
 
+  def dynamic_create_path
+  end
+
   def create
     @note = Note.new(params[:note])
     @note.user = current_user
 
     respond_to do |format|
       if @note.save
-        format.html { redirect_to @note, notice: 'Note was successfully created.' }
-        format.json { render json: @note, status: :created, location: @note }
+        if params[:client_show]
+          format.html { redirect_to client_path(params[:client_show]), notice: 'Note was successfully created.' }
+          format.json { render json: @note, status: :created, location: @note }
+        else
+          format.html { redirect_to @note, notice: 'Note was successfully created.' }
+          format.json { render json: @note, status: :created, location: @note }
+        end
       else
         format.html { render action: "new" }
         format.json { render json: @note.errors, status: :unprocessable_entity }

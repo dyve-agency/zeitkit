@@ -38,4 +38,10 @@ class ClientsController < ApplicationController
     @client.destroy
     redirect_to clients_url
   end
+
+  def show
+    @notes = @client.notes.order("created_at DESC")
+    @note = Note.new
+    @note.client = @client
+  end
 end

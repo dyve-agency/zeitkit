@@ -20,7 +20,7 @@ table.table.table-bordered.table-striped
       tr
         td
           = link_to note.content[0..20] + "...", note
-        td = note.client ? note.client.name : "-"
+        td = note.client ? link_to(note.client.name, client_path(note.client)) : "-"
         td
           .btn-group
             = link_to '<i class="icon-zoom-in"></i> Details'.html_safe, note, class: "btn"
