@@ -67,6 +67,19 @@ class User < ActiveRecord::Base
     unpaid
   end
 
+  def unpaid_by_client
+    unpaid = []
+    clients.each do |client|
+      total = Worklog.unpaid.where(client_id: client.id).sum(:total_cents)
+      total += Expense.unpaid.where(client_id: client.id).sum(:total_cents)
+      next if total == 0
+      unpaid.push({client: client.name,
+        total: Money.new(total, currency)
+      })
+    end
+    unpaid
+  end
+
   def currency
     Money.default_currency
   end

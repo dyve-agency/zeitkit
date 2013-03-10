@@ -22,6 +22,7 @@ class InvoicesController < ApplicationController
   def new
     @invoice.set_initial_values!
     @unpaid_worklogs = current_user.unpaid_worklogs_by_client
+    @unpaid_expenses = current_user.expenses.unpaid
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @invoice }
@@ -30,6 +31,7 @@ class InvoicesController < ApplicationController
 
   def edit
     @unpaid_worklogs = current_user.unpaid_worklogs_by_client
+    @unpaid_expenses = current_user.expenses.unpaid
   end
 
   def create

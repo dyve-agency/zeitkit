@@ -1,0 +1,49 @@
+h3 Outstanding items
+ul.nav.nav-tabs.unpaid-tabs
+  li.active
+    a href="#worklogs" data-toggle="tab" Worklogs
+  li
+    a href="#expenses" data-toggle="tab" Expenses
+.tab-content
+  #worklogs.tab-pane.active
+    - if @unpaid_worklogs.empty?
+      h3 There are no unpaid worklogs
+    - else
+      .unpaid-worklogs
+        table.table.table-bordered
+          thead
+            tr
+              th Client
+              th Unpaid
+              th Set as total
+          tbody
+            - @unpaid_worklogs.each do |unpaid|
+              tr.warning
+                td= unpaid[:client]
+                td= with_currency unpaid[:total]
+                td
+                  a.set-total data-total="#{unpaid[:total].cents}" href="#"
+                    i.icon-ok
+                    span Set total
+
+
+  #expenses.tab-pane
+    - if @unpaid_expenses.empty?
+      h3 There are no unpaid expenses
+    - else
+      .unpaid-expenses
+        table.table.table-bordered
+          thead
+            tr
+              th Client
+              th Total
+              th Add to total
+          tbody
+            - @unpaid_expenses.each do |expense|
+              tr.warning
+                td= expense.client.name
+                td= with_currency expense.total
+                td
+                  a.add-total data-total="#{expense.total.cents}" href="#"
+                    i.icon-plus
+                    span Add

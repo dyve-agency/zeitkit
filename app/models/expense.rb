@@ -7,7 +7,11 @@ class Expense < ActiveRecord::Base
   belongs_to :user
   belongs_to :client
 
+  before_validation :ensure_paid_not_nil
   validates :user_id, :client_id, :total, :reason, presence: true
+
+  scope :paid, where(paid: true)
+  scope :unpaid, where(paid: false)
 
   def string_fields_to_nil
     [:reason]
@@ -15,6 +19,10 @@ class Expense < ActiveRecord::Base
 
   def toggle_paid
     self.paid ? self.paid = false : self.paid = true
+  end
+
+  def ensure_paid_not_nil
+    self.paid = false if paid.nil?
   end
 
 end

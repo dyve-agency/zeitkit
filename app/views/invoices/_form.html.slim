@@ -4,10 +4,10 @@
       = f.input :client_id, collection: current_user.clients
       = f.input :number
     .span3
-      = f.input :total
+      = f.input :total, input_html: { data: {total: @invoice.total.cents} }
       = f.input :vat
     .span4.client-unpaid-list
-      = render "unpaid_worklogs"
+      = render "unpaid"
   = f.input :includes_vat, label: false, hint: "The total includes value added tax."
   hr
   = f.input :content
