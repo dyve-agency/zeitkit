@@ -16,11 +16,11 @@
             li
               = link_to "Worklogs", user_worklogs_path(current_user)
             li
-              = link_to "Invoices", user_invoices_path(current_user)
-            li
               = link_to "Expenses", user_expenses_path(current_user)
             li
               = link_to "Notes", user_notes_path(current_user)
+            li
+              = link_to "Invoices", user_invoices_path(current_user)
             li class="dropdown"
               a.dropdown-toggle data-toggle="dropdown" href="#dropdown-menu"
                 = current_user.email
