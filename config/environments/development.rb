@@ -35,5 +35,7 @@ Timetracker::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+  # Use this to test PDFkit pdfs
+  #config.threadsafe!
 
 end

@@ -1,4 +1,6 @@
 @media print
+  h1, h2, h3, h4, h5, h6, .hero-unit h1
+    text-shadow: none
   .navbar, .footer-wrapper
     display: none
   .invoice-quick-total
@@ -9,3 +11,9 @@
     color: inherit
   .invoice-controls
     display: none
+  .content
+    @include box-shadow(none)
+    border: none
+    padding: 20px
+  html
+    background: none

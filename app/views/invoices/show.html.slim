@@ -1,4 +1,3 @@
-.alert.alert-info This page has been optimized for printing. Please generate a .pdf for your client.
 .invoice-writer
   h3 Contractor
   p= link_to val_or_nil_string(current_user.company_name), edit_user_path(current_user)
@@ -53,5 +52,8 @@ hr
       p= markdown @invoice.note
 .invoice-controls
   hr
-  = link_to "<i class='icon-edit'></i> Edit invoice".html_safe,
-    edit_invoice_path(@invoice), class: "btn btn-primary"
+  .btn-group
+    = link_to "<i class='icon-edit'></i> Edit invoice".html_safe,
+      edit_invoice_path(@invoice), class: "btn btn-primary"
+    = link_to "<i class='icon-cloud-download'></i> Download PDF".html_safe,
+      invoice_path(@invoice, format: :pdf), class: "btn"
