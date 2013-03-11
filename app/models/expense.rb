@@ -23,6 +23,8 @@ class Expense < ActiveRecord::Base
 
   def ensure_paid_not_nil
     self.paid = false if paid.nil?
+    # return true to avoid rollback error
+    true
   end
 
 end
