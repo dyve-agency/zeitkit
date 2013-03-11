@@ -2,9 +2,9 @@ class WorklogsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @user = User.find(params[:user_id])
-    @worklogs = @worklogs.order("start_time DESC")
+    @user = current_user
     @clients = @user.clients
+    @worklogs = current_user.worklogs.order("start_time DESC")
     params[:client] ? @worklogs = @worklogs.where(client_id: params[:client]) : @worklogs
     params[:paid] == "true" ? @worklogs = @worklogs.paid : @worklogs
     params[:paid] == "false" ? @worklogs = @worklogs.unpaid : @worklogs
