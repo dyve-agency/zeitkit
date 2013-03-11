@@ -30,13 +30,13 @@
     h3 Invoice total
     p.key-value
       |Subtotal:
-      span #{@invoice.total}
+      span #{with_currency @invoice.total}
     p.key-value
       span #{@invoice.includes_vat ? "Including" : "Excluding"} VAT:
-      span #{@invoice.total_vat}
+      span #{with_currency @invoice.total_vat}
     p.key-value
       |Total
-      span= @invoice.calc_vat_total
+      span= with_currency @invoice.calc_vat_total
 hr
 .row
   .span4
