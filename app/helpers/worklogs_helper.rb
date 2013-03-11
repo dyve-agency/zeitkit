@@ -36,6 +36,10 @@ module WorklogsHelper
     active_if_value_true(params[:time], "this_month")
   end
 
+  def check_older_than_this_month
+    active_if_value_true(params[:time], "older_than_this_month")
+  end
+
   def check_last_month
     active_if_value_true(params[:time], "last_month")
   end
