@@ -2,7 +2,7 @@ class InvoicesController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @invoices = current_user.invoices
+    @invoices = current_user.invoices.order("created_at DESC")
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @invoices }

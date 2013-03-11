@@ -2,7 +2,7 @@ class NotesController < ApplicationController
   load_and_authorize_resource except: :public
 
   def index
-    @notes = current_user.notes
+    @notes = current_user.notes.order("created_at DESC")
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @notes }
