@@ -66,6 +66,10 @@ class Invoice < ActiveRecord::Base
     end
   end
 
+  def filename
+    "#{client.name.downcase.split.join("-")}-#{number}"
+  end
+
   def toggle_paid
     paid_on ? self.paid_on = nil : self.paid_on = Time.now
   end

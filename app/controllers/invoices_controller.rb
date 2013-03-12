@@ -11,6 +11,7 @@ class InvoicesController < ApplicationController
 
   def show
     @client = @invoice.client
+    headers["Content-Disposition"] = "attachment; filename=\"#{@invoice.filename}\""
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @invoice }
