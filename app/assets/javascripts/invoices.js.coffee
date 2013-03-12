@@ -8,7 +8,7 @@ Invoice = {
     $('.unpaid-worklogs').on 'click touchstart', 'a', (e) ->
       e.preventDefault()
       _that.totalInput().val($(e.currentTarget).data().total / 100)
-    $('.unpaid-expenses').on 'click touchstart', 'a', (e) ->
+    $('.unpaid-expenses').on 'click touchstart', '.add-total', (e) ->
       e.preventDefault()
       input = _that.totalInput()
       oldval = input.val()
