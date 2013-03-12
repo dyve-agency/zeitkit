@@ -24,6 +24,7 @@ Timetracker::Application.routes.draw do
     resources :invoices do
       member do
         post "toggle_paid"
+        get "pdf_export"
       end
     end
     resources :invoice_default, only: [:update, :edit]
