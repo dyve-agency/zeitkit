@@ -48,6 +48,9 @@ ul.nav.nav-tabs.unpaid-tabs
                     = expense.reason[0..6] + "..."
                 td= with_currency expense.total
                 td
-                  a.add-total data-total="#{expense.total.cents}" href="#"
+                  a.add-total[data-total="#{expense.total.cents}"
+                    data-reason="#{expense.reason}"
+                    data-total_currency="#{with_currency expense.total}"
+                    href="#"]
                     i.icon-plus
                     span Add
