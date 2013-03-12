@@ -45,7 +45,7 @@ ul.nav.nav-tabs.unpaid-tabs
                 td= expense.client.name
                 td
                   a.tooltip-init[href="#" data-toggle="tooltip" data-original-title="#{expense.reason}"]
-                    = expense.reason[0..20] + "..."
+                    = expense.reason[0..6] + "..."
                 td= with_currency expense.total
                 td
                   a.add-total data-total="#{expense.total.cents}" href="#"
