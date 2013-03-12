@@ -1,19 +1,18 @@
 .hero-unit
-  h1 The toolset for developers and ninjas.
+  h1 The toolset for developers and freelancers.
   .row
     .span6
-      p Zeitkit is a simple management companion for developers. Focus on
-        your work and manage your clients with Zeitkit.
+      p The developer companion reducing administrative overhead:
       ul.feature-list
-        li
-          i.icon-dashboard
-          span Stay organized - A light CRM for developers.
         li
           i.icon-time
           span Track time and expenses for clients.
         li
           i.icon-credit-card
           span Painlessly invoice based on worklogs and expenses.
+        li
+          i.icon-dashboard
+          span Stay organized - A light CRM for developers.
         li
           i.icon-github
           span Take meeting notes in Github's markdown syntax.
@@ -30,11 +29,11 @@
           = simple_form_for "", url: signup_email_path do |f|
             input.span3#signup-email[name="signup_email" type="email"
               placeholder="e.g. me@mymail.com" required="required"]
-            = f.button :submit, "Get started »",
+            = f.button :submit, "Get Started Now »",
               class: "home-submit btn-large",
               onclick: "_gaq.push(['_trackEvent', 'Signup', 'Click', 'Submit']);"
         p
-          strong Signup is free.
+          strong Signup is free. No trials, no fees.
           - #span.next-to-free For more than three clients: 6.99$ per month.
       - else
         = link_to "My Account", user_path(current_user), class: "btn btn-large"
