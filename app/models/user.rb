@@ -81,7 +81,7 @@ class User < ActiveRecord::Base
   end
 
   def currency
-    Money.default_currency
+    Money::Currency.new read_attribute(:currency)
   end
 
   def set_initial_currency
