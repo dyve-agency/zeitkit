@@ -31,6 +31,7 @@ end
 group :development do
   gem 'quiet_assets'
   gem 'sqlite3'
+  gem 'webrick', '~> 1.3.1'
 end
 group :development, :test do
   gem 'railroady'
