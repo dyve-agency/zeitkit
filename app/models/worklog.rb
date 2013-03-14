@@ -2,7 +2,7 @@ class Worklog < ActiveRecord::Base
   include HourlyRateHelper
   include TotalHelper
 
-  include TimeFilter
+  #include TimeFilter
 
   attr_accessible :client_id,
     :end_time,
@@ -16,6 +16,11 @@ class Worklog < ActiveRecord::Base
   belongs_to :user
   belongs_to :client
   belongs_to :invoice
+  scope :today, where(end_time: Time.zone.now.midnight..Time.zone.now)
+  scope :this_week, where(end_time: Time.zone.now.beginning_of_week..Time.zone.now)
+  scope :this_month, where(end_time: Time.zone.now.beginning_of_month..Time.zone.now)
+  scope :older_than_this_month, where("end_time < ?", Time.zone.now.beginning_of_month)
+  scope :last_month, where(end_time: Time.zone.now.beginning_of_month..Time.zone.now.beginning_of_month - 1.month)
 
   validates :user, :client, :start_time, :end_time, presence: true
 
