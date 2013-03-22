@@ -15,11 +15,15 @@ module ApplicationHelper
   def check_if_css_class
     classes = ""
     classes += @css_class if @css_class
-    if session[:mac_app]
+    if cookies[:mac_app]
       classes += " " if !classes.empty?
       classes += "mac-app"
     end
     classes
+  end
+
+  def mac_app?
+    cookies[:mac_app]
   end
 
   def val_or_nil_string(obj)

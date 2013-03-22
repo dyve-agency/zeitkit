@@ -27,4 +27,5 @@ html lang="en" class="#{check_if_css_class}"
           .span12
             = render "layouts/notices"
             = yield
-      = render "layouts/footer"
+      - if !mac_app?
+        = render "layouts/footer"
