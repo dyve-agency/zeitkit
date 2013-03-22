@@ -76,6 +76,27 @@ $default-background: #f1f1f1
   .alert-info
     background: #a9dafd
     color: $default-mac-font-color
+  .navbar .btn-navbar .icon-bar
+    background: #333
+  @media (max-width: 767px)
+    .navbar-fixed-top
+      margin-bottom: 0px
+    .nav-collapse .nav > li > a:hover, .nav-collapse .dropdown-menu a:hover
+      color: #fff
+    .navbar-fixed-top .navbar-inner
+      background: none
+      background-color: #d1d1d1
+    .content
+      margin-top: 0px
+      @include border-radius(0px)
+      padding-top: 10px
+  @media (max-width: 979px)
+    .navbar-fixed-top
+      margin-bottom: 0px
+    .content
+      margin-top: 0px
+      @include border-radius(0px)
+      padding-top: 10px
 .mac-app.home-design
   .content
     @include box-shadow(none)
