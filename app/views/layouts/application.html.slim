@@ -1,5 +1,5 @@
 doctype html
-html lang="en"
+html lang="en" class="#{check_if_css_class}"
   head
     meta charset="utf-8"
     meta content="width=device-width, initial-scale=1.0" name="viewport"
@@ -20,7 +20,7 @@ html lang="en"
       })();
     = csrf_meta_tags
   body
-    #wrapper class="#{check_if_css_class}"
+    #wrapper
       = render "layouts/header"
       .container.content.clearfix
         .row
