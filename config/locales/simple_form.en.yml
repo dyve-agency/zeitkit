@@ -4,6 +4,8 @@ en:
       text: 'required'
       mark: '*'
     labels:
+      worklog:
+        summary: "What did you do?"
       session:
         username: "Email"
       invoice:
@@ -29,7 +31,7 @@ en:
         password_confirmation: "i.e. mypassword"
         username: "i.e. TheDonut"
       worklog:
-        summary: "e.g. -Fix a bug, finish project b."
+        summary: "e.g. *Fix a bug, finish project b."
       invoice:
         content: "e.g. * 10 hours á 100 € = 2500"
         total: "e.g. 2500"

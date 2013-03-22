@@ -2,19 +2,54 @@
   .alert.alert-info
     = link_to "x", "#", class: "close", data: {dismiss: "alert"}
     span Worklogs are awesome to track the time you work for clients.
+.row
+  .span4
+    h2 Start
+    h4 Date
+    .input-append.bootstrap-timepicker
+      input.timepicker.input-small type="text"
+      span.add-on
+        i.icon-time
+    h4 Time
+    .input-append.bootstrap-timepicker
+      input.timepicker.input-small type="text"
+      span.add-on
+        i.icon-time
+  .span4
+    h2 End
+    h4 Date
+    .input-append.bootstrap-timepicker
+      input.timepicker.input-small type="text"
+      span.add-on
+        i.icon-time
+    h4 Time
+    .input-append.bootstrap-timepicker
+      input.timepicker.input-small type="text"
+      span.add-on
+        i.icon-time
+  .span4
+    h3 Timer
+    .btn-group
+      .btn
+        i.icon-time Start
+      .btn
+        i.icon-time Stop
+      .btn
+        i.icon-refresh Reset
+    hr
+    h3 Restore
+    .btn
+      i.icon-asterisk Restore unsaved changes
+hr
 = simple_form_for shallow_args(current_user, @worklog) do |f|
-  = f.input :start_time
-  = f.input :end_time
-  .set-time
-    a.btn.end-time-now
-      i.icon-time
-      span Set Endtime to now.
+  = f.input :start_time, as: :hidden
+  = f.input :end_time, as: :hidden
   = f.input :client_id, collection: current_user.clients, required: true
-  = f.input :summary
-  = f.input :paid, label: false
+  = f.input :summary, input_html: {class: "span6"}
   - if !@worklog.new_record?
     = f.input :hourly_rate, as: :string
   .form-actions
     = f.button :submit
+
 = link_to "", temp_worklog_save_path(current_user.temp_worklog_save),
   class: "temp_worklog_save_path hidden", method: :put
