@@ -78,7 +78,7 @@ SaveTime =
   init: ->
     _this = this
     this.elems.form().on 'change', (e) ->
-      _this.updateRemote()
+      #_this.updateRemote()
     $('.dismiss-save-time').on 'click touchstart', (e) ->
       _this.dismissSaveTime($(e.currentTarget))
       return false

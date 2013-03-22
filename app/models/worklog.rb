@@ -11,7 +11,16 @@ class Worklog < ActiveRecord::Base
     :hourly_rate,
     :total,
     :summary,
-    :paid
+    :paid,
+    :from_date,
+    :from_time,
+    :to_date,
+    :to_time
+
+  attr_accessor :from_date,
+    :from_time,
+    :to_date,
+    :to_time
 
   belongs_to :user
   belongs_to :client
@@ -23,9 +32,8 @@ class Worklog < ActiveRecord::Base
   validate :duration_less_than_a_year
 
   before_validation :ensure_paid_not_nil
-  before_validation :set_hourly_rate, on: :create
-  before_save :set_total
-  after_create :drop_start_time_save
+  after_validation :set_hourly_rate, on: :create
+  after_validation :set_total
 
   scope :paid, where(paid: true)
   scope :unpaid, where(paid: false)
@@ -74,6 +82,7 @@ class Worklog < ActiveRecord::Base
   end
 
   def duration
+    return if !end_time || !start_time
     (end_time - start_time).to_i
   end
 
@@ -94,6 +103,7 @@ class Worklog < ActiveRecord::Base
   end
 
   def end_time_ok
+    return if !end_time || !start_time
     end_time > start_time
   end
 
@@ -113,26 +123,62 @@ class Worklog < ActiveRecord::Base
 
   def ensure_paid_not_nil
     self.paid = false if paid.nil?
+    true
   end
 
   # Validations #
   def duration_less_than_a_year
-    if duration > 1.year && end_time_ok
-      errors.add(:start_time, "Must be smaller than a year.")
-      errors.add(:end_time, "Must be smaller than a year.")
+    if duration && duration > 1.year && end_time_ok
+      multi_errors_add([:start_time, :end_time, :from_date, :from_time, :to_time, :to_date], "Must be smaller than a year")
+    end
+  end
+
+  def multi_errors_add(attributes, message)
+    attributes.each do |attri|
+      errors.add(attri, message)
     end
   end
 
   def end_time_greater_than_start_time
     if !end_time_ok
-      errors.add(:end_time, "Must be greater than start time.")
+      multi_errors_add([:end_time, :to_time, :to_date], "Must be greater than the start.")
     end
   end
 
-  def drop_start_time_save
-    if user.start_time_save
-      user.start_time_save.destroy
+  def set_from_to_now!
+    self.from_date = Time.zone.now.strftime("%d/%m/%Y")
+    self.to_date = Time.zone.now.strftime("%d/%m/%Y")
+    self.from_time = Time.zone.now.strftime("%H:%M:%S")
+    self.to_time = Time.zone.now.strftime("%H:%M:%S")
+  end
+
+  def from_converted
+    begin
+      date = self.from_date.split("/").reverse.map(&:to_i)
+      time = self.from_time.split(":").map(&:to_i)
+      from_to_time(date, time)
+    rescue
+      nil
     end
+  end
+
+  def from_to_time(date, time)
+    Time.new(date[0], date[1], date[2], time[0], time[1], time[2], Time.zone.formatted_offset)
+  end
+
+  def to_converted
+    begin
+      date = self.to_date.split("/").reverse.map(&:to_i)
+      time = self.to_time.split(":").map(&:to_i)
+      from_to_time(date, time)
+    rescue
+      nil
+    end
+  end
+
+  def set_start_end!
+    self.start_time = from_converted
+    self.end_time = to_converted
   end
 
 end

@@ -2,48 +2,52 @@
   .alert.alert-info
     = link_to "x", "#", class: "close", data: {dismiss: "alert"}
     span Worklogs are awesome to track the time you work for clients.
-.row
-  .span4
-    h2 Start
-    h4 Date
-    .input-append.bootstrap-timepicker
-      input.timepicker.input-small type="text"
-      span.add-on
-        i.icon-time
-    h4 Time
-    .input-append.bootstrap-timepicker
-      input.timepicker.input-small type="text"
-      span.add-on
-        i.icon-time
-  .span4
-    h2 End
-    h4 Date
-    .input-append.bootstrap-timepicker
-      input.timepicker.input-small type="text"
-      span.add-on
-        i.icon-time
-    h4 Time
-    .input-append.bootstrap-timepicker
-      input.timepicker.input-small type="text"
-      span.add-on
-        i.icon-time
-  .span4
-    h3 Timer
-    .btn-group
-      .btn
-        i.icon-time Start
-      .btn
-        i.icon-time Stop
-      .btn
-        i.icon-refresh Reset
-    hr
-    h3 Restore
-    .btn
-      i.icon-asterisk Restore unsaved changes
-hr
 = simple_form_for shallow_args(current_user, @worklog) do |f|
-  = f.input :start_time, as: :hidden
-  = f.input :end_time, as: :hidden
+  .row
+    .span4
+      h2 Start
+      h4 Date
+      = f.input :from_date, wrapper: :append, label: false do
+        = f.input_field :from_date, class: "datepicker"
+        = content_tag :span, class: "add-on" do
+          = content_tag :i, "", class: "icon-time"
+      h4 Time
+      .bootstrap-timepicker
+        = f.input :from_time, wrapper: :append, label: false do
+          = f.input_field :from_time, class: "timepicker"
+          = content_tag :span, class: "add-on" do
+            = content_tag :i, "", class: "icon-time"
+    .span4
+      h2 End
+      h4 Date
+      = f.input :to_date, wrapper: :append, label: false do
+        = f.input_field :to_date, class: "datepicker"
+        = content_tag :span, class: "add-on" do
+          = content_tag :i, "", class: "icon-time"
+      h4 Time
+      .bootstrap-timepicker
+        = f.input :to_time, wrapper: :append, label: false do
+          = f.input_field :to_time, class: "timepicker"
+          = content_tag :span, class: "add-on" do
+            = content_tag :i, "", class: "icon-time"
+    .span4
+      h3 Timer
+      .btn-group
+        .btn
+          i.icon-time
+          |Start
+        .btn
+          i.icon-time
+          |Stop
+        .btn
+          i.icon-refresh
+          |Reset
+      hr
+      h3 Restore
+      .btn
+        i.icon-asterisk
+        |Restore unsaved changes
+  hr
   = f.input :client_id, collection: current_user.clients, required: true
   = f.input :summary, input_html: {class: "span6"}
   - if !@worklog.new_record?

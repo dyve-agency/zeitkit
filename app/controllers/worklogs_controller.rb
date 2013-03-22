@@ -30,6 +30,7 @@ class WorklogsController < ApplicationController
     @worklog.user = current_user
     @worklog.client = current_user.worklogs.any? ? current_user.worklogs.last.client : nil
     params[:client] ? @worklog.client = current_user.clients.find(params[:client]) : nil
+    @worklog.set_from_to_now!
     # TODO update this
     if params[:recover_time]
       @worklog.start_time = @start_time_save.start_time
@@ -44,6 +45,7 @@ class WorklogsController < ApplicationController
   def create
     @worklog = Worklog.new(params[:worklog])
     @worklog.user = current_user
+    @worklog.set_start_end!
     if @worklog.save
       redirect_to new_user_worklog_path,
         notice: "Worklog was successfully created. Create another one - or: <a href='#{user_worklogs_path}'>Go back.</a>".html_safe
@@ -53,6 +55,7 @@ class WorklogsController < ApplicationController
   end
 
   def update
+    @worklog.set_start_end!
     if @worklog.update_attributes(params[:worklog])
       redirect_to user_worklogs_path(current_user), notice: 'Worklog was successfully updated.'
     else
