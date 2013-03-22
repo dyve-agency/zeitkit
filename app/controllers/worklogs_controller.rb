@@ -30,7 +30,7 @@ class WorklogsController < ApplicationController
     @worklog.user = current_user
     @worklog.client = current_user.worklogs.any? ? current_user.worklogs.last.client : nil
     params[:client] ? @worklog.client = current_user.clients.find(params[:client]) : nil
-    @start_time_save = current_user.check_or_build_start_time
+    # TODO update this
     if params[:recover_time]
       @worklog.start_time = @start_time_save.start_time
       flash.now[:notice] = "Successfully restored the start time: #{l @start_time_save.start_time}."

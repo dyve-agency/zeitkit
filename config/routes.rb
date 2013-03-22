@@ -3,11 +3,8 @@ Timetracker::Application.routes.draw do
   root :to => "static#home"
 
   resources :users, only: [:new, :create, :show, :edit, :update], shallow: true do
-    member do
-      post "update_savetime"
-    end
     resources :clients
-    resources :start_time_saves, only: [:destroy], as: "start_time_save"
+    resources :temp_worklog_saves, only: [:update], as: "temp_worklog_save"
     resources :notes do
       member do
         get "public"

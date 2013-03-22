@@ -1,8 +1,7 @@
-= render "start_time_save"
 - if current_user.worklogs.empty?
   .alert.alert-info
     = link_to "x", "#", class: "close", data: {dismiss: "alert"}
-    span Here you can log your work. Once you are done, click the 'Set endtime' button to log the exact time you worked.
+    span Worklogs are awesome to track the time you work for clients.
 = simple_form_for shallow_args(current_user, @worklog) do |f|
   = f.input :start_time
   = f.input :end_time
@@ -17,5 +16,5 @@
     = f.input :hourly_rate, as: :string
   .form-actions
     = f.button :submit
-= link_to "", update_savetime_user_path(current_user),
-  class: "update_savetime_user_path hidden", method: :post
+= link_to "", temp_worklog_save_path(current_user.temp_worklog_save),
+  class: "temp_worklog_save_path hidden", method: :put

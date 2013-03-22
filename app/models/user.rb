@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
   has_many :notes
   has_many :expenses
 
-  has_one :start_time_save
+  has_one :temp_worklog_save
   has_one :invoice_default
 
   before_validation :set_initial_currency, on: :create
@@ -29,20 +29,16 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :email
 
   after_create :build_invoice_default
+  after_create :build_initial_temp_worklog_save
 
   def set_temp_password(temp_pw)
     self.password = temp_pw
     self.password_confirmation = temp_pw
   end
 
-  def check_or_build_start_time
-    # if there is a start time save return in
-    if start_time_save
-      start_time_save
-    else
-      build_start_time_save(start_time: Time.now).save
-      nil
-    end
+  def build_initial_temp_worklog_save
+    temp_save = TempWorklogSave.new(user_id: self.id)
+    temp_save.save
   end
 
   def string_fields_to_nil

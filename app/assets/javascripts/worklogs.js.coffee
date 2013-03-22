@@ -2,7 +2,6 @@ $ ->
   Worklog.setTimeInit()
   Worklog.autoEndTimeInit()
   SaveTime.init()
-  SaveTime.updateEndTimeInit()
 
 Worklog =
   setTimeInit: ->
@@ -72,23 +71,23 @@ Worklog =
   relatedEndTime: (elem)->
     return $(this.elems.end.all()[elem.index()])
 SaveTime =
+  elems: {
+    form: ->
+      $('.new_worklog')
+  }
   init: ->
     _this = this
+    this.elems.form().on 'change', (e) ->
+      _this.updateRemote()
     $('.dismiss-save-time').on 'click touchstart', (e) ->
       _this.dismissSaveTime($(e.currentTarget))
       return false
-  updateEndTimeInit: ->
-    _this = this
-    $('.worklog_start_time').on 'change', (e) ->
-      _this.updateRemote()
   updateRemote: ->
     _this = this
-    $.ajax $('.update_savetime_user_path').attr('href'),
-      type: 'POST'
+    $.ajax $('.temp_worklog_save_path').attr('href') + ".json",
+      type: 'PUT'
       dataType: 'json'
-      data: {
-        start_time: _this.getStartTime()
-      }
+      data: _this.elems.form().serialize()
       error: ->
         alert "There has been an error"
 
