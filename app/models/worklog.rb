@@ -147,6 +147,11 @@ class Worklog < ActiveRecord::Base
     self.end_time = to_converted
   end
 
+  def restore_based_on_saved_info
+    return if !user
+    self.class.new(user.temp_worklog_save.restoreable_options)
+  end
+
   # Active record callbacks #
 
   def set_hourly_rate

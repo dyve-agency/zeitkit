@@ -4,7 +4,7 @@
     span Worklogs are awesome to track the time you work for clients.
 = simple_form_for shallow_args(current_user, @worklog) do |f|
   .row
-    .span4
+    .span4.start-time
       h2 Start
       h4 Date
       = f.input :from_date, wrapper: :append, label: false do
@@ -33,18 +33,12 @@
     .span4
       h3 Timer
       .btn-group
-        .btn
-          i.icon-time
-          |Start
-        .btn
+        .btn.end-time-now
           i.icon-time
           |Stop
-        .btn
-          i.icon-refresh
-          |Reset
       hr
       h3 Restore
-      .btn
+      = link_to new_user_worklog_path(current_user, restore: true), class: "btn" do
         i.icon-asterisk
         |Restore unsaved changes
   hr

@@ -1,75 +1,32 @@
 $ ->
-  Worklog.setTimeInit()
-  Worklog.autoEndTimeInit()
+  Worklog.init()
   SaveTime.init()
 
 Worklog =
-  setTimeInit: ->
+  init: ->
     _this = this
     $('.end-time-now').on 'click touchstart', (e) ->
       e.preventDefault()
-      _this.setCurrentTime()
-  autoEndTimeInit: ->
-    _this = this
-    $('.worklog_start_time').on 'change', 'select', (e) ->
-      _this.updateEndTimeStartTime($(e.currentTarget))
-  setCurrentTime: ->
+      _this.setEndToNow()
+    $('.start-time').on 'change', (e) ->
+      _this.updateEndTimeStartTime()
+  setEndToNow: ->
     current = this.getCurrentTime()
-    views = this.getViews()
-    _.each(views, (elem, index)->
-      elem.val(current[index])
-    )
+    $('#worklog_to_date').val(current[2] + "/" + current[1] + "/" + current[0])
+    $('#worklog_to_time').val(current[3] + ":" + current[4] + ":" + current[5])
   getCurrentTime: ->
     d = new Date()
-    return [d.getFullYear(), d.getMonth() + 1, d.getDate(),
-      this.convertToZeroBased(d.getHours()), this.convertToZeroBased(d.getMinutes())]
+    convert = this.convertToZeroBased
+    return [d.getFullYear(), convert(d.getMonth() + 1), convert(d.getDate()),
+      convert(d.getHours()), convert(d.getMinutes()), convert(d.getSeconds())]
   convertToZeroBased: (number)->
     if number < 10
       return "0" + number
     else
       return number
-  getMonth: ->
-    ["January","February","March","April","May","June",
-      "July","August","September","October","November","December"]
-  getViews: ->
-    return [this.elems.end.year(), this.elems.end.month(), this.elems.end.day(),
-      this.elems.end.hour(), this.elems.end.minute()]
-  elems: {
-    start: {
-      all: ->
-        $('.worklog_start_time select')
-      year: ->
-        $('#worklog_start_time_1i')
-      month: ->
-        $('#worklog_start_time_2i')
-      day: ->
-        $('#worklog_start_time_3i')
-      hour: ->
-        $('#worklog_start_time_4i')
-      minute: ->
-        $('#worklog_start_time_5i')
-    }
-    end: {
-      all: ->
-        $('.worklog_end_time select')
-      year: ->
-        $('#worklog_end_time_1i')
-      month: ->
-        $('#worklog_end_time_2i')
-      day: ->
-        $('#worklog_end_time_3i')
-      hour: ->
-        $('#worklog_end_time_4i')
-      minute: ->
-        $('#worklog_end_time_5i')
-    }
-  }
-  updateEndTimeStartTime: (elem)->
-    return if !elem
-    end_time = this.relatedEndTime(elem)
-    end_time.val(elem.val())
-  relatedEndTime: (elem)->
-    return $(this.elems.end.all()[elem.index()])
+  updateEndTimeStartTime: ->
+    $('#worklog_to_date').val($('#worklog_from_date').val())
+    $('#worklog_to_time').val($('#worklog_from_time').val())
 SaveTime =
   elems: {
     form: ->
@@ -78,7 +35,7 @@ SaveTime =
   init: ->
     _this = this
     this.elems.form().on 'change', (e) ->
-      #_this.updateRemote()
+      _this.updateRemote()
     $('.dismiss-save-time').on 'click touchstart', (e) ->
       _this.dismissSaveTime($(e.currentTarget))
       return false
@@ -90,20 +47,3 @@ SaveTime =
       data: _this.elems.form().serialize()
       error: ->
         alert "There has been an error"
-
-  getStartTime: ->
-    return new Date(Worklog.elems.start.year().val(),
-      Worklog.elems.start.month().val() - 1,
-      Worklog.elems.start.day().val(),
-      Worklog.elems.start.hour().val(),
-      Worklog.elems.start.minute().val()
-    )
-  dismissSaveTime: (elem)->
-      url = elem.attr('href')
-      $.ajax url,
-        type: 'DELETE'
-        dataType: 'json'
-        success: ->
-          $('.alert').remove()
-        error: ->
-          alert "There has been an error"

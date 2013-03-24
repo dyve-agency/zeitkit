@@ -29,13 +29,11 @@ class WorklogsController < ApplicationController
     @worklog = Worklog.new
     @worklog.user = current_user
     @worklog.client = current_user.worklogs.any? ? current_user.worklogs.last.client : nil
-    params[:client] ? @worklog.client = current_user.clients.find(params[:client]) : nil
     @worklog.set_from_to_now!
-    # TODO update this
-    if params[:recover_time]
-      @worklog.start_time = @start_time_save.start_time
-      flash.now[:notice] = "Successfully restored the start time: #{l @start_time_save.start_time}."
-      @start_time_save = nil
+    params[:client] ? @worklog.client = current_user.clients.find(params[:client]) : nil
+    if params[:restore]
+      @worklog = @worklog.restore_based_on_saved_info
+      flash.now[:notice] = "We restored the information that was unsaved."
     end
   end
 
