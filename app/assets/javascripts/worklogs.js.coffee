@@ -5,6 +5,11 @@ $ ->
 Worklog =
   init: ->
     _this = this
+    $('.reset-time').on 'click touchstart', (e) ->
+      e.preventDefault()
+      _this.setEndToNow()
+      _this.setStartToNow()
+      SaveTime.updateRemote()
     $('.end-time-now').on 'click touchstart', (e) ->
       e.preventDefault()
       _this.setEndToNow()
@@ -15,6 +20,10 @@ Worklog =
     current = this.getCurrentTime()
     $('#worklog_to_date').val(current[2] + "/" + current[1] + "/" + current[0])
     $('#worklog_to_time').val(current[3] + ":" + current[4] + ":" + current[5])
+  setStartToNow: ->
+    current = this.getCurrentTime()
+    $('#worklog_from_date').val(current[2] + "/" + current[1] + "/" + current[0])
+    $('#worklog_from_time').val(current[3] + ":" + current[4] + ":" + current[5])
   getCurrentTime: ->
     d = new Date()
     convert = this.convertToZeroBased
