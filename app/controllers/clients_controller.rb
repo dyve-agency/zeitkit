@@ -36,7 +36,7 @@ class ClientsController < ApplicationController
 
   def destroy
     @client.destroy
-    redirect_to clients_url
+    redirect_to user_clients_path(current_user), notice: 'Client was successfully deleted.'
   end
 
   def show
