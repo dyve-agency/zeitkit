@@ -73,11 +73,13 @@ ActiveRecord::Schema.define(:version => 20130322153755) do
 
   create_table "temp_worklog_saves", :force => true do |t|
     t.integer  "user_id"
-    t.datetime "start_time"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.text     "summary"
-    t.time     "end_time"
+    t.string   "from_date"
+    t.string   "from_time"
+    t.string   "to_date"
+    t.string   "to_time"
     t.integer  "client_id"
     t.boolean  "show_user"
   end
