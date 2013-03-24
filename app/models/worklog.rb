@@ -111,11 +111,19 @@ class Worklog < ActiveRecord::Base
     paid ? self.paid = false : self.paid = true
   end
 
-  def set_from_to_now!
-    self.from_date = Time.zone.now.strftime("%d/%m/%Y")
-    self.to_date = Time.zone.now.strftime("%d/%m/%Y")
-    self.from_time = Time.zone.now.strftime("%H:%M:%S")
-    self.to_time = Time.zone.now.strftime("%H:%M:%S")
+  def set_time_helpers_to_now!
+    set_time_helpers_to_time!(Time.zone.now, Time.zone.now)
+  end
+
+  def set_time_helpers_to_saved_times!
+    set_time_helpers_to_time!(start_time, end_time)
+  end
+
+  def set_time_helpers_to_time!(start_time, end_time)
+    self.from_date = start_time.strftime("%d/%m/%Y")
+    self.to_date = end_time.strftime("%d/%m/%Y")
+    self.from_time = start_time.strftime("%H:%M:%S")
+    self.to_time = end_time.strftime("%H:%M:%S")
   end
 
   def from_converted
@@ -142,7 +150,7 @@ class Worklog < ActiveRecord::Base
     end
   end
 
-  def set_start_end!
+  def convert_time_helpers_to_date_time!
     self.start_time = from_converted
     self.end_time = to_converted
   end

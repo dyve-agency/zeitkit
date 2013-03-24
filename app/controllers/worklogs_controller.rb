@@ -29,7 +29,7 @@ class WorklogsController < ApplicationController
     @worklog = Worklog.new
     @worklog.user = current_user
     @worklog.client = current_user.worklogs.any? ? current_user.worklogs.last.client : nil
-    @worklog.set_from_to_now!
+    @worklog.set_time_helpers_to_now!
     params[:client] ? @worklog.client = current_user.clients.find(params[:client]) : nil
     if params[:restore]
       @worklog = @worklog.restore_based_on_saved_info
@@ -38,12 +38,13 @@ class WorklogsController < ApplicationController
   end
 
   def edit
+    @worklog.set_time_helpers_to_saved_times!
   end
 
   def create
     @worklog = Worklog.new(params[:worklog])
     @worklog.user = current_user
-    @worklog.set_start_end!
+    @worklog.convert_time_helpers_to_date_time!
     if @worklog.save
       redirect_to new_user_worklog_path,
         notice: "Worklog was successfully created. Create another one - or: <a href='#{user_worklogs_path}'>Go back.</a>".html_safe
@@ -53,8 +54,9 @@ class WorklogsController < ApplicationController
   end
 
   def update
-    @worklog.set_start_end!
-    if @worklog.update_attributes(params[:worklog])
+    @worklog.assign_attributes(params[:worklog])
+    @worklog.convert_time_helpers_to_date_time!
+    if @worklog.save
       redirect_to user_worklogs_path(current_user), notice: 'Worklog was successfully updated.'
     else
       render action: "edit"
