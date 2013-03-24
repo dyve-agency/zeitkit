@@ -5,7 +5,8 @@ class TempWorklogSavesController < ApplicationController
     @temp = current_user.temp_worklog_save
     params[:worklog].delete("paid")
     params[:worklog].delete("id")
-    @temp.update_attributes params[:worklog]
+    params[:worklog].delete("user_id")
+    @temp.update_attributes(params[:worklog])
     respond_with @temp
   end
 
