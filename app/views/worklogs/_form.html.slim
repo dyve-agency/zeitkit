@@ -45,6 +45,10 @@
         i.icon-asterisk
         |Restore unsaved changes
   hr
+  - if current_user.clients.empty?
+    .alert.alert-error
+      span You need to create a client before you can create an invoice. 
+      = link_to "Create your first client.", new_user_client_path(current_user)
   = f.input :client_id, collection: current_user.clients, required: true
   = f.input :summary, input_html: {class: "span6"}
   - if !@worklog.new_record?
