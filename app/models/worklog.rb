@@ -111,40 +111,6 @@ class Worklog < ActiveRecord::Base
     paid ? self.paid = false : self.paid = true
   end
 
-  # Active record callbacks #
-
-  def set_hourly_rate
-    self.hourly_rate = client.hourly_rate
-  end
-
-  def set_total
-    self.total = self.calc_total
-  end
-
-  def ensure_paid_not_nil
-    self.paid = false if paid.nil?
-    true
-  end
-
-  # Validations #
-  def duration_less_than_a_year
-    if duration && duration > 1.year && end_time_ok
-      multi_errors_add([:start_time, :end_time, :from_date, :from_time, :to_time, :to_date], "Must be smaller than a year")
-    end
-  end
-
-  def multi_errors_add(attributes, message)
-    attributes.each do |attri|
-      errors.add(attri, message)
-    end
-  end
-
-  def end_time_greater_than_start_time
-    if !end_time_ok
-      multi_errors_add([:end_time, :to_time, :to_date], "Must be greater than the start.")
-    end
-  end
-
   def set_from_to_now!
     self.from_date = Time.zone.now.strftime("%d/%m/%Y")
     self.to_date = Time.zone.now.strftime("%d/%m/%Y")
@@ -179,6 +145,40 @@ class Worklog < ActiveRecord::Base
   def set_start_end!
     self.start_time = from_converted
     self.end_time = to_converted
+  end
+
+  # Active record callbacks #
+
+  def set_hourly_rate
+    self.hourly_rate = client.hourly_rate
+  end
+
+  def set_total
+    self.total = self.calc_total
+  end
+
+  def ensure_paid_not_nil
+    self.paid = false if paid.nil?
+    true
+  end
+
+  # Validations #
+  def multi_errors_add(attributes, message)
+    attributes.each do |attri|
+      errors.add(attri, message)
+    end
+  end
+
+  def duration_less_than_a_year
+    if duration && duration > 1.year && end_time_ok
+      multi_errors_add([:start_time, :end_time, :from_date, :from_time, :to_time, :to_date], "Must be smaller than a year")
+    end
+  end
+
+  def end_time_greater_than_start_time
+    if !end_time_ok
+      multi_errors_add([:end_time, :to_time, :to_date], "Must be greater than the start.")
+    end
   end
 
 end
