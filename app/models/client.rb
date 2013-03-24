@@ -11,10 +11,10 @@ class Client < ActiveRecord::Base
     :hourly_rate
 
   belongs_to :user
-  has_many :worklogs
-  has_many :invoices
-  has_many :notes
-  has_many :expenses
+  has_many :worklogs, dependent: :destroy
+  has_many :invoices, dependent: :destroy
+  has_many :notes, dependent: :destroy
+  has_many :expenses, dependent: :destroy
 
   validates :user, :name, presence: true
   validates :name, uniqueness: {scope: :user_id, message: "You can only have the client once."}
