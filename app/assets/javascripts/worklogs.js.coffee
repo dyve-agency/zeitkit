@@ -8,6 +8,7 @@ Worklog =
     $('.end-time-now').on 'click touchstart', (e) ->
       e.preventDefault()
       _this.setEndToNow()
+      SaveTime.updateRemote()
     $('.start-time').on 'change', (e) ->
       _this.updateEndTimeStartTime()
   setEndToNow: ->
@@ -46,4 +47,4 @@ SaveTime =
       dataType: 'json'
       data: _this.elems.form().serialize()
       error: ->
-        alert "There has been an error"
+        alert "There has been an error saving your worklog."
