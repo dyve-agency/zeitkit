@@ -1,25 +1,50 @@
 $ ->
   Invoice.init()
-Invoice = {
-  totalInput: ->
-    return $('#invoice_total')
+Invoice =
   init: ->
     _that = this
-    $('.unpaid-worklogs').on 'click touchstart', 'a', (e) ->
-      e.preventDefault()
-      _that.totalInput().val($(e.currentTarget).data().total / 100)
-    $('.unpaid-expenses').on 'click touchstart', '.add-total', (e) ->
-      e.preventDefault()
-      input = _that.totalInput()
-      oldval = input.val()
-      add = $(e.currentTarget).data().total / 100
-      new_val = (parseFloat(oldval) + add).toFixed(2)
-      _that.updateContent($(e.currentTarget))
-      input.val(new_val)
-  updateContent: (elem)->
-    update_elem = $('#invoice_content')
-    old_val = update_elem.val()
-    add_text = elem.data().reason + " = " + elem.data().total_currency
-    new_val = old_val + "\n" + add_text
-    update_elem.val(new_val)
-}
+    $('.move-left').on 'click', ->
+      _that.moveLeft()
+    $('.move-right').on 'click', ->
+      _that.moveRight()
+  elems:
+    invoiceSelect: ->
+      $('.invoice-select')
+    worklogsSelect: ->
+      $('.worklogs-select')
+    expensesSelect: ->
+      $('.expenses-select')
+    rightSelects: ->
+      $('.right-selects select')
+  getInvoiceSelected: ->
+    this.elems.invoiceSelect().find(':selected')
+  # Returns selected expenses and worklogs.
+  getRightSelected: ->
+    this.elems.rightSelects().find(':selected')
+  moveRight: ->
+    elems = this.getInvoiceSelected()
+    return if elems.length == 0
+    this.appendWorklogs(this.filterWorklogs(elems))
+    this.appendExpenses(this.filterExpenses(elems))
+    this.deselectRight()
+  moveLeft: ->
+    elems = this.getRightSelected()
+    return if elems.length == 0
+    this.appendInvoice(elems)
+  appendWorklogs: (elems)->
+    this.elems.worklogsSelect().append(elems)
+  appendExpenses: (elems)->
+    this.elems.expensesSelect().append(elems)
+  appendInvoice: (elems)->
+    this.elems.invoiceSelect().append(elems)
+  filterWorklogs: (elems)->
+    _.filter elems, (elem) ->
+      $(elem).hasClass "worklog"
+  filterExpenses: (elems)->
+    _.filter elems, (elem)->
+      $(elem).hasClass 'expense'
+  # Deselect the multi select on the right
+  deselectRight: ->
+    elems = [this.elems.worklogsSelect(), this.elems.expensesSelect()]
+    _.each elems, (elem) ->
+      $(elem).val('')
