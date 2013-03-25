@@ -18,6 +18,7 @@ class Invoice < ActiveRecord::Base
   belongs_to :user
   belongs_to :client
   has_many :worklogs
+  has_many :expenses
 
   validates :user_id, :client_id, :content, :number, :total, :vat, presence: true
   validates_uniqueness_of :number, scope: :user_id

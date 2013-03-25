@@ -6,6 +6,7 @@ class Expense < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :client
+  belongs_to :invoice
 
   before_validation :ensure_paid_not_nil
   validates :user_id, :client_id, :total, :reason, presence: true
