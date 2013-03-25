@@ -55,5 +55,3 @@ SaveTime =
       type: 'PUT'
       dataType: 'json'
       data: _this.elems.form().serialize()
-      error: ->
-        alert "There has been an error saving your worklog."
