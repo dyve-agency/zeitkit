@@ -26,6 +26,10 @@ Invoice =
       $('.expenses-select')
     rightSelects: ->
       $('.right-selects select')
+    hiddenWorklogs: ->
+      $('#invoice_worklog_ids')
+    hiddenExpenses: ->
+      $('#invoice_expense_ids')
   getInvoiceSelected: ->
     this.elems.invoiceSelect().find(':selected')
   # Returns selected expenses and worklogs.
@@ -37,10 +41,12 @@ Invoice =
     this.appendWorklogs(this.filterWorklogs(elems))
     this.appendExpenses(this.filterExpenses(elems))
     this.deselectRight()
+    this.updateHiddenInputs()
   moveLeft: ->
     elems = this.getRightSelected()
     return if elems.length == 0
     this.appendInvoice(elems)
+    this.updateHiddenInputs()
   appendWorklogs: (elems)->
     this.elems.worklogsSelect().append(elems)
   appendExpenses: (elems)->
@@ -53,6 +59,15 @@ Invoice =
   filterExpenses: (elems)->
     _.filter elems, (elem)->
       $(elem).hasClass 'expense'
+  updateHiddenInputs: ->
+    selected = this.getInvoiceSelected()
+    worklogs = this.extractVals(this.filterWorklogs(selected))
+    expenses = this.extractVals(this.filterExpenses(selected))
+    this.elems.hiddenWorklogs().val(worklogs)
+    this.elems.hiddenExpenses().val(expenses)
+  extractVals: (elems)->
+    _.map elems, (elem) ->
+      $(elem).val()
   # Deselect the multi select on the right
   deselectRight: ->
     elems = [this.elems.worklogsSelect(), this.elems.expensesSelect()]

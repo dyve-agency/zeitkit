@@ -13,7 +13,9 @@ class Invoice < ActiveRecord::Base
     :number,
     :content,
     :payment_terms,
-    :payment_info
+    :payment_info,
+    :worklog_ids,
+    :expense_ids
 
   belongs_to :user
   belongs_to :client

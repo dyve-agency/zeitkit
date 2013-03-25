@@ -5,6 +5,9 @@
   .row
     .span12
       h3 2) Invoice the client.
+    .span12
+      = f.association :worklogs, collection: [], as: :hidden
+      = f.association :expenses, collection: [], as: :hidden
     .span5
       select.invoice-select.select multiple="multiple"
     .span2.invoice-control-buttons

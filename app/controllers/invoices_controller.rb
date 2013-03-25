@@ -30,8 +30,8 @@ class InvoicesController < ApplicationController
     if params[:client]
       @client = current_user.clients.find(params[:client])
       @invoice.client = @client
-      @worklogs = @client.worklogs.unpaid
-      @expenses = @client.expenses.unpaid
+      @worklogs = @client.worklogs.unpaid.no_invoice
+      @expenses = @client.expenses.unpaid.no_invoice
     end
     respond_to do |format|
       format.html # new.html.erb
