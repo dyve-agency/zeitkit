@@ -27,8 +27,12 @@ class InvoicesController < ApplicationController
   # GET /invoices/new.json
   def new
     @invoice.set_initial_values!
-    @unpaid_worklogs = current_user.unpaid_worklogs_by_client
-    @unpaid_expenses = current_user.expenses.unpaid
+    if params[:client]
+      @client = current_user.clients.find(params[:client])
+      @invoice.client = @client
+      @worklogs = @client.worklogs.unpaid
+      @expenses = @client.expenses.unpaid
+    end
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @invoice }

@@ -1,5 +1,5 @@
 = simple_form_for shallow_args(current_user, @invoice) do |f|
-  h3 1) Pick the Client.
+  h3 1) Pick the client.
   = f.input :client_id, collection: current_user.clients
   hr
   .row
@@ -7,13 +7,6 @@
       h3 2) Invoice the client.
     .span5
       select.invoice-select.select multiple="multiple"
-        option class="worklog" value="1" 1.3.05 - 12.10.05. 10h:10min. 10$
-        option class="worklog" value="2" 1.3.05 - 12.10.05. 10h:10min. 80$
-        option class="worklog" value="3" 1.3.05 - 12.10.05. 10h:10min. 90$
-        option class="worklog" value="4" 1.3.05 - 12.10.05. 10h:10min. 50$
-        option class="worklog" value="5" 1.3.05 - 12.10.05. 10h:10min. 30$
-        option class="worklog" value="6" 1.3.05 - 12.10.05. 10h:10min. 20$
-        option class="expense" value="18" 1.3.05 - Buy bread. 190$.
     .span2.invoice-control-buttons
       .btn.move-left <
       hr
@@ -26,25 +19,31 @@
           a href="#expenses" data-toggle="tab" Expenses
       .tab-content
         #worklogs.tab-pane.active
-          select.worklogs-select.select multiple="multiple"
-            option class="worklog" value="7" 1.3.05 - 12.10.05. 10h:10min. 10$
-            option class="worklog" value="8" 1.3.05 - 12.10.05. 10h:10min. 80$
-            option class="worklog" value="9" 1.3.05 - 12.10.05. 10h:10min. 90$
-            option class="worklog" value="10" 1.3.05 - 12.10.05. 10h:10min. 50$
-            option class="worklog" value="11" 2.3.05 - 12.10.05. 10h:10min. 30$
-            option class="worklog" value="12" 1.3.05 - 12.10.05. 10h:10min. 20$
+          - if !@worklogs
+            h3 Please pick a client first.
+          - elsif @worklogs.empty?
+            h3 There are no unpaid worklogs.
+          - else
+            select.worklogs-select.select multiple="multiple"
+              - @worklogs.each do |worklog|
+                option class="worklog" value="#{worklog.id}"= worklog.title
         #expenses.tab-pane
-          select.expenses-select.select multiple="multiple"
-            option class="expense" value="13" 1.3.05. Buy server. 90$.
-            option class="expense" value="14" 5.3.05. Buy server. 100$.
+          - if !@expenses
+            h3 Please pick a client first.
+          - elsif @expenses.empty?
+            h3 There are no unpaid expenses.
+          - else
+            select.expenses-select.select multiple="multiple"
+              - @expenses.each do |expense|
+                option class="expense" value="#{expense.id}"= expense.title
 
   hr
   h3 3) Finalize.
   .row
     .span3
       = f.input :includes_vat, label: false, hint: "The total includes value added tax."
-      = f.input :number
       = f.input :vat
+      = f.input :number
     .span3
       = f.input :payment_info
     .span3

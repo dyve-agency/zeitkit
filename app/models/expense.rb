@@ -27,4 +27,14 @@ class Expense < ActiveRecord::Base
     true
   end
 
+  def short_reason
+    cut_off = 40
+    return reason if reason.length < cut_off
+    "#{reason[0..(cut_off - 1)]}..."
+  end
+
+  def title
+    "#{short_reason} - #{total.to_s}#{total.currency.symbol}"
+  end
+
 end

@@ -7,6 +7,16 @@ Invoice =
       _that.moveLeft()
     $('.move-right').on 'click', ->
       _that.moveRight()
+    $('#invoice_client_id').on 'change', ->
+      client_id = $(this).find(':selected').val()
+      return if client_id == ""
+      attempt_split = window.location.href.split("?client=")
+      client_param = "?client=" + client_id
+      if attempt_split.length == 1
+        new_loc = window.location.href + client_param
+      else
+        new_loc = attempt_split[0] + client_param
+      window.location.href = new_loc
   elems:
     invoiceSelect: ->
       $('.invoice-select')

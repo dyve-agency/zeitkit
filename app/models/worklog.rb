@@ -160,6 +160,10 @@ class Worklog < ActiveRecord::Base
     self.class.new(user.temp_worklog_save.restoreable_options)
   end
 
+  def title
+    "#{end_time.strftime("%d.%m.%Y")} - #{duration_hours.to_s}h:#{duration_minutes.to_s}min. #{total.to_s}#{total.currency.symbol}"
+  end
+
   # Active record callbacks #
 
   def set_hourly_rate
