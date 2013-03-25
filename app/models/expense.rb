@@ -13,6 +13,7 @@ class Expense < ActiveRecord::Base
 
   scope :paid, where(paid: true)
   scope :unpaid, where(paid: false)
+  scope :no_invoice, where(invoice_id: nil)
 
   def string_fields_to_nil
     [:reason]

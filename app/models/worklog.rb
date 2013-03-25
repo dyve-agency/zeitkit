@@ -37,6 +37,7 @@ class Worklog < ActiveRecord::Base
 
   scope :paid, where(paid: true)
   scope :unpaid, where(paid: false)
+  scope :no_invoice, where(invoice_id: nil)
 
   def self.to_csv(worklogs)
     CSV.generate do |csv|
