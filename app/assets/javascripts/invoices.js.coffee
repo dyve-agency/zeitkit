@@ -41,12 +41,25 @@ Invoice =
     this.appendWorklogs(this.filterWorklogs(elems))
     this.appendExpenses(this.filterExpenses(elems))
     this.deselectRight()
-    this.updateHiddenInputs()
+    this.appendHiddenInputs()
   moveLeft: ->
     elems = this.getRightSelected()
     return if elems.length == 0
     this.appendInvoice(elems)
-    this.updateHiddenInputs()
+    this.appendHiddenInputs()
+  appendHiddenInputs: ->
+    dom_el = $('.hidden-inputs')
+    el = $('<div></div>')
+    elems = this.getInvoiceSelected()
+    worklogs = this.filterWorklogs(elems)
+    expenses = this.filterExpenses(elems)
+    worklog_template = _.template("<input type='hidden' name=invoice[worklog_ids][] value='<%= worklog_id %>'>")
+    expense_template = _.template("<input type='hidden' name=invoice[expense_ids][] value='<%= expense_id %>'>")
+    _.each worklogs, (elem)->
+      el.append worklog_template({worklog_id: $(elem).val()})
+    _.each expenses, (elem)->
+      el.append expense_template({expense_id: $(elem).val()})
+    dom_el.html(el.html())
   appendWorklogs: (elems)->
     this.elems.worklogsSelect().append(elems)
   appendExpenses: (elems)->
@@ -59,12 +72,6 @@ Invoice =
   filterExpenses: (elems)->
     _.filter elems, (elem)->
       $(elem).hasClass 'expense'
-  updateHiddenInputs: ->
-    selected = this.getInvoiceSelected()
-    worklogs = this.extractVals(this.filterWorklogs(selected))
-    expenses = this.extractVals(this.filterExpenses(selected))
-    this.elems.hiddenWorklogs().val(worklogs)
-    this.elems.hiddenExpenses().val(expenses)
   extractVals: (elems)->
     _.map elems, (elem) ->
       $(elem).val()

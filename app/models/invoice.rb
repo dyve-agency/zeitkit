@@ -11,19 +11,22 @@ class Invoice < ActiveRecord::Base
     :total,
     :note,
     :number,
-    :content,
     :payment_terms,
     :payment_info,
     :worklog_ids,
-    :expense_ids
+    :expense_ids,
+    :content
 
   belongs_to :user
   belongs_to :client
   has_many :worklogs
   has_many :expenses
 
-  validates :user_id, :client_id, :content, :number, :total, :vat, presence: true
+  before_validation :set_total
+
+  validates :user_id, :client_id, :number, :vat, presence: true
   validates_uniqueness_of :number, scope: :user_id
+  validates_numericality_of :total, :greater_than => 0, :allow_blank => false
 
   def total_vat
     total * vat/100
@@ -75,6 +78,10 @@ class Invoice < ActiveRecord::Base
 
   def toggle_paid
     paid_on ? self.paid_on = nil : self.paid_on = Time.now
+  end
+
+  def set_total
+    self.total = Money.new worklogs.sum(:total_cents) + expenses.sum(:total_cents), currency
   end
 
 end
