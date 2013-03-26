@@ -22,6 +22,9 @@ class Invoice < ActiveRecord::Base
   has_many :worklogs
   has_many :expenses
 
+  before_destroy :deassociate_worklogs
+  before_destroy :deassociate_expenses
+
   before_validation :set_total
 
   validates :user_id, :client_id, :number, :vat, presence: true
@@ -82,6 +85,14 @@ class Invoice < ActiveRecord::Base
 
   def set_total
     self.total = Money.new worklogs.sum(:total_cents) + expenses.sum(:total_cents), currency
+  end
+
+  def deassociate_worklogs
+    Worklog.where(invoice_id: id).update_all(invoice_id: nil)
+  end
+
+  def deassociate_expenses
+    Expense.where(invoice_id: id).update_all(invoice_id: nil)
   end
 
 end
