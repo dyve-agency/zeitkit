@@ -1,10 +1,13 @@
 = simple_form_for shallow_args(current_user, @invoice) do |f|
-  h3 1) Pick the client.
-  = f.input :client_id, collection: current_user.clients
+  - if @invoice.new_record?
+    h3 Pick the client.
+    = f.input :client_id, collection: current_user.clients
+  - else
+    h3 Client: #{@invoice.client.name}
   hr
   .row
     .span12
-      h3 2) Invoice the client.
+      h3 Invoice the client.
       .hidden-inputs.hidden
         .always
           input name="invoice[worklog_ids][]" value=""
@@ -55,7 +58,7 @@
                 option class="expense" value="#{expense.id}"= expense.title
 
   hr
-  h3 3) Finalize.
+  h3 Finalize.
   .row
     .span3
       = f.input :includes_vat, label: false, hint: "The total includes value added tax."
