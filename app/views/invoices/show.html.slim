@@ -22,9 +22,12 @@
       span #{l @invoice.created_at}
 .inovice-content
   h3 Invoice content
-  ul
-    - (@invoice.worklogs + @invoice.expenses).each do |entry|
-      li= entry.invoice_title
+  - if @invoice.content
+    = markdown @invoice.content
+  - else
+    ul
+      - (@invoice.worklogs + @invoice.expenses).each do |entry|
+        li= entry.invoice_title
 .row
   .span4.offset8.invoice-total
     h3 Invoice total
