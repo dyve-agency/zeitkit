@@ -1,23 +1,74 @@
 = simple_form_for shallow_args(current_user, @invoice) do |f|
+  - if @invoice.new_record?
+    h3 Pick the client.
+    = f.input :client_id, collection: current_user.clients
+  - else
+    h3 Client: #{@invoice.client.name}
+  hr
+  .row
+    .span12
+      h3 Invoice the client.
+      .hidden-inputs.hidden
+        .always
+          input name="invoice[worklog_ids][]" value=""
+          input name="invoice[expense_ids][]" value=""
+        .dynamic
+          - @invoice.worklogs.each do |worklog|
+            input name="invoice[worklog_ids][]" value="#{worklog.id}"
+          - @invoice.expenses.each do |expense|
+            input name="invoice[expense_ids][]" value="#{expense.id}"
+    .span5
+      select.invoice-select.select multiple="multiple"
+        - @invoice.worklogs.each do |worklog|
+          option class="worklog" value="#{worklog.id}"= worklog.title
+        - @invoice.expenses.each do |expense|
+          option class="expense" value="#{expense.id}"= expense.title
+    .span2.invoice-control-buttons
+      .btn.move-left <
+      hr
+      .btn.move-right >
+    .span5.right-selects
+      ul.nav.nav-tabs
+        li.active
+          a href="#worklogs" data-toggle="tab" Worklogs
+        li
+          a href="#expenses" data-toggle="tab" Expenses
+      .tab-content
+        #worklogs.tab-pane.active
+          - if !@invoice.client
+            h3 Please pick a client first.
+          - elsif @worklogs && @worklogs.empty?
+            h3 There are no unpaid worklogs.
+            select.worklogs-select.select.hidden multiple="multiple"
+          - else
+            h3.hidden There are no unpaid worklogs.
+            select.worklogs-select.select multiple="multiple"
+              - @worklogs.each do |worklog|
+                option class="worklog" value="#{worklog.id}"= worklog.title
+        #expenses.tab-pane
+          - if !@invoice.client
+            h3 Please pick a client first.
+          - elsif @expenses && @expenses.empty?
+            h3 There are no unpaid expenses.
+            select.expenses-select.select.hidden multiple="multiple"
+          - else
+            h3.hidden There are no unpaid expenses.
+            select.expenses-select.select multiple="multiple"
+              - @expenses.each do |expense|
+                option class="expense" value="#{expense.id}"= expense.title
+
+  hr
+  h3 Finalize.
   .row
     .span3
-      = f.input :client_id, collection: current_user.clients
+      = f.input :includes_vat, label: false, hint: "The total includes value added tax."
+      = f.input :vat
       = f.input :number
     .span3
-      = f.input :total, input_html: { data: {total: @invoice.total.cents} }
-      = f.input :vat
-    .span4.client-unpaid-list
-      = render "unpaid"
-  = f.input :includes_vat, label: false, hint: "The total includes value added tax."
-  hr
-  = f.input :content
-  hr
-  .row
-    .span4
       = f.input :payment_info
-    .span4
+    .span3
       = f.input :payment_terms
-    .span4
+    .span3
       = f.input :note
   .form-actions
     .btn-group

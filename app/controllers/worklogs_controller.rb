@@ -68,12 +68,4 @@ class WorklogsController < ApplicationController
     redirect_to user_worklogs_path(current_user)
   end
 
-  def toggle_paid
-    @worklog.toggle_paid
-    if @worklog.save
-      redirect_to user_worklogs_path(current_user, params[:old_params]), notice: 'Worklog was successfully updated.'
-    else
-      render action: "edit"
-    end
-  end
 end

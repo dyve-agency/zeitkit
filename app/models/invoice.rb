@@ -11,16 +11,26 @@ class Invoice < ActiveRecord::Base
     :total,
     :note,
     :number,
-    :content,
     :payment_terms,
-    :payment_info
+    :payment_info,
+    :worklog_ids,
+    :expense_ids,
+    :content
 
   belongs_to :user
   belongs_to :client
   has_many :worklogs
+  has_many :expenses
 
-  validates :user_id, :client_id, :content, :number, :total, :vat, presence: true
+  before_destroy :deassociate_worklogs
+  before_destroy :deassociate_expenses
+
+  before_validation :set_initial_total!, on: :create
+  after_save :set_total!
+
+  validates :user_id, :client_id, :number, :vat, presence: true
   validates_uniqueness_of :number, scope: :user_id
+  validates_numericality_of :total, :allow_blank => false
 
   def total_vat
     total * vat/100
@@ -72,6 +82,23 @@ class Invoice < ActiveRecord::Base
 
   def toggle_paid
     paid_on ? self.paid_on = nil : self.paid_on = Time.now
+  end
+
+  def set_initial_total!
+    self.total = Money.new 0, currency
+  end
+
+  def set_total!
+    new_total = Money.new worklogs.sum(:total_cents) + expenses.sum(:total_cents), currency
+    self.update_column(:total_cents, new_total.cents)
+  end
+
+  def deassociate_worklogs
+    Worklog.where(invoice_id: id).update_all(invoice_id: nil)
+  end
+
+  def deassociate_expenses
+    Expense.where(invoice_id: id).update_all(invoice_id: nil)
   end
 
 end

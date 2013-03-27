@@ -13,11 +13,7 @@ Timetracker::Application.routes.draw do
         post "unshare"
       end
     end
-    resources :worklogs, except: [:show] do
-      member do
-        post "toggle_paid"
-      end
-    end
+    resources :worklogs, except: [:show]
     resources :invoices do
       member do
         post "toggle_paid"
@@ -25,11 +21,7 @@ Timetracker::Application.routes.draw do
       end
     end
     resources :invoice_default, only: [:update, :edit]
-    resources :expenses, except: [:show] do
-      member do
-        post "toggle_paid"
-      end
-    end
+    resources :expenses, except: [:show]
   end
 
   resources :sessions

@@ -35,12 +35,4 @@ class ExpensesController < ApplicationController
     redirect_to user_expenses_path(current_user)
   end
 
-  def toggle_paid
-    @expense.toggle_paid
-    if @expense.save
-      redirect_to user_expenses_path(current_user), notice: 'Expense was successfully updated.'
-    else
-      render action: "edit"
-    end
-  end
 end

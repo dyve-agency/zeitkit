@@ -1,17 +1,15 @@
 .invoice-writer
-  h3 Contractor
+  h3 Contractor #{link_to "(edit)", edit_user_path(current_user), class: "hide-for-print"}
   p= link_to val_or_nil_string(current_user.company_name), edit_user_path(current_user)
   p= val_or_nil_string current_user.street
   p= "#{val_or_nil_string current_user.zip} #{val_or_nil_string current_user.city}"
 .row
   .span6.invoice-client
-    h3 Client
+    h3 Client #{link_to "(edit)", edit_client_path(@client), class: "hide-for-print"}
     - if @client.company_name
-      p
-        = link_to @client.company_name, edit_client_path(@client)
+      p= @client.company_name
     - else
-      p
-        = link_to @client.name, edit_client_path(@client)
+      p= @client.name
     p= val_or_nil_string @client.street
     p= "#{val_or_nil_string @client.zip} #{val_or_nil_string @client.city}"
   .span6.invoice-quick-total
@@ -24,7 +22,12 @@
       span #{l @invoice.created_at}
 .inovice-content
   h3 Invoice content
-  = markdown @invoice.content
+  - if @invoice.content
+    = markdown @invoice.content
+  - else
+    ul
+      - (@invoice.worklogs + @invoice.expenses).each do |entry|
+        li= entry.invoice_title
 .row
   .span4.offset8.invoice-total
     h3 Invoice total
