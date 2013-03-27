@@ -33,6 +33,8 @@ Invoice =
   getInvoiceSelected: ->
     this.elems.invoiceSelect().find(':selected')
   # Returns selected expenses and worklogs.
+  getInvoiceOptions: ->
+    this.elems.invoiceSelect().find('option')
   getRightSelected: ->
     this.elems.rightSelects().find(':selected')
   moveRight: ->
@@ -42,15 +44,32 @@ Invoice =
     this.appendExpenses(this.filterExpenses(elems))
     this.deselectRight()
     this.appendHiddenInputs()
+    this.toggleNoRemainingNotice()
   moveLeft: ->
     elems = this.getRightSelected()
     return if elems.length == 0
     this.appendInvoice(elems)
     this.appendHiddenInputs()
+    this.toggleNoRemainingNotice()
+  toggleNoRemainingNotice: ->
+    expenses = this.elems.expensesSelect()
+    worklogs = this.elems.worklogsSelect()
+    if worklogs.find('option').length >= 1
+      worklogs.removeClass('hidden')
+      worklogs.siblings("h3").addClass('hidden')
+    else
+      worklogs.addClass('hidden')
+      worklogs.siblings("h3").removeClass('hidden')
+    if expenses.find('option').length >= 1
+      expenses.removeClass('hidden')
+      expenses.siblings("h3").addClass('hidden')
+    else
+      expenses.addClass('hidden')
+      expenses.siblings("h3").removeClass('hidden')
   appendHiddenInputs: ->
-    dom_el = $('.hidden-inputs')
+    dom_el = $('.hidden-inputs .dynamic')
     el = $('<div></div>')
-    elems = this.getInvoiceSelected()
+    elems = this.getInvoiceOptions()
     worklogs = this.filterWorklogs(elems)
     expenses = this.filterExpenses(elems)
     worklog_template = _.template("<input type='hidden' name=invoice[worklog_ids][] value='<%= worklog_id %>'>")

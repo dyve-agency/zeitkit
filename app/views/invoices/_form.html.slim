@@ -6,8 +6,20 @@
     .span12
       h3 2) Invoice the client.
       .hidden-inputs.hidden
+        .always
+          input name="invoice[worklog_ids][]" value=""
+          input name="invoice[expense_ids][]" value=""
+        .dynamic
+          - @invoice.worklogs.each do |worklog|
+            input name="invoice[worklog_ids][]" value="#{worklog.id}"
+          - @invoice.expenses.each do |expense|
+            input name="invoice[expense_ids][]" value="#{expense.id}"
     .span5
       select.invoice-select.select multiple="multiple"
+        - @invoice.worklogs.each do |worklog|
+          option class="worklog" value="#{worklog.id}"= worklog.title
+        - @invoice.expenses.each do |expense|
+          option class="expense" value="#{expense.id}"= expense.title
     .span2.invoice-control-buttons
       .btn.move-left <
       hr
@@ -20,20 +32,24 @@
           a href="#expenses" data-toggle="tab" Expenses
       .tab-content
         #worklogs.tab-pane.active
-          - if !@worklogs
+          - if !@invoice.client
             h3 Please pick a client first.
-          - elsif @worklogs.empty?
+          - elsif @worklogs && @worklogs.empty?
             h3 There are no unpaid worklogs.
+            select.worklogs-select.select.hidden multiple="multiple"
           - else
+            h3.hidden There are no unpaid worklogs.
             select.worklogs-select.select multiple="multiple"
               - @worklogs.each do |worklog|
                 option class="worklog" value="#{worklog.id}"= worklog.title
         #expenses.tab-pane
-          - if !@expenses
+          - if !@invoice.client
             h3 Please pick a client first.
-          - elsif @expenses.empty?
+          - elsif @expenses && @expenses.empty?
             h3 There are no unpaid expenses.
+            select.expenses-select.select.hidden multiple="multiple"
           - else
+            h3.hidden There are no unpaid expenses.
             select.expenses-select.select multiple="multiple"
               - @expenses.each do |expense|
                 option class="expense" value="#{expense.id}"= expense.title
