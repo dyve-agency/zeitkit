@@ -21,7 +21,7 @@ table.table.table-bordered
       th Controls
   tbody
     - @worklogs.each do |worklog|
-      tr class="#{success_or_warning worklog.paid}"
+      tr class="#{success_or_warning worklog.invoiced?}"
         td= worklog.client.name
         td.hidden-phone= l worklog.start_time
         td.hidden-phone= l worklog.end_time
@@ -30,7 +30,6 @@ table.table.table-bordered
         td.hidden-phone= with_currency worklog.total
         td
           .btn-group.pull-right
-            = render "set_paid", worklog: worklog
             = link_to 'Edit', edit_worklog_path(worklog), class: "btn"
             = link_to 'Delete', worklog, :confirm => 'Are you sure?', :method => :delete,
               class: "btn hidden-phone"
