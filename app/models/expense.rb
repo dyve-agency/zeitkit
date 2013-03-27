@@ -14,6 +14,8 @@ class Expense < ActiveRecord::Base
   scope :unpaid, where(invoice_id: nil)
   scope :no_invoice, where(invoice_id: nil)
 
+  scope :oldest_first, order("created_at ASC")
+
   def string_fields_to_nil
     [:reason]
   end

@@ -30,8 +30,8 @@ class InvoicesController < ApplicationController
     if params[:client]
       @client = current_user.clients.find(params[:client])
       @invoice.client = @client
-      @worklogs = @client.worklogs.unpaid.no_invoice
-      @expenses = @client.expenses.unpaid.no_invoice
+      @worklogs = @client.worklogs.unpaid.no_invoice.oldest_first
+      @expenses = @client.expenses.unpaid.no_invoice.oldest_first
     end
     respond_to do |format|
       format.html # new.html.erb
@@ -41,9 +41,8 @@ class InvoicesController < ApplicationController
 
   def edit
     @client = @invoice.client
-    @worklogs = @client.worklogs.unpaid.no_invoice
-    @expenses = @client.expenses.unpaid.no_invoice
-    Rails.logger.fatal("OPENEEEEED")
+    @worklogs = @client.worklogs.unpaid.no_invoice.oldest_first
+    @expenses = @client.expenses.unpaid.no_invoice.oldest_first
   end
 
   def create
