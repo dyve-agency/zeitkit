@@ -11,7 +11,6 @@ class Worklog < ActiveRecord::Base
     :hourly_rate,
     :total,
     :summary,
-    :paid,
     :from_date,
     :from_time,
     :to_date,
@@ -31,12 +30,11 @@ class Worklog < ActiveRecord::Base
   validate :end_time_greater_than_start_time
   validate :duration_less_than_a_year
 
-  before_validation :ensure_paid_not_nil
   after_validation :set_hourly_rate, on: :create
   after_validation :set_total
 
-  scope :paid, where(paid: true)
-  scope :unpaid, where(paid: false)
+  scope :paid, where(invoice_id: !nil)
+  scope :unpaid, where(invoice_id: nil)
   scope :no_invoice, where(invoice_id: nil)
 
   def self.to_csv(worklogs)
@@ -78,6 +76,10 @@ class Worklog < ActiveRecord::Base
     summary]
   end
 
+  def invoiced?
+    invoice_id
+  end
+
   def yes_or_no_boolean(boolean_var)
     boolean_var ? "Yes" : "No"
   end
@@ -106,10 +108,6 @@ class Worklog < ActiveRecord::Base
   def end_time_ok
     return if !end_time || !start_time
     end_time > start_time
-  end
-
-  def toggle_paid
-    paid ? self.paid = false : self.paid = true
   end
 
   def set_time_helpers_to_now!
@@ -165,6 +163,10 @@ class Worklog < ActiveRecord::Base
     "#{end_time.strftime("%d.%m.%Y")} - #{duration_hours.to_s}h:#{duration_minutes.to_s}min. #{total.to_s}#{total.currency.symbol}"
   end
 
+  def invoice_title
+    "Work: #{end_time.strftime("%d.%m.%Y")} - #{duration_hours.to_s}h:#{duration_minutes.to_s}min. #{total.to_s}#{total.currency.symbol}"
+  end
+
   # Active record callbacks #
 
   def set_hourly_rate
@@ -173,11 +175,6 @@ class Worklog < ActiveRecord::Base
 
   def set_total
     self.total = self.calc_total
-  end
-
-  def ensure_paid_not_nil
-    self.paid = false if paid.nil?
-    true
   end
 
   # Validations #

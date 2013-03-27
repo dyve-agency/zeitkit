@@ -16,14 +16,13 @@ table.table.table-bordered
       th Controls
   tbody
     - @expenses.each do |expense|
-      tr class="#{success_or_warning expense.paid}"
+      tr class="#{success_or_warning expense.invoiced?}"
         td= expense.client.name
         td
           = link_to expense.reason[0..20] + "...", edit_expense_path(expense)
         td= with_currency expense.total
         td
           .btn-group.pull-right
-            = render "set_paid", expense: expense
             = link_to 'Edit', edit_expense_path(expense), class: "btn"
             = link_to 'Delete', expense, :confirm => 'Are you sure?', :method => :delete,
               class: "btn hidden-phone"
