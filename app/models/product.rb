@@ -38,4 +38,7 @@ class Product < ActiveRecord::Base
     invoice_id
   end
 
+  def charged_total
+    ((charge / 100) * total_cents) + total_cents
+  end
 end

@@ -32,7 +32,7 @@ table.table.table-bordered
     tr
       td Sums:
       td
-      td= with_currency Money.new @products.sum(:total_cents), current_user.currency
+      td= with_currency Money.new @products.inject(0){|total, product| total + product.charged_total} , current_user.currency
       td
       td
 .btn-group
