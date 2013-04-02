@@ -16,6 +16,8 @@ class Product < ActiveRecord::Base
 
   scope :oldest_first, order("created_at ASC")
 
+  before_validation :check_if_charge_missing, :only => [:charge]
+
   def string_fields_to_nil
     [:title]
   end
@@ -40,5 +42,9 @@ class Product < ActiveRecord::Base
 
   def charged_total
     ((charge / 100) * total_cents) + total_cents
+  end
+
+  def check_if_charge_missing
+    self.charge = self.charge == nil || self.charge < 0 ? 0.0 : self.charge
   end
 end
