@@ -138,7 +138,7 @@ class Worklog < ActiveRecord::Base
 
 
   def from_to_time(date, time)
-    Time.new(date[0], date[1], date[2], time[0], time[1], time[2])
+    Time.zone.local(date[0], date[1], date[2], time[0], time[1], time[2])
   end
 
   def to_converted
