@@ -15,6 +15,7 @@ class Client < ActiveRecord::Base
   has_many :invoices, dependent: :destroy
   has_many :notes, dependent: :destroy
   has_many :expenses, dependent: :destroy
+  has_many :products, dependent: :destroy  
 
   validates :user, :name, presence: true
   validates :name, uniqueness: {scope: :user_id, message: "You can only have the client once."}

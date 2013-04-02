@@ -15,15 +15,18 @@ class Invoice < ActiveRecord::Base
     :payment_info,
     :worklog_ids,
     :expense_ids,
+    :product_ids,
     :content
 
   belongs_to :user
   belongs_to :client
   has_many :worklogs
   has_many :expenses
+  has_many :products
 
   before_destroy :deassociate_worklogs
   before_destroy :deassociate_expenses
+  before_destroy :deassociate_products
 
   before_validation :set_initial_total!, on: :create
   after_save :set_total!
@@ -101,4 +104,7 @@ class Invoice < ActiveRecord::Base
     Expense.where(invoice_id: id).update_all(invoice_id: nil)
   end
 
+  def deassociate_products
+    Product.where(invoice_id: id).update_all(invoice_id: nil)
+  end
 end

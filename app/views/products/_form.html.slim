@@ -1,0 +1,11 @@
+= simple_form_for shallow_args(current_user, @product) do |f|
+  .row
+    .span3
+      = f.input :client_id, collection: current_user.clients
+    .span3
+      = f.input :total
+    .span3
+      = f.input :charge
+  = f.input :title
+  .form-actions
+    = f.button :submit, "Save"

@@ -17,6 +17,7 @@ class User < ActiveRecord::Base
   has_many :invoices
   has_many :notes
   has_many :expenses
+  has_many :products
 
   has_one :temp_worklog_save
   has_one :invoice_default

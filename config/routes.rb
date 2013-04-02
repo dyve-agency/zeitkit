@@ -22,6 +22,7 @@ Timetracker::Application.routes.draw do
     end
     resources :invoice_default, only: [:update, :edit]
     resources :expenses, except: [:show]
+    resources :products, except: [:show]
   end
 
   resources :sessions
