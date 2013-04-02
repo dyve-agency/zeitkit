@@ -18,12 +18,16 @@ en:
         content: Invoice content (Markdown)
         payment_info: Payment info (Markdown)
         payment_terms: Payment terms (Markdown)
+      product:
+        charge: Surcharge in %
     hints:
       worklog:
         hourly_rate: Change the hourly rate that was saved when you created the worklog.
         paid: This worklog has been paid.
       expense:
         reason: Make sure to keep receipts in case the client want more details on this expense.
+      product:
+        charge: Allows you to add a surcharge to the product price for your client. I.e. when you are reselling a server.
     placeholders:
       user:
         email: "i.e. me@me.com"
@@ -48,3 +52,5 @@ en:
         reason: e.g. Train ride 16/03/2013
       note:
         content: "e.g. * TODO get back with more details"
+      product:
+        charge: "i.e. 20"

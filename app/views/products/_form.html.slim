@@ -4,8 +4,10 @@
       = f.input :client_id, collection: current_user.clients
     .span3
       = f.input :total
+  .row
+    .span3
+      = f.input :title, as: :string
     .span3
       = f.input :charge
-  = f.input :title
   .form-actions
     = f.button :submit, "Save"
