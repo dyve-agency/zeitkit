@@ -5,7 +5,7 @@
     .span3
       = f.input :total
     .span3
-      = f.input :charge, input_html: {value: '0'}
+      = f.input :charge, required: false
   = f.input :title
   .form-actions
     = f.button :submit, "Save"

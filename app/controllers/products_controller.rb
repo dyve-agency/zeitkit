@@ -12,6 +12,9 @@ class ProductsController < ApplicationController
   end
 
   def create
+    if params[:product].has_key?("charge")
+      params[:product][:charge] = 0
+    end
     @product = Product.new(params[:product])
     @product.user = current_user
     if @product.save
@@ -23,6 +26,9 @@ class ProductsController < ApplicationController
   end
 
   def update
+    if params[:product].has_key?("charge")
+      params[:product][:charge] = 0
+    end
     if @product.update_attributes(params[:product])
       redirect_to user_products_path(current_user), notice: 'Product was successfully updated.'
     else
