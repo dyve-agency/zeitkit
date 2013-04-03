@@ -32,6 +32,7 @@ class InvoicesController < ApplicationController
       @invoice.client = @client
       @worklogs = @client.worklogs.unpaid.no_invoice.oldest_first
       @expenses = @client.expenses.unpaid.no_invoice.oldest_first
+      @products = @client.products.oldest_first
     end
     respond_to do |format|
       format.html # new.html.erb
@@ -40,9 +41,11 @@ class InvoicesController < ApplicationController
   end
 
   def edit
+    pr_ids = @invoice.products.map(&:id)
     @client = @invoice.client
     @worklogs = @client.worklogs.unpaid.no_invoice.oldest_first
     @expenses = @client.expenses.unpaid.no_invoice.oldest_first
+    @products = @client.products.oldest_first.reject{|pr| pr_ids.include?(pr.id)}
   end
 
   def create
@@ -58,8 +61,10 @@ class InvoicesController < ApplicationController
       else
         wl_ids = @invoice.worklogs.map(&:id)
         ex_ids = @invoice.expenses.map(&:id)
+        pr_ids = @invoice.products.map(&:id)
         @worklogs = @client.worklogs.unpaid.no_invoice.reject{|wl| wl_ids.include?(wl.id)}
         @expenses = @client.expenses.unpaid.no_invoice.reject{|ex| ex_ids.include?(ex.id)}
+        @products = @client.products.reject{|pr| pr_ids.include?(pr.id)}
         format.html { render action: "new" }
         format.json { render json: @invoice.errors, status: :unprocessable_entity }
       end
@@ -69,6 +74,7 @@ class InvoicesController < ApplicationController
   def update
     @invoice.expense_ids = []
     @invoice.worklog_ids = []
+    @invoice.product_ids = []
     respond_to do |format|
       if @invoice.update_attributes(params[:invoice])
         format.html { redirect_to @invoice, notice: 'Invoice was successfully updated.' }
@@ -77,8 +83,10 @@ class InvoicesController < ApplicationController
         @client = @invoice.client
         wl_ids = @invoice.worklogs.map(&:id)
         ex_ids = @invoice.expenses.map(&:id)
+        pr_ids = @invoice.products.map(&:id)
         @worklogs = @client.worklogs.unpaid.no_invoice.reject{|wl| wl_ids.include?(wl.id)}
         @expenses = @client.expenses.unpaid.no_invoice.reject{|ex| ex_ids.include?(ex.id)}
+        @products = @client.products.reject{|pr| pr_ids.include?(pr.id)}
         format.html { render action: "edit" }
         format.json { render json: @invoice.errors, status: :unprocessable_entity }
       end

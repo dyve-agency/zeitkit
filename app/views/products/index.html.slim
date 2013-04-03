@@ -22,18 +22,18 @@ table.table.table-bordered
         td
           = link_to product.title[0..20] + "...", edit_product_path(product)
         td= with_currency product.total
-        td= product.charge ? number_to_percentage(product.charge, precision: 2) : "0%"
+        td= product.charge > 0 ? number_to_percentage(product.charge, precision: 2) : "0%"
         td
           .btn-group.pull-right
             = link_to 'Edit', edit_product_path(product), class: "btn"
             = link_to 'Delete', product, :confirm => 'Are you sure?', :method => :delete,
               class: "btn hidden-phone"
-  tfoot.hidden-phone
-    tr
-      td Sums:
-      td
-      td= with_currency Money.new @products.inject(0){|total, product| total + product.charged_total} , current_user.currency
-      td
-      td
+/  tfoot.hidden-phone
+/    tr
+/     td Sums:
+/      td
+/      td= with_currency Money.new @products.inject(0){|total, product| total + product.charged_total} , current_user.currency
+/      td
+/      td
 .btn-group
   = link_to "New product", new_user_product_path(current_user), class: "btn btn-primary"

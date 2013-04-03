@@ -26,7 +26,7 @@
     = markdown @invoice.content
   - else
     ul
-      - (@invoice.worklogs.oldest_first + @invoice.expenses.oldest_first).each do |entry|
+      - (@invoice.worklogs.oldest_first + @invoice.expenses.oldest_first + @invoice.products.oldest_first).each do |entry|
         li= entry.invoice_title
 .row
   .span4.offset8.invoice-total
