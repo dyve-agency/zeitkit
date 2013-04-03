@@ -22,7 +22,7 @@ class Invoice < ActiveRecord::Base
   belongs_to :client
   has_many :worklogs
   has_many :expenses
-  has_many :products
+  has_and_belongs_to_many :products
 
   before_destroy :deassociate_worklogs
   before_destroy :deassociate_expenses
@@ -105,6 +105,6 @@ class Invoice < ActiveRecord::Base
   end
 
   def deassociate_products
-    Product.where(invoice_id: id).update_all(invoice_id: nil)
+    ProductInvoice.where(invoice_id: id).destroy_all
   end
 end

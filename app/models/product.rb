@@ -6,13 +6,13 @@ class Product < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :client
-  belongs_to :invoice
+  has_and_belongs_to_many :invoices
 
   validates :user_id, :client_id, :total, :title, :charge, presence: true
 
-  scope :paid, where(invoice_id: !nil)
-  scope :unpaid, where(invoice_id: nil)
-  scope :no_invoice, where(invoice_id: nil)
+  scope :paid, where(invoice_ids: !nil)
+  scope :unpaid, where(invoice_ids: nil)
+  scope :no_invoice, where(invoice_ids: nil)
 
   scope :oldest_first, order("created_at ASC")
 
@@ -37,7 +37,7 @@ class Product < ActiveRecord::Base
   end
 
   def invoiced?
-    invoice_id
+    !invoices.empty?
   end
 
   def charged_total
