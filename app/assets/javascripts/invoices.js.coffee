@@ -24,12 +24,16 @@ Invoice =
       $('.worklogs-select')
     expensesSelect: ->
       $('.expenses-select')
+    productsSelect: ->
+      $('.products-select')
     rightSelects: ->
       $('.right-selects select')
     hiddenWorklogs: ->
       $('#invoice_worklog_ids')
     hiddenExpenses: ->
       $('#invoice_expense_ids')
+    hiddenProducts: ->
+      $('#invoice_product_ids')
   getInvoiceSelected: ->
     this.elems.invoiceSelect().find(':selected')
   # Returns selected expenses and worklogs.
@@ -42,6 +46,7 @@ Invoice =
     return if elems.length == 0
     this.appendWorklogs(this.filterWorklogs(elems))
     this.appendExpenses(this.filterExpenses(elems))
+    this.appendProducts(this.filterProducts(elems))
     this.deselectRight()
     this.appendHiddenInputs()
     this.toggleNoRemainingNotice()
@@ -54,6 +59,7 @@ Invoice =
   toggleNoRemainingNotice: ->
     expenses = this.elems.expensesSelect()
     worklogs = this.elems.worklogsSelect()
+    products = this.elems.productsSelect()
     if worklogs.find('option').length >= 1
       worklogs.removeClass('hidden')
       worklogs.siblings("h3").addClass('hidden')
@@ -66,23 +72,35 @@ Invoice =
     else
       expenses.addClass('hidden')
       expenses.siblings("h3").removeClass('hidden')
+    if products.find('option').length >= 1
+      products.removeClass('hidden')
+      products.siblings("h3").addClass('hidden')
+    else
+      products.addClass('hidden')
+      products.siblings("h3").removeClass('hidden')
   appendHiddenInputs: ->
     dom_el = $('.hidden-inputs .dynamic')
     el = $('<div></div>')
     elems = this.getInvoiceOptions()
     worklogs = this.filterWorklogs(elems)
     expenses = this.filterExpenses(elems)
+    products = this.filterProducts(elems)
     worklog_template = _.template("<input type='hidden' name=invoice[worklog_ids][] value='<%= worklog_id %>'>")
     expense_template = _.template("<input type='hidden' name=invoice[expense_ids][] value='<%= expense_id %>'>")
+    product_template = _.template("<input type='hidden' name=invoice[product_ids][] value='<%= product_id %>'>")
     _.each worklogs, (elem)->
       el.append worklog_template({worklog_id: $(elem).val()})
     _.each expenses, (elem)->
       el.append expense_template({expense_id: $(elem).val()})
+    _.each products, (elem)->
+      el.append product_template({product_id: $(elem).val()})
     dom_el.html(el.html())
   appendWorklogs: (elems)->
     this.elems.worklogsSelect().append(elems)
   appendExpenses: (elems)->
     this.elems.expensesSelect().append(elems)
+  appendProducts: (elems)->
+    this.elems.productsSelect().append(elems)
   appendInvoice: (elems)->
     this.elems.invoiceSelect().append(elems)
   filterWorklogs: (elems)->
@@ -91,11 +109,14 @@ Invoice =
   filterExpenses: (elems)->
     _.filter elems, (elem)->
       $(elem).hasClass 'expense'
+  filterProducts: (elems)->
+    _.filter elems, (elem)->
+      $(elem).hasClass 'product'
   extractVals: (elems)->
     _.map elems, (elem) ->
       $(elem).val()
   # Deselect the multi select on the right
   deselectRight: ->
-    elems = [this.elems.worklogsSelect(), this.elems.expensesSelect()]
+    elems = [this.elems.worklogsSelect(), this.elems.expensesSelect(), this.elems.productsSelect()]
     _.each elems, (elem) ->
       $(elem).val('')

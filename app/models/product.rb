@@ -10,9 +10,9 @@ class Product < ActiveRecord::Base
 
   validates :user_id, :client_id, :total, :title, :charge, presence: true
 
-  scope :paid, where(invoice_ids: !nil)
-  scope :unpaid, where(invoice_ids: nil)
-  scope :no_invoice, where(invoice_ids: nil)
+  scope :paid, joins('LEFT OUTER JOIN invoices_products ON products.id=invoices_products.product_id').where('invoices_products.invoice_id IS NOT NULL')
+  scope :unpaid, joins('LEFT OUTER JOIN invoices_products ON products.id=invoices_products.product_id').where('invoices_products.invoice_id IS NULL')
+  scope :no_invoice, joins('LEFT OUTER JOIN invoices_products ON products.id=invoices_products.product_id').where('invoices_products.invoice_id IS NULL')
 
   scope :oldest_first, order("created_at ASC")
 
@@ -29,11 +29,11 @@ class Product < ActiveRecord::Base
   end
 
   def display_title
-    "#{short_title} - #{total.to_s}#{total.currency.symbol}"
+    "#{short_title} - #{(charged_total / 100).to_s}#{total.currency.symbol}"
   end
 
   def invoice_title
-    "Product: #{title} - #{total.to_s}#{total.currency.symbol}"
+    "Product: #{title} - #{(charged_total / 100).to_s}#{total.currency.symbol}"
   end
 
   def invoiced?

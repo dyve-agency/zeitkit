@@ -92,7 +92,7 @@ class Invoice < ActiveRecord::Base
   end
 
   def set_total!
-    new_total = Money.new worklogs.sum(:total_cents) + expenses.sum(:total_cents), currency
+    new_total = Money.new worklogs.sum(:total_cents) + expenses.sum(:total_cents) + products.inject(0){|total, product| total + product.charged_total}, currency
     self.update_column(:total_cents, new_total.cents)
   end
 
@@ -105,6 +105,6 @@ class Invoice < ActiveRecord::Base
   end
 
   def deassociate_products
-    ProductInvoice.where(invoice_id: id).destroy_all
+    InvoicesProducts.where(invoice_id: id).destroy_all
   end
 end
