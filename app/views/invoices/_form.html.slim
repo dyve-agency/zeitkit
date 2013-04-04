@@ -26,8 +26,8 @@
           option class="worklog" value="#{worklog.id}"= worklog.title
         - @invoice.expenses.each do |expense|
           option class="expense" value="#{expense.id}"= expense.title
-        - @invoice.products.each do |product|
-          option class="product" value="#{product.id}"= product.display_title
+        - @invoice.products.uniq.each do |product|
+          option class="product" value="#{product.id}"= product.display_title + ' (' + product.invoice_qty(@invoice.id).to_s + ')' 
     .span2.invoice-control-buttons
       .btn.move-left <
       hr

@@ -34,6 +34,8 @@ Invoice =
       $('#invoice_expense_ids')
     hiddenProducts: ->
       $('#invoice_product_ids')
+    hiddenInputs: ->
+      $('.hidden-inputs .dynamic')
   getInvoiceSelected: ->
     this.elems.invoiceSelect().find(':selected')
   # Returns selected expenses and worklogs.
@@ -41,6 +43,10 @@ Invoice =
     this.elems.invoiceSelect().find('option')
   getRightSelected: ->
     this.elems.rightSelects().find(':selected')
+  countOfProducts: (id) ->
+    this.elems.hiddenInputs().children('[name=invoice\\[product_ids\\]\\[\\]][value=' + id + ']').length
+  origProductName: (id) ->
+    this.elems.productsSelect().children('[class="product"][value=' + id + ']')[0].innerHTML
   moveRight: ->
     elems = this.getInvoiceSelected()
     return if elems.length == 0
@@ -48,13 +54,13 @@ Invoice =
     this.appendExpenses(this.filterExpenses(elems))
     this.appendProducts(this.filterProducts(elems))
     this.deselectRight()
-    this.appendHiddenInputs()
+    this.appendHiddenInputs(-1)
     this.toggleNoRemainingNotice()
   moveLeft: ->
     elems = this.getRightSelected()
     return if elems.length == 0
     this.appendInvoice(elems)
-    this.appendHiddenInputs()
+    this.appendHiddenInputs(1)
     this.toggleNoRemainingNotice()
   toggleNoRemainingNotice: ->
     expenses = this.elems.expensesSelect()
@@ -78,8 +84,9 @@ Invoice =
     else
       products.addClass('hidden')
       products.siblings("h3").removeClass('hidden')
-  appendHiddenInputs: ->
-    dom_el = $('.hidden-inputs .dynamic')
+  appendHiddenInputs: (add) ->
+    that = this
+    dom_el = this.elems.hiddenInputs()
     el = $('<div></div>')
     elems = this.getInvoiceOptions()
     worklogs = this.filterWorklogs(elems)
@@ -93,16 +100,35 @@ Invoice =
     _.each expenses, (elem)->
       el.append expense_template({expense_id: $(elem).val()})
     _.each products, (elem)->
-      el.append product_template({product_id: $(elem).val()})
+      pid = $(elem).val()
+      qty = that.countOfProducts(pid) + add
+      tpl = product_template({product_id: pid})
+      for i in [1..qty] by 1
+        el.append tpl
     dom_el.html(el.html())
   appendWorklogs: (elems)->
     this.elems.worklogsSelect().append(elems)
   appendExpenses: (elems)->
     this.elems.expensesSelect().append(elems)
   appendProducts: (elems)->
-    this.elems.productsSelect().append(elems)
+    that = this
+    _.each elems, (elem)->
+      count = that.countOfProducts(elem.value)
+      if count == 1
+        elem.remove();
+      else
+        elem.innerHTML = that.origProductName(elem.value) + ' (' + (count - 1) + ')'
   appendInvoice: (elems)->
-    this.elems.invoiceSelect().append(elems)
+    that = this
+    invsel = this.elems.invoiceSelect()
+    invsel.append(elems.not('.product'))
+    invsel.append(elems.filter('.product').filter((index) ->
+      option = invsel.children('[class="product"][value=' + this.value + ']')
+      isNew = option.length == 0;
+      if !isNew
+        option[0].innerHTML = this.innerHTML + ' (' + (that.countOfProducts(this.value) + 1) + ')'
+      return isNew
+    ).clone())
   filterWorklogs: (elems)->
     _.filter elems, (elem) ->
       $(elem).hasClass "worklog"

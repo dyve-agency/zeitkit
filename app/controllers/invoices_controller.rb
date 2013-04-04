@@ -41,11 +41,10 @@ class InvoicesController < ApplicationController
   end
 
   def edit
-    pr_ids = @invoice.products.map(&:id)
     @client = @invoice.client
     @worklogs = @client.worklogs.unpaid.no_invoice.oldest_first
     @expenses = @client.expenses.unpaid.no_invoice.oldest_first
-    @products = @client.products.oldest_first.reject{|pr| pr_ids.include?(pr.id)}
+    @products = @client.products.oldest_first
   end
 
   def create

@@ -22,6 +22,10 @@ class Product < ActiveRecord::Base
     [:title]
   end
 
+  def invoice_qty(invoice)
+    InvoicesProducts.where(:invoice_id => invoice, :product_id => self.id).length
+  end
+
   def short_title
     cut_off = 40
     return title if title.length < cut_off
@@ -32,8 +36,13 @@ class Product < ActiveRecord::Base
     "#{short_title} - #{(charged_total / 100).to_s}#{total.currency.symbol}"
   end
 
-  def invoice_title
-    "Product: #{title} - #{(charged_total / 100).to_s}#{total.currency.symbol}"
+  def invoice_title(invoice)
+    str = "Product: #{title} - #{(charged_total / 100).to_s}#{total.currency.symbol}" 
+    count = invoice_qty(invoice)
+    if (count > 1)
+      str += " (" + count.to_s + ")"
+    end
+    str
   end
 
   def invoiced?
