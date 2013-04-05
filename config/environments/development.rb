@@ -38,4 +38,12 @@ Timetracker::Application.configure do
   # Use this to test PDFkit pdfs
   #config.threadsafe!
 
+  # Use Pry instead of IRB
+  silence_warnings do
+    begin
+      require 'pry'
+      IRB = Pry
+    rescue LoadError
+    end
+  end
 end
