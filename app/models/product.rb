@@ -2,13 +2,12 @@ class Product < ActiveRecord::Base
   include TotalHelper
   include NilStrings
 
-  attr_accessible :client_id, :total, :user_id, :title, :charge
+  attr_accessible :total, :user_id, :title, :charge
 
   belongs_to :user
-  belongs_to :client
   has_and_belongs_to_many :invoices
 
-  validates :user_id, :client_id, :total, :title, :charge, presence: true
+  validates :user_id, :total, :title, :charge, presence: true
 
   scope :paid, joins('LEFT OUTER JOIN invoices_products ON products.id=invoices_products.product_id').where('invoices_products.invoice_id IS NOT NULL')
   scope :unpaid, joins('LEFT OUTER JOIN invoices_products ON products.id=invoices_products.product_id').where('invoices_products.invoice_id IS NULL')

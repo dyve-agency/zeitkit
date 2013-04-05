@@ -10,7 +10,6 @@ h1 Products
 table.table.table-bordered
   thead
     tr
-      th Client
       th Title
       th Total
       th Surcharge
@@ -18,7 +17,6 @@ table.table.table-bordered
   tbody
     - @products.each do |product|
       tr class="#{success_or_warning product.invoiced?}"
-        td= product.client.name
         td
           = link_to product.title[0..20] + "...", edit_product_path(product)
         td= with_currency product.total

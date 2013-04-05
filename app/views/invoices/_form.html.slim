@@ -64,9 +64,7 @@
               - @expenses.each do |expense|
                 option class="expense" value="#{expense.id}"= expense.title
         #products.tab-pane
-          - if !@invoice.client
-            h3 Please pick a client first.
-          - elsif @products && @products.empty?
+          - if @products && @products.empty?
             h3 There are no unpaid products.
             select.products-select.select.hidden multiple="multiple"
           - else
