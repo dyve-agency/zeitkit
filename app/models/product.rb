@@ -25,6 +25,15 @@ class Product < ActiveRecord::Base
     invoice.product_ids.count(self.id)
   end
 
+  def invoice_price(invoice)
+    charged_total * invoice_qty(invoice)
+  end
+
+  def invoice_price_title(invoice)
+    money = Money.new invoice_price(invoice), currency
+    str = "(" + invoice_qty(invoice).to_s + 'x: ' + money.to_s + currency.symbol + ")"
+  end
+
   def short_title
     cut_off = 40
     return title if title.length < cut_off
@@ -39,7 +48,7 @@ class Product < ActiveRecord::Base
     str = "Product: #{title} - #{(charged_total / 100).to_s}#{total.currency.symbol}" 
     count = invoice_qty(invoice)
     if (count > 1)
-      str += " (" + count.to_s + ")"
+      str += ' ' + invoice_price_title(invoice)
     end
     str
   end
