@@ -22,7 +22,8 @@ class User < ActiveRecord::Base
   has_one :temp_worklog_save
   has_one :invoice_default
 
-  before_validation :set_initial_currency, on: :create
+  before_validation :set_initial_currency!, on: :create
+  before_validation :set_email_sent_false!, on: :create
 
   validates_confirmation_of :password
   validates_presence_of :password, :on => :create
@@ -31,6 +32,10 @@ class User < ActiveRecord::Base
 
   after_create :build_invoice_default
   after_create :build_initial_temp_worklog_save
+
+  scope :paid, where(invoice_id: !nil)
+  scope :no_signup_email_sent, where(signup_email_sent: false)
+  scope :older_than_30_minutes, lambda {where("created_at <= ?", 30.minutes.ago)}
 
   def set_temp_password(temp_pw)
     self.password = temp_pw
@@ -81,12 +86,29 @@ class User < ActiveRecord::Base
     Money::Currency.new read_attribute(:currency)
   end
 
-  def set_initial_currency
+  def set_initial_currency!
     self.currency = Money.default_currency.iso_code.to_s
+  end
+
+  def set_email_sent_false!
+    self.signup_email_sent = false
+    true
   end
 
   def total_all_invoices
     Money.new invoices.sum(:total_cents), currency
+  end
+
+  def self.email_new_users
+    self.no_signup_email_sent.older_than_30_minutes.each do |user|
+      begin
+        UserMailer.signup_email(user).deliver
+      rescue
+      ensure
+        user.signup_email_sent = true
+        user.save
+      end
+    end
   end
 
 end
