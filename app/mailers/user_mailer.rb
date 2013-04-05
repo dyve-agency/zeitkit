@@ -13,9 +13,9 @@ class UserMailer < ActionMailer::Base
     mail(:to => user.email, :subject => "Your password has been reset")
   end
 
-  def signup_email
+  def signup_email(user)
     @user = user
-    mail(:to => user.email, :subject => "Checking in from Zeitkit")
+    mail(to: user.email, subject: "Checking in from Zeitkit", from: "Hendrik Kleinwaechter <hendrik@zeitkit.com>")
   end
 
 end
