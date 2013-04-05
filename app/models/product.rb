@@ -2,13 +2,12 @@ class Product < ActiveRecord::Base
   include TotalHelper
   include NilStrings
 
-  attr_accessible :client_id, :total, :user_id, :title, :charge
+  attr_accessible :total, :user_id, :title, :charge
 
   belongs_to :user
-  belongs_to :client
   has_and_belongs_to_many :invoices
 
-  validates :user_id, :client_id, :total, :title, :charge, presence: true
+  validates :user_id, :total, :title, :charge, presence: true
 
   scope :paid, joins('LEFT OUTER JOIN invoices_products ON products.id=invoices_products.product_id').where('invoices_products.invoice_id IS NOT NULL')
   scope :unpaid, joins('LEFT OUTER JOIN invoices_products ON products.id=invoices_products.product_id').where('invoices_products.invoice_id IS NULL')
@@ -23,7 +22,16 @@ class Product < ActiveRecord::Base
   end
 
   def invoice_qty(invoice)
-    InvoicesProducts.where(:invoice_id => invoice, :product_id => self.id).length
+    invoice.product_ids.count(self.id)
+  end
+
+  def invoice_price(invoice)
+    charged_total * invoice_qty(invoice)
+  end
+
+  def invoice_price_title(invoice)
+    money = Money.new invoice_price(invoice), currency
+    str = "(" + invoice_qty(invoice).to_s + 'x: ' + money.to_s + currency.symbol + ")"
   end
 
   def short_title
@@ -40,7 +48,7 @@ class Product < ActiveRecord::Base
     str = "Product: #{title} - #{(charged_total / 100).to_s}#{total.currency.symbol}" 
     count = invoice_qty(invoice)
     if (count > 1)
-      str += " (" + count.to_s + ")"
+      str += ' ' + invoice_price_title(invoice)
     end
     str
   end

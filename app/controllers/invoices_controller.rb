@@ -27,12 +27,12 @@ class InvoicesController < ApplicationController
   # GET /invoices/new.json
   def new
     @invoice.set_initial_values!
+    @products = current_user.products.oldest_first
     if params[:client]
       @client = current_user.clients.find(params[:client])
       @invoice.client = @client
       @worklogs = @client.worklogs.unpaid.no_invoice.oldest_first
       @expenses = @client.expenses.unpaid.no_invoice.oldest_first
-      @products = @client.products.oldest_first
     end
     respond_to do |format|
       format.html # new.html.erb
@@ -44,7 +44,7 @@ class InvoicesController < ApplicationController
     @client = @invoice.client
     @worklogs = @client.worklogs.unpaid.no_invoice.oldest_first
     @expenses = @client.expenses.unpaid.no_invoice.oldest_first
-    @products = @client.products.oldest_first
+    @products = current_user.products.oldest_first
   end
 
   def create
@@ -60,10 +60,9 @@ class InvoicesController < ApplicationController
       else
         wl_ids = @invoice.worklogs.map(&:id)
         ex_ids = @invoice.expenses.map(&:id)
-        pr_ids = @invoice.products.map(&:id)
         @worklogs = @client.worklogs.unpaid.no_invoice.reject{|wl| wl_ids.include?(wl.id)}
         @expenses = @client.expenses.unpaid.no_invoice.reject{|ex| ex_ids.include?(ex.id)}
-        @products = @client.products.reject{|pr| pr_ids.include?(pr.id)}
+        @products = current_user.products
         format.html { render action: "new" }
         format.json { render json: @invoice.errors, status: :unprocessable_entity }
       end
@@ -82,10 +81,9 @@ class InvoicesController < ApplicationController
         @client = @invoice.client
         wl_ids = @invoice.worklogs.map(&:id)
         ex_ids = @invoice.expenses.map(&:id)
-        pr_ids = @invoice.products.map(&:id)
         @worklogs = @client.worklogs.unpaid.no_invoice.reject{|wl| wl_ids.include?(wl.id)}
         @expenses = @client.expenses.unpaid.no_invoice.reject{|ex| ex_ids.include?(ex.id)}
-        @products = @client.products.reject{|pr| pr_ids.include?(pr.id)}
+        @products = current_user.products
         format.html { render action: "edit" }
         format.json { render json: @invoice.errors, status: :unprocessable_entity }
       end

@@ -27,7 +27,7 @@
         - @invoice.expenses.each do |expense|
           option class="expense" value="#{expense.id}"= expense.title
         - @invoice.products.uniq.each do |product|
-          option class="product" value="#{product.id}"= product.display_title + ' (' + product.invoice_qty(@invoice.id).to_s + ')' 
+          option class="product" value="#{product.id}"= product.display_title + ' ' + product.invoice_price_title(@invoice)
     .span2.invoice-control-buttons
       .btn.move-left <
       hr
@@ -66,7 +66,7 @@
         #products.tab-pane
           - if !@invoice.client
             h3 Please pick a client first.
-          - elsif @products && @products.empty?
+          - if @products && @products.empty?
             h3
               = link_to "Please create a product first.", new_user_product_path(current_user)
             select.products-select.select.hidden multiple="multiple"
@@ -75,7 +75,7 @@
               = link_to "Please create a product first.", new_user_product_path(current_user)
             select.products-select.select multiple="multiple"
               - @products.each do |product|
-                option class="product" value="#{product.id}"= product.display_title
+                option class="product" data-price="#{product.charged_total / 100}" value="#{product.id}"= product.display_title
   hr
   h3 Finalize.
   .row

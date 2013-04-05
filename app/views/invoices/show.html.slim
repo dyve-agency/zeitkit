@@ -27,7 +27,7 @@
   - else
     ul
       - (@invoice.worklogs.oldest_first + @invoice.expenses.oldest_first + @invoice.products.oldest_first.uniq).each do |entry|
-        li= entry.invoice_title(@invoice.id)
+        li= entry.invoice_title(@invoice)
 .row
   .span4.offset8.invoice-total
     h3 Invoice total
