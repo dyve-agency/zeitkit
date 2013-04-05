@@ -65,7 +65,6 @@ ActiveRecord::Schema.define(:version => 20130405151100) do
   create_table "invoices_products", :force => true do |t|
     t.integer "product_id"
     t.integer "invoice_id"
-    t.integer "quantity",   :default => 1
   end
 
   create_table "notes", :force => true do |t|
