@@ -1,5 +1,5 @@
 class UserMailer < ActionMailer::Base
-  default from: "info@zeitkit.com"
+  default from: "Zeitkit team <info@zeitkit.com>"
 
   def temp_password_email(temppw, user)
     @user = user
@@ -11,6 +11,11 @@ class UserMailer < ActionMailer::Base
     @user = user
     @token = @user.reset_password_token
     mail(:to => user.email, :subject => "Your password has been reset")
+  end
+
+  def signup_email(user)
+    @user = user
+    mail(to: user.email, subject: "Checking in from Zeitkit", from: "Hendrik Kleinwaechter <hendrik@zeitkit.com>")
   end
 
 end
