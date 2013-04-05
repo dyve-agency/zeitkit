@@ -44,7 +44,7 @@ Invoice =
   getRightSelected: ->
     this.elems.rightSelects().find(':selected')
   countOfProducts: (id) ->
-    this.elems.hiddenInputs().children('[name=invoice\\[product_ids\\]\\[\\]][value=' + id + ']').length
+    this.elems.hiddenInputs().children("[name='invoice\\[product_ids\\]\\[\\]'][value=" + id + ']').length
   origProductName: (id) ->
     this.elems.productsSelect().children('[class="product"][value=' + id + ']')[0].innerHTML
   moveRight: ->
