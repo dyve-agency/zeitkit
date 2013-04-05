@@ -23,7 +23,7 @@ class Product < ActiveRecord::Base
   end
 
   def invoice_qty(invoice)
-    InvoicesProducts.where(:invoice_id => invoice, :product_id => self.id).length
+    invoice.product_ids.count(self.id)
   end
 
   def short_title

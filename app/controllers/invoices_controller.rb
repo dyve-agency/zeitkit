@@ -63,7 +63,7 @@ class InvoicesController < ApplicationController
         pr_ids = @invoice.products.map(&:id)
         @worklogs = @client.worklogs.unpaid.no_invoice.reject{|wl| wl_ids.include?(wl.id)}
         @expenses = @client.expenses.unpaid.no_invoice.reject{|ex| ex_ids.include?(ex.id)}
-        @products = @client.products.reject{|pr| pr_ids.include?(pr.id)}
+        @products = @client.products
         format.html { render action: "new" }
         format.json { render json: @invoice.errors, status: :unprocessable_entity }
       end
