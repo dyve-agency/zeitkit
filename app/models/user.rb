@@ -102,6 +102,7 @@ class User < ActiveRecord::Base
     self.no_signup_email_sent.older_than_30_minutes.each do |user|
       begin
         UserMailer.signup_email(user).deliver
+      rescue
       ensure
         user.signup_email_sent = true
         user.save
