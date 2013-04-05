@@ -1,5 +1,5 @@
 class UserMailer < ActionMailer::Base
-  default from: "info@zeitkit.com"
+  default from: "Zeitkit team <info@zeitkit.com>"
 
   def temp_password_email(temppw, user)
     @user = user
