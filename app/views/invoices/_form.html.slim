@@ -27,7 +27,7 @@
         - @invoice.expenses.each do |expense|
           option class="expense" value="#{expense.id}"= expense.title
         - @invoice.products.uniq.each do |product|
-          option class="product" value="#{product.id}"= product.display_title + ' ' + product.invoice_price_title(@invoice)
+          option class="product" value="#{product.id}"= product.display_title + ' - ' + product.invoice_price_title(@invoice)
     .span2.invoice-control-buttons
       .btn.move-left <
       hr
@@ -71,7 +71,7 @@
             h3.hidden There are no unpaid products.
             select.products-select.select multiple="multiple"
               - @products.each do |product|
-                option class="product" data-price="#{product.charged_total / 100}" value="#{product.id}"= product.display_title
+                option class="product" data-title="#{product.display_title}" data-currency="#{product.currency.symbol}" data-price="#{product.charged_total / 100}" value="#{product.id}"= product.display_title + ' - ' + product.price_tag
   hr
   h3 Finalize.
   .row
