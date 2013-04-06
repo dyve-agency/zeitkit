@@ -14,3 +14,4 @@ $ ->
     showMeridian: false,
     defaultTime: false
   })
+  $(".collapse").collapse()
