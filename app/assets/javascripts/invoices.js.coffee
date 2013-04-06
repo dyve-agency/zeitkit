@@ -46,9 +46,11 @@ Invoice =
   countOfProducts: (id) ->
     this.elems.hiddenInputs().children("[name='invoice\\[product_ids\\]\\[\\]'][value=" + id + ']').length
   origProductName: (id) ->
-    this.elems.productsSelect().children('[class="product"][value=' + id + ']')[0].innerHTML
+    this.elems.productsSelect().children('[class="product"][value=' + id + ']').data('title')
   productPrice: (id) ->
     this.elems.productsSelect().children('[class="product"][value=' + id + ']').data('price')
+  productCurrency: (id) ->
+    this.elems.productsSelect().children('[class="product"][value=' + id + ']').data('currency')
   moveRight: ->
     elems = this.getInvoiceSelected()
     return if elems.length == 0
@@ -120,7 +122,9 @@ Invoice =
         elem.remove();
       else
         count = count - 1
-        elem.innerHTML = that.origProductName(elem.value) + ' (' + count + 'x: ' + (that.productPrice(elem.value) * count) + ')'
+        currency = that.productCurrency(elem.value)
+        price = that.productPrice(elem.value)
+        elem.innerHTML = that.origProductName(elem.value) + ' - ' + count + ' x ' + price + currency + ' = ' + (price * count) + currency
   appendInvoice: (elems)->
     that = this
     invsel = this.elems.invoiceSelect()
@@ -130,7 +134,9 @@ Invoice =
       isNew = option.length == 0;
       if !isNew
         count = that.countOfProducts(this.value) + 1
-        option[0].innerHTML = this.innerHTML + ' (' + count + 'x: ' + (that.productPrice(this.value) * count) + ')'
+        currency = that.productCurrency(this.value)
+        price = that.productPrice(this.value)
+        option[0].innerHTML = that.origProductName(this.value) + ' - ' + count + ' x ' + price + currency + ' = ' + (price * count) + currency
       return isNew
     ).clone())
   filterWorklogs: (elems)->

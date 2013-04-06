@@ -29,9 +29,16 @@ class Product < ActiveRecord::Base
     charged_total * invoice_qty(invoice)
   end
 
+  def price_tag
+    "#{(charged_total / 100).to_s}#{currency.symbol}"
+  end
+
+  def price_tag_total(invoice)
+    "#{(invoice_price(invoice) / 100)}#{currency.symbol}"
+  end
+
   def invoice_price_title(invoice)
-    money = Money.new invoice_price(invoice), currency
-    str = "(" + invoice_qty(invoice).to_s + 'x: ' + money.to_s + currency.symbol + ")"
+    "#{invoice_qty(invoice)} x #{price_tag} = #{price_tag_total(invoice)}"
   end
 
   def short_title
@@ -41,16 +48,11 @@ class Product < ActiveRecord::Base
   end
 
   def display_title
-    "#{short_title} - #{(charged_total / 100).to_s}#{total.currency.symbol}"
+    "#{short_title}"
   end
 
   def invoice_title(invoice)
-    str = "Product: #{title} - #{(charged_total / 100).to_s}#{total.currency.symbol}" 
-    count = invoice_qty(invoice)
-    if (count > 1)
-      str += ' ' + invoice_price_title(invoice)
-    end
-    str
+    "Product: #{title} - #{invoice_price_title(invoice)}"
   end
 
   def invoiced?
