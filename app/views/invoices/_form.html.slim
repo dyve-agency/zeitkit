@@ -64,11 +64,15 @@
               - @expenses.each do |expense|
                 option class="expense" value="#{expense.id}"= expense.title
         #products.tab-pane
+          - if !@invoice.client
+            h3 Please pick a client first.
           - if @products && @products.empty?
-            h3 There are no unpaid products.
+            h3
+              = link_to "Please create a product first.", new_user_product_path(current_user)
             select.products-select.select.hidden multiple="multiple"
           - else
-            h3.hidden There are no unpaid products.
+            h3.hidden
+              = link_to "Please create a product first.", new_user_product_path(current_user)
             select.products-select.select multiple="multiple"
               - @products.each do |product|
                 option class="product" data-title="#{product.display_title}" data-currency="#{product.currency.symbol}" data-price="#{product.charged_total / 100}" value="#{product.id}"= product.display_title + ' - ' + product.price_tag
