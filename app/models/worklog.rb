@@ -9,6 +9,7 @@ class Worklog < ActiveRecord::Base
     :start_time,
     :user_id,
     :hourly_rate,
+    :custom_rate,
     :total,
     :summary,
     :from_date,
@@ -30,7 +31,7 @@ class Worklog < ActiveRecord::Base
   validate :end_time_greater_than_start_time
   validate :duration_less_than_a_year
 
-  after_validation :set_hourly_rate, on: :create
+  after_validation :set_hourly_rate
   after_validation :set_total
 
   scope :paid, where(invoice_id: !nil)
@@ -99,11 +100,12 @@ class Worklog < ActiveRecord::Base
   end
 
   def calc_total
-    Money.new cent_rate_per_second * duration, currency
+    return (Money.new cent_rate_per_second(custom_rate_cents) * duration, currency) if custom_rate && custom_rate.cents != 0
+    Money.new cent_rate_per_second(hourly_rate_cents) * duration, currency
   end
 
-  def cent_rate_per_second
-    hourly_rate_cents.to_f / 3600
+  def cent_rate_per_second(cents)
+    cents.to_f / 3600
   end
 
   def end_time_ok
@@ -167,6 +169,31 @@ class Worklog < ActiveRecord::Base
 
   def invoice_title(invoice)
     "Work: #{end_time.strftime("%d.%m.%Y")} - #{duration_hours.to_s}h:#{duration_minutes.to_s}min. #{total.to_s}#{total.currency.symbol}"
+  end
+
+  def custom_rate
+    Money.new custom_rate_cents, currency
+  end
+
+  def custom_rate_with_currency
+    "#{custom_rate.to_s}#{custom_rate.currency.symbol}"
+  end
+
+  def custom_rate=(new_amount)
+    return unless new_amount
+
+    if new_amount.is_a?(Money)
+      write_attribute(:custom_rate_cents, new_amount.cents)
+      result = new_amount
+    elsif new_amount.is_a?(Integer)
+      write_attribute(:custom_rate_cents, new_amount)
+      result = Money.new(new_amount, currency)
+    elsif new_amount.is_a?(String) && new_amount.to_i
+      amount_from_string = (new_amount.to_f * 100).to_i
+      write_attribute(:custom_rate_cents, amount_from_string)
+      result = Money.new(amount_from_string, currency)
+    end
+    result
   end
 
   # Active record callbacks #

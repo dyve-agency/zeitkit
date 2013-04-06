@@ -31,7 +31,7 @@
     .row
       .span2
         p.lead.pull-right Time
-      .span4
+      .span4.time-buttons
         .btn-group
           = link_to "All",
             user_worklogs_path(merge_params(time: nil)),
@@ -42,15 +42,14 @@
           = link_to "This week",
             user_worklogs_path(merge_params(time: "this_week")),
             class: "btn paid #{check_this_week}"
-    .row
-      .span4.offset2
         .btn-group
           = link_to "This month",
             user_worklogs_path(merge_params(time: "this_month")),
             class: "btn paid #{check_this_month}"
-          = link_to "Older this month",
-            user_worklogs_path(merge_params(time: "older_than_this_month")),
-            class: "btn paid #{check_older_than_this_month}"
           = link_to "Last month",
             user_worklogs_path(merge_params(time: "last_month")),
             class: "btn #{check_last_month}"
+        .btn-group
+          = link_to "Older this month",
+            user_worklogs_path(merge_params(time: "older_than_this_month")),
+            class: "btn paid #{check_older_than_this_month}"

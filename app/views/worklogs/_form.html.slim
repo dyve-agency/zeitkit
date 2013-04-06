@@ -49,10 +49,19 @@
     .alert.alert-error
       span You need to create a client before you can create an invoice. 
       = link_to "Create your first client.", new_user_client_path(current_user)
-  = f.input :client_id, collection: current_user.clients, required: true
-  = f.input :summary, input_html: {class: "span6"}
-  - if !@worklog.new_record?
-    = f.input :hourly_rate, as: :string
+  .row
+    .span6
+      = f.input :summary, input_html: {class: "span6"}
+    .span3
+      = f.input :client_id, collection: current_user.clients, required: true
+      .accordion.collapse
+        .accordion-group
+          .accordion-heading
+            a.accordion-toggle data-parent="#accordion2" data-toggle="collapse" href="#adjust-price"
+              | Optionally adjust what you charge.
+          #adjust-price.accordion-body.collapse.in
+            .accordion-inner
+              = f.input :custom_rate, as: :string
   .form-actions
     = f.button :submit
 

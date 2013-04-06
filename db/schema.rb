@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130405151100) do
+ActiveRecord::Schema.define(:version => 20130406160552) do
 
   create_table "clients", :force => true do |t|
     t.string   "name"
@@ -130,6 +130,7 @@ ActiveRecord::Schema.define(:version => 20130405151100) do
     t.integer  "total_cents"
     t.text     "summary"
     t.integer  "invoice_id"
+    t.integer  "custom_rate_cents"
   end
 
 end
