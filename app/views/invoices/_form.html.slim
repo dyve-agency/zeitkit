@@ -12,17 +12,22 @@
         .always
           input name="invoice[worklog_ids][]" value=""
           input name="invoice[expense_ids][]" value=""
+          input name="invoice[product_ids][]" value=""
         .dynamic
           - @invoice.worklogs.each do |worklog|
             input name="invoice[worklog_ids][]" value="#{worklog.id}"
           - @invoice.expenses.each do |expense|
             input name="invoice[expense_ids][]" value="#{expense.id}"
+          - @invoice.products.each do |product|
+            input name="invoice[product_ids][]" value="#{product.id}"
     .span5
       select.invoice-select.select multiple="multiple"
         - @invoice.worklogs.each do |worklog|
           option class="worklog" value="#{worklog.id}"= worklog.title
         - @invoice.expenses.each do |expense|
           option class="expense" value="#{expense.id}"= expense.title
+        - @invoice.products.uniq.each do |product|
+          option class="product" value="#{product.id}"= product.display_title + ' - ' + product.invoice_price_title(@invoice)
     .span2.invoice-control-buttons
       .btn.move-left <
       hr
@@ -33,6 +38,8 @@
           a href="#worklogs" data-toggle="tab" Worklogs
         li
           a href="#expenses" data-toggle="tab" Expenses
+        li
+          a href="#products" data-toggle="tab" Products
       .tab-content
         #worklogs.tab-pane.active
           - if !@invoice.client
@@ -56,7 +63,19 @@
             select.expenses-select.select multiple="multiple"
               - @expenses.each do |expense|
                 option class="expense" value="#{expense.id}"= expense.title
-
+        #products.tab-pane
+          - if !@invoice.client
+            h3 Please pick a client first.
+          - if @products && @products.empty?
+            h3
+              = link_to "Please create a product first.", new_user_product_path(current_user)
+            select.products-select.select.hidden multiple="multiple"
+          - else
+            h3.hidden
+              = link_to "Please create a product first.", new_user_product_path(current_user)
+            select.products-select.select multiple="multiple"
+              - @products.each do |product|
+                option class="product" data-title="#{product.display_title}" data-currency="#{product.currency.symbol}" data-price="#{product.charged_total / 100}" value="#{product.id}"= product.display_title + ' - ' + product.price_tag
   hr
   h3 Finalize.
   .row

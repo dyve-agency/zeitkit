@@ -1,0 +1,10 @@
+= simple_form_for shallow_args(current_user, @product) do |f|
+  .row
+    .span3
+      = f.input :total
+    .span3
+      = f.input :title, as: :string
+    .span3
+      = f.input :charge, required: false
+  .form-actions
+    = f.button :submit, "Save"
