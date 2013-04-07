@@ -1,6 +1,7 @@
 class Product < ActiveRecord::Base
   include TotalHelper
   include NilStrings
+  include ActionView::Helpers::NumberHelper
 
   attr_accessible :total, :user_id, :title, :charge
 
@@ -26,15 +27,15 @@ class Product < ActiveRecord::Base
   end
 
   def invoice_price(invoice)
-    charged_total * invoice_qty(invoice)
+    (charged_total / 100).round(2) * invoice_qty(invoice)
   end
 
   def price_tag
-    "#{(charged_total / 100).to_s}#{currency.symbol}"
+    "#{number_with_precision((charged_total / 100).round(2), :precision => 2)}#{currency.symbol}"
   end
 
   def price_tag_total(invoice)
-    "#{(invoice_price(invoice) / 100)}#{currency.symbol}"
+    "#{number_with_precision(invoice_price(invoice), :precision => 2)}#{currency.symbol}"
   end
 
   def invoice_price_title(invoice)
