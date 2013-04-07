@@ -34,16 +34,14 @@
         td Description
         td.last Subtotal
     tbody
-      tr
-        td Nov 05, 2009 - Website Updates
-        td.last 120$
-      tr
-        td Nov 05, 2009 - Website Updates
-        td.last 120$
+     - (@invoice.worklogs.oldest_first + @invoice.expenses.oldest_first).each do |entry|
+       tr
+         td= entry.invoice_title
+         td.last= with_currency entry.total
 .invoice-total
   .row
     .span2.offset9.key Subtotal
-    .span1.val 50
+    .span1.val= with_currency @invoice.total
   .row.big-border
     .span2.offset9.key #{@invoice.includes_vat ? "Including" : "Excluding"} VAT:
     .span1.val #{with_currency @invoice.total_vat}
