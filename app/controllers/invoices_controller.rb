@@ -12,7 +12,7 @@ class InvoicesController < ApplicationController
   def pdf_export
     @client = @invoice.client
     headers["Content-Disposition"] = "attachment; filename=\"#{@invoice.filename}\""
-    render "show"
+    render "show", layout: "application_print"
   end
 
   def show
