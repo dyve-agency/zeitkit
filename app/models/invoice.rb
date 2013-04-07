@@ -62,6 +62,11 @@ class Invoice < ActiveRecord::Base
     end
   end
 
+  def days_not_paid
+    return if paid_on
+    (Time.zone.now - created_at) / 1.day
+  end
+
   def vat_last_invoice
     return 19.0 if user.invoices.empty?
     user.invoices.last.vat

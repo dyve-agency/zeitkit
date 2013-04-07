@@ -15,6 +15,7 @@ table.table.table-bordered
       th.hidden-phone Number
       th Client
       th Total
+      th.hidden-phone Created on
       th.hidden-phone Paid on
       th Controls
 
@@ -24,7 +25,8 @@ table.table.table-bordered
       td.hidden-phone= invoice.number
       td= link_to invoice.client.name, edit_client_path(invoice.client)
       td= with_currency invoice.total
-      td.hidden-phone= invoice.paid_on ? l(invoice.paid_on) : "-"
+      td.hidden-phone= l invoice.created_at, format: :day_month_year
+      td.hidden-phone= invoice.paid_on ? l(invoice.paid_on, format: :day_month_year) : "Unpaid #{invoice.days_not_paid.to_i} day(s)"
       td
         .btn-group
           = render "set_paid", invoice: invoice
@@ -32,7 +34,7 @@ table.table.table-bordered
           = link_to "<i class='icon-cloud-download'></i> Download PDF".html_safe,
             pdf_export_invoice_path(invoice, format: :pdf), class: "btn"
           = link_to 'Edit', edit_invoice_path(invoice), class: "btn"
-          = link_to 'Delete', invoice, :confirm => 'Are you sure?', :method => :delete, class: "btn"
+          = link_to 'Delete', invoice, confirm: 'Are you sure? This can not be undone.', method: :delete, class: "btn"
   tfoot.hidden-phone
     tr
       td Sums:
