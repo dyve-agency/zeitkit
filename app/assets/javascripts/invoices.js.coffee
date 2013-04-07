@@ -51,6 +51,8 @@ Invoice =
     this.elems.productsSelect().children('[class="product"][value=' + id + ']').data('price')
   productCurrency: (id) ->
     this.elems.productsSelect().children('[class="product"][value=' + id + ']').data('currency')
+  roundPrice: (price) ->
+    (Math.round(price * 100) / 100).toFixed(2)
   moveRight: ->
     elems = this.getInvoiceSelected()
     return if elems.length == 0
@@ -124,7 +126,7 @@ Invoice =
         count = count - 1
         currency = that.productCurrency(elem.value)
         price = that.productPrice(elem.value)
-        elem.innerHTML = that.origProductName(elem.value) + ' - ' + count + ' x ' + price + currency + ' = ' + (price * count) + currency
+        elem.innerHTML = that.origProductName(elem.value) + ' - ' + count + ' x ' + that.roundPrice(price) + currency + ' = ' + (that.roundPrice(price) * count).toFixed(2) + currency
   appendInvoice: (elems)->
     that = this
     invsel = this.elems.invoiceSelect()
@@ -136,7 +138,7 @@ Invoice =
         count = that.countOfProducts(this.value) + 1
         currency = that.productCurrency(this.value)
         price = that.productPrice(this.value)
-        option[0].innerHTML = that.origProductName(this.value) + ' - ' + count + ' x ' + price + currency + ' = ' + (price * count) + currency
+        option[0].innerHTML = that.origProductName(this.value) + ' - ' + count + ' x ' + that.roundPrice(price) + currency + ' = ' + (that.roundPrice(price) * count).toFixed(2) + currency
       return isNew
     ).clone())
   filterWorklogs: (elems)->

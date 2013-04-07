@@ -97,7 +97,7 @@ class Invoice < ActiveRecord::Base
   end
 
   def set_total!
-    new_total = Money.new worklogs.sum(:total_cents) + expenses.sum(:total_cents) + products.inject(0){|total, product| total + product.charged_total}, currency
+    new_total = Money.new worklogs.sum(:total_cents) + expenses.sum(:total_cents) + products.inject(0){|total, product| total + ((product.charged_total / 100).round(2) * 100)}, currency
     self.update_column(:total_cents, new_total.cents)
   end
 
