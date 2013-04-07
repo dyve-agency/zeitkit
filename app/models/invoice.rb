@@ -15,15 +15,18 @@ class Invoice < ActiveRecord::Base
     :payment_info,
     :worklog_ids,
     :expense_ids,
+    :product_ids,
     :content
 
   belongs_to :user
   belongs_to :client
   has_many :worklogs
   has_many :expenses
+  has_and_belongs_to_many :products
 
   before_destroy :deassociate_worklogs
   before_destroy :deassociate_expenses
+  before_destroy :deassociate_products
 
   before_validation :set_initial_total!, on: :create
   after_save :set_total!
@@ -89,7 +92,7 @@ class Invoice < ActiveRecord::Base
   end
 
   def set_total!
-    new_total = Money.new worklogs.sum(:total_cents) + expenses.sum(:total_cents), currency
+    new_total = Money.new worklogs.sum(:total_cents) + expenses.sum(:total_cents) + products.inject(0){|total, product| total + product.charged_total}, currency
     self.update_column(:total_cents, new_total.cents)
   end
 
@@ -101,4 +104,7 @@ class Invoice < ActiveRecord::Base
     Expense.where(invoice_id: id).update_all(invoice_id: nil)
   end
 
+  def deassociate_products
+    InvoicesProducts.where(invoice_id: id).destroy_all
+  end
 end

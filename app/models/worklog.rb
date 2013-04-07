@@ -167,8 +167,8 @@ class Worklog < ActiveRecord::Base
     "#{end_time.strftime("%d.%m.%Y")} - #{duration_hours.to_s}h:#{duration_minutes.to_s}min. #{total.to_s}#{total.currency.symbol}"
   end
 
-  def invoice_title
-    "Work: #{end_time.strftime("%d.%m.%Y")} - #{duration_hours.to_s}h:#{duration_minutes.to_s}min. #{total.to_s}#{total.currency.symbol}"
+  def invoice_title(invoice)
+    "Work: #{end_time.strftime("%d.%m.%Y")} - #{duration_hours.to_s}h:#{duration_minutes.to_s}min x #{hourly_rate}#{hourly_rate.currency.symbol}"
   end
 
   def custom_rate

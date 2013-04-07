@@ -12,7 +12,7 @@ class InvoicesController < ApplicationController
   def pdf_export
     @client = @invoice.client
     headers["Content-Disposition"] = "attachment; filename=\"#{@invoice.filename}\""
-    render "show"
+    render "show", layout: "application_print"
   end
 
   def show
@@ -27,6 +27,7 @@ class InvoicesController < ApplicationController
   # GET /invoices/new.json
   def new
     @invoice.set_initial_values!
+    @products = current_user.products.oldest_first
     if params[:client]
       @client = current_user.clients.find(params[:client])
       @invoice.client = @client
@@ -43,6 +44,7 @@ class InvoicesController < ApplicationController
     @client = @invoice.client
     @worklogs = @client.worklogs.unpaid.no_invoice.oldest_first
     @expenses = @client.expenses.unpaid.no_invoice.oldest_first
+    @products = current_user.products.oldest_first
   end
 
   def create
@@ -60,6 +62,7 @@ class InvoicesController < ApplicationController
         ex_ids = @invoice.expenses.map(&:id)
         @worklogs = @client.worklogs.unpaid.no_invoice.reject{|wl| wl_ids.include?(wl.id)}
         @expenses = @client.expenses.unpaid.no_invoice.reject{|ex| ex_ids.include?(ex.id)}
+        @products = current_user.products
         format.html { render action: "new" }
         format.json { render json: @invoice.errors, status: :unprocessable_entity }
       end
@@ -69,6 +72,7 @@ class InvoicesController < ApplicationController
   def update
     @invoice.expense_ids = []
     @invoice.worklog_ids = []
+    @invoice.product_ids = []
     respond_to do |format|
       if @invoice.update_attributes(params[:invoice])
         format.html { redirect_to @invoice, notice: 'Invoice was successfully updated.' }
@@ -79,6 +83,7 @@ class InvoicesController < ApplicationController
         ex_ids = @invoice.expenses.map(&:id)
         @worklogs = @client.worklogs.unpaid.no_invoice.reject{|wl| wl_ids.include?(wl.id)}
         @expenses = @client.expenses.unpaid.no_invoice.reject{|ex| ex_ids.include?(ex.id)}
+        @products = current_user.products
         format.html { render action: "edit" }
         format.json { render json: @invoice.errors, status: :unprocessable_entity }
       end

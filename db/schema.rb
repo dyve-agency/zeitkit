@@ -78,7 +78,6 @@ ActiveRecord::Schema.define(:version => 20130406160552) do
 
   create_table "products", :force => true do |t|
     t.integer  "user_id"
-    t.integer  "client_id"
     t.integer  "total_cents"
     t.float    "charge"
     t.text     "title"

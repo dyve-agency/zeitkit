@@ -1,58 +1,79 @@
-.invoice-writer
-  h3 Contractor #{link_to "(edit)", edit_user_path(current_user), class: "hide-for-print"}
-  p= link_to val_or_nil_string(current_user.company_name), edit_user_path(current_user)
-  p= val_or_nil_string current_user.street
-  p= "#{val_or_nil_string current_user.zip} #{val_or_nil_string current_user.city}"
-.row
-  .span6.invoice-client
-    h3 Client #{link_to "(edit)", edit_client_path(@client), class: "hide-for-print"}
-    - if @client.company_name
-      p= @client.company_name
-    - else
-      p= @client.name
-    p= val_or_nil_string @client.street
-    p= "#{val_or_nil_string @client.zip} #{val_or_nil_string @client.city}"
-  .span6.invoice-quick-total
-    h3 Invoice summary
-    p.key-value
-      |Invoice number:
-      span #{@invoice.number}
-    p.key-value
-      |Invoice date:
-      span #{l @invoice.created_at}
-.inovice-content
-  h3 Invoice content
-  - if @invoice.content
-    = markdown @invoice.content
-  - else
-    ul
-      - (@invoice.worklogs.oldest_first + @invoice.expenses.oldest_first).each do |entry|
-        li= entry.invoice_title
-.row
-  .span4.offset8.invoice-total
-    h3 Invoice total
-    p.key-value
-      |Subtotal:
-      span #{with_currency @invoice.total}
-    p.key-value
-      span #{@invoice.includes_vat ? "Including" : "Excluding"} VAT:
-      span #{with_currency @invoice.total_vat}
-    p.key-value
-      |Total
-      span= with_currency @invoice.calc_vat_total
-hr
-.row
+.row.invoice-writer
+  .span4.company-title
+    h3= link_to val_or_nil_string(current_user.company_name), edit_user_path(current_user)
+  .span4.company-details
+    p= link_to val_or_nil_string(current_user.company_name), edit_user_path(current_user)
+    p= val_or_nil_string current_user.street
+    p= "#{val_or_nil_string current_user.zip} #{val_or_nil_string current_user.city}"
   .span4
-    h3 Payment Info
+    h3.intro hi. this is your invoice
+.row.invoice-client
+  .span12
+    hr
+  .span6
+    h3 Client
+    - if @client.company_name
+      h4= @client.company_name
+    - else
+      h4= @client.name
+    h4= val_or_nil_string @client.street
+    h4= "#{val_or_nil_string @client.zip} #{val_or_nil_string @client.city}"
+  .span2.invoice-box
+    span.key Invoice number
+    span.value #{@invoice.number}
+  .span2.invoice-box.please-pay
+    span.key Please pay
+    span.value= with_currency @invoice.total
+  .span2.invoice-box
+    span.key Invoice date
+    span.value= l @invoice.created_at, format: :day_month_year
+.invoice-content
+  table.table
+    thead
+      tr
+        td Description
+        td.last Subtotal
+    tbody
+      - (@invoice.worklogs.oldest_first + @invoice.products.oldest_first.uniq + @invoice.expenses.oldest_first).each do |entry|
+        tr
+          td= entry.invoice_title(@invoice)
+          - if entry.is_a?(Product)
+            td.last= entry.price_tag_total(@invoice)
+          - else
+            td.last= with_currency entry.total
+.invoice-total
+  .row
+    .span2.offset9.key Subtotal
+    .span1.val= with_currency @invoice.total
+  .row.big-border
+    .span2.offset9.key #{@invoice.includes_vat ? "Including" : "Excluding"} VAT:
+    .span1.val #{with_currency @invoice.total_vat}
+  .row.bold
+    .span2.offset9.key Total
+    .span1.val= with_currency @invoice.calc_vat_total
+.row.terms
+  .span4
+    h4 Payment
     p= markdown @invoice.payment_info
-  - if @invoice.payment_terms
-    .span4
-      h3 Payment Terms
+  .span4
+    - if @invoice.payment_terms
+      h4 Terms
       p= markdown @invoice.payment_terms
-  - if @invoice.note
-    .span4
-      h3 Note
-      p= markdown @invoice.note
+  .span4
+    - if @invoice.note
+      h4 Notes
+      = markdown @invoice.note
+    h5 Thank you for choosing #{val_or_nil_string(current_user.company_name)}
+
+
+
+
+
+
+
+
+
+
 .invoice-controls
   hr
   .btn-group

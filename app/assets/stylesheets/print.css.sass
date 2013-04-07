@@ -1,22 +1,18 @@
-@media print
-  .hide-for-print
-    display: none
-  h1, h2, h3, h4, h5, h6, .hero-unit h1
-    text-shadow: none
-  .navbar, .footer-wrapper
-    display: none
-  .invoice-quick-total
-    border-top: 1px solid #eee
-  .alert
-    display: none
-  a
-    color: inherit
-  .invoice-controls
-    display: none
-  .content
-    @include box-shadow(none)
-    border: none
-    padding: 20px
-  html
-    background: none
-
+.hide-for-print
+  display: none
+h1, h2, h3, h4, h5, h6, .hero-unit h1
+  text-shadow: none
+.navbar, .footer-wrapper
+  display: none
+.alert
+  display: none
+a
+  color: inherit
+.invoice-controls
+  display: none
+.content
+  @include box-shadow(none)
+  border: none
+  padding: 20px
+html
+  background: none

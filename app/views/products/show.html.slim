@@ -1,0 +1,15 @@
+p#notice = notice
+
+p
+  strong User:
+  = @product.user_id
+p
+  strong Total cents:
+  = @product.total_cents
+p
+  strong Paid:
+  = @product.paid
+
+= link_to 'Edit', edit_product_path(@product)
+'|
+= link_to 'Back', product_path
