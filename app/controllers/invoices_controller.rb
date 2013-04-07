@@ -18,8 +18,8 @@ class InvoicesController < ApplicationController
   def show
     @client = @invoice.client
     respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @invoice }
+      format.html
+      format.json { render json: @invoice}
     end
   end
 

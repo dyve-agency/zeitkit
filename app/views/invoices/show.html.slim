@@ -1,8 +1,9 @@
 .row.invoice-writer
   .span4.company-title
-    h3= link_to val_or_nil_string(current_user.company_name), edit_user_path(current_user)
+    h4= val_or_nil_string(current_user.company_name)
+    h5.hide-for-print= link_to "(Edit details)", edit_user_path(current_user)
   .span4.company-details
-    p= link_to val_or_nil_string(current_user.company_name), edit_user_path(current_user)
+    p= val_or_nil_string(current_user.company_name)
     p= val_or_nil_string current_user.street
     p= "#{val_or_nil_string current_user.zip} #{val_or_nil_string current_user.city}"
   .span4
@@ -18,12 +19,14 @@
       h4= @client.name
     h4= val_or_nil_string @client.street
     h4= "#{val_or_nil_string @client.zip} #{val_or_nil_string @client.city}"
+    h5.hide-for-print
+      = link_to "(Edit details)", edit_user_path(current_user)
   .span2.invoice-box
     span.key Invoice number
     span.value #{@invoice.number}
   .span2.invoice-box.please-pay
     span.key Please pay
-    span.value= with_currency @invoice.total
+    span.value= with_currency @invoice.calc_vat_total
   .span2.invoice-box
     span.key Invoice date
     span.value= l @invoice.created_at, format: :day_month_year
@@ -46,7 +49,7 @@
     .span2.offset9.key Subtotal
     .span1.val= with_currency @invoice.total
   .row.big-border
-    .span2.offset9.key #{@invoice.includes_vat ? "Including" : "Excluding"} VAT:
+    .span2.offset9.key #{@invoice.includes_vat ? "Including" : "Excluding"} VAT
     .span1.val #{with_currency @invoice.total_vat}
   .row.bold
     .span2.offset9.key Total
