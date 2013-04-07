@@ -6,3 +6,4 @@ en:
   time:
     formats:
       default: "%d %b %Y %H:%M:%S"
+      day_month_year: "%b %d, %Y"
