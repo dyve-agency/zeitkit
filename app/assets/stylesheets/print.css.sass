@@ -1,3 +1,5 @@
+$orange: #E23C49
+$border-color: #d1d1d1
 @media print
   .hide-for-print
     display: none
@@ -19,4 +21,67 @@
     padding: 20px
   html
     background: none
-
+.invoice-client
+  font-size: 15px
+  font-weight: bold
+  margin-bottom: 90px
+  padding-top: 30px
+.terms
+  h4, h5
+    color: $orange
+  margin-top: 40px
+.invoice-box
+  height: 100px
+  border: 1px solid $border-color
+  border-top: none
+  @include box-sizing(border-box)
+  margin-top: -21px
+  padding-top: 15px
+  .key
+    color: $orange
+    margin-bottom: 13px
+    text-transform: uppercase
+    font-size: 11px
+  span
+    display: block
+    text-align: center
+    font-weight: normal
+.please-pay
+  background: $orange
+  .key, span
+    color: #fff
+.invoice-writer
+  $height: 150px
+  .span4
+    height: $height
+  .company-title
+    h3
+      line-height: $height
+  .intro
+    margin-top: $height - 30px
+  .company-details
+    padding-top: $height / 2
+    @include box-sizing(border-box)
+.invoice-content
+  tbody
+    border-bottom: 1px solid $border-color
+  .last
+    text-align: right
+  .table
+    margin-bottom: 100px
+.invoice-total
+  text-align: right
+  .key
+    color: $orange
+  .bold
+    font-weight: bold
+  .row
+    border-bottom: 1px solid $border-color
+    padding: 7px 0px
+    &:first-of-type
+      border-top: 1px solid $border-color
+    margin-left: 0px
+  .offset9
+    margin-left: 720px
+  .big-border
+    border-bottom: 2px solid $border-color
