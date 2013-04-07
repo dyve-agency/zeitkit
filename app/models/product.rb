@@ -38,7 +38,7 @@ class Product < ActiveRecord::Base
   end
 
   def invoice_price_title(invoice)
-    "#{invoice_qty(invoice)} x #{price_tag} = #{price_tag_total(invoice)}"
+    "#{invoice_qty(invoice)} x #{price_tag}"
   end
 
   def short_title

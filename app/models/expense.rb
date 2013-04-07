@@ -31,7 +31,7 @@ class Expense < ActiveRecord::Base
   end
 
   def invoice_title(invoice)
-    "Expense: #{reason} - #{total.to_s}#{total.currency.symbol}"
+    "Expense: #{reason}"
   end
 
   def invoiced?

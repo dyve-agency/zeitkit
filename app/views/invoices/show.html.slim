@@ -34,9 +34,13 @@
         td Description
         td.last Subtotal
     tbody
-      ul
-        - (@invoice.worklogs.oldest_first + @invoice.expenses.oldest_first + @invoice.products.oldest_first.uniq).each do |entry|
-          li= entry.invoice_title(@invoice)
+      - (@invoice.worklogs.oldest_first + @invoice.products.oldest_first.uniq + @invoice.expenses.oldest_first).each do |entry|
+        tr
+          td= entry.invoice_title(@invoice)
+          - if entry.is_a?(Product)
+            td.last= entry.price_tag_total(@invoice)
+          - else
+            td.last= with_currency entry.total
 .invoice-total
   .row
     .span2.offset9.key Subtotal
