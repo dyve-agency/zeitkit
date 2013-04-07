@@ -52,4 +52,8 @@ module WorklogsHelper
     request.parameters.merge(new_param_hash)
   end
 
+  def hours_minutes_combined(hours, minutes)
+    "#{hours}h:#{minutes}min"
+  end
+
 end

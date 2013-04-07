@@ -68,4 +68,19 @@ class WorklogsController < ApplicationController
     redirect_to user_worklogs_path(current_user)
   end
 
+  def detailed_index
+    @worklogs = current_user.worklogs.order("start_time DESC")
+    if params[:invoice]
+      @worklogs = current_user.invoices.find(params[:invoice]).worklogs
+    end
+    @client = @worklogs.empty? ? "-" : @worklogs.first.client.name
+    @sum = Money.new @worklogs.sum(:total_cents), current_user.currency
+    seconds = Worklog.range_duration_seconds(@worklogs)
+    @hours = Worklog.hours_from_seconds seconds
+    @minutes = Worklog.remaining_minutes_from_seconds seconds
+    respond_to do |format|
+      format.html {render action: "detailed_index", layout: "application_print"}
+    end
+  end
+
 end

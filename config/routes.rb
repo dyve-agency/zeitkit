@@ -13,7 +13,11 @@ Timetracker::Application.routes.draw do
         post "unshare"
       end
     end
-    resources :worklogs, except: [:show]
+    resources :worklogs, except: [:show] do
+      collection do
+        get "detailed_index"
+      end
+    end
     resources :invoices do
       member do
         post "toggle_paid"
@@ -32,5 +36,5 @@ Timetracker::Application.routes.draw do
   get "login" => "sessions#new", :as => "login"
   get "signup" => "users#new", :as => "signup"
   get "home" => "users#dynamic_home", :as => "dynamic_home"
-  post "signup_email" => "users#signup_email", :as => "signup_email"
+  get "users/:id/worklogs/pdf_export" => "worklogs#pdf_export", :as => "pdf_export"
 end
