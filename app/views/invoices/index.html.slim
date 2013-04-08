@@ -42,6 +42,7 @@ table.table.table-bordered
       td= with_currency current_user.total_all_invoices
       td
       td
+      td
 .btn-group
   = link_to "New invoice", new_user_invoice_path(current_user), class: "btn btn-primary"
   = link_to "<i class='icon-edit'></i> Template".html_safe,
