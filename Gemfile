@@ -1,3 +1,6 @@
+heroku_java_home = '/usr/lib/jvm/java-6-openjdk'
+ENV['JAVA_HOME'] = heroku_java_home if Dir.exist?(heroku_java_home)
+
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.11'
