@@ -46,14 +46,14 @@
             td.last= with_currency entry.total
 .invoice-total
   .row
-    .span2.offset9.key Subtotal
-    .span1.val= with_currency @invoice.total
+    .span2.offset8.key Subtotal
+    .span2.val= with_currency @invoice.total
   .row.big-border
-    .span2.offset9.key #{@invoice.includes_vat ? "Including" : "Excluding"} VAT
-    .span1.val #{with_currency @invoice.total_vat}
+    .span2.offset8.key #{@invoice.includes_vat ? "Including" : "Excluding"} VAT
+    .span2.val #{with_currency @invoice.total_vat}
   .row.bold
-    .span2.offset9.key Total
-    .span1.val= with_currency @invoice.calc_vat_total
+    .span2.offset8.key Total
+    .span2.val= with_currency @invoice.calc_vat_total
 .row.terms
   .span4
     h4 Payment
