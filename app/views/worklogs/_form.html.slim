@@ -51,7 +51,9 @@
       = link_to "Create your first client.", new_user_client_path(current_user)
   .row
     .span6
-      = f.input :summary, input_html: {class: "span6"}
+      h4 What did you do?
+      #wmd-button-bar
+      = f.input :summary, input_html: {class: "span6 wmd-input", id: "wmd-input"}, label: false
     .span3
       = f.input :client_id, collection: current_user.clients, required: true
       .accordion.collapse

@@ -4,14 +4,34 @@
     .span3
       = f.input :vat
     .span3.default-includes-vat.mobile-no-padding
-      = f.input :includes_vat, label: false, hint: "The total includes value added tax."
+      = f.input :includes_vat, label: false, hint: "The invoice total includes VAT. If not, it is charge on top of the total."
   hr
   .row
     .span4
-      = f.input :payment_info
+      h4 Payment info
+      #wmd-button-bar
+      = f.input :payment_info, input_html: {class: "span4 wmd-input", id: "wmd-input"}, label: false
     .span4
-      = f.input :payment_terms
+      h4 Payment terms
+      #wmd-button-bar-second
+      = f.input :payment_terms, input_html: {class: "span4 wmd-input", id: "wmd-input-second"}, label: false
     .span4
-      = f.input :note
+      h4 Note
+      #wmd-button-bar-third
+      = f.input :note, input_html: {class: "span4 wmd-input", id: "wmd-input-third"}, label: false
   .form-actions
     = f.button :submit, "Save"
+javascript:
+  (function() {
+
+    $(function() {
+      var converter2, converter3, editor2, editor3;
+      converter2 = Markdown.getSanitizingConverter();
+      editor2 = new Markdown.Editor(converter2, "-second");
+      editor2.run();
+      converter3 = Markdown.getSanitizingConverter();
+      editor3 = new Markdown.Editor(converter3, "-third");
+      return editor3.run();
+    });
+
+  }).call(this);

@@ -1,11 +1,8 @@
 h1 Client notes
 = simple_form_for shallow_args(current_user, @note) do |f|
-  = f.input :content, input_html: {class: "span12"}
-  = f.input :client_id, as: :hidden
+  #wmd-button-bar
+  = f.input :content, input_html: {class: "span12 wmd-input", id: "wmd-input"}
   input name="client_show" value="#{@client.id}" type="hidden"
-  .alert.alert-info
-    span If you are hacker, you can write 
-    a href="http://daringfireball.net/projects/markdown/syntax" notes in markdown.
   = f.button :submit
 
 .note-list

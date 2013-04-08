@@ -12,8 +12,11 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require underscore
 //= require bootstrap
 //= require bootstrap-datepicker
 //= require bootstrap-timepicker
-//= require underscore
+//= require Markdown.Converter
+//= require Markdown.Sanitizer
+//= require Markdown.Editor
 //= require_tree .
