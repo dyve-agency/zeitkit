@@ -67,6 +67,14 @@ class Invoice < ActiveRecord::Base
     (Time.zone.now - created_at) / 1.day
   end
 
+  # Returns a phrase including the vat.
+  # Including 19.0% VAT
+  # Excluding 19.0% VAT
+  def including_vat_info
+    phrase = includes_vat ? "Inlcuding" : "Excluding"
+    "#{phrase} #{sprintf('%.2f', vat)}% VAT"
+  end
+
   def vat_last_invoice
     return 19.0 if user.invoices.empty?
     user.invoices.last.vat
