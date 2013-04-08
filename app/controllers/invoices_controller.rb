@@ -11,8 +11,40 @@ class InvoicesController < ApplicationController
 
   def pdf_export
     @client = @invoice.client
-    headers["Content-Disposition"] = "attachment; filename=\"#{@invoice.filename}\""
-    render "show", layout: "application_print"
+    @worklogs = @invoice.worklogs.order("start_time DESC")
+    @sum = Money.new @worklogs.sum(:total_cents), current_user.currency
+    seconds = Worklog.range_duration_seconds(@worklogs)
+    @hours = Worklog.hours_from_seconds seconds
+    @minutes = Worklog.remaining_minutes_from_seconds seconds
+    # For this to work you need to precompile your assets once.
+    @invoice_pdf = PDFKit.new(render_to_string(action: "show", :layout => 'application_print'))
+    @invoice_pdf.stylesheets << "#{Rails.root}/public/assets/application_print.css"
+    if @invoice.worklogs.empty?
+      send_data(@invoice_pdf.to_pdf, :filename => @invoice.filename, :type => 'application/pdf')
+      return
+    end
+    respond_to do |format|
+      format.html {
+        send_file merge_pdf_files
+      }
+    end
+  end
+
+  def merge_pdf_files
+    @worklogs_pdf = PDFKit.new(render_to_string(action: "../worklogs/detailed_index", :layout => 'application_print'))
+    @worklogs_pdf.stylesheets << "#{Rails.root}/public/assets/application_print.css"
+
+    tmp_invoice_file = "#{Rails.root}/tmp/invoice-#{@invoice.id}.pdf"
+    tmp_worklog_file = "#{Rails.root}/tmp/worklog-#{@invoice.id}.pdf"
+    @worklogs_pdf.to_file(tmp_worklog_file)
+    @invoice_pdf.to_file(tmp_invoice_file)
+    failure_list = []
+    pdf = PDF::Merger.new
+    pdf.add_file tmp_invoice_file
+    pdf.add_file tmp_worklog_file
+    file_name = "#{Rails.root}/tmp/#{@invoice.filename}.pdf"
+    pdf.save_as file_name, failure_list
+    file_name
   end
 
   def show

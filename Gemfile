@@ -15,6 +15,10 @@ gem 'rack-force_domain'
 gem 'money'
 gem 'contact_us', '~> 0.4.0'
 gem 'pdfkit'
+gem 'pdf-merger'
+gem 'rjb'
+
+
 gem 'wkhtmltopdf-binary'
 
 # Gems used only for assets and not required

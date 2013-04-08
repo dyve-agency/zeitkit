@@ -67,8 +67,5 @@ module Timetracker
     # Forces to use a domain.
     config.middleware.use Rack::ForceDomain, ENV["ZDOMAIN"]
 
-    config.middleware.use PDFKit::Middleware
-
-
   end
 end

@@ -13,11 +13,7 @@ Timetracker::Application.routes.draw do
         post "unshare"
       end
     end
-    resources :worklogs, except: [:show] do
-      collection do
-        get "detailed_index"
-      end
-    end
+    resources :worklogs, except: [:show]
     resources :invoices do
       member do
         post "toggle_paid"
