@@ -1,0 +1,25 @@
+h1= "Worklogs: #{@client.name || @client.company_name}"
+
+table.table.table-bordered
+  thead
+    tr
+      th Start
+      th End
+      th Duration
+      th Details
+      th Price
+  tbody
+    - @worklogs.each do |worklog|
+      tr
+        td= l worklog.start_time
+        td= l worklog.end_time
+        td= hours_minutes_combined worklog.duration_hours, worklog.duration_minutes
+        td= markdown worklog.summary
+        td= with_currency worklog.total
+  tfoot.hidden-phone
+    tr
+      td Sums:
+      td
+      td.lower-case= hours_minutes_combined @hours, @minutes
+      td
+      td= with_currency @sum

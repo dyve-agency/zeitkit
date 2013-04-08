@@ -68,19 +68,10 @@
       = markdown @invoice.note
     h5 Thank you for choosing #{val_or_nil_string(current_user.company_name)}
 
-
-
-
-
-
-
-
-
-
 .invoice-controls
   hr
   .btn-group
     = link_to "<i class='icon-edit'></i> Edit invoice".html_safe,
       edit_invoice_path(@invoice), class: "btn btn-primary"
     = link_to "<i class='icon-cloud-download'></i> Download PDF".html_safe,
-      pdf_export_invoice_path(@invoice, format: :pdf), class: "btn"
+      pdf_export_invoice_path(@invoice), class: "btn"
