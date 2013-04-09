@@ -15,7 +15,7 @@ class UserMailer < ActionMailer::Base
 
   def signup_email(user)
     @user = user
-    @name = user.name
+    @name = user.first_name
     mail(to: user.email, subject: "Checking in from Zeitkit", from: "Hendrik Kleinwaechter <hendrik@zeitkit.com>")
   end
 
