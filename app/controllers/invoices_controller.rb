@@ -82,7 +82,7 @@ class InvoicesController < ApplicationController
   def create
     @invoice = Invoice.new(params[:invoice])
     @invoice.user = current_user
-    @client = current_user.clients.find(@invoice.client.id)
+    @client = current_user.clients.find(params[:invoice][:client_id])
     @invoice.client = @client
 
     respond_to do |format|
