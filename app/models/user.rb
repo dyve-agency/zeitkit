@@ -34,6 +34,7 @@ class User < ActiveRecord::Base
 
   after_create :build_invoice_default
   after_create :build_initial_temp_worklog_save
+  before_create :get_name_from_api
 
   scope :paid, where(invoice_id: !nil)
   scope :no_signup_email_sent, where(signup_email_sent: false)
@@ -110,6 +111,20 @@ class User < ActiveRecord::Base
         user.signup_email_sent = true
         user.save
       end
+    end
+  end
+
+  # Attempt to get the name from the Fullcontact API
+  def get_name_from_api
+    begin
+      person = FullContact.person(email: email)
+    rescue
+      person = nil
+    ensure
+      return if !person || person.status != 200 || !person.contact_info
+      self.first_name = person.contact_info.given_name
+      self.last_name = person.contact_info.family_name
+      person
     end
   end
 
