@@ -10,7 +10,9 @@ class User < ActiveRecord::Base
     :zip,
     :street,
     :city,
-    :currency
+    :currency,
+    :first_name,
+    :last_name
 
   has_many :clients
   has_many :worklogs
