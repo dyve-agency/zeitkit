@@ -20,6 +20,7 @@ gem 'contact_us', '~> 0.4.0'
 gem 'pdfkit'
 gem 'pdf-merger'
 gem 'rjb'
+gem 'fullcontact'
 
 
 gem 'wkhtmltopdf-binary'

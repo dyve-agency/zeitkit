@@ -67,6 +67,15 @@ GEM
       multi_json (~> 1.0)
     faraday (0.8.4)
       multipart-post (~> 1.1)
+    faraday_middleware (0.8.8)
+      faraday (>= 0.7.4, < 0.9)
+    fullcontact (0.4.4)
+      faraday (~> 0.8)
+      faraday_middleware (~> 0.8.6)
+      hashie (~> 1.2.0)
+      multi_xml (>= 0.4.2)
+      rash (~> 0.3.0)
+    hashie (1.2.0)
     hike (1.2.1)
     httpauth (0.2.0)
     i18n (0.6.1)
@@ -83,6 +92,7 @@ GEM
     money (5.1.0)
       i18n (~> 0.6.0)
     multi_json (1.5.0)
+    multi_xml (0.5.3)
     multipart-post (1.1.5)
     newrelic_rpm (3.5.5.38)
     oauth (0.4.7)
@@ -121,6 +131,8 @@ GEM
       rdoc (~> 3.4)
       thor (>= 0.14.6, < 2.0)
     rake (10.0.3)
+    rash (0.3.2)
+      hashie (~> 1.2.0)
     rdoc (3.12)
       json (~> 1.4)
     redcarpet (2.2.2)
@@ -171,6 +183,7 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   contact_us (~> 0.4.0)
   font-awesome-sass-rails (~> 3.0.0.0)!
+  fullcontact
   jquery-rails
   money
   newrelic_rpm
