@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
-  authenticates_with_sorcery!
+  authenticates_with_sorcery! do |config|
+    config.authentications_class = Authentication
+  end
   include NilStrings
 
   attr_accessible :email,
@@ -12,7 +14,8 @@ class User < ActiveRecord::Base
     :city,
     :currency,
     :first_name,
-    :last_name
+    :last_name,
+    :authentications_attributes
 
   has_many :clients
   has_many :worklogs
@@ -20,6 +23,8 @@ class User < ActiveRecord::Base
   has_many :notes
   has_many :expenses
   has_many :products
+  has_many :access_tokens, :dependent => :delete_all
+  has_many :authentications, :dependent => :destroy
 
   has_one :temp_worklog_save
   has_one :invoice_default
