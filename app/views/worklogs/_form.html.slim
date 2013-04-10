@@ -2,6 +2,10 @@
   .alert.alert-info
     = link_to "x", "#", class: "close", data: {dismiss: "alert"}
     span Worklogs are awesome to track the time you work for clients.
+- if current_user.clients.empty?
+  .alert.alert-error
+    span You need to create a client first. 
+    = link_to "Create your first client.", new_user_client_path(current_user)
 = simple_form_for shallow_args(current_user, @worklog) do |f|
   .row
     .span4.start-time
@@ -45,10 +49,6 @@
         i.icon-asterisk
         |Restore unsaved changes
   hr
-  - if current_user.clients.empty?
-    .alert.alert-error
-      span You need to create a client before you can create an invoice. 
-      = link_to "Create your first client.", new_user_client_path(current_user)
   .row
     .span6
       h4 What did you do?
