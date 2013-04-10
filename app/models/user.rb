@@ -121,7 +121,7 @@ class User < ActiveRecord::Base
     rescue
       person = nil
     ensure
-      return if !person || person.status != 200 || !person.contact_info || person.contact_info.given_name.length == 0
+      return if (!person || person.status != 200 || !person.contact_info || !person.contact_info.given_name || person.contact_info.given_name.length == 0)
       self.first_name = person.contact_info.given_name
       self.last_name = person.contact_info.family_name
       person
