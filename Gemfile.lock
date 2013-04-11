@@ -1,6 +1,6 @@
 GIT
-  remote: https://github.com/fzagarzazu/sorcery.git
-  revision: ec97aa5aab02d362bc51acac83b9d13fd1880082
+  remote: git@github.com:hendricius/sorcery.git
+  revision: bd25c2d26b7650a3e95f61ee8c9bf3f7fff2c6c8
   branch: access_token
   specs:
     sorcery (0.8.1)
