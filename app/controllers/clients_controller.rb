@@ -1,9 +1,12 @@
 class ClientsController < ApplicationController
   load_and_authorize_resource
 
+  respond_to :html, :json
+
   def index
     @user = User.find(params[:user_id])
     @clients = @clients.order("created_at DESC")
+    respond_with(@clients)
   end
 
   def new
