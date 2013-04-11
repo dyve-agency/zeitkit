@@ -1,6 +1,8 @@
 class WorklogsController < ApplicationController
   load_and_authorize_resource
 
+  respond_to :json, :html
+
   def index
     @user = current_user
     @clients = @user.clients
@@ -43,14 +45,12 @@ class WorklogsController < ApplicationController
 
   def create
     @worklog = Worklog.new(params[:worklog])
-    @worklog.user = current_user
     @worklog.convert_time_helpers_to_date_time!
     if @worklog.save
-      redirect_to new_user_worklog_path,
-        notice: "Worklog was successfully created. Create another one - or: <a href='#{user_worklogs_path}'>Go back.</a>".html_safe
-    else
-      render action: "new"
+      location = new_user_worklog_path
+      flash[:notice] = "Worklog was successfully created. Create another one - or: <a href='#{user_worklogs_path}'>Go back.</a>".html_safe
     end
+    respond_with @worklog, location: location
   end
 
   def update
