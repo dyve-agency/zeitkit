@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   respond_to :html
+  skip_before_filter :require_login, only: [:new, :create, :signup_email, :dynamic_home]
 
   def new
     @user = User.new

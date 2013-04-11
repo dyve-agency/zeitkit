@@ -1,5 +1,7 @@
 class SessionsController < ApplicationController
 
+  skip_before_filter :require_login
+
   def create
     user = login(
       params[:session][:username] || params[:email],
@@ -15,6 +17,10 @@ class SessionsController < ApplicationController
   def destroy
     logout
     redirect_to root_url, :notice => "Logged out!"
+  end
+
+  def new
+
   end
 
   private

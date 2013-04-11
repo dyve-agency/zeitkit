@@ -1,5 +1,6 @@
 class NotesController < ApplicationController
   load_and_authorize_resource except: :public
+  skip_before_filter :require_login, only: [:public]
 
   def index
     @notes = current_user.notes.order("created_at DESC")
