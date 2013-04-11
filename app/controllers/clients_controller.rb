@@ -4,9 +4,7 @@ class ClientsController < ApplicationController
   respond_to :html, :json
 
   def index
-    @user = User.find(params[:user_id])
-    @clients = @clients.order("created_at DESC")
-    respond_with(@clients)
+    respond_with @clients.order("created_at DESC")
   end
 
   def new
