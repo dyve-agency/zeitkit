@@ -1,12 +1,25 @@
 class SessionsController < ApplicationController
-  respond_to :html
 
   def create
-    if params[:email] && params[:password]
-      api_login
-      return
+    user = login(
+      params[:session][:username] || params[:email],
+      params[:session][:password] || params[:password],
+      1
+    )
+    respond_to do |format|
+      format.html { login_user_response(user) }
+      format.json { login_json_response }
     end
-    user = login(params[:session][:username], params[:session][:password], 1)
+  end
+
+  def destroy
+    logout
+    redirect_to root_url, :notice => "Logged out!"
+  end
+
+  private
+
+  def login_user_response(user)
     if user
       redirect_back_or_to new_user_worklog_path(current_user), :notice => "Logged in. Let's track some time."
     else
@@ -15,20 +28,11 @@ class SessionsController < ApplicationController
     end
   end
 
-  def destroy
-    logout
-    head :ok
-    redirect_to root_url, :notice => "Logged out!"
-  end
-
-  def api_login
-    login(params[:email], params[:password])
-    # Response
+  def login_json_response
     if @api_access_token
       render :json => {:access_token => @api_access_token.token }
     else
       head :unauthorized
     end
-    return
   end
 end
