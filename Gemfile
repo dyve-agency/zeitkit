@@ -9,7 +9,7 @@ gem 'pg'
 gem 'slim'
 gem 'slim-rails'
 gem 'sorcery', git: 'https://github.com/fzagarzazu/sorcery.git', branch: :access_token
-gem 'simple_form', git: 'https://github.com/plataformatec/simple_form.git', branch: :master
+gem 'simple_form'
 gem 'jquery-rails'
 gem 'cancan'
 gem 'newrelic_rpm'
