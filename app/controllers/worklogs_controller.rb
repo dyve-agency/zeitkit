@@ -46,6 +46,7 @@ class WorklogsController < ApplicationController
   def create
     @worklog = Worklog.new(params[:worklog])
     @worklog.convert_time_helpers_to_date_time!
+    @worklog.user = current_user
     if @worklog.save
       location = new_user_worklog_path
       flash[:notice] = "Worklog was successfully created. Create another one - or: <a href='#{user_worklogs_path}'>Go back.</a>".html_safe
@@ -56,6 +57,7 @@ class WorklogsController < ApplicationController
   def update
     @worklog.assign_attributes(params[:worklog])
     @worklog.convert_time_helpers_to_date_time!
+    @worklog.user = current_user
     if @worklog.save
       redirect_to user_worklogs_path(current_user), notice: 'Worklog was successfully updated.'
     else
