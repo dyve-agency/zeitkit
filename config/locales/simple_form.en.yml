@@ -24,7 +24,7 @@ en:
         charge: Surcharge in %
     hints:
       worklog:
-        custom_rate: Useful for rush jobs. Leave empty to use the client's default rate.
+        hourly_rate: Set a custom hourly rate for i.e. rush jobs.
         paid: This worklog has been paid.
       expense:
         reason: Make sure to keep receipts in case the client want more details on this expense.
