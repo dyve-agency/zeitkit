@@ -30,8 +30,8 @@ class Worklog < ActiveRecord::Base
   validate :end_time_greater_than_start_time
   validate :duration_less_than_a_year
 
-  after_validation :set_hourly_rate
-  after_validation :set_total
+  before_validation :persist_hourly_rate_from_client, on: :create, if: :not_set_by_user
+  before_validation :set_total
 
   scope :paid, where(invoice_id: !nil)
   scope :unpaid, where(invoice_id: nil)
@@ -171,8 +171,15 @@ class Worklog < ActiveRecord::Base
 
   # Active record callbacks #
 
-  def set_hourly_rate
+  def persist_hourly_rate_from_client
     self.hourly_rate = client.hourly_rate
+  end
+
+  def not_set_by_user
+    # This check only works for new records, as the hourly rate is persisted
+    # after.
+    return if !new_record?
+    hourly_rate.cents == 0
   end
 
   def set_total
