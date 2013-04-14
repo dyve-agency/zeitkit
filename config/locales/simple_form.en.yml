@@ -50,7 +50,11 @@ en:
         note: "e.g. * VAT-Number: 502123 or other important info in your country."
         vat: "e.g. 19.00"
       client:
-        name: e.g. My Client
+        name: e.g. George Washington
+        company_name: e.g. Evil Powers Ltd.
+        street: e.g. Mysterialane 123
+        city: e.g. Raccooncity
+        zip: e.g. 424242
       expense:
         reason: e.g. Train ride 16/03/2013
       note:

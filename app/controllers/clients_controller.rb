@@ -36,7 +36,7 @@ class ClientsController < ApplicationController
   def update
     @client = current_user.clients.find(params[:id])
     if @client.update_attributes(params[:client])
-      redirect_to user_clients_path(current_user), notice: 'Client was successfully updated.'
+      redirect_to clients_path, notice: 'Client was successfully updated.'
     else
       render action: "edit"
     end
