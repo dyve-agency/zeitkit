@@ -1,11 +1,10 @@
 class ClientsController < ApplicationController
-  load_and_authorize_resource except: [:index, :new]
+  load_and_authorize_resource
 
   respond_to :html, :json
 
   def index
-    @clients = current_user.clients.order("created_at DESC")
-    respond_with @clients
+    respond_with @clients.order("created_at DESC")
   end
 
   def new
