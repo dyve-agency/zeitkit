@@ -1,48 +1,27 @@
 class NotesController < ApplicationController
   load_and_authorize_resource except: :public
 
+  respond_to :html, :json
+
   def index
-    @notes = current_user.notes.order("created_at DESC")
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @notes }
-    end
+    respond_with current_user.notes.order("created_at DESC")
   end
 
   def public
     @note = Note.find(params[:id])
-    @content = @note.markdown_converted_content
     if @note.share_token && params[:t] == @note.share_token
-      respond_to do |format|
-        format.html {}
-        format.json { render json: @note }
-      end
+      respond_with @note
     else
-      respond_to do |format|
-        format.html {
-          flash[:error] = "Sorry, your share link is invalid."
-          redirect_to root_url
-        }
-        format.json { render json: @note }
-      end
+      @note = Note.new
+      respond_with [], status: 401
     end
   end
 
   def show
-    @content = @note.markdown_converted_content
-    respond_to do |format|
-      format.html {}
-      format.json { render json: @note }
-    end
+    respond_with @note
   end
 
   def new
-    @note = Note.new
-    @note.user = current_user
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @note }
-    end
   end
 
   def edit
@@ -54,16 +33,11 @@ class NotesController < ApplicationController
   def create
     @note = Note.new(params[:note])
     @note.user = current_user
-
+    path = params[:client_show] ? client_path : @note
     respond_to do |format|
       if @note.save
-        if params[:client_show]
-          format.html { redirect_to client_path(params[:client_show]), notice: 'Note was successfully created.' }
-          format.json { render json: @note, status: :created, location: @note }
-        else
-          format.html { redirect_to @note, notice: 'Note was successfully created.' }
-          format.json { render json: @note, status: :created, location: @note }
-        end
+        format.html { redirect_to path, notice: 'Note was successfully created.' }
+        format.json { render json: @note, status: :created, location: @note }
       else
         format.html { render action: "new" }
         format.json { render json: @note.errors, status: :unprocessable_entity }
@@ -86,7 +60,7 @@ class NotesController < ApplicationController
   def destroy
     @note.destroy
     respond_to do |format|
-      format.html { redirect_to user_notes_path(current_user) }
+      format.html { redirect_to notes_path }
       format.json { head :no_content }
     end
   end
