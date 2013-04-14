@@ -12,4 +12,8 @@ class ApplicationController < ActionController::Base
     redirect_to login_url, :alert => "Please first login to access this page."
   end
 
+  def set_current_user(object_with_user_attribute)
+    object_with_user_attribute.user = current_user
+  end
+
 end

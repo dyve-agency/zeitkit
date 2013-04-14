@@ -2,28 +2,27 @@ Timetracker::Application.routes.draw do
 
   root :to => "static#home"
 
-  resources :users, only: [:new, :create, :show, :edit, :update], shallow: true do
-    resources :clients
-    resources :temp_worklog_saves, only: [:update], as: "temp_worklog_save"
-    resources :notes do
-      member do
-        get "public"
-        post "share"
-        post "new_share_link"
-        post "unshare"
-      end
+  resources :users, only: [:new, :create, :show, :edit, :update]
+  resources :clients
+  resources :temp_worklog_saves, only: [:update], as: "temp_worklog_save"
+  resources :notes do
+    member do
+      get "public"
+      post "share"
+      post "new_share_link"
+      post "unshare"
     end
-    resources :worklogs, except: [:show]
-    resources :invoices do
-      member do
-        post "toggle_paid"
-        get "pdf_export"
-      end
-    end
-    resources :invoice_default, only: [:update, :edit]
-    resources :expenses, except: [:show]
-    resources :products, except: [:show]
   end
+  resources :worklogs, except: [:show]
+  resources :invoices do
+    member do
+      post "toggle_paid"
+      get "pdf_export"
+    end
+  end
+  resources :invoice_default, only: [:update, :edit]
+  resources :expenses, except: [:show]
+  resources :products, except: [:show]
 
   resources :sessions
   resources :password_resets, only: [:create, :edit, :update, :new]

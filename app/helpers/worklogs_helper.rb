@@ -5,7 +5,7 @@ module WorklogsHelper
   end
 
   def client_paid_path(client)
-    user_worklogs_path(merge_params(client: client.id))
+    worklogs_path(merge_params(client: client.id))
   end
 
   def check_paid

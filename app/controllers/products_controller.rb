@@ -1,38 +1,32 @@
 class ProductsController < ApplicationController
+
   load_and_authorize_resource
+
+  respond_to :html, :json
 
   def index
   end
 
   def new
-    @product = Product.new
   end
 
   def edit
   end
 
   def create
-    @product = Product.new(params[:product])
-    @product.user = current_user
-    if @product.save
-      redirect_to user_products_path(current_user),
-        notice: "Product was successfully created."
-    else
-      render action: "new"
-    end
+    flash[:notice] = "Product was successfully created." if @product.save
+    respond_with @product, location: products_path
   end
 
   def update
-    if @product.update_attributes(params[:product])
-      redirect_to user_products_path(current_user), notice: 'Product was successfully updated.'
-    else
-      render action: "edit"
-    end
+    flash[:notice] = 'Product was successfully updated.' if @product.update_attributes(params[:product])
+    respond_with @product, location: products_path
   end
 
   def destroy
     @product.destroy
-    redirect_to user_products_path(current_user)
+    flash[:notice] = 'Product was successfully deleted.'
+    respond_with @product
   end
 
 end

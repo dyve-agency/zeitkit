@@ -1,8 +1,8 @@
 .row.worklog-filters
   .span6
     .btn-group
-      = link_to 'New Worklog', new_user_worklog_path, class: "btn btn-primary"
-      = link_to user_worklogs_path(merge_params(format: :csv)), class: "btn" do
+      = link_to 'New Worklog', new_worklog_path, class: "btn btn-primary"
+      = link_to worklogs_path(merge_params(format: :csv)), class: "btn" do
         i.icon-cloud-download
         span Download CSV
   .span6
@@ -11,7 +11,7 @@
         p.lead.pull-right Client
       .span4
         select.span4.client-filter
-          option data-url="#{user_worklogs_path(merge_params(client: nil))}"
+          option data-url="#{worklogs_path(merge_params(client: nil))}"
           - @clients.each do |c|
             = select_worklog_if_params(c)
     .row
@@ -20,13 +20,13 @@
       .span4
         .btn-group
           = link_to "All",
-            user_worklogs_path(merge_params(paid: nil)),
+            worklogs_path(merge_params(paid: nil)),
             class: "btn #{check_no_paid}"
           = link_to "Paid",
-            user_worklogs_path(merge_params(paid: true)),
+            worklogs_path(merge_params(paid: true)),
             class: "btn paid #{check_paid}"
           = link_to "Unpaid",
-            user_worklogs_path(merge_params(paid: false)),
+            worklogs_path(merge_params(paid: false)),
             class: "btn paid #{check_unpaid}"
     .row
       .span2
@@ -34,22 +34,22 @@
       .span4.time-buttons
         .btn-group
           = link_to "All",
-            user_worklogs_path(merge_params(time: nil)),
+            worklogs_path(merge_params(time: nil)),
             class: "btn paid #{check_no_month}"
           = link_to "Today",
-            user_worklogs_path(merge_params(time: "today")),
+            worklogs_path(merge_params(time: "today")),
             class: "btn paid #{check_today}"
           = link_to "This week",
-            user_worklogs_path(merge_params(time: "this_week")),
+            worklogs_path(merge_params(time: "this_week")),
             class: "btn paid #{check_this_week}"
         .btn-group
           = link_to "This month",
-            user_worklogs_path(merge_params(time: "this_month")),
+            worklogs_path(merge_params(time: "this_month")),
             class: "btn paid #{check_this_month}"
           = link_to "Last month",
-            user_worklogs_path(merge_params(time: "last_month")),
+            worklogs_path(merge_params(time: "last_month")),
             class: "btn #{check_last_month}"
         .btn-group
           = link_to "Older this month",
-            user_worklogs_path(merge_params(time: "older_than_this_month")),
+            worklogs_path(merge_params(time: "older_than_this_month")),
             class: "btn paid #{check_older_than_this_month}"

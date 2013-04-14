@@ -21,6 +21,7 @@ gem 'pdfkit'
 gem 'pdf-merger'
 gem 'rjb'
 gem 'fullcontact'
+gem 'thin'
 
 
 gem 'wkhtmltopdf-binary'
@@ -39,7 +40,6 @@ end
 group :development do
   gem 'quiet_assets'
   gem 'sqlite3'
-  gem 'thin'
   gem 'pry-rails'
 end
 

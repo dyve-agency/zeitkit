@@ -1,8 +1,8 @@
-= simple_form_for shallow_args(current_user, @invoice) do |f|
+= simple_form_for @invoice do |f|
   - if @invoice.new_record?
     - if current_user.clients.empty?
       .alert.alert-error
-        = link_to "Please create a client first.", new_user_client_path(current_user)
+        = link_to "Please create a client first.", new_client_path
     - else
       h3 Pick the client.
       = f.input :client_id, collection: current_user.clients
@@ -72,11 +72,11 @@
             h3 Please pick a client first.
           - if @products && @products.empty?
             h3
-              = link_to "Please create a product first.", new_user_product_path(current_user)
+              = link_to "Please create a product first.", new_product_path
             select.products-select.select.hidden multiple="multiple"
           - else
             h3.hidden
-              = link_to "Please create a product first.", new_user_product_path(current_user)
+              = link_to "Please create a product first.", new_product_path
             select.products-select.select multiple="multiple"
               - @products.each do |product|
                 option class="product" data-title="#{product.display_title}" data-currency="#{product.currency.symbol}" data-price="#{product.charged_total / 100}" value="#{product.id}"= product.display_title + ' - ' + product.price_tag

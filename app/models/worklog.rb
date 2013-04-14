@@ -9,7 +9,6 @@ class Worklog < ActiveRecord::Base
     :start_time,
     :user_id,
     :hourly_rate,
-    :custom_rate,
     :total,
     :summary,
     :from_date,
@@ -31,8 +30,8 @@ class Worklog < ActiveRecord::Base
   validate :end_time_greater_than_start_time
   validate :duration_less_than_a_year
 
-  after_validation :set_hourly_rate
-  after_validation :set_total
+  before_validation :persist_hourly_rate_from_client, on: :create, if: :not_set_by_user
+  before_validation :set_total
 
   scope :paid, where(invoice_id: !nil)
   scope :unpaid, where(invoice_id: nil)
@@ -100,12 +99,11 @@ class Worklog < ActiveRecord::Base
   end
 
   def calc_total
-    return (Money.new cent_rate_per_second(custom_rate_cents) * duration, currency) if custom_rate && custom_rate.cents != 0
     Money.new cent_rate_per_second(hourly_rate_cents) * duration, currency
   end
 
-  def cent_rate_per_second(cents)
-    cents.to_f / 3600
+  def cent_rate_per_second(cents_per_hour)
+    cents_per_hour.to_f / 3600
   end
 
   def end_time_ok
@@ -171,35 +169,17 @@ class Worklog < ActiveRecord::Base
     "Work: #{end_time.strftime("%d.%m.%Y")} - #{duration_hours.to_s}h:#{duration_minutes.to_s}min x #{hourly_rate}#{hourly_rate.currency.symbol}"
   end
 
-  def custom_rate
-    Money.new custom_rate_cents, currency
-  end
-
-  def custom_rate_with_currency
-    "#{custom_rate.to_s}#{custom_rate.currency.symbol}"
-  end
-
-  def custom_rate=(new_amount)
-    return unless new_amount
-
-    if new_amount.is_a?(Money)
-      write_attribute(:custom_rate_cents, new_amount.cents)
-      result = new_amount
-    elsif new_amount.is_a?(Integer)
-      write_attribute(:custom_rate_cents, new_amount)
-      result = Money.new(new_amount, currency)
-    elsif new_amount.is_a?(String) && new_amount.to_i
-      amount_from_string = (new_amount.to_f * 100).to_i
-      write_attribute(:custom_rate_cents, amount_from_string)
-      result = Money.new(amount_from_string, currency)
-    end
-    result
-  end
-
   # Active record callbacks #
 
-  def set_hourly_rate
+  def persist_hourly_rate_from_client
     self.hourly_rate = client.hourly_rate
+  end
+
+  def not_set_by_user
+    # This check only works for new records, as the hourly rate is persisted
+    # after.
+    return if !new_record?
+    hourly_rate.cents == 0
   end
 
   def set_total

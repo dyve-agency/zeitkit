@@ -6,7 +6,7 @@ class InvoiceDefaultController < ApplicationController
 
   def update
     if @invoice_default.update_attributes(params[:invoice_default])
-      redirect_to user_invoices_path(current_user), notice: 'Successfully updated your invoice template.'
+      redirect_to invoices_path, notice: 'Successfully updated your invoice template.'
     else
       render action: "edit"
     end
