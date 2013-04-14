@@ -1,4 +1,5 @@
 class WorklogsController < ApplicationController
+
   load_and_authorize_resource
 
   respond_to :json, :html
@@ -28,7 +29,6 @@ class WorklogsController < ApplicationController
   end
 
   def new
-    @worklog = Worklog.new
     @worklog.user = current_user
     @worklog.client = current_user.worklogs.any? ? current_user.worklogs.last.client : nil
     @worklog.set_time_helpers_to_now!
@@ -37,37 +37,33 @@ class WorklogsController < ApplicationController
       @worklog = @worklog.restore_based_on_saved_info
       flash.now[:notice] = "We restored the information that was unsaved."
     end
+    respond_with @worklog
   end
 
   def edit
     @worklog.set_time_helpers_to_saved_times!
+    respond_with @worklog
   end
 
   def create
-    @worklog = Worklog.new(params[:worklog])
     @worklog.convert_time_helpers_to_date_time!
     @worklog.user = current_user
-    if @worklog.save
-      location = new_user_worklog_path
-      flash[:notice] = "Worklog was successfully created. Create another one - or: <a href='#{user_worklogs_path}'>Go back.</a>".html_safe
-    end
-    respond_with @worklog, location: location
+    flash[:notice] = "Worklog was successfully created. Create another one - or: <a href='#{worklogs_path}'>Go back.</a>".html_safe if @worklog.save
+    respond_with @worklog, location: new_worklog_path
   end
 
   def update
     @worklog.assign_attributes(params[:worklog])
     @worklog.convert_time_helpers_to_date_time!
     @worklog.user = current_user
-    if @worklog.save
-      redirect_to user_worklogs_path(current_user), notice: 'Worklog was successfully updated.'
-    else
-      render action: "edit"
-    end
+    flash[:notice] = "Worklog was successfully updated." if @worklog.save
+    respond_with @worklog, location: worklogs_path
   end
 
   def destroy
     @worklog.destroy
-    redirect_to user_worklogs_path(current_user)
+    flash[:notice] = "Worklog successfully deleted."
+    respond_with @worklog, location: worklogs_path
   end
 
 end
