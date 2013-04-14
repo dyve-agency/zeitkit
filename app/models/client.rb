@@ -24,4 +24,8 @@ class Client < ActiveRecord::Base
     [:company_name, :zip, :street, :city]
   end
 
+  def contact_info_entered?
+    name && city && street && zip
+  end
+
 end

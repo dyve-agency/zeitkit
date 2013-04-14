@@ -89,6 +89,10 @@ class User < ActiveRecord::Base
     Money::Currency.new read_attribute(:currency)
   end
 
+  def contact_info_entered?
+    company_name && street && city && zip
+  end
+
   def set_initial_currency!
     self.currency = Money.default_currency.iso_code.to_s
   end
