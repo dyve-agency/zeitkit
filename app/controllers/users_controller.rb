@@ -41,7 +41,7 @@ class UsersController < ApplicationController
   def dynamic_home
     flash.keep
     if current_user
-      redirect_to user_clients_path(current_user)
+      redirect_to clients_path
     else
       redirect_to root_url
     end
