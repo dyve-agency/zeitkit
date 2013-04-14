@@ -12,22 +12,22 @@
         ul.nav
           - if current_user
             li
-              = link_to "Clients", user_clients_path(current_user)
+              = link_to "Clients", clients_path
             li
-              = link_to "Notes", user_notes_path(current_user)
+              = link_to "Notes", notes_path
             li
-              = link_to "Worklogs", user_worklogs_path(current_user)
+              = link_to "Worklogs", worklogs_path
             li
-              = link_to "Expenses", user_expenses_path(current_user)
+              = link_to "Expenses", expenses_path
             li
-              = link_to "Products", user_products_path(current_user)
+              = link_to "Products", products_path
             li class="dropdown"
               a.dropdown-toggle data-toggle="dropdown" href="#dropdown-menu"
                 |Invoices
                 b.caret
               ul.dropdown-menu
                 li
-                  = link_to "Invoices", user_invoices_path(current_user)
+                  = link_to "Invoices", invoices_path
                 li
                   = link_to "Edit defaults", edit_invoice_default_path(current_user.invoice_default)
             li class="dropdown"
