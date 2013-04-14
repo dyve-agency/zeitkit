@@ -6,11 +6,12 @@
       = f.input :hourly_rate, as: :string, required: true
       - if !@client.new_record?
         = f.input :company_name
-    .span4
-      h4 Optional info (for invoices)
-      = f.input :street
-      = f.input :city
-      = f.input :zip
+    - if !@client.new_record?
+      .span4
+        h4 Optional info (for invoices)
+        = f.input :street
+        = f.input :city
+        = f.input :zip
 
   .form-actions
     = f.button :submit, "Save Client"
