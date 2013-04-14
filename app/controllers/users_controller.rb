@@ -9,8 +9,7 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
     if @user.save
       user = login(params[:user][:email], params[:user][:password], true)
-      redirect_to user_clients_path(@user),
-        notice: welcome_message
+      redirect_to clients_path, notice: welcome_message
     else
       render :new
     end
@@ -29,8 +28,7 @@ class UsersController < ApplicationController
         UserMailer.temp_password_email(temp_pw, @user).deliver
       ensure
         user = login(@user.email, temp_pw, true)
-        redirect_to user_clients_path(@user),
-          notice: welcome_message
+        redirect_to clients_path, notice: welcome_message
       end
     else
       flash[:alert] = "Sorry, that email has already been taken/is invalid. Please try again."
