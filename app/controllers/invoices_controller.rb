@@ -1,12 +1,12 @@
 class InvoicesController < ApplicationController
+
   load_and_authorize_resource
 
+  respond_to :html, :json
+
   def index
-    @invoices = current_user.invoices.order("created_at DESC")
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @invoices }
-    end
+    @invoices = @invoices.order("created_at DESC")
+    respond_with @invoices
   end
 
   def pdf_export
@@ -124,16 +124,14 @@ class InvoicesController < ApplicationController
 
   def destroy
     @invoice.destroy
-    respond_to do |format|
-      format.html { redirect_to user_invoices_path(current_user) }
-      format.json { head :no_content }
-    end
+    flash[:notice] = "Invoice was successfully deleted"
+    respond_with @invoice
   end
 
   def toggle_paid
     @invoice.toggle_paid
     if @invoice.save
-      redirect_to user_invoices_path(current_user, params[:old_params]), notice: 'Invoice was successfully updated.'
+      redirect_to invoices_path, notice: 'Invoice was successfully updated.'
     else
       render action: "edit"
     end

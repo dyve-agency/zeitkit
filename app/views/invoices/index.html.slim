@@ -44,6 +44,6 @@ table.table.table-bordered
       td
       td
 .btn-group
-  = link_to "New invoice", new_user_invoice_path(current_user), class: "btn btn-primary"
+  = link_to "New invoice", new_invoice_path, class: "btn btn-primary"
   = link_to "<i class='icon-edit'></i> Template".html_safe,
     edit_invoice_default_path(current_user.invoice_default), class: "btn"
