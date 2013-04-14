@@ -1,11 +1,11 @@
 .row.invoice-writer
   .span4.company-title
-    h4= val_or_nil_string(current_user.company_name)
+    h4= current_user.company_name
     h5.hide-for-print= link_to "(Edit details)", edit_user_path(current_user)
   .span4.company-details
-    p= val_or_nil_string(current_user.company_name)
-    p= val_or_nil_string current_user.street
-    p= "#{val_or_nil_string current_user.zip} #{val_or_nil_string current_user.city}"
+    p= current_user.company_name
+    p= current_user.street
+    p= "#{current_user.zip} #{current_user.city}"
   .span4
     h3.intro hi. this is your invoice
 .row.invoice-client
@@ -17,8 +17,8 @@
       h4= @client.company_name
     - else
       h4= @client.name
-    h4= val_or_nil_string @client.street
-    h4= "#{val_or_nil_string @client.zip} #{val_or_nil_string @client.city}"
+    h4= @client.street
+    h4= "#{@client.zip} #{@client.city}"
     h5.hide-for-print
       = link_to "(Edit details)", edit_user_path(current_user)
   .span2.invoice-box
@@ -66,7 +66,7 @@
     - if @invoice.note
       h4 Notes
       = markdown @invoice.note
-    h5 Thank you for choosing #{val_or_nil_string(current_user.company_name)}
+    h5 Thank you for choosing #{current_user.company_name}
 
 .invoice-controls
   hr
