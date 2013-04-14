@@ -1,5 +1,5 @@
 class ClientsController < ApplicationController
-  load_and_authorize_resource except: [:index, :new]
+  load_and_authorize_resource
 
   respond_to :html, :json
 
