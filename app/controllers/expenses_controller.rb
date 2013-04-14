@@ -1,38 +1,34 @@
 class ExpensesController < ApplicationController
+
   load_and_authorize_resource
 
+  respond_to :html, :json
+
   def index
+    respond_with @expenses
   end
 
   def new
-    @expense = Expense.new
   end
 
   def edit
   end
 
   def create
-    @expense = Expense.new(params[:expense])
     @expense.user = current_user
-    if @expense.save
-      redirect_to user_expenses_path(current_user),
-        notice: "Expense was successfully created."
-    else
-      render action: "new"
-    end
+    flash[:notice] = "Expense was successfully created." if @expense.save
+    respond_with @expense, location: expenses_path
   end
 
   def update
-    if @expense.update_attributes(params[:expense])
-      redirect_to user_expenses_path(current_user), notice: 'Expense was successfully updated.'
-    else
-      render action: "edit"
-    end
+    flash[:notice] = 'Expense was successfully updated.' if @expense.update_attributes(params[:expense])
+    respond_with @expense, location: expenses_path
   end
 
   def destroy
     @expense.destroy
-    redirect_to user_expenses_path(current_user)
+    flash[:notice] = 'Expense was successfully deleted.'
+    respond_with @expense
   end
 
 end
