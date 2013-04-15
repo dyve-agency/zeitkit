@@ -9,6 +9,7 @@ class Worklog < ActiveRecord::Base
     :start_time,
     :user_id,
     :hourly_rate,
+    :hourly_rate_cents,
     :total,
     :summary,
     :from_date,

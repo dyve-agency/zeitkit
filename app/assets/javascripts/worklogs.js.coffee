@@ -36,7 +36,6 @@ Worklog =
       return number
   updateEndTimeStartTime: ->
     $('#worklog_to_date').val($('#worklog_from_date').val())
-    $('#worklog_to_time').val($('#worklog_from_time').val())
 SaveTime =
   elems: {
     form: ->

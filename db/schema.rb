@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130413201557) do
+ActiveRecord::Schema.define(:version => 20130415155233) do
 
   create_table "access_tokens", :force => true do |t|
     t.string   "token"
@@ -104,8 +104,8 @@ ActiveRecord::Schema.define(:version => 20130413201557) do
 
   create_table "temp_worklog_saves", :force => true do |t|
     t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
     t.text     "summary"
     t.string   "from_date"
     t.string   "from_time"
@@ -113,6 +113,8 @@ ActiveRecord::Schema.define(:version => 20130413201557) do
     t.string   "to_time"
     t.integer  "client_id"
     t.boolean  "show_user"
+    t.decimal  "hourly_rate"
+    t.integer  "hourly_rate_cents"
   end
 
   create_table "users", :force => true do |t|
