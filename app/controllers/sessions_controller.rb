@@ -20,7 +20,11 @@ class SessionsController < ApplicationController
   end
 
   def new
+  end
 
+  def destroy
+    logout
+    redirect_to root_url
   end
 
   private
@@ -42,8 +46,4 @@ class SessionsController < ApplicationController
     end
   end
 
-  def destroy
-    logout
-    redirect_to root_url
-  end
 end
