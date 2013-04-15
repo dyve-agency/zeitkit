@@ -1,5 +1,5 @@
 h1 Client notes
-= simple_form_for shallow_args(current_user, @note) do |f|
+= simple_form_for @note do |f|
   #wmd-button-bar
   = f.input :content, input_html: {class: "span12 wmd-input", id: "wmd-input"}
   = f.input :client_id, as: :hidden
