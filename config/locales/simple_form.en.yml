@@ -38,7 +38,12 @@ en:
         email: "i.e. me@me.com"
         password: "i.e. mypassword"
         password_confirmation: "i.e. mypassword"
-        username: "i.e. TheDonut"
+        username: i.e. TheDonut
+        name: e.g. George Washington
+        company_name: e.g. Evil Powers Ltd.
+        street: e.g. Mysterialane 123
+        city: e.g. Raccooncity
+        zip: e.g. 424242
       worklog:
         summary: "e.g. * Finish feature 1."
       invoice:
