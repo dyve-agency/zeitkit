@@ -11,4 +11,8 @@ h1 Edit contact info
       = f.input :zip
 
   .form-actions
-    = f.button :submit, "Update"
+    .btn-group
+      = f.button :submit, "Update"
+      = link_to new_password_reset_path(email: @user.email), class: "btn" do
+        i.icon-edit
+        | Change password
