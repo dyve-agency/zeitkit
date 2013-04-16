@@ -37,6 +37,7 @@ class User < ActiveRecord::Base
   validates_presence_of :email, :currency
   validates_uniqueness_of :email
 
+  before_create :get_name_from_api
   after_create :build_invoice_default
   after_create :build_initial_temp_worklog_save
   before_create :get_name_from_api
@@ -124,17 +125,24 @@ class User < ActiveRecord::Base
   end
 
   # Attempt to get the name from the Fullcontact API
+  # NOTE: This absolutely has to always return true because it is used in
+  #       a before_create. If it returns false a rollback will be issued
+  #       and the User will not have been created!
   def get_name_from_api
-    begin
-      person = FullContact.person(email: email)
-    rescue
-      person = nil
-    ensure
-      return if (!person || person.status != 200 || !person.contact_info || !person.contact_info.given_name || person.contact_info.given_name.length == 0)
-      self.first_name = person.contact_info.given_name
-      self.last_name = person.contact_info.family_name
-      person
+    if Rails.env.test?
+      true
+    else
+      begin
+        person = FullContact.person(email: email)
+      rescue
+        person = nil
+      ensure
+        return true if (!person || person.status != 200 || !person.contact_info || !person.contact_info.given_name || person.contact_info.given_name.length == 0)
+        self.first_name = person.contact_info.given_name
+        self.last_name = person.contact_info.family_name
+        person
+        true
+      end
     end
   end
-
 end
