@@ -1,5 +1,12 @@
 GIT
-  remote: git@github.com:hendricius/sorcery.git
+  remote: https://github.com/hendricius/contact_us.git
+  revision: 8b4e273f999fd1e1bab604dd7f40e7c5099ae340
+  specs:
+    contact_us (0.4.0)
+      rails (>= 3.0.0)
+
+GIT
+  remote: https://github.com/hendricius/sorcery.git
   revision: e16870bfc3f2db0e69c6f38d19e1479ae3e2b5e3
   branch: access_token
   specs:
@@ -7,13 +14,6 @@ GIT
       bcrypt-ruby (~> 3.0.0)
       oauth (~> 0.4.4)
       oauth2 (~> 0.8.0)
-
-GIT
-  remote: https://github.com/hendricius/contact_us
-  revision: 8b4e273f999fd1e1bab604dd7f40e7c5099ae340
-  specs:
-    contact_us (0.4.0)
-      rails (>= 3.0.0)
 
 GIT
   remote: https://github.com/nicoles/font-awesome-sass-rails.git

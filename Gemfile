@@ -8,7 +8,9 @@ gem 'rails', '3.2.11'
 gem 'pg'
 gem 'slim'
 gem 'slim-rails'
-gem 'sorcery', git: 'git@github.com:hendricius/sorcery.git', branch: :access_token
+gem 'sorcery', git: 'https://github.com/hendricius/sorcery.git', branch: :access_token
+
+
 gem 'simple_form'
 gem 'jquery-rails'
 gem 'cancan'
@@ -16,7 +18,7 @@ gem 'newrelic_rpm'
 gem 'redcarpet'
 gem 'rack-force_domain'
 gem 'money'
-gem 'contact_us', '~> 0.4.0', git: "https://github.com/hendricius/contact_us"
+gem 'contact_us', '~> 0.4.0', git: "https://github.com/hendricius/contact_us.git"
 gem 'pdfkit'
 gem 'pdf-merger'
 gem 'rjb'
