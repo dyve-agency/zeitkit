@@ -18,7 +18,7 @@
           li
             i.icon-envelope
             = link_to "Contact", "/contact-us/"
-      - if current_user
+      - if current_user && params[:action] != "home"
         .span6.random-tip
           i.icon-quote-left
           span=Tip.random_tip.html_safe
