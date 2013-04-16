@@ -1,5 +1,6 @@
 heroku_java_home = '/usr/lib/jvm/java-6-openjdk'
 ENV['JAVA_HOME'] = heroku_java_home if Dir.exist?(heroku_java_home)
+ruby "1.9.3"
 
 source 'https://rubygems.org'
 
