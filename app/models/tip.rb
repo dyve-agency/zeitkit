@@ -22,6 +22,6 @@ class Tip
   end
 
   def self.random_tip
-    self.tips[rand(0..self.tips.length - 1)]
+    self.tips[rand(0..(self.tips.length - 1))]
   end
 end
