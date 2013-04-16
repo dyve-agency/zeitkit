@@ -20,23 +20,14 @@
           i.icon-heart
           span Made by developers for developers.
 
-      - if !mac_app?
-        blockquote.hidden-phone
-          p "Zeitkit is my preferred collection of smart and lightweight tools.
-            It helps me making my freelance work more efficient."
-          small Thomas, Django developer
       - if !current_user
         .signup-links
           = simple_form_for "", url: signup_email_path do |f|
-            input.span3#signup-email[name="signup_email" type="email"
-              placeholder="e.g. me@mymail.com (optional)"]
+            input.span3#signup-email[name="signup_email" type="hidden"
+              placeholder="e.g. me@mymail.com"]
             = f.button :submit, "Get Started Now »",
               class: "home-submit btn-large",
               onclick: "_gaq.push(['_trackEvent', 'Signup', 'Click', 'Submit']);"
-        - if !mac_app?
-          p
-            strong Signup is free. No trials, no fees.
-            - #span.next-to-free For more than three clients: 6.99$ per month.
       - else
         = link_to "My Account", user_path(current_user), class: "btn btn-large"
 
