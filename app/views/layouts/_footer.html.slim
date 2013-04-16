@@ -5,19 +5,20 @@
         .footer
           .footer-logo.brand-font Zeitkit
           p.lead The kit for saving time.
-      .span4
+      .span2
         ul
-          - if current_user
-            li
-              i.icon-heart
-              = link_to "Please send us feedback", "/contact-us/"
-          - else
-            li
-              i.icon-heart
-              = link_to "Feedback", "/contact-us/"
+          li
+            i.icon-heart
+            = link_to "Feedback", "/contact-us/"
           li
             i.icon-envelope
             = link_to "Contact", "/contact-us/"
+      - if current_user && current_user.demo?
+        .span2
+          ul
+            li
+              i.icon-bell-alt
+              = link_to "Register", edit_user_path(current_user)
       - if current_user && params[:action] != "home"
         .span6.random-tip
           i.icon-quote-left
