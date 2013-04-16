@@ -31,6 +31,9 @@ en:
       product:
         charge: Allows you to add a surcharge to the product price for your client. I.e. when you are reselling a server.
     placeholders:
+      session:
+        username: "i.e. me@example.com"
+        password: "i.e. zugzugblubgzugbug"
       user:
         email: "i.e. me@me.com"
         password: "i.e. mypassword"
