@@ -5,7 +5,7 @@
         .footer
           .footer-logo.brand-font Zeitkit
           p.lead The kit for saving time.
-      .span9
+      .span4
         ul
           - if current_user
             li
@@ -18,3 +18,8 @@
           li
             i.icon-envelope
             = link_to "Contact", "/contact-us/"
+      - if current_user
+        .span6.random-tip
+          i.icon-quote-left
+          span=Tip.random_tip.html_safe
+          i.icon-quote-right
