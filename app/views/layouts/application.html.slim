@@ -25,6 +25,7 @@ html lang="en" class="#{check_if_css_class}"
       .container.content.clearfix
         .row
           .span12
+            = render "layouts/demo_warn"
             = render "layouts/notices"
             = yield
       - if !mac_app?

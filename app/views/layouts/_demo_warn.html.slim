@@ -1,0 +1,6 @@
+- if current_user && current_user.demo?
+  .alert.alert-error
+    ul
+      li
+        |You are currently using a guest account. To keep your data, #{link_to 'please register', edit_user_path(current_user)}. 
+      li This account will self destruct in #{(current_user.created_at + 48.hours).strftime("%H hour(s), %M minute(s) and %S second(s)")}.
