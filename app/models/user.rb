@@ -129,7 +129,7 @@ class User < ActiveRecord::Base
   #       a before_create. If it returns false a rollback will be issued
   #       and the User will not have been created!
   def get_name_from_api
-    if Rails.env.test?
+    if Rails.env.test? || Rails.env.development?
       true
     else
       begin
