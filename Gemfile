@@ -16,7 +16,7 @@ gem 'newrelic_rpm'
 gem 'redcarpet'
 gem 'rack-force_domain'
 gem 'money'
-gem 'contact_us', '~> 0.4.0'
+gem 'contact_us', '~> 0.4.0', git: "https://github.com/hendricius/contact_us"
 gem 'pdfkit'
 gem 'pdf-merger'
 gem 'rjb'

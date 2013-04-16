@@ -9,6 +9,13 @@ GIT
       oauth2 (~> 0.8.0)
 
 GIT
+  remote: https://github.com/hendricius/contact_us
+  revision: 8b4e273f999fd1e1bab604dd7f40e7c5099ae340
+  specs:
+    contact_us (0.4.0)
+      rails (>= 3.0.0)
+
+GIT
   remote: https://github.com/nicoles/font-awesome-sass-rails.git
   revision: 3dc12ca74891fd358f635ffc4be980a5cd2fd213
   specs:
@@ -62,8 +69,6 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.2)
-    contact_us (0.4.0)
-      rails (>= 3.0.0)
     daemons (1.1.9)
     erubis (2.7.0)
     eventmachine (1.0.3)
@@ -199,7 +204,7 @@ DEPENDENCIES
   bourbon
   cancan
   coffee-rails (~> 3.2.1)
-  contact_us (~> 0.4.0)
+  contact_us (~> 0.4.0)!
   font-awesome-sass-rails (~> 3.0.0.0)!
   fullcontact
   jquery-rails
