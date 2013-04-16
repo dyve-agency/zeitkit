@@ -42,6 +42,7 @@ class User < ActiveRecord::Base
   before_create :get_name_from_api
 
   scope :paid, where(invoice_id: !nil)
+  scope :no_demo_user, where("email NOT LIKE 'demo%@zeitkit.com'")
   scope :no_signup_email_sent, where(signup_email_sent: false)
   scope :older_than_30_minutes, lambda {where("created_at <= ?", 30.minutes.ago)}
 
@@ -64,6 +65,17 @@ class User < ActiveRecord::Base
     id.save
   end
 
+  def demo?
+    self.email.match("demo(.*?)@zeitkit\\.com")
+  end
+
+  def email_title
+    if demo?
+      "Demo user"
+    else
+      email
+    end
+  end
 
   def unpaid_worklogs_by_client
     unpaid = []
@@ -112,7 +124,7 @@ class User < ActiveRecord::Base
   end
 
   def self.email_new_users
-    self.no_signup_email_sent.older_than_30_minutes.each do |user|
+    self.no_signup_email_sent.older_than_30_minutes.no_demo_user.each do |user|
       begin
         UserMailer.signup_email(user).deliver
       rescue

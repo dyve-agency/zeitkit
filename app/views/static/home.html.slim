@@ -29,7 +29,7 @@
         .signup-links
           = simple_form_for "", url: signup_email_path do |f|
             input.span3#signup-email[name="signup_email" type="email"
-              placeholder="e.g. me@mymail.com" required="required"]
+              placeholder="e.g. me@mymail.com (optional)"]
             = f.button :submit, "Get Started Now »",
               class: "home-submit btn-large",
               onclick: "_gaq.push(['_trackEvent', 'Signup', 'Click', 'Submit']);"

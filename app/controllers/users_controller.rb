@@ -21,15 +21,27 @@ class UsersController < ApplicationController
 
   def signup_email
     @user = User.new
-    @user.email = params[:signup_email]
+
+    # TODO: ensure uniqueness of random mail
+    if params[:singup_email] == nil
+      @user.email = 'demo' + SecureRandom.base64(10).split("=").first + '@zeitkit.com'
+    else
+      @user.email = params[:signup_email]
+    end
+
     temp_pw = SecureRandom.base64(10).split("=").first
     @user.set_temp_password temp_pw
     if @user.save
-      begin
-        UserMailer.temp_password_email(temp_pw, @user).deliver
-      ensure
+      if @user.demo?
         user = login(@user.email, temp_pw, true)
         redirect_to clients_path, notice: welcome_message
+      else
+        begin
+          UserMailer.temp_password_email(temp_pw, @user).deliver
+        ensure
+          user = login(@user.email, temp_pw, true)
+          redirect_to clients_path, notice: welcome_message
+        end
       end
     else
       flash[:alert] = "Sorry, that email has already been taken/is invalid. Please try again."
