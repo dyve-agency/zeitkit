@@ -113,7 +113,6 @@ ActiveRecord::Schema.define(:version => 20130415155233) do
     t.string   "to_time"
     t.integer  "client_id"
     t.boolean  "show_user"
-    t.decimal  "hourly_rate"
     t.integer  "hourly_rate_cents"
   end
 
