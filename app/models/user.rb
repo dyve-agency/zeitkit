@@ -78,6 +78,19 @@ class User < ActiveRecord::Base
     end
   end
 
+  # Returns a hash with hour, minute, s when the account will selfdestruct.
+  def self_destruct_in
+    return if !demo?
+    t = (created_at + 48.hours - Time.zone.now).to_i
+    mm, ss = t.divmod(60)
+    hh, mm = mm.divmod(60)
+    {
+      hours: hh,
+      minutes: mm,
+      seconds: ss
+    }
+  end
+
   def unpaid_worklogs_by_client
     unpaid = []
     clients.each do |client|
