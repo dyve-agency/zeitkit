@@ -37,6 +37,7 @@ class User < ActiveRecord::Base
   validates_presence_of :email, :currency
   validates_uniqueness_of :email
 
+  before_save :update_after_demo_conversion
   before_create :get_name_from_api
   after_create :build_invoice_default
   after_create :build_initial_temp_worklog_save
@@ -66,7 +67,11 @@ class User < ActiveRecord::Base
   end
 
   def demo?
-    self.email.match("demo(.*?)@zeitkit\\.com")
+    demo_email?(email)
+  end
+
+  def demo_email?(demo_email)
+    demo_email.match("demo(.*?)@zeitkit\\.com")
   end
 
   def email_title
@@ -168,5 +173,19 @@ class User < ActiveRecord::Base
         true
       end
     end
+  end
+
+  def converted_from_demo?
+    return false if new_record?
+    return false unless email_changed?
+    demo_email?(email_was)
+  end
+
+  def update_after_demo_conversion
+    if converted_from_demo? && !demo?
+      self.created_at = Time.zone.now
+      get_name_from_api
+    end
+    true
   end
 end
