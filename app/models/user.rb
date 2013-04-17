@@ -44,6 +44,7 @@ class User < ActiveRecord::Base
 
   scope :paid, where(invoice_id: !nil)
   scope :no_demo_user, where("email NOT LIKE 'demo%@zeitkit.com'")
+  scope :demo_user, where("email LIKE 'demo%@zeitkit.com'")
   scope :no_signup_email_sent, where(signup_email_sent: false)
   scope :older_than_30_minutes, lambda {where("created_at <= ?", 30.minutes.ago)}
 
