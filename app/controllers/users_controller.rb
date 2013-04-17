@@ -65,7 +65,7 @@ class UsersController < ApplicationController
   def update
     @user = current_user
     if @user.update_attributes(params[:user])
-      redirect_to dynamic_home_path, notice: 'Successfuly updated details.'
+      redirect_to dynamic_home_path, notice: 'Successfuly updated user details.'
     else
       render action: "edit"
     end
