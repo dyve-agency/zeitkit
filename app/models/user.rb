@@ -40,7 +40,6 @@ class User < ActiveRecord::Base
   before_create :get_name_from_api
   after_create :build_invoice_default
   after_create :build_initial_temp_worklog_save
-  before_create :get_name_from_api
 
   scope :paid, where(invoice_id: !nil)
   scope :no_demo_user, where("email NOT LIKE 'demo%@zeitkit.com'")
