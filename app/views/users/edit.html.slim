@@ -1,7 +1,7 @@
 - if current_user.demo?
   h1 Register
   = simple_form_for @user do |f|
-    = f.input :email, label: "Change the email"
+    = f.input :email, label: "Change the email", input_html: {value: ''}
     = f.input :password, required: true, label: "Pick a password"
     = f.input :password_confirmation, required: true, label: "Confirm password"
     .form-actions
