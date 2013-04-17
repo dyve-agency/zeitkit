@@ -42,6 +42,10 @@
                     = link_to "Sign out", logout_path
           - if !current_user
             li
-              = link_to "Register", signup_path
+              = link_to "Register free", signup_email_path, method: :post, onclick: "_gaq.push(['_trackEvent', 'Signup', 'Click', 'Submit']);"
+            li
+              = link_to "Demo", signup_email_path, method: :post, onclick: "_gaq.push(['_trackEvent', 'Signup', 'Click', 'Submit']);"
+            li
+              = link_to "Tour", signup_email_path, method: :post, onclick: "_gaq.push(['_trackEvent', 'Signup', 'Click', 'Submit']);"
             li
               = link_to "Login", login_path
