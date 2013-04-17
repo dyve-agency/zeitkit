@@ -25,9 +25,11 @@
           = simple_form_for "", url: signup_email_path do |f|
             input.span3#signup-email[name="signup_email" type="hidden"
               placeholder="e.g. me@mymail.com"]
-            = f.button :submit, "Get Started Now »",
+            = f.button :submit, "Get started Free »",
               class: "home-submit btn-large",
               onclick: "_gaq.push(['_trackEvent', 'Signup', 'Click', 'Submit']);"
+          p No contracts, no fees. It's free. Signup takes less than 2 seconds
+            and is done by clicking the above button.
       - else
         = link_to "My Account", user_path(current_user), class: "btn btn-large"
 
