@@ -7,7 +7,7 @@ module UsersHelper
   end
 
   def show_tutorial?
-    current_user && current_user.show_tutorial?
+    current_user && params[:action] != "home" && current_user.show_tutorial?
   end
 
 end
