@@ -8,4 +8,8 @@ module UsersHelper
   def show_demo_warning?
     current_user && current_user.demo? && !session[:hide_demo_warning]
   end
+
+  def tutorial
+    Tutorial.new(current_user)
+  end
 end

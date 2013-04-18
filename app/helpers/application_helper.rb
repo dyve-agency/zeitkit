@@ -34,4 +34,9 @@ module ApplicationHelper
     value_check ? "success" : "warning"
   end
 
+  def css_class_if_cond(cond, css_class = "completed")
+    return " #{css_class}" if cond
+    ""
+  end
+
 end

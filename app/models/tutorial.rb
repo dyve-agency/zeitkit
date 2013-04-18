@@ -25,6 +25,18 @@ class Tutorial
     end
   end
 
+  # Adds methods to return the score
+  # clients_score
+  # worklogs_score
+  # notes_score
+  # invoices_score
+  SCORES.keys.each do |arg|
+    method_name = (arg.to_s + "_score").to_sym
+    send :define_method, method_name do
+      SCORES[arg]
+    end
+  end
+
   def max_level
     SCORES.map{|key,val| val}.inject(:+)
   end
