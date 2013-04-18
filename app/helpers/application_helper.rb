@@ -34,6 +34,10 @@ module ApplicationHelper
     value_check ? "success" : "warning"
   end
 
+  def not_on_home?
+    params[:action] != "home"
+  end
+
   def css_class_if_cond(cond, css_class = "completed")
     return " #{css_class}" if cond
     ""

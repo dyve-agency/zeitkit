@@ -30,7 +30,7 @@
                   = link_to "Invoices", invoices_path
                 li
                   = link_to "Edit defaults", edit_invoice_default_path(current_user.invoice_default)
-            - if params[:action] != "home"
+            - if not_on_home?
               li
                 = link_to "Tutorial", show_tutorial_path, class: "show-tutorial"
             - if !current_user.demo?

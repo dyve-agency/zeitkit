@@ -19,11 +19,7 @@
               li
                 i.icon-bell-alt
                 = link_to "Register", edit_user_path(current_user)
-              - if params[:action] != "home"
-                li
-                  i.icon-ambulance
-                  = link_to "Tutorial", show_tutorial_path, class: "show-tutorial"
-          - elsif current_user && params[:action] != "home"
+          - if current_user && not_on_home?
               li
                 i.icon-ambulance
                 = link_to "Tutorial", show_tutorial_path, class: "show-tutorial"
