@@ -13,16 +13,16 @@ Tutorial =
     $('.levels').on 'mouseenter', 'a', (e) ->
       _that.select $(e.currentTarget)
   select: (elem) ->
-    this.removeActive(this.elems.container().find('.active'))
+    this.removeActive(this.elems.container().find('.shown'))
     counterpart = this.elems.tips()[elem.parent().index()]
     this.addActive [elem, counterpart]
     this.animateLightBulb()
   addActive: (elems)->
     _.each elems, (el) ->
-      $(el).addClass("active")
+      $(el).addClass("shown")
   removeActive: (elems) ->
     _.each elems, (el) ->
-      $(el).removeClass("active")
+      $(el).removeClass("shown")
   animateLightBulb: ->
     elem = $('.icon-lightbulb')
     elem.removeClass("animate-bulb")

@@ -5,11 +5,8 @@ module UsersHelper
     "#{destruct[:hours]} hour(s), #{destruct[:minutes]} minute(s) and #{destruct[:seconds]} second(s)"
   end
 
-  def show_demo_warning?
-    current_user && current_user.demo? && !session[:hide_demo_warning]
+  def show_tutorial?
+    current_user && current_user.show_tutorial?
   end
 
-  def tutorial
-    Tutorial.new(current_user)
-  end
 end
