@@ -72,7 +72,7 @@ class UsersController < ApplicationController
   end
 
   def welcome_message
-    "Hi. Check out the header to get to know your tools <i class='icon-arrow-up'></i> <script>_gaq.push(['_trackPageview', '/register_success']);</script>".html_safe
+    "Your registration was successful. Thank you.<script>_gaq.push(['_trackPageview', '/register_success']);</script>".html_safe
   end
 
 end
