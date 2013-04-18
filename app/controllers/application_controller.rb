@@ -3,7 +3,6 @@ class ApplicationController < ActionController::Base
 
   before_filter :require_login
   before_filter :check_and_set_mac_design
-  before_filter :check_tutorial
 
   def check_and_set_mac_design
     cookies[:mac_app] = true if params[:mac_app]
@@ -17,10 +16,5 @@ class ApplicationController < ActionController::Base
     object_with_user_attribute.user = current_user
   end
 
-  def check_tutorial
-    if current_user && current_user.show_tutorial?
-      @tutorial = Tutorial.new(current_user)
-    end
-  end
 
 end

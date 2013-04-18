@@ -7,7 +7,9 @@ module UsersHelper
   end
 
   def show_tutorial?
-    current_user && params[:action] != "home" && current_user.show_tutorial? && !session[:hide_tutorial]
+    if (current_user && current_user.show_tutorial? && session[:show_tutorial]) || session[:show_tutorial]
+      @tutorial = Tutorial.new(current_user)
+    end
   end
 
 end
