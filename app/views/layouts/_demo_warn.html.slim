@@ -1,7 +1,0 @@
-- if show_demo_warning?
-  .alert.alert-error
-    a.close.demo-warn-close data-dismiss="alert" data-route="#{hide_demo_warning_path}" ×
-    ul
-      li
-        |You are currently using a guest account. To keep your data, #{link_to 'please register', edit_user_path(current_user)}. 
-      li This account will self destruct in #{self_destruct_counter}.

@@ -25,6 +25,10 @@
             i.icon-github-alt
             = link_to "Add a note", new_note_path
             span.percentage (+#{@tutorial.notes_score} Levels)
+          li class="#{css_class_if_cond @tutorial.no_demo_user?}"
+            i.icon-github-alt
+            = link_to "Pick an email + password", edit_user_path(current_user)
+            span.percentage (+#{@tutorial.no_demo_user_score} Levels)
       .span6.alert-success.tip-explanations
         i.icon-lightbulb
         .tips.active
@@ -35,10 +39,13 @@
               |Keep track of whom you work with.
             li
               i.icon-ok
+              |Clients are the heart of all Zeitkit tools.
+            li
+              i.icon-ok
               |Log your time, expenses and products.
             li
               i.icon-ok
-              |Bill them.
+              |Bill them in a few clicks.
             li
               i.icon-ok
               |Take notes to keep track on progress to close more deals.
@@ -53,7 +60,10 @@
               |Log in detail what you were doing.
             li
               i.icon-ok
-              |You can then convert them into invoices.
+              |The logs can be written in markdown.
+            li
+              i.icon-ok
+              |Worklogs can be converted into invoices.
             li
               i.icon-ok
               |Or send detailed overviews as a .csv file
@@ -66,6 +76,9 @@
             li
               i.icon-ok
               |Easily bill your worklogs, expenses, or products.
+            li
+              i.icon-ok
+              |Check which invoices are still unpaid.
             li
               i.icon-ok
               |Generate an awesomesauce .pdf in a single click.
@@ -83,8 +96,28 @@
               |Log TODOS, or recent conversations with the client.
             li
               i.icon-ok
+              |Organize your teams by creating individual notes.
+            li
+              i.icon-ok
               |Share the notes with a single click.
             li
               i.icon-ok
               |For hackers: Nicely write them in markdown language
-    = render "layouts/demo_warn"
+        .tips
+          h4 About registering
+          ul
+            li
+              i.icon-ok
+              |You are still a demo user.
+            li
+              i.icon-ok
+              |Demo users are deleted automatically every 48h.
+            li
+              i.icon-ok
+              |Yours in #{self_destruct_counter}
+            li
+              i.icon-ok
+              |You can access all features after registration.
+            li
+              i.icon-ok
+              |Don't worry, we will automatically transfer all your data.

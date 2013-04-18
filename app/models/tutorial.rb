@@ -7,21 +7,27 @@ class Tutorial
   end
 
   SCORES = {
-    worklogs: 30,
-    clients: 40,
+    worklogs: 20,
+    clients: 30,
     invoices: 20,
-    notes: 10
+    notes: 10,
+    no_demo_user: 20
   }
 
   # Adds methods which if the user has:
   # clients?
   # worklogs?
   # notes?
-  # invoices
+  # invoices?
+  # no_demo_user?
   SCORES.keys.each do |arg|
     method_name = (arg.to_s + "?").to_sym
     send :define_method, method_name do
-      eval("user." + arg.to_s + ".any?")
+      if arg == :no_demo_user
+        eval("!user.demo?")
+      else
+        eval("user." + arg.to_s + ".any?")
+      end
     end
   end
 
@@ -30,6 +36,7 @@ class Tutorial
   # worklogs_score
   # notes_score
   # invoices_score
+  # no_demo_user_score
   SCORES.keys.each do |arg|
     method_name = (arg.to_s + "_score").to_sym
     send :define_method, method_name do
