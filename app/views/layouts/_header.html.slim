@@ -30,16 +30,20 @@
                   = link_to "Invoices", invoices_path
                 li
                   = link_to "Edit defaults", edit_invoice_default_path(current_user.invoice_default)
-            li class="dropdown"
-              a.dropdown-toggle data-toggle="dropdown" href="#dropdown-menu"
-                = current_user.email_title
-                b.caret
-              ul.dropdown-menu
-                li
-                  = link_to "Edit account", edit_user_path(current_user)
-                - if !mac_app?
+            - if !current_user.demo?
+              li class="dropdown"
+                a.dropdown-toggle data-toggle="dropdown" href="#dropdown-menu"
+                  = current_user.email_title
+                  b.caret
+                ul.dropdown-menu
                   li
-                    = link_to "Sign out", logout_path
+                    = link_to "Edit account", edit_user_path(current_user)
+                  - if !mac_app?
+                    li
+                      = link_to "Sign out", logout_path
+            - else
+              li
+                = link_to "Register", edit_user_path(current_user)
           - if !current_user
             li
               = link_to "Register free", signup_email_path, method: :post, onclick: "_gaq.push(['_trackEvent', 'Signup', 'Click', 'Submit']);"

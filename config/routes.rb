@@ -33,4 +33,5 @@ Timetracker::Application.routes.draw do
   get "home" => "users#dynamic_home", :as => "dynamic_home"
   get "users/:id/worklogs/pdf_export" => "worklogs#pdf_export", :as => "pdf_export"
   post "signup_email" => "users#signup_email", :as => "signup_email"
+  post "hide_demo_warning" => "demo#hide_warning", as: "hide_demo_warning"
 end
