@@ -142,6 +142,10 @@ class User < ActiveRecord::Base
     Money.new invoices.sum(:total_cents), currency
   end
 
+  def show_tutorial?
+    Tutorial.new(self).show_tutorial?
+  end
+
   def self.email_new_users
     self.no_signup_email_sent.older_than_30_minutes.no_demo_user.each do |user|
       begin
