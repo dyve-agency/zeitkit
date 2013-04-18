@@ -30,6 +30,9 @@
                   = link_to "Invoices", invoices_path
                 li
                   = link_to "Edit defaults", edit_invoice_default_path(current_user.invoice_default)
+            - if params[:action] != "home"
+              li
+                = link_to "Tutorial", show_tutorial_path, class: "show-tutorial"
             - if !current_user.demo?
               li class="dropdown"
                 a.dropdown-toggle data-toggle="dropdown" href="#dropdown-menu"

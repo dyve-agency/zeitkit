@@ -13,12 +13,20 @@
           li
             i.icon-envelope
             = link_to "Contact", "/contact-us/"
-      - if current_user && current_user.demo?
-        .span2
-          ul
-            li
-              i.icon-bell-alt
-              = link_to "Register", edit_user_path(current_user)
+      .span2
+        ul
+          - if current_user && current_user.demo?
+              li
+                i.icon-bell-alt
+                = link_to "Register", edit_user_path(current_user)
+              - if params[:action] != "home"
+                li
+                  i.icon-ambulance
+                  = link_to "Tutorial", show_tutorial_path, class: "show-tutorial"
+          - elsif current_user && params[:action] != "home"
+              li
+                i.icon-ambulance
+                = link_to "Tutorial", show_tutorial_path, class: "show-tutorial"
       - if current_user && params[:action] != "home"
         .span6.random-tip
           i.icon-quote-left
