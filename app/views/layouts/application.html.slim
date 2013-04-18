@@ -22,7 +22,8 @@ html lang="en" class="#{check_if_css_class}"
   body
     #wrapper
       = render "layouts/header"
-      = render "layouts/tutorial"
+      - if show_tutorial?
+        = render "layouts/tutorial"
       .container.content.clearfix
         .row
           .span12
