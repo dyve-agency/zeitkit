@@ -12,6 +12,8 @@ Tutorial =
     _that = this
     $('.levels').on 'mouseenter', 'a', (e) ->
       _that.select $(e.currentTarget)
+    $('.tutorial-close').on 'click touchstart', (e) ->
+      _that.elems.container().parent().remove()
   select: (elem) ->
     this.removeActive(this.elems.container().find('.shown'))
     counterpart = this.elems.tips()[elem.parent().index()]
