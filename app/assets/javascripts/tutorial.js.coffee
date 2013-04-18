@@ -16,9 +16,16 @@ Tutorial =
     this.removeActive(this.elems.container().find('.active'))
     counterpart = this.elems.tips()[elem.parent().index()]
     this.addActive [elem, counterpart]
+    this.animateLightBulb()
   addActive: (elems)->
     _.each elems, (el) ->
       $(el).addClass("active")
   removeActive: (elems) ->
     _.each elems, (el) ->
       $(el).removeClass("active")
+  animateLightBulb: ->
+    elem = $('.icon-lightbulb')
+    elem.removeClass("animate-bulb")
+    setTimeout (->
+      elem.addClass("animate-bulb")
+    ), 200

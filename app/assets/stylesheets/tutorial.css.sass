@@ -1,3 +1,5 @@
+$orange: orange
+$orange-bright: #FFDAB9
 .tutorial
   .span2
     text-align: center
@@ -8,6 +10,8 @@
     color: orange
     float: right
     margin-right: 20px
+.animate-bulb
+  @include animation(bulb-light 3.0s ease-in 1)
 .level
   padding-top: 10px
   h4
@@ -42,3 +46,11 @@ ul.levels
   display: none
   &.active
     display: block
+
+@include keyframes(bulb-light)
+  0%
+    color: $orange
+  50%
+    color: $orange-bright
+  100%
+    color: $orange
