@@ -7,7 +7,7 @@
             .progress.progress-striped.active
               .bar style="width: #{@tutorial.calc_level + 10}%;"
           .span3
-            h4 Zeitkit level #{@tutorial.calc_level}
+            h4 Zeitkit level #{@tutorial.calc_level} of #{@tutorial.max_level}
         ul.levels
           li class="#{css_class_if_cond @tutorial.clients?}"
             i.icon-github-alt
@@ -54,13 +54,19 @@
           ul
             li
               i.icon-ok
-              |You are still a demo user.
+              - if current_user.demo?
+                |You are still a demo user.
+              - else
+                |You are no longer a demo user.
             li
               i.icon-ok
               |Demo users are deleted automatically every 48h.
             li
               i.icon-ok
-              |You in #{self_destruct_counter}
+              - if current_user.demo?
+                |You in #{self_destruct_counter}
+              - else
+                |Your account is fully registered and won't delete.
             li
               i.icon-ok
               |You can access all features after registration.
