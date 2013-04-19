@@ -60,12 +60,14 @@ class InvoicesController < ApplicationController
   def new
     @invoice.set_initial_values!
     @products = current_user.products.oldest_first
+    @invoice.client = set_client
     if params[:client]
       @client = current_user.clients.find(params[:client])
-      @invoice.client = @client
-      @worklogs = @client.worklogs.unpaid.no_invoice.oldest_first
-      @expenses = @client.expenses.unpaid.no_invoice.oldest_first
+    else
+      @invoice.client = set_client
     end
+    @worklogs = set_invoice_worklogs
+    @expenses = set_invoice_expenses
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @invoice }
@@ -135,5 +137,22 @@ class InvoicesController < ApplicationController
     else
       render action: "edit"
     end
+  end
+
+  def set_client
+    if current_user.invoices.any?
+      @client = current_user.invoices.last.client
+    elsif current_user.clients.count == 1
+      @client = current_user.clients.first
+    end
+    @client
+  end
+
+  def set_invoice_worklogs
+    @client ? @client.worklogs.unpaid.no_invoice.oldest_first : nil
+  end
+
+  def set_invoice_expenses
+    @client ? @client.expenses.unpaid.no_invoice.oldest_first : nil
   end
 end

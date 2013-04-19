@@ -29,8 +29,7 @@ class WorklogsController < ApplicationController
   end
 
   def new
-    @worklog.user = current_user
-    @worklog.client = current_user.worklogs.any? ? current_user.worklogs.last.client : nil
+    @worklog.client = set_client
     @worklog.set_time_helpers_to_now!
     params[:client] ? @worklog.client = current_user.clients.find(params[:client]) : nil
     if params[:restore]
@@ -64,6 +63,15 @@ class WorklogsController < ApplicationController
     @worklog.destroy
     flash[:notice] = "Worklog successfully deleted."
     respond_with @worklog, location: worklogs_path
+  end
+
+  def set_client
+    if current_user.worklogs.any?
+      @client = current_user.worklogs.last.client
+    elsif current_user.clients.count == 1
+      @client = current_user.clients.first
+    end
+    @client
   end
 
 end

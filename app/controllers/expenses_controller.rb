@@ -9,6 +9,7 @@ class ExpensesController < ApplicationController
   end
 
   def new
+    @expense.client = set_client
   end
 
   def edit
@@ -29,6 +30,15 @@ class ExpensesController < ApplicationController
     @expense.destroy
     flash[:notice] = 'Expense was successfully deleted.'
     respond_with @expense
+  end
+
+  def set_client
+    if current_user.expenses.any?
+      @client = current_user.expenses.last.client
+    elsif current_user.clients.count == 1
+      @client = current_user.clients.first
+    end
+    @client
   end
 
 end
