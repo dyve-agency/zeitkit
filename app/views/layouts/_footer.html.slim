@@ -23,6 +23,10 @@
               li
                 i.icon-ambulance
                 = link_to "Tutorial", show_tutorial_path, class: "show-tutorial"
+          - if !current_user
+              li
+                i.icon-star
+                = link_to "Register", signup_email_path, method: :post, onclick: "_gaq.push(['_trackEvent', 'Signup', 'Click', 'Submit']);"
       - if current_user && params[:action] != "home"
         .span6.random-tip
           i.icon-quote-left
