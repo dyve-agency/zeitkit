@@ -28,8 +28,7 @@
             = f.button :submit, "Get started Free »",
               class: "home-submit btn-large",
               onclick: "_gaq.push(['_trackEvent', 'Signup', 'Click', 'Submit']);"
-          p No contracts, no fees. It's free. Signup takes less than 2 seconds
-            and is done by clicking the above button.
+          p No contracts, no fees. It's free. Signup.time < 2.seconds.
       - else
         = link_to "My Account", user_path(current_user), class: "btn btn-large"
 
