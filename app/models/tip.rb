@@ -4,7 +4,7 @@ class Tip
       "Get a list of your recent git commits, copy paste into a new worklog: git log --reverse --format=%B --max-count=20 | sed '/^$/d' | sed 's/^/* /'",
       "zlog for pure awesomness. Edit your .bashrc/.zshrc. Paste: alias zlog=\"git log --reverse --format=%B --max-count=20 | sed '/^$/d' | sed 's/^/* /'\"",
       "Fill in your worklogs as detailed as possible. This way your clients have no bad feelings.",
-      "The ninja workflow: 1) Start a new worklog, 2) Add some commits, 3) Stop the timer. 4) Save.",
+      "The ninja workflow: 1) Start a new worklog, 2) Work work work, 3) Stop the timer. 4) Save.",
       "If you lose your last worklog, no problem. You can restore unsaved changes.",
       "Your invoices should be paid within 15 days, if not, ask the client what's wrong.",
       "Charge your clients more for rush jobs.",
