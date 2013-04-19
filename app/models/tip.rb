@@ -4,7 +4,7 @@ class Tip
       "Get a list of your recent git commits, copy paste into a new worklog: git log --reverse --format=%B --max-count=20 | sed '/^$/d' | sed 's/^/* /'",
       "zlog for pure awesomness. Edit your .bashrc/.zshrc. Paste: alias zlog=\"git log --reverse --format=%B --max-count=20 | sed '/^$/d' | sed 's/^/* /'\"",
       "Fill in your worklogs as detailed as possible. This way your clients have no bad feelings.",
-      "The ninja workflow: 1) Start a new worklog, 2) Add some commits, 3) Stop the timer. 4) Save.",
+      "The ninja workflow: 1) Start a new worklog, 2) Work work work, 3) Stop the timer. 4) Save.",
       "If you lose your last worklog, no problem. You can restore unsaved changes.",
       "Your invoices should be paid within 15 days, if not, ask the client what's wrong.",
       "Charge your clients more for rush jobs.",
@@ -17,7 +17,9 @@ class Tip
       "You can share important notes with your client via a unique share link.",
       "Filter worklogs to see what you got done in a specific time period.",
       "Sometimes required for corporate clients: Worklogs can be exported as .CSV",
-      "Ideas/Feedback? Email us at <a href='mailto:info@zeitkit.com'>info@zeitkit.com</a>."
+      "Ideas/Feedback? Email us at <a href='mailto:info@zeitkit.com'>info@zeitkit.com</a>.",
+      "Android User? <a href='https://play.google.com/store/apps/details?id=com.zeitkit.app'>Get the Zeitkit App to start tracking from your mobile.</a>",
+      "On your mobile? Zeitkit is nicely responsive and works on your mobile too."
     ]
   end
 
