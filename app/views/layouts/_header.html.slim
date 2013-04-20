@@ -48,6 +48,8 @@
               li
                 = link_to "Complete signup", edit_user_path(current_user),
                   class: "white"
+            li
+              i.icon-spinner.icon-spin.loading-animation
           - if !current_user
             li
               = link_to "Register free", signup_email_path, method: :post, onclick: "_gaq.push(['_trackEvent', 'Signup', 'Click', 'Submit']);"
