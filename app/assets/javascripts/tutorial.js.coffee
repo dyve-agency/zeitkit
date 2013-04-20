@@ -52,8 +52,6 @@ Tutorial =
       alert 'Tutorial already shown'
       return
     $.ajax clicked_elem.attr('href'),
-      beforeSend: ->
-        window.App.loading.show()
       type: 'GET'
       dataType: 'html'
       success: (response) ->
@@ -61,5 +59,3 @@ Tutorial =
         _that.initHider()
       error: () ->
         console.log('there was an error')
-      complete: ->
-        window.App.loading.hide()

@@ -50,6 +50,7 @@
                   class: "white"
             li
               i.icon-spinner.icon-spin.loading-animation
+              span.loading-message
           - if !current_user
             li
               = link_to "Register free", signup_email_path, method: :post, onclick: "_gaq.push(['_trackEvent', 'Signup', 'Click', 'Submit']);"
@@ -61,3 +62,4 @@
               = link_to "Login", login_path
             li
               i.icon-spinner.icon-spin.loading-animation
+              span.loading-message

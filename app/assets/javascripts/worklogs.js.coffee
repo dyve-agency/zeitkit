@@ -50,6 +50,7 @@ SaveTime =
       return false
   updateRemote: ->
     _this = this
+    window.App.ajax_loading_message = "saving..."
     $.ajax $('.temp_worklog_save_path').attr('href') + ".json",
       type: 'PUT'
       dataType: 'json'
