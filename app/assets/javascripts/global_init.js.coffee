@@ -1,3 +1,5 @@
+window.App = {}
+
 $ ->
   if $('.wmd-input').length > 0
     converter1 = Markdown.getSanitizingConverter()
