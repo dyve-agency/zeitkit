@@ -15,7 +15,7 @@
           span.percentage (+#{@tutorial.clients_score} Levels)
         li class="#{css_class_if_cond @tutorial.no_demo_user?}"
           i.icon-github-alt
-          = link_to "Pick an email + password", edit_user_path(current_user)
+          = link_to "Complete signup", edit_user_path(current_user)
           span.percentage (+#{@tutorial.no_demo_user_score} Levels)
         li class="#{css_class_if_cond @tutorial.worklogs?}"
           i.icon-github-alt
@@ -50,7 +50,7 @@
             i.icon-ok
             |Take notes to keep track on progress to close more deals.
       .tips
-        h4 About registration
+        h4 About signup
         ul
           li
             i.icon-ok
@@ -58,6 +58,9 @@
               |You are still a demo user.
             - else
               |You are no longer a demo user.
+          li
+            i.icon-ok
+            |It's easy, just pick an email and password. Done.
           li
             i.icon-ok
             |Demo users are deleted automatically every 48h.
@@ -69,10 +72,7 @@
               |Your account is fully registered and won't delete.
           li
             i.icon-ok
-            |You can access all features after registration.
-          li
-            i.icon-ok
-            |Don't worry, we will automatically transfer all your data.
+            |You can access all features after completing signup.
       .tips
         h4 About worklogs
         ul

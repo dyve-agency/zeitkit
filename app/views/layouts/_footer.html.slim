@@ -18,7 +18,7 @@
           - if current_user && current_user.demo?
               li
                 i.icon-bell-alt
-                = link_to "Register", edit_user_path(current_user)
+                = link_to "Complete signup", edit_user_path(current_user)
           - if current_user && not_on_home?
               li
                 i.icon-ambulance
