@@ -72,7 +72,7 @@ class UsersController < ApplicationController
   end
 
   def welcome_message
-    "Your registration was successful. Thank you.<script>_gaq.push(['_trackPageview', '/register_success']);</script>".html_safe
+    "Thank you for testing Zeitkit.<script>_gaq.push(['_trackPageview', '/register_success']);</script>".html_safe
   end
 
 end
