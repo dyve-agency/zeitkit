@@ -5,7 +5,8 @@ class NotesController < ApplicationController
   respond_to :html, :json
 
   def index
-    respond_with current_user.notes.order("created_at DESC")
+    @notes = @notes.order("created_at DESC")
+    respond_with @notes
   end
 
   def public
