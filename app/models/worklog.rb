@@ -22,6 +22,12 @@ class Worklog < ActiveRecord::Base
     :to_date,
     :to_time
 
+  default_scope where(deleted_at: nil)
+
+  def self.deleted
+    self.unscoped.where('deleted_at IS NOT NULL')
+  end
+
   belongs_to :user
   belongs_to :client
   belongs_to :invoice

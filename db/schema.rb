@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130415155233) do
+ActiveRecord::Schema.define(:version => 20130425100853) do
 
   create_table "access_tokens", :force => true do |t|
     t.string   "token"
@@ -150,6 +150,7 @@ ActiveRecord::Schema.define(:version => 20130415155233) do
     t.integer  "total_cents"
     t.text     "summary"
     t.integer  "invoice_id"
+    t.datetime "deleted_at"
   end
 
 end
