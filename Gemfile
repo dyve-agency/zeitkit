@@ -25,6 +25,7 @@ gem 'pdf-merger'
 gem 'rjb'
 gem 'fullcontact'
 gem 'thin'
+gem 'jbuilder'
 
 
 gem 'wkhtmltopdf-binary'
