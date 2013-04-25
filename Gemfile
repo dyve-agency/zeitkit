@@ -26,6 +26,7 @@ gem 'rjb'
 gem 'fullcontact'
 gem 'thin'
 gem 'jbuilder'
+gem "permanent_records", "~> 3.1.3"
 
 
 gem 'wkhtmltopdf-binary'

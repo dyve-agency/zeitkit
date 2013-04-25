@@ -119,6 +119,8 @@ GEM
       rack (~> 1.2)
     pdf-merger (0.3.1)
     pdfkit (0.5.3)
+    permanent_records (3.1.3)
+      activerecord
     pg (0.15.1)
     polyglot (0.3.3)
     pry (0.9.12)
@@ -216,6 +218,7 @@ DEPENDENCIES
   newrelic_rpm
   pdf-merger
   pdfkit
+  permanent_records (~> 3.1.3)
   pg
   pry-rails
   quiet_assets
