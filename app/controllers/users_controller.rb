@@ -14,7 +14,7 @@ class UsersController < ApplicationController
 
       respond_to do |format|
         format.html { redirect_to clients_path, notice: welcome_message }
-        format.json
+        format.json { render status: 201 }
       end
     else
       respond_to do |format|
