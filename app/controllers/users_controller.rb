@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  respond_to :html
+  respond_to :html, :json
   skip_before_filter :require_login, only: [:new, :create, :signup_email, :dynamic_home]
 
   def new
@@ -8,11 +8,19 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(params[:user])
+
     if @user.save
       user = login(params[:user][:email], params[:user][:password], true)
-      redirect_to clients_path, notice: welcome_message
+
+      respond_to do |format|
+        format.html { redirect_to clients_path, notice: welcome_message }
+        format.json
+      end
     else
-      render :new
+      respond_to do |format|
+        format.html { render :new }
+        format.json { render status: 400, json: { :errors => @user.errors.full_messages } }
+      end
     end
   end
 
