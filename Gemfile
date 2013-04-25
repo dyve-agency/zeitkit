@@ -27,6 +27,7 @@ gem 'fullcontact'
 gem 'thin'
 gem 'jbuilder'
 gem "permanent_records", "~> 3.1.3"
+gem 'validates_email_format_of'
 
 
 gem 'wkhtmltopdf-binary'

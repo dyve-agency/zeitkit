@@ -36,6 +36,7 @@ class User < ActiveRecord::Base
   validates_presence_of :password, :on => :create
   validates_presence_of :email, :currency
   validates_uniqueness_of :email
+  validates :email, email_format: { message: 'address is not of a valid format' }
 
   before_save :update_after_demo_conversion
   before_create :get_name_from_api
