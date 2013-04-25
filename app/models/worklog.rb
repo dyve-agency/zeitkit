@@ -176,6 +176,10 @@ class Worklog < ActiveRecord::Base
     "Work: #{end_time.strftime("%d.%m.%Y")} - #{duration_hours.to_s}h:#{duration_minutes.to_s}min x #{hourly_rate}#{hourly_rate.currency.symbol}"
   end
 
+  def self.updated_since(unixtimestamp)
+    self.deleted.where("updated_at >= ?", Time.at(unixtimestamp.to_i).to_datetime)
+  end
+
   # Active record callbacks #
 
   def persist_hourly_rate_from_client
