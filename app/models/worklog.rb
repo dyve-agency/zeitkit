@@ -177,7 +177,7 @@ class Worklog < ActiveRecord::Base
   end
 
   def self.updated_since(unixtimestamp)
-    self.deleted.where("updated_at >= ?", Time.at(unixtimestamp.to_i).to_datetime)
+    self.unscoped.where("updated_at >= ?", Time.at(unixtimestamp.to_i).to_datetime)
   end
 
   # Active record callbacks #
