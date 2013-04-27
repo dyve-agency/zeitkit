@@ -10,6 +10,12 @@ class Time
   end
 end
 
+class ActiveSupport::TimeWithZone
+  def to_unixtime
+    self.to_i
+  end
+end
+
 class NilClass
   def to_unixtime
     nil

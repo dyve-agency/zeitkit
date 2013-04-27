@@ -7,8 +7,8 @@ json.array! @worklogs do |worklog|
   json.start_time            worklog.start_time
   json.end_time              worklog.end_time
 
-  json.start_time_unixtime   worklog.start_time.unixtime
-  json.end_time_unixtime     worklog.end_time.unixtime
+  json.start_time_unixtime   worklog.start_time.to_unixtime
+  json.end_time_unixtime     worklog.end_time.to_unixtime
 
   json.summary               worklog.summary
   json.hourly_rate_cents     worklog.hourly_rate_cents
