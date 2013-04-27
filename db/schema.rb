@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130425100853) do
+ActiveRecord::Schema.define(:version => 20130427115027) do
 
   create_table "access_tokens", :force => true do |t|
     t.string   "token"
@@ -135,6 +135,7 @@ ActiveRecord::Schema.define(:version => 20130425100853) do
     t.boolean  "signup_email_sent"
     t.string   "first_name"
     t.string   "last_name"
+    t.string   "time_zone"
   end
 
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token"

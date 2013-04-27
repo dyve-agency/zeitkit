@@ -8,6 +8,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(params[:user])
+    @user.time_zone = cookies["jstz_time_zone"]
 
     if @user.save
       user = login(params[:user][:email], params[:user][:password], true)
@@ -29,6 +30,7 @@ class UsersController < ApplicationController
 
   def signup_email
     @user = User.new
+    @user.time_zone = cookies["jstz_time_zone"]
 
     # TODO: ensure uniqueness of random mail
     if params[:singup_email] == nil

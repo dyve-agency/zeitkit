@@ -15,7 +15,8 @@ class User < ActiveRecord::Base
     :currency,
     :first_name,
     :last_name,
-    :authentications_attributes
+    :authentications_attributes,
+    :time_zone
 
   has_many :clients
   has_many :worklogs
@@ -37,6 +38,9 @@ class User < ActiveRecord::Base
   validates_presence_of :email, :currency
   validates_uniqueness_of :email
   validates :email, email_format: { message: 'address is not of a valid format' }
+  validates :time_zone, # allows empty timezone. falls back to default timezone
+    inclusion: { in: ActiveSupport::TimeZone.all.map(&:name) },
+    unless: Proc.new { |u| u.time_zone.blank? }
 
   before_save :update_after_demo_conversion
   before_create :get_name_from_api
@@ -193,5 +197,14 @@ class User < ActiveRecord::Base
       get_name_from_api
     end
     true
+  end
+
+  def time_zone=(new_time_zone)
+    result = Time.zone || 'UTC'
+    if new_time_zone && ActiveSupport::TimeZone.all.map(&:name).include?(
+      new_time_zone.try(:split, "/").try(:last))
+      result = new_time_zone.split("/").last
+    end
+    write_attribute(:time_zone, result)
   end
 end
