@@ -71,7 +71,7 @@ class Invoice < ActiveRecord::Base
   # Including 19.0% VAT
   # Excluding 19.0% VAT
   def including_vat_info
-    phrase = includes_vat ? "Inlcuding" : "Excluding"
+    phrase = includes_vat ? "Including" : "Excluding"
     "#{phrase} #{sprintf('%.2f', vat)}% VAT"
   end
 
