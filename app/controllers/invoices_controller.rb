@@ -63,6 +63,7 @@ class InvoicesController < ApplicationController
     @invoice.client = set_client
     if params[:client]
       @client = current_user.clients.find(params[:client])
+      @invoice.client = @client
     else
       @invoice.client = set_client
     end
