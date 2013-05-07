@@ -1,2 +1,3 @@
+h1.note-title.content-heading Note #{@note.client ? ": #{@note.client.name} #{l @note.created_at, format: :day_month_year}" : ""}
 .note-content
   = markdown @note.content
