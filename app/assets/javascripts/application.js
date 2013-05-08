@@ -20,4 +20,5 @@
 //= require Markdown.Sanitizer
 //= require Markdown.Editor
 //= require add2home
+//= require stay_in_browser
 //= require_tree .
