@@ -5,7 +5,12 @@ html lang="en" class="#{check_if_css_class}"
     meta content="width=device-width, initial-scale=1.0" name="viewport"
     title Tools for developers and freelancers - Zeitkit
     link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600|Pacifico|Bree+Serif' rel='stylesheet' type='text/css'
-    link rel="icon" href="/assets/favicon.png" type="image/png"
+    = favicon_link_tag "/assets/favicon.ico"
+    = favicon_link_tag "/assets/apple-touch-icon-iphone.png", rel: "apple-touch-icon", type: "image/png"
+    = favicon_link_tag "/assets/apple-touch-icon-iphone4.png", sizes: "114x114", rel: "apple-touch-icon", type: "image/png"
+    = favicon_link_tag "/assets/apple-touch-icon-ipad.png", sizes: "72x72", rel: "apple-touch-icon", type: "image/png"
+    = favicon_link_tag "/assets/apple-touch-icon-ipad3.png", sizes: "144x144", rel: "apple-touch-icon", type: "image/png"
+
     = stylesheet_link_tag    "application", :media => "all"
     = javascript_include_tag "application"
     javascript:
