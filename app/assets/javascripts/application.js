@@ -19,4 +19,5 @@
 //= require Markdown.Converter
 //= require Markdown.Sanitizer
 //= require Markdown.Editor
+//= require add2home
 //= require_tree .
