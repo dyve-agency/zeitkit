@@ -50,11 +50,14 @@ Worklog =
     total_dom.html(new_total)
   getHourlyCentRate: ->
     custom_rate_per_hour = parseFloat($('#worklog_hourly_rate').val())
+    selected_client = $('#worklog_client_id option:selected')
     if custom_rate_per_hour && custom_rate_per_hour > 0
       # Convert into cents
       return custom_rate_per_hour * 100
+    else if selected_client.length > 0
+      return seleted_client.data().hourlyRateCents
     else
-      return $('#worklog_client_id option:selected').data().hourlyRateCents
+      return false
   calcTotal: (start, end, per_hour) ->
     return if !start || !end
     time_span_seconds = (end.getTime() - start.getTime()) / 1000
