@@ -55,7 +55,8 @@
       #wmd-button-bar
       = f.input :summary, input_html: {class: "span6 wmd-input", id: "wmd-input"}, label: false
     .span3
-      = f.input :client_id, collection: current_user.clients, required: true
+      = f.input :client_id, as: :select do
+        = f.select :client_id, current_user.clients.map{|c| [c.name, c.id, {"data-hourly-rate-cents" => c.hourly_rate.cents}]}, required: true
       .accordion#accordion1
         .accordion-group
           .accordion-heading
@@ -64,6 +65,10 @@
           #adjust-price.accordion-body.collapse
             .accordion-inner
               = f.input :hourly_rate, as: :string
+      .total
+        span.label.label-success
+          | Total
+          span.worklog-total data-currency="#{@worklog.currency.symbol}" = @worklog.hourly_rate_with_currency
   .form-actions
     = f.button :submit
 

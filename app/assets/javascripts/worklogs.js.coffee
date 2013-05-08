@@ -16,6 +16,8 @@ Worklog =
       SaveTime.updateRemote()
     $('.start-time').on 'change', (e) ->
       _this.updateEndTimeStartTime()
+    $('.new_worklog, .edit_worklog').on 'change', (e) ->
+      _this.updateTotal()
   setEndToNow: ->
     current = this.getCurrentTime()
     $('#worklog_to_date').val(current[2] + "/" + current[1] + "/" + current[0])
@@ -36,6 +38,38 @@ Worklog =
       return number
   updateEndTimeStartTime: ->
     $('#worklog_to_date').val($('#worklog_from_date').val())
+  updateTotal: ->
+    per_hour = $('#worklog_client_id option:selected').data().hourlyRateCents
+    start = this.getStartDate()
+    end = this.getEndDate()
+    new_total = this.calcTotal(start, end, per_hour)
+    return if !start || !end || !new_total
+    total_dom = $('.worklog-total')
+    currency = total_dom.data().currency
+    new_total = new_total + currency
+    total_dom.html(new_total)
+  calcTotal: (start, end, per_hour) ->
+    return if !start || !end
+    time_span_seconds = (end.getTime() - start.getTime()) / 1000
+    return "0.00" if time_span_seconds < 0
+    per_second = per_hour / 3600
+    return ((time_span_seconds * per_second) / 100).toFixed(2)
+  getStartDate: ->
+    date = $('#worklog_from_date').val().split("/")
+    time = $('#worklog_from_time').val().split(":")
+    return this.dateFromDateAndTime(date, time)
+  getEndDate: ->
+    date = $('#worklog_to_date').val().split("/")
+    time = $('#worklog_to_time').val().split(":")
+    return this.dateFromDateAndTime(date, time)
+  dateFromDateAndTime: (date, time) ->
+    # date should be this format [18, 05, 2013]
+    # time should be this format [22, 51, 19]
+    try
+      return new Date(date[2], date[1], date[0], time[0], time[1], time[2], 0)
+    catch err
+      return false
+
 SaveTime =
   elems: {
     form: ->
