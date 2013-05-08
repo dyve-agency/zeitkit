@@ -8,10 +8,10 @@ class Tutorial
 
   SCORES = {
     worklogs: 20,
-    clients: 30,
-    invoices: 20,
+    clients: 25,
+    invoices: 15,
     notes: 10,
-    no_demo_user: 20
+    no_demo_user: 30
   }
 
   # Adds methods which if the user has:

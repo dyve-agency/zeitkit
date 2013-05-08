@@ -9,14 +9,14 @@
         .span3
           h4 Zeitkit level #{@tutorial.calc_level} of #{@tutorial.max_level}
       ul.levels
-        li class="#{css_class_if_cond @tutorial.clients?}"
-          i.icon-github-alt
-          = link_to "Add a client", new_client_path
-          span.percentage (+#{@tutorial.clients_score} Levels)
         li class="#{css_class_if_cond @tutorial.no_demo_user?}"
           i.icon-github-alt
           = link_to "Complete signup", edit_user_path(current_user)
           span.percentage (+#{@tutorial.no_demo_user_score} Levels)
+        li class="#{css_class_if_cond @tutorial.clients?}"
+          i.icon-github-alt
+          = link_to "Add a client", new_client_path
+          span.percentage (+#{@tutorial.clients_score} Levels)
         li class="#{css_class_if_cond @tutorial.worklogs?}"
           i.icon-github-alt
           = link_to "Create a worklog", new_worklog_path
@@ -32,24 +32,6 @@
     .span6.alert-success.tip-explanations
       i.icon-lightbulb
       .tips.shown
-        h4 About clients
-        ul
-          li
-            i.icon-ok
-            |Keep track of whom you work with.
-          li
-            i.icon-ok
-            |Clients are the heart of all Zeitkit tools.
-          li
-            i.icon-ok
-            |Log your time, expenses and products.
-          li
-            i.icon-ok
-            |Bill them in a few clicks.
-          li
-            i.icon-ok
-            |Take notes to keep track on progress to close more deals.
-      .tips
         h4 About signup
         ul
           li
@@ -73,6 +55,24 @@
           li
             i.icon-ok
             |You can access all features after completing signup.
+      .tips
+        h4 About clients
+        ul
+          li
+            i.icon-ok
+            |Keep track of whom you work with.
+          li
+            i.icon-ok
+            |Clients are the heart of all Zeitkit tools.
+          li
+            i.icon-ok
+            |Log your time, expenses and products.
+          li
+            i.icon-ok
+            |Bill them in a few clicks.
+          li
+            i.icon-ok
+            |Take notes to keep track on progress to close more deals.
       .tips
         h4 About worklogs
         ul
