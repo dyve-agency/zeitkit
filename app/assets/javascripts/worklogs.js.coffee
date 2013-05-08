@@ -39,15 +39,22 @@ Worklog =
   updateEndTimeStartTime: ->
     $('#worklog_to_date').val($('#worklog_from_date').val())
   updateTotal: ->
-    per_hour = $('#worklog_client_id option:selected').data().hourlyRateCents
     start = this.getStartDate()
     end = this.getEndDate()
-    new_total = this.calcTotal(start, end, per_hour)
+    console.log this.getHourlyCentRate()
+    new_total = this.calcTotal(start, end, this.getHourlyCentRate())
     return if !start || !end || !new_total
     total_dom = $('.worklog-total')
     currency = total_dom.data().currency
     new_total = new_total + currency
     total_dom.html(new_total)
+  getHourlyCentRate: ->
+    custom_rate_per_hour = parseFloat($('#worklog_hourly_rate').val())
+    if custom_rate_per_hour && custom_rate_per_hour > 0
+      # Convert into cents
+      return custom_rate_per_hour * 100
+    else
+      return $('#worklog_client_id option:selected').data().hourlyRateCents
   calcTotal: (start, end, per_hour) ->
     return if !start || !end
     time_span_seconds = (end.getTime() - start.getTime()) / 1000
