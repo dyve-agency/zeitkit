@@ -7,7 +7,7 @@ module TotalHelper
   end
 
   def total_with_currency
-    "#{total.to_s}#{total_rate.currency.symbol}"
+    "#{total.to_s}#{total.currency.symbol}"
   end
 
   def total=(new_amount)
