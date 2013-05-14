@@ -13,6 +13,7 @@ Worklog =
     $('.end-time-now').on 'click touchstart', (e) ->
       e.preventDefault()
       _this.setEndToNow()
+      _this.updateTotal()
       SaveTime.updateRemote()
     $('.start-time').on 'change', (e) ->
       _this.updateEndTimeStartTime()
