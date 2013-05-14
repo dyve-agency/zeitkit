@@ -68,7 +68,7 @@
       .total
         span.label.label-success
           | Total
-          span.worklog-total data-currency="#{@worklog.currency.symbol}" = @worklog.hourly_rate_with_currency
+          span.worklog-total data-currency="#{@worklog.currency.symbol}" = @worklog.total_with_currency
   .form-actions
     = f.button :submit
 
