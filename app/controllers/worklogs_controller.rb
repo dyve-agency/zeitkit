@@ -7,7 +7,7 @@ class WorklogsController < ApplicationController
     @user = current_user
     @clients = @user.clients
     if params[:updated_since]
-      @worklogs = current_user.worklogs.updated_since(params[:updated_since])
+      @worklogs = Worklog.updated_since(params[:updated_since]).where(user_id: current_user.id)
     else
       @worklogs = current_user.worklogs.order("start_time DESC")
       params[:client] ? @worklogs = @worklogs.where(client_id: params[:client]) : @worklogs
