@@ -28,4 +28,7 @@ class Client < ActiveRecord::Base
     name && city && street && zip
   end
 
+  def self.updated_since(unixtimestamp)
+    self.unscoped.where("updated_at >= ?", Time.at(unixtimestamp.to_i).to_datetime)
+  end
 end
