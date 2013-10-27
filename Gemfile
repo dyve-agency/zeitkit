@@ -35,15 +35,18 @@ gem 'wkhtmltopdf-binary'
 # Octokit gem for github
 gem 'octokit'
 
-# Gems used only for assets and not required
-# in production environments by default.
 group :assets do
   gem 'coffee-rails', '~> 3.2.1'
-  gem 'bootstrap-sass', '~> 2.1.1.0'
   gem 'bourbon'
   gem 'font-awesome-sass-rails', '~> 3.0.0.0', git: "https://github.com/nicoles/font-awesome-sass-rails.git"
   gem 'uglifier', '>= 1.0.3'
-  gem 'sass-rails',   '~> 3.2.3'
+
+  # Use bootstrap as the style framework
+  gem 'bootstrap-sass', '~> 2.3.1.1', git: 'https://github.com/thomas-mcdonald/bootstrap-sass', tag: 'v2.3.1.1'
+
+  # Bootstrap helpers
+  gem "rails-bootstrap-helpers", git: "https://github.com/Tretti/rails-bootstrap-helpers.git"
+
 end
 
 group :development do

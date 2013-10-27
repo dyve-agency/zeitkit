@@ -1,4 +1,11 @@
 GIT
+  remote: https://github.com/Tretti/rails-bootstrap-helpers.git
+  revision: 98bc0458f864be3f21f1a53f1a265b15f9e0e883
+  specs:
+    rails-bootstrap-helpers (0.1.0)
+      rails (>= 3.2.11)
+
+GIT
   remote: https://github.com/hendricius/contact_us.git
   revision: 8b4e273f999fd1e1bab604dd7f40e7c5099ae340
   specs:
@@ -22,6 +29,14 @@ GIT
     font-awesome-sass-rails (3.0.0.0)
       railties (>= 3.1.1)
       sass-rails (>= 3.1.1)
+
+GIT
+  remote: https://github.com/thomas-mcdonald/bootstrap-sass
+  revision: 97501b33aa0026698ba2a102226f276297c665b2
+  tag: v2.3.1.1
+  specs:
+    bootstrap-sass (2.3.1.1)
+      sass (~> 3.2)
 
 GEM
   remote: https://rubygems.org/
@@ -56,7 +71,6 @@ GEM
     addressable (2.3.5)
     arel (3.0.2)
     bcrypt-ruby (3.0.1)
-    bootstrap-sass (2.1.1.0)
     bourbon (3.1.3)
       sass (>= 3.2.0)
       thor
@@ -212,7 +226,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bootstrap-sass (~> 2.1.1.0)
+  bootstrap-sass (~> 2.3.1.1)!
   bourbon
   cancan
   coffee-rails (~> 3.2.1)
@@ -233,9 +247,9 @@ DEPENDENCIES
   rack-force_domain
   railroady
   rails (= 3.2.11)
+  rails-bootstrap-helpers!
   redcarpet
   rjb
-  sass-rails (~> 3.2.3)
   simple_form
   slim
   slim-rails

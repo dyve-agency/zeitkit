@@ -16,7 +16,9 @@ class User < ActiveRecord::Base
     :first_name,
     :last_name,
     :authentications_attributes,
-    :time_zone
+    :time_zone,
+    :github_user,
+    :github_password
 
   has_many :clients
   has_many :worklogs
@@ -206,5 +208,9 @@ class User < ActiveRecord::Base
       result = new_time_zone.split("/").last
     end
     write_attribute(:time_zone, result)
+  end
+
+  def github_client
+    @github_client ||= Github.new(self) if github_user && github_password
   end
 end

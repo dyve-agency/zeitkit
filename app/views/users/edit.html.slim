@@ -24,6 +24,13 @@
         = f.input :city
         = f.input :zip
         = f.input :time_zone, label: "Timezone"
+    = accordion "github-data" do |a|
+      - a.group "Github Account data" do
+        = bs_alert "For creating worklogs we can pull commit data from your Github repositories.", style: "info"
+        = f.input :github_user
+        = f.input :github_password
+
+    
 
     .form-actions
       .btn-group
