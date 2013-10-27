@@ -32,6 +32,9 @@ gem 'validates_email_format_of'
 
 gem 'wkhtmltopdf-binary'
 
+# Octokit gem for github
+gem 'octokit'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
