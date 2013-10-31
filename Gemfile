@@ -24,13 +24,17 @@ gem 'pdfkit'
 gem 'pdf-merger'
 gem 'rjb'
 gem 'fullcontact'
-gem 'thin'
 gem 'jbuilder'
 gem "permanent_records", "~> 3.1.3"
 gem 'validates_email_format_of'
 
-
 gem 'wkhtmltopdf-binary'
+
+# Managing startup behavior of App
+gem 'foreman'
+
+# Use the puma web server
+gem 'puma'
 
 # Octokit gem for github
 gem 'octokit'
