@@ -73,7 +73,7 @@
       - if current_user.github_token
         ul#github_commit_messages
       - else
-        p You can auth with GitHub. Then we fetch your Github commit messages your worklogs.
+        p You can auth with GitHub. This shows recent GitHub commit messages which you can then add to your worklogs.
         = link_to boolean_with_icon(condition: current_user.github_token, text: "Authenticate with Github"), "/auth/github", class: "btn btn-primary"
 
 

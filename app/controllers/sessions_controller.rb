@@ -30,9 +30,9 @@ class SessionsController < ApplicationController
   def auth_provider_callback
     auth = auth_hash
     if auth && current_user.update_attribute(:github_token, auth_hash["credentials"]["token"])
-      redirect_to edit_user_path(current_user), notice: "Successfuly authed GitHub"
+      redirect_to edit_user_path(current_user), notice: "Successfuly authed GitHub."
     else
-      redirect_to edit_user_path(current_user), flash: { error: "Could not auth with GitHub" }
+      redirect_to edit_user_path(current_user), flash: { error: "Could not auth with GitHub." }
     end
   end
 

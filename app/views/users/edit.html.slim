@@ -25,7 +25,7 @@
         = f.input :zip
         = f.input :time_zone, label: "Timezone"
 
-    = bs_alert "For creating worklogs we can pull commit data from your Github repositories.", style: "info"
+    = bs_alert "When creating worklogs we can show recent commit messages from your GitHub repos.", style: "info"
     = link_to boolean_with_icon(condition: current_user.github_token, text: "Authenticate with Github"), "/auth/github", class: "btn btn-primary"
 
     
