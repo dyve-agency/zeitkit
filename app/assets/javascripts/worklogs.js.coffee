@@ -115,7 +115,7 @@ Worklog =
     summary = this.elems.worklog_summary()
     old_val = summary.val()
     if old_val == ""
-      new_val = "* #{text}"
+      new_val = " * #{text}"
     else
       new_val = "#{old_val}\n * #{text}"
     summary.val(new_val)
