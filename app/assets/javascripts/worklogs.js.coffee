@@ -70,7 +70,7 @@ Worklog =
 
   calcTotal: (start, end, per_hour) ->
     return if !start || !end
-    time_span_seconds = (end.getTime() - start.getTime()) / 1000
+    time_span_seconds = (end - start) / 1000
     return "0.00" if time_span_seconds < 0
     per_second = per_hour / 3600
     return ((time_span_seconds * per_second) / 100).toFixed(2)
@@ -78,18 +78,33 @@ Worklog =
   getStartDate: ->
     date = $('#worklog_from_date').val().split("/")
     time = $('#worklog_from_time').val().split(":")
-    return this.dateFromDateAndTime(date, time)
+    date_obj =
+      year: date[2]
+      month: date[1]
+      day: date[0]
+      hour: time[0]
+      minute: time[1]
+      second: time[2]
+    return this.dateFromDateAndTime(date_obj)
 
   getEndDate: ->
     date = $('#worklog_to_date').val().split("/")
     time = $('#worklog_to_time').val().split(":")
-    return this.dateFromDateAndTime(date, time)
+    date_obj =
+      year: date[2]
+      month: date[1]
+      day: date[0]
+      hour: time[0]
+      minute: time[1]
+      second: time[2]
 
-  dateFromDateAndTime: (date, time) ->
+    return this.dateFromDateAndTime(date_obj)
+
+  dateFromDateAndTime: (date_obj) ->
     # date should be this format [18, 05, 2013]
     # time should be this format [22, 51, 19]
     try
-      return new Date(date[2], date[1], date[0], time[0], time[1], time[2], 0)
+      return moment("#{date_obj.year}-#{date_obj.month}-#{date_obj.day} #{date_obj.hour}:#{date_obj.minute}:#{date_obj.second}")
     catch err
       return false
 
