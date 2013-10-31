@@ -10,6 +10,7 @@ $dark-blue: #68cad8
 $light-color: $light-blue
 $dark-color: $dark-blue
 .btn
+  @include border-radius(0px)
   i
     margin-right: 3px
 textarea
@@ -46,6 +47,11 @@ h1, h2, h3, h4, h5, h6, .hero-unit h1
       font-size: 15px
 .table th
   font-weight: 600
+
+.table-bordered
+  @include border-radius(0px)
+  thead:first-child tr:first-child > th:first-child, thead:last-child tr:first-child > th:last-child
+    @include border-radius(0px)
 .navbar-fixed-top .navbar-inner, .navbar-static-top .navbar-inner
   background: none
   background-color: #333
@@ -71,6 +77,10 @@ h1, h2, h3, h4, h5, h6, .hero-unit h1
     background-image: none
     background-color: #afe4ec
     color: #156571
+
+.btn-large
+  @include border-radius(0px)
+
 blockquote
   border-left: 2px solid #fff
 hr
@@ -91,7 +101,7 @@ hr
 .table-striped tbody tr:nth-child(odd) td, .table-striped tbody tr:nth-child(odd) th
   background: #fefefe
 .alert
-  @include box-shadow(0px 2px 3px 0px #bbbbbb)
+  @include border-radius(0px)
   ul
     margin: 0px 0px 0px 25px
   .intro
@@ -101,3 +111,13 @@ a
 select[multiple], select[size]
   width: 468px
   height: 300px
+
+.btn-group
+  > .btn:last-child, > .dropdown-toggle, > .btn:first-child
+    @include border-radius(0px)
+
+select, textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input
+  @include border-radius(0px)
+
+.progress
+  @include border-radius(0px)
