@@ -70,7 +70,7 @@
           | Total
           span.worklog-total data-currency="#{@worklog.currency.symbol}" = @worklog.total_with_currency
       h4 Github Commits
-      - if current_user.github_user && current_user.github_password
+      - if current_user.github_token
         ul#github_commit_messages
       - else
         p You can add your Github credentials, then we fetch your Github

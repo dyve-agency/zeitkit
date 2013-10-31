@@ -222,7 +222,7 @@ class User < ActiveRecord::Base
   end
 
   def github_client
-    @github_client ||= Github.new(self) if github_user && github_password
+    @github_client ||= Github.new(self) if github_token
   end
 
 end

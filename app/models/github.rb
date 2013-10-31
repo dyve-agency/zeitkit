@@ -3,7 +3,7 @@ class Github
   attr_accessor :client
 
   def initialize(user)
-    self.client = Octokit::Client.new login: user.github_user, password: user.github_password
+    self.client = Octokit::Client.new access_token: user.github_token
   end
 
   def get_repo_names
