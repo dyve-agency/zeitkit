@@ -5,6 +5,9 @@ $ ->
   SaveTime.init()
 
 Worklog =
+  elems:
+    worklog_summary: ->
+      $('.worklog-summary')
   init: ->
     _this = this
     $('.reset-time').on 'click touchstart', (e) ->
@@ -107,6 +110,15 @@ Worklog =
       return moment("#{date_obj.year}-#{date_obj.month}-#{date_obj.day} #{date_obj.hour}:#{date_obj.minute}:#{date_obj.second}")
     catch err
       return false
+
+  add_to_worklog: (text)->
+    summary = this.elems.worklog_summary()
+    old_val = summary.val()
+    if old_val == ""
+      new_val = "* #{text}"
+    else
+      new_val = "#{old_val}\n * #{text}"
+    summary.val(new_val)
 
 SaveTime =
   elems: {

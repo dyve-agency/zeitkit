@@ -1,10 +1,15 @@
 window.App ||= {}
 
-$ ->
-  Github.el = $('#github_commit_messages')
-  Github.get_commit_messages(window.App.Worklog.getStartDate(), window.App.Worklog.getEndDate())
-
 Github =
+  init: ->
+    _this = this
+    $ ->
+      _this.el = $('#github_commit_messages')
+      _this.get_commit_messages(window.App.Worklog.getStartDate(), window.App.Worklog.getEndDate())
+      _this.el.on 'click', 'a', (e)->
+        e.preventDefault()
+        elem = $(e.currentTarget)
+        window.App.Worklog.add_to_worklog(elem.data().text)
   get_commit_messages: (start_date, end_date)->
     _this = this
     url = this.github_messages_link

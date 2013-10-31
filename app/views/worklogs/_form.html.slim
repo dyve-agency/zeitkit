@@ -53,7 +53,7 @@
     .span6
       h4 What did you do?
       #wmd-button-bar
-      = f.input :summary, input_html: {class: "span6 wmd-input", id: "wmd-input"}, label: false
+      = f.input :summary, input_html: {class: "span6 wmd-input worklog-summary", id: "wmd-input"}, label: false
     .span6
       = f.input :client_id, as: :select do
         = f.select :client_id, current_user.clients.map{|c| [c.name, c.id, {"data-hourly-rate-cents" => c.hourly_rate.cents}]}, required: true
@@ -84,4 +84,5 @@
   class: "temp_worklog_save_path hidden", method: :put
 
 javascript: 
+  window.App.Github.init();
   window.App.Github.github_messages_link = "#{github_commit_messages_user_path(current_user, format: :json)}";
