@@ -55,6 +55,17 @@ class User < ActiveRecord::Base
   scope :no_signup_email_sent, where(signup_email_sent: false)
   scope :older_than_30_minutes, lambda {where("created_at <= ?", 30.minutes.ago)}
 
+  def self.unused_random_email
+    email = nil
+    while email.blank?
+      new_email = "demo#{SecureRandom.hex}@zeitkit.com"
+      unless exists?(email: new_email)
+        email = new_email
+      end
+    end
+    email
+  end
+
   def set_temp_password(temp_pw)
     self.password = temp_pw
     self.password_confirmation = temp_pw
@@ -213,4 +224,5 @@ class User < ActiveRecord::Base
   def github_client
     @github_client ||= Github.new(self) if github_user && github_password
   end
+
 end
