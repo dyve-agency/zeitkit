@@ -26,11 +26,12 @@
             input.span3#signup-email[name="signup_email" type="hidden"
               placeholder="e.g. me@mymail.com"]
             = f.button :submit, "Get started Free »",
-              class: "home-submit btn-large",
-              onclick: "_gaq.push(['_trackEvent', 'Signup', 'Click', 'Submit']);"
+              class: "home-submit btn-large signup-link"
           p No contracts, no fees. It's free. Signup.time < 2.seconds.
       - else
         = link_to "My Account", user_path(current_user), class: "btn btn-large"
 
     .span3.offset1
       i.icon-briefcase.large-icon.hidden-phone
+javascript:
+  window.App.SignupTracker.init()

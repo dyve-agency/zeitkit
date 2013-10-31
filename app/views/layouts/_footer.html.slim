@@ -26,7 +26,7 @@
           - if !current_user
               li
                 i.icon-star
-                = link_to "Register", signup_email_path, method: :post, onclick: "_gaq.push(['_trackEvent', 'Signup', 'Click', 'Submit']);"
+                = link_to "Register", new_user_path, class: "signup-link"
       - if current_user && params[:action] != "home"
         .span6.random-tip
           i.icon-quote-left

@@ -32,30 +32,29 @@ class UsersController < ApplicationController
     @user = User.new
     @user.time_zone = cookies["jstz_time_zone"]
 
-    # TODO: ensure uniqueness of random mail
     if params[:singup_email] == nil
-      @user.email = 'demo' + SecureRandom.base64(10).split("=").first + '@zeitkit.com'
+      @user.email = User.unused_random_email
     else
       @user.email = params[:signup_email]
     end
 
-    temp_pw = SecureRandom.base64(10).split("=").first
+    temp_pw = SecureRandom.hex 
     @user.set_temp_password temp_pw
-    if @user.save
-      if @user.demo?
-        user = login(@user.email, temp_pw, true)
-        redirect_to clients_path, notice: welcome_message
-      else
-        begin
-          UserMailer.temp_password_email(temp_pw, @user).deliver
-        ensure
-          user = login(@user.email, temp_pw, true)
-          redirect_to clients_path, notice: welcome_message
-        end
-      end
-    else
+    unless @user.save
       flash[:alert] = "Sorry, that email has already been taken/is invalid. Please try again."
       redirect_to root_path
+      return
+    end
+    if @user.demo?
+      user = login(@user.email, temp_pw, true)
+      redirect_to clients_path, notice: welcome_message
+    else
+      begin
+        UserMailer.temp_password_email(temp_pw, @user).deliver
+      ensure
+        user = login(@user.email, temp_pw, true)
+        redirect_to clients_path, notice: welcome_message
+      end
     end
   end
 
