@@ -43,6 +43,9 @@ gem 'octokit'
 gem 'omniauth'
 gem 'omniauth-github'
 
+# Bootstrap helpers
+gem "rails-bootstrap-helpers", git: "https://github.com/Tretti/rails-bootstrap-helpers.git"
+
 group :assets do
   gem 'coffee-rails', '~> 3.2.1'
   gem 'bourbon'
@@ -51,9 +54,6 @@ group :assets do
 
   # Use bootstrap as the style framework
   gem 'bootstrap-sass', '~> 2.3.1.1', git: 'https://github.com/thomas-mcdonald/bootstrap-sass', tag: 'v2.3.1.1'
-
-  # Bootstrap helpers
-  gem "rails-bootstrap-helpers", git: "https://github.com/Tretti/rails-bootstrap-helpers.git"
 
   # Formating times
   gem 'momentjs-rails'
