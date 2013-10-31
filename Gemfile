@@ -39,6 +39,10 @@ gem 'puma'
 # Octokit gem for github
 gem 'octokit'
 
+# Omniauth Github
+gem 'omniauth'
+gem 'omniauth-github'
+
 group :assets do
   gem 'coffee-rails', '~> 3.2.1'
   gem 'bourbon'

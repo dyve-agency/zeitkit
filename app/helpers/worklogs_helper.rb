@@ -56,4 +56,12 @@ module WorklogsHelper
     "#{hours}h:#{minutes}min"
   end
 
+  def boolean_with_icon(condition: false, text: "")
+    if condition
+      "<i class='icon-ok'></i> #{text}".html_safe
+    else
+      "<i class='icon-remove'></i> #{text}".html_safe
+    end
+  end
+
 end

@@ -33,19 +33,19 @@
             - if not_on_home?
               li
                 = link_to "Tutorial", show_tutorial_path, class: "show-tutorial"
+            li class="dropdown"
+              a.dropdown-toggle data-toggle="dropdown" href="#dropdown-menu"
+                = current_user.email_title
+                b.caret
+              ul.dropdown-menu
+                li
+                  = link_to "Edit account", edit_user_path(current_user)
+                li
+                  = link_to "Sign out", logout_path
             - if current_user.demo?
               li
                 = link_to "Complete signup", edit_user_path(current_user),
                   class: "white"
-              li class="dropdown"
-                a.dropdown-toggle data-toggle="dropdown" href="#dropdown-menu"
-                  = current_user.email_title
-                  b.caret
-                ul.dropdown-menu
-                  li
-                    = link_to "Edit account", edit_user_path(current_user)
-                  li
-                    = link_to "Sign out", logout_path
             li
               i.icon-spinner.icon-spin.loading-animation
               span.loading-message
