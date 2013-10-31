@@ -1,1 +1,1 @@
-web: bundle exec puma -t 8:32 -w 3 -p3000
+web: bundle exec puma -t ${PUMA_MIN_THREADS:-8}:${PUMA_MAX_THREADS:-12} -w ${PUMA_WORKERS:-2} -p $PORT -e ${RACK_ENV:-development}
