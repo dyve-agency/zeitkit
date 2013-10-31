@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131031181451) do
+ActiveRecord::Schema.define(:version => 20131031183018) do
 
   create_table "access_tokens", :force => true do |t|
     t.string   "token"
@@ -136,8 +136,6 @@ ActiveRecord::Schema.define(:version => 20131031181451) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "time_zone"
-    t.string   "github_user"
-    t.string   "github_password"
     t.string   "github_token"
   end
 

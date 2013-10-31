@@ -16,9 +16,7 @@ class User < ActiveRecord::Base
     :first_name,
     :last_name,
     :authentications_attributes,
-    :time_zone,
-    :github_user,
-    :github_password
+    :time_zone
 
   has_many :clients
   has_many :worklogs
