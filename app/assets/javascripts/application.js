@@ -21,4 +21,5 @@
 //= require Markdown.Editor
 //= require add2home
 //= require stay_in_browser
+//= require moment
 //= require_tree .

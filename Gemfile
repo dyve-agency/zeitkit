@@ -47,6 +47,8 @@ group :assets do
   # Bootstrap helpers
   gem "rails-bootstrap-helpers", git: "https://github.com/Tretti/rails-bootstrap-helpers.git"
 
+  # Formating times
+  gem 'momentjs-rails'
 end
 
 group :development do
