@@ -1,3 +1,5 @@
+window.App ||= {}
+
 $ ->
   Worklog.init()
   SaveTime.init()
@@ -19,19 +21,23 @@ Worklog =
       _this.updateEndTimeStartTime()
     $('.new_worklog, .edit_worklog').on 'change', (e) ->
       _this.updateTotal()
+
   setEndToNow: ->
     current = this.getCurrentTime()
     $('#worklog_to_date').val(current[2] + "/" + current[1] + "/" + current[0])
     $('#worklog_to_time').val(current[3] + ":" + current[4] + ":" + current[5])
+
   setStartToNow: ->
     current = this.getCurrentTime()
     $('#worklog_from_date').val(current[2] + "/" + current[1] + "/" + current[0])
     $('#worklog_from_time').val(current[3] + ":" + current[4] + ":" + current[5])
+
   getCurrentTime: ->
     d = new Date()
     convert = this.convertToZeroBased
     return [d.getFullYear(), convert(d.getMonth() + 1), convert(d.getDate()),
       convert(d.getHours()), convert(d.getMinutes()), convert(d.getSeconds())]
+
   convertToZeroBased: (number)->
     if number < 10
       return "0" + number
@@ -39,16 +45,18 @@ Worklog =
       return number
   updateEndTimeStartTime: ->
     $('#worklog_to_date').val($('#worklog_from_date').val())
+
   updateTotal: ->
     start = this.getStartDate()
     end = this.getEndDate()
-    console.log this.getHourlyCentRate()
     new_total = this.calcTotal(start, end, this.getHourlyCentRate())
     return if !start || !end || !new_total
+    window.App.Github.get_commit_messages(start, end)
     total_dom = $('.worklog-total')
     currency = total_dom.data().currency
     new_total = new_total + currency
     total_dom.html(new_total)
+
   getHourlyCentRate: ->
     custom_rate_per_hour = parseFloat($('#worklog_hourly_rate').val())
     selected_client = $('#worklog_client_id option:selected')
@@ -59,20 +67,24 @@ Worklog =
       return selected_client.data().hourlyRateCents
     else
       return false
+
   calcTotal: (start, end, per_hour) ->
     return if !start || !end
     time_span_seconds = (end.getTime() - start.getTime()) / 1000
     return "0.00" if time_span_seconds < 0
     per_second = per_hour / 3600
     return ((time_span_seconds * per_second) / 100).toFixed(2)
+
   getStartDate: ->
     date = $('#worklog_from_date').val().split("/")
     time = $('#worklog_from_time').val().split(":")
     return this.dateFromDateAndTime(date, time)
+
   getEndDate: ->
     date = $('#worklog_to_date').val().split("/")
     time = $('#worklog_to_time').val().split(":")
     return this.dateFromDateAndTime(date, time)
+
   dateFromDateAndTime: (date, time) ->
     # date should be this format [18, 05, 2013]
     # time should be this format [22, 51, 19]
@@ -100,3 +112,6 @@ SaveTime =
       type: 'PUT'
       dataType: 'json'
       data: _this.elems.form().serialize()
+
+window.App.Worklog = Worklog
+window.App.SaveTime = SaveTime

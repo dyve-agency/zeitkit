@@ -1,4 +1,4 @@
-window.App = {}
+window.App ||= {}
 
 $ ->
   if $('.wmd-input').length > 0
