@@ -2,7 +2,11 @@ Timetracker::Application.routes.draw do
 
   root :to => "static#home"
 
-  resources :users, only: [:new, :create, :show, :edit, :update]
+  resources :users, only: [:new, :create, :show, :edit, :update] do
+    member do
+      get :github_commit_messages
+    end
+  end
   resources :clients
   resources :temp_worklog_saves, only: [:update], as: "temp_worklog_save"
   resources :notes do

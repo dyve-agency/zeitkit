@@ -85,4 +85,12 @@ class UsersController < ApplicationController
     "Thank you for testing Zeitkit.<script>_gaq.push(['_trackPageview', '/register_success']);</script>".html_safe
   end
 
+  def github_commit_messages
+    if current_user.github_client
+      respond_with current_user.github_client.get_commits_between(start_date: params[:start_date], end_date: params[:end_date])
+    else
+      respond_with []
+    end
+  end
+
 end
