@@ -73,8 +73,8 @@
       - if current_user.github_token
         ul#github_commit_messages
       - else
-        p You can add your Github credentials, then we fetch your Github
-        commit messages for the day. This makes adding logs even easier.
+        p You can auth with GitHub. Then we fetch your Github commit messages your worklogs.
+        = link_to boolean_with_icon(condition: current_user.github_token, text: "Authenticate with Github"), "/auth/github", class: "btn btn-primary"
 
 
   .form-actions
