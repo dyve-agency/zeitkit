@@ -4,22 +4,12 @@ class Invoice < ActiveRecord::Base
 
   include TotalHelper
   total_and_currency_for attribute_name: :total, cents_attribute: :total_cents
+  total_and_currency_for attribute_name: :subtotal, cents_attribute: :subtotal_cents
   total_and_currency_for attribute_name: :discount, cents_attribute: :discount_cents
 
-  attr_accessible :client_id,
-    :includes_vat,
-    :user_id,
-    :vat,
-    :paid_on,
-    :total,
-    :note,
-    :number,
-    :payment_terms,
-    :payment_info,
-    :worklog_ids,
-    :expense_ids,
-    :product_ids,
-    :content
+  attr_accessible :client_id, :includes_vat, :user_id, :vat, :paid_on,
+    :total, :note, :number, :payment_terms, :payment_info, :worklog_ids,
+    :expense_ids, :product_ids, :content, :discount
 
   belongs_to :user
   belongs_to :client
@@ -33,13 +23,14 @@ class Invoice < ActiveRecord::Base
 
   before_validation :set_initial_total!, on: :create
   after_save :set_total!
+  after_save :set_subtotal!
 
   validates :user_id, :client_id, :number, :vat, presence: true
   validates_uniqueness_of :number, scope: :user_id
   validates_numericality_of :total, :allow_blank => false
 
   def total_vat
-    total * vat/100
+    (total) * vat/100
   end
 
   def calc_vat_total
@@ -48,6 +39,10 @@ class Invoice < ActiveRecord::Base
     else
       total + total_vat
     end
+  end
+
+  def net_total
+    total - discount
   end
 
   def string_fields_to_nil
@@ -108,9 +103,19 @@ class Invoice < ActiveRecord::Base
   end
 
   def set_total!
-    new_total = Money.new worklogs.sum(:total_cents) + expenses.sum(:total_cents) + products.inject(0){|total, product| total + ((product.charged_total / 100).round(2) * 100)}, currency
+    set_subtotal!
+    cents_total = subtotal.cents - discount.cents
+    new_total = Money.new cents_total, currency
     self.update_column(:total_cents, new_total.cents)
   end
+
+  def set_subtotal!
+    cents_total = worklogs.sum(:total_cents) + expenses.sum(:total_cents)
+    cents_total += products.inject(0){|total, product| total + ((product.charged_total / 100).round(2) * 100)}
+    new_total = Money.new cents_total, currency
+    self.update_column(:subtotal_cents, new_total.cents)
+  end
+
 
   def deassociate_worklogs
     Worklog.where(invoice_id: id).update_all(invoice_id: nil)
@@ -125,6 +130,6 @@ class Invoice < ActiveRecord::Base
   end
 
   def discount_applied?
-    discount && discount > 0
+    discount && discount.cents > 0
   end
 end

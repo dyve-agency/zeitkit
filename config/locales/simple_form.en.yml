@@ -15,6 +15,7 @@ en:
         payment_info: Payment info (Markdown)
         payment_terms: Payment terms (Markdown)
         vat: VAT
+        discount: Discount Absolute
       invoice_default:
         content: Invoice content (Markdown)
         payment_info: Payment info (Markdown)
@@ -30,6 +31,8 @@ en:
         reason: Make sure to keep receipts in case the client want more details on this expense.
       product:
         charge: Allows you to add a surcharge to the product price for your client. I.e. when you are reselling a server.
+      invoice:
+        discount: This value will be substracted from the invoice total.
     placeholders:
       session:
         username: "i.e. me@example.com"
@@ -52,6 +55,7 @@ en:
         payment_info: "e.g. * Wire to: 2691929, Gerbank, 250000. Or Paypal: payments@zeitkit.com"
         payment_terms: "e.g. * Amount is due opon invoice receival."
         note: "e.g. * VAT-Number: 502123 or other important info in your country."
+        discount: "i.e. 100"
       invoice_default:
         payment_info: "e.g. * Wire to: 2691929, Gerbank, 250000. Or Paypal: payments@zeitkit.com"
         payment_terms: "e.g. * Amount is due opon invoice receival."
