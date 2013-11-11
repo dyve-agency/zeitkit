@@ -1,5 +1,7 @@
 class Expense < ActiveRecord::Base
   include TotalHelper
+  total_and_currency_for attribute_name: :total, cents_attribute: :total_cents
+
   include NilStrings
 
   attr_accessible :client_id, :total, :user_id, :reason

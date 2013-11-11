@@ -1,7 +1,10 @@
 class Invoice < ActiveRecord::Base
 
   include NilStrings
+
   include TotalHelper
+  total_and_currency_for attribute_name: :total, cents_attribute: :total_cents
+  total_and_currency_for attribute_name: :discount, cents_attribute: :discount_cents
 
   attr_accessible :client_id,
     :includes_vat,
@@ -119,5 +122,9 @@ class Invoice < ActiveRecord::Base
 
   def deassociate_products
     InvoicesProducts.where(invoice_id: id).destroy_all
+  end
+
+  def discount_applied?
+    discount && discount > 0
   end
 end

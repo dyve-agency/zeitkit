@@ -1,6 +1,8 @@
 class Worklog < ActiveRecord::Base
   include HourlyRateHelper
+
   include TotalHelper
+  total_and_currency_for attribute_name: :total, cents_attribute: :total_cents
 
   include TimeFilter
 

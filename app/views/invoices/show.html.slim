@@ -56,6 +56,10 @@
   .row
     .span3.offset7.key Subtotal
     .span2.val= with_currency @invoice.total
+  - if @invoice.discount_applied?
+    .row
+      .span3.offset7.key Discount
+      .span2.val= with_currency @invoice.total
   .row.big-border
     .span3.offset7.key #{@invoice.including_vat_info}
     .span2.val #{with_currency @invoice.total_vat}

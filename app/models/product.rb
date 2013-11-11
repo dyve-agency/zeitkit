@@ -1,5 +1,7 @@
 class Product < ActiveRecord::Base
   include TotalHelper
+  total_and_currency_for attribute_name: :total, cents_attribute: :total_cents
+
   include NilStrings
   include ActionView::Helpers::NumberHelper
 

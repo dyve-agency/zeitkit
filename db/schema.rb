@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131031183018) do
+ActiveRecord::Schema.define(:version => 20131111153139) do
 
   create_table "access_tokens", :force => true do |t|
     t.string   "token"
@@ -72,11 +72,12 @@ ActiveRecord::Schema.define(:version => 20131031183018) do
     t.datetime "paid_on"
     t.float    "vat"
     t.text     "note"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
     t.text     "content"
     t.text     "payment_terms"
     t.text     "payment_info"
+    t.integer  "discount_cents"
   end
 
   create_table "invoices_products", :force => true do |t|
