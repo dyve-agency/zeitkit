@@ -16,7 +16,7 @@ stdout_path "#{shared_path}/log/unicorn.zeitkit.stdout.log"
 
 if env == "production"
   # Production specific settings
-  worker_processes 20
+  worker_processes 8
 else
   worker_processes 4
 end
