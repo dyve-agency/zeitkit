@@ -166,10 +166,11 @@ class User < ActiveRecord::Base
     self.no_signup_email_sent.older_than_30_minutes.no_demo_user.each do |user|
       begin
         UserMailer.signup_email(user).deliver
-        user.signup_email_sent = true
-        user.save
       rescue
         nil
+      ensure
+        user.signup_email_sent = true
+        user.save
       end
     end
   end
