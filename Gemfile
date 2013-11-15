@@ -46,6 +46,9 @@ gem 'omniauth-github'
 # Bootstrap helpers
 gem "rails-bootstrap-helpers", git: "https://github.com/Tretti/rails-bootstrap-helpers.git"
 
+# Scheduled jobs
+gem "whenever"
+
 group :assets do
   gem 'coffee-rails', '~> 3.2.1'
   gem 'bourbon'

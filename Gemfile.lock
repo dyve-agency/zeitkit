@@ -76,6 +76,7 @@ GEM
       thor
     builder (3.0.4)
     cancan (1.6.9)
+    chronic (0.10.2)
     coderay (1.0.9)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
@@ -231,6 +232,9 @@ GEM
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
     validates_email_format_of (1.5.3)
+    whenever (0.8.4)
+      activesupport (>= 2.3.4)
+      chronic (>= 0.6.3)
     wkhtmltopdf-binary (0.9.9.1)
 
 PLATFORMS
@@ -273,4 +277,5 @@ DEPENDENCIES
   sqlite3
   uglifier (>= 1.0.3)
   validates_email_format_of
+  whenever
   wkhtmltopdf-binary
