@@ -31,8 +31,8 @@ gem 'wkhtmltopdf-binary'
 # Managing startup behavior of App
 gem 'foreman'
 
-# Use the puma web server
-gem 'puma'
+# Use the unicorn web server
+gem 'unicorn'
 
 # Octokit gem for github
 gem 'octokit'
@@ -49,6 +49,9 @@ gem "whenever"
 
 # Mergint two pdfs
 gem "prawn"
+
+# JS precompiler
+gem "therubyracer"
 
 group :assets do
   gem 'coffee-rails', '~> 3.2.1'
