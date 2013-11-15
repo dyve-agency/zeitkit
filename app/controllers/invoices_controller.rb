@@ -38,12 +38,9 @@ class InvoicesController < ApplicationController
     tmp_worklog_file = "#{Rails.root}/tmp/worklog-#{@invoice.id}.pdf"
     @worklogs_pdf.to_file(tmp_worklog_file)
     @invoice_pdf.to_file(tmp_invoice_file)
-    failure_list = []
-    pdf = PDF::Merger.new
-    pdf.add_file tmp_invoice_file
-    pdf.add_file tmp_worklog_file
+    pdf_merger = PdfMerger.new
     file_name = "#{Rails.root}/tmp/#{@invoice.filename}.pdf"
-    pdf.save_as file_name, failure_list
+    pdf_merger.merge([tmp_invoice_file, tmp_worklog_file], file_name)
     file_name
   end
 

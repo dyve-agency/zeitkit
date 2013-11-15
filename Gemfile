@@ -21,8 +21,6 @@ gem 'rack-force_domain'
 gem 'money'
 gem 'contact_us', '~> 0.4.0', git: "https://github.com/hendricius/contact_us.git"
 gem 'pdfkit'
-gem 'pdf-merger'
-gem 'rjb'
 gem 'fullcontact'
 gem 'jbuilder'
 gem "permanent_records", "~> 3.1.3"
@@ -48,6 +46,9 @@ gem "rails-bootstrap-helpers", git: "https://github.com/Tretti/rails-bootstrap-h
 
 # Scheduled jobs
 gem "whenever"
+
+# Mergint two pdfs
+gem "prawn"
 
 group :assets do
   gem 'coffee-rails', '~> 3.2.1'
