@@ -26,7 +26,7 @@ gem 'jbuilder'
 gem "permanent_records", "~> 3.1.3"
 gem 'validates_email_format_of'
 
-gem 'wkhtmltopdf-binary'
+gem 'wkhtmltopdf-binary', git: "https://github.com/tolgap/wkhtmltopdf-binary.git"
 
 # Managing startup behavior of App
 gem 'foreman'
