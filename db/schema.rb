@@ -32,10 +32,10 @@ ActiveRecord::Schema.define(:version => 20131111164305) do
 
   create_table "clients", :force => true do |t|
     t.string   "name"
-    t.integer  "hourly_rate_cents", :limit => 8
-    t.integer  "user_id",                        :null => false
-    t.datetime "created_at",                     :null => false
-    t.datetime "updated_at",                     :null => false
+    t.integer  "hourly_rate_cents"
+    t.integer  "user_id",           :null => false
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
     t.string   "city"
     t.string   "street"
     t.string   "zip"
