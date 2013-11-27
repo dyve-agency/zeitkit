@@ -3,7 +3,7 @@ env = ENV["RAILS_ENV"] || "development"
 pid "/tmp/unicorn.zeitkit.pid"
 listen "/tmp/zeitkit.sock", :backlog => 64
 preload_app true
-timeout 20
+timeout 100
 # Help ensure your application will always spawn in the symlinked
 # "current" directory that Capistrano sets up.
 working_directory "/home/zeitkit/apps/zeitkit"
