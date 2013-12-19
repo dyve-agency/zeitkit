@@ -5,7 +5,8 @@ class ExpensesController < ApplicationController
   respond_to :html, :json
 
   def index
-    respond_with @expenses.order("created_at DESC, client_id DESC")
+    @expenses = @expenses.order("created_at DESC, client_id DESC")
+    respond_with @expenses
   end
 
   def new
