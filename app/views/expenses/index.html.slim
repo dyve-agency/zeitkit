@@ -11,6 +11,7 @@ table.table.table-bordered
   thead
     tr
       th Client
+      th Created
       th Reason
       th Total
       th Controls
@@ -18,6 +19,7 @@ table.table.table-bordered
     - @expenses.each do |expense|
       tr class="#{success_or_warning expense.invoiced?}"
         td= expense.client.name
+        td= l expense.created_at
         td
           = link_to expense.reason[0..20] + "...", edit_expense_path(expense)
         td= with_currency expense.total
@@ -29,6 +31,7 @@ table.table.table-bordered
   tfoot.hidden-phone
     tr
       td Sums:
+      td
       td
       td= with_currency Money.new @expenses.sum(:total_cents), current_user.currency
       td
