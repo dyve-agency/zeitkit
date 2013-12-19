@@ -262,6 +262,9 @@ GEM
     whenever (0.8.4)
       activesupport (>= 2.3.4)
       chronic (>= 0.6.3)
+    will_paginate (3.0.5)
+    will_paginate-bootstrap (0.2.5)
+      will_paginate (>= 3.0.3)
 
 PLATFORMS
   ruby
@@ -304,4 +307,5 @@ DEPENDENCIES
   unicorn
   validates_email_format_of
   whenever
+  will_paginate-bootstrap (= 0.2.5)
   wkhtmltopdf-binary!

@@ -53,6 +53,9 @@ gem "prawn"
 # JS precompiler
 gem "therubyracer"
 
+# Pagination
+gem 'will_paginate-bootstrap', '0.2.5'
+
 group :assets do
   gem 'coffee-rails', '~> 3.2.1'
   gem 'bourbon'

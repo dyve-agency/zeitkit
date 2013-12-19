@@ -19,6 +19,7 @@ class WorklogsController < ApplicationController
       params[:time] == "older_than_this_month" ? @worklogs = @worklogs.older_than_this_month : @worklogs
       params[:time] == "last_month" ? @worklogs = @worklogs.last_month : @worklogs
     end
+    @worklogs = @worklogs.paginate(:page => params[:page])
     @sum = Money.new @worklogs.sum(:total_cents), @user.currency
     seconds = Worklog.range_duration_seconds(@worklogs)
     @hours = Worklog.hours_from_seconds seconds
