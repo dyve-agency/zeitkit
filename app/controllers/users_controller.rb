@@ -38,13 +38,14 @@ class UsersController < ApplicationController
       @user.email = params[:signup_email]
     end
 
-    temp_pw = SecureRandom.hex 
+    temp_pw = SecureRandom.hex
     @user.set_temp_password temp_pw
     unless @user.save
       flash[:alert] = "Sorry, that email has already been taken/is invalid. Please try again."
-      redirect_to root_path
+      render "new"
       return
     end
+
     if @user.demo?
       user = login(@user.email, temp_pw, true)
       redirect_to clients_path, notice: welcome_message

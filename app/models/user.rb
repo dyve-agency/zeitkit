@@ -55,12 +55,12 @@ class User < ActiveRecord::Base
 
   def self.unused_random_email
     email = nil
-    while email.blank?
+    begin
       new_email = "demo#{SecureRandom.hex}@zeitkit.com"
       unless exists?(email: new_email)
         email = new_email
       end
-    end
+    end while email.blank?
     email
   end
 

@@ -1,4 +1,9 @@
 = simple_form_for @user do |f|
+  - if f.object.errors.any?
+    .alert.alert-error
+      ul
+        - f.object.errors.full_messages.each do |msg|
+          li= msg
   = f.input :email
   = f.input :password
   = f.input :password_confirmation
