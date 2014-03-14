@@ -24,9 +24,11 @@ table.table.table-bordered
             span.caret
           ul.dropdown-menu
             li= render "set_paid", invoice: invoice
-            li= link_to '<i class="icon-zoom-in"></i> Details'.html_safe, invoice
-            li= link_to "<i class='icon-cloud-download'></i> Download PDF".html_safe,
+            li= link_to 'Details'.html_safe, invoice
+            li= link_to "Download PDF".html_safe,
               pdf_export_invoice_path(invoice)
+            li= link_to "Download PDF with worklogs".html_safe,
+              pdf_export_invoice_path(invoice, export_worklogs: true)
             li= link_to 'Delete', invoice, confirm: 'Are you sure? This can not be undone.', method: :delete
 
 .btn-group

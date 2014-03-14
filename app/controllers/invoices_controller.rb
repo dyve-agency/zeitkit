@@ -19,14 +19,11 @@ class InvoicesController < ApplicationController
     # For this to work you need to precompile your assets once.
     @invoice_pdf = PDFKit.new(render_to_string(action: "show", :layout => 'application_print'))
     @invoice_pdf.stylesheets << "#{Rails.root}/public/assets/application_print.css"
-    if @invoice.worklogs.empty?
-      send_data(@invoice_pdf.to_pdf, :filename => @invoice.filename, :type => 'application/pdf')
+    if params[:export_worklogs] && @invoice.worklogs.present?
+      send_file merge_pdf_files
       return
-    end
-    respond_to do |format|
-      format.html {
-        send_file merge_pdf_files
-      }
+    else
+      send_data(@invoice_pdf.to_pdf, :filename => @invoice.filename, :type => 'application/pdf')
     end
   end
 
