@@ -83,6 +83,6 @@
 = link_to "", temp_worklog_save_path(current_user.temp_worklog_save),
   class: "temp_worklog_save_path hidden", method: :put
 
-javascript: 
+javascript:
   window.App.Github.init();
   window.App.Github.github_messages_link = "#{github_commit_messages_user_path(current_user, format: :json)}";
