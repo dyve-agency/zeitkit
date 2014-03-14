@@ -212,11 +212,18 @@ class User < ActiveRecord::Base
   end
 
   def time_zone=(new_time_zone)
-    result = Time.zone || 'UTC'
-    if new_time_zone && ActiveSupport::TimeZone.all.map(&:name).include?(
-      new_time_zone.try(:split, "/").try(:last))
-      result = new_time_zone.split("/").last
+    timezones = ActiveSupport::TimeZone.all.map(&:name)
+
+    if new_time_zone.blank?
+      new_time_zone = "Europe/London"
     end
+
+    if timezones.include?(new_time_zone.try(:split, "/").try(:last))
+      result = new_time_zone.split("/").last
+    else
+      result = "London"
+    end
+
     write_attribute(:time_zone, result)
   end
 
