@@ -1,17 +1,26 @@
-= simple_form_for @client do |f|
+= simple_nested_form_for @client do |f|
   .row
     .span4
       h4 Basic info
       = f.input :name
       = f.input :hourly_rate, as: :string, required: true
-      - if !@client.new_record?
-        = f.input :company_name
-    - if !@client.new_record?
-      .span4
-        h4 Optional info (for invoices)
-        = f.input :street
-        = f.input :city
-        = f.input :zip
+      = f.input :company_name
+    .span4
+      h4 Optional info (for invoices)
+      = f.input :street
+      = f.input :city
+      = f.input :zip
+    .span4
+      h4 Allow other users to use the same client
+      = f.simple_fields_for :client_shares do |cs|
+        .row-fluid
+          .span8
+            = cs.input :user_id, placeholder: "Zeitkit username i.e. hendr", label: false
+          .span4
+            = cs.link_to_remove class: "btn btn-danger" do |link|
+              i.icon-remove
+      = f.link_to_add "Add share", :client_shares, class: "btn"
+
 
   .form-actions
     = f.button :submit, "Save Client"

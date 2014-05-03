@@ -139,6 +139,7 @@ GEM
     multi_json (1.9.3)
     multi_xml (0.5.3)
     multipart-post (1.2.0)
+    nested_form (0.3.2)
     newrelic_rpm (3.6.0.83)
     oauth (0.4.7)
     oauth2 (0.8.1)
@@ -281,6 +282,7 @@ DEPENDENCIES
   jquery-rails
   momentjs-rails
   money
+  nested_form
   newrelic_rpm
   octokit
   omniauth

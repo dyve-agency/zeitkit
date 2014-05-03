@@ -8,14 +8,17 @@ class Client < ActiveRecord::Base
     :zip,
     :street,
     :city,
-    :hourly_rate
+    :hourly_rate,
+    :client_shares_attributes
 
   belongs_to :user
   has_many :worklogs, dependent: :destroy
   has_many :invoices, dependent: :destroy
   has_many :notes, dependent: :destroy
   has_many :expenses, dependent: :destroy
-  has_many :client_shares
+  has_many :client_shares, dependent: :destroy
+
+  accepts_nested_attributes_for :client_shares, allow_destroy: true
 
   validates :user, :name, presence: true
   validates :name, uniqueness: {scope: :user_id, message: "You can only have the client once."}
