@@ -66,6 +66,13 @@ class User < ActiveRecord::Base
     email
   end
 
+  def self.unused_random_username
+    begin
+      username = "user#{SecureRandom.hex(6)}"
+    end while exists?(username: username)
+    username
+  end
+
   def set_temp_password(temp_pw)
     self.password = temp_pw
     self.password_confirmation = temp_pw
