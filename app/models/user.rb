@@ -43,7 +43,9 @@ class User < ActiveRecord::Base
   validates :time_zone, # allows empty timezone. falls back to default timezone
     inclusion: { in: ActiveSupport::TimeZone.all.map(&:name) },
     unless: Proc.new { |u| u.time_zone.blank? }
+  validates :username, presence: true, uniqueness: true
 
+  before_validation :set_temp_username, on: :create
   before_save :update_after_demo_conversion
   before_create :get_name_from_api
   after_create :build_invoice_default
@@ -238,6 +240,13 @@ class User < ActiveRecord::Base
 
   def github_client
     @github_client ||= Github.new(self) if github_token
+  end
+
+  def set_temp_username
+    if username.blank?
+      self.username = self.class.unused_random_username
+    end
+    true
   end
 
 end
