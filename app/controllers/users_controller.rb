@@ -93,4 +93,12 @@ class UsersController < ApplicationController
     end
   end
 
+  def usernames
+    result = []
+    if params[:query].present?
+      result = User.select("username, id").where("username ILIKE ?", "%#{params[:query]}%").limit(10).map{|u| {id: u.id, username: u.username} }
+    end
+    render json: result, status: 200
+  end
+
 end

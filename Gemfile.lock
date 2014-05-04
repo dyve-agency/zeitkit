@@ -31,33 +31,32 @@ GIT
       sass-rails (>= 3.1.1)
 
 GIT
+  remote: https://github.com/rails/jquery-rails
+  revision: 7ae3bec2982692f8c0a1aa7816575ba4ac599df9
+  specs:
+    jquery-rails (3.1.0)
+      railties (>= 3.0, < 5.0)
+      thor (>= 0.14, < 2.0)
+
+GIT
   remote: https://github.com/ryanb/nested_form
   revision: 1b0689dfb4d230ceabd278eba159fcb02f23c68a
   specs:
     nested_form (0.3.2)
 
 GIT
-  remote: https://github.com/sammynave/jquery-rails.git
-  revision: ee661789c8b17c102ce8d4c67379dbde354f17f8
-  branch: 3.0.5.a
-  specs:
-    jquery-rails (3.0.5.a)
-      railties (>= 3.0, < 5.0)
-      thor (>= 0.14, < 2.0)
-
-GIT
-  remote: https://github.com/thomas-mcdonald/bootstrap-sass
-  revision: 97501b33aa0026698ba2a102226f276297c665b2
-  tag: v2.3.1.1
-  specs:
-    bootstrap-sass (2.3.1.1)
-      sass (~> 3.2)
-
-GIT
   remote: https://github.com/tolgap/wkhtmltopdf-binary.git
   revision: 62f001cc143607e3c83dfeb0a980f85f1a67d319
   specs:
     wkhtmltopdf-binary (0.11.1)
+
+GIT
+  remote: https://github.com/twbs/bootstrap-sass
+  revision: b55d889b46a640b99bdf8f832fad9a1f2c03ded1
+  tag: v2.3.2.2
+  specs:
+    bootstrap-sass (2.3.2.2)
+      sass (~> 3.2)
 
 GEM
   remote: https://rubygems.org/
@@ -225,7 +224,7 @@ GEM
     redcarpet (2.2.2)
     ref (1.0.5)
     ruby-rc4 (0.1.5)
-    sass (3.2.7)
+    sass (3.3.7)
     sass-rails (3.2.6)
       railties (~> 3.2.0)
       sass (>= 3.1.10)
@@ -281,7 +280,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bootstrap-sass (~> 2.3.1.1)!
+  bootstrap-sass!
   bourbon
   cancan
   coffee-rails (~> 3.2.1)

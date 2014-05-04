@@ -13,7 +13,7 @@ gem 'sorcery', git: 'https://github.com/hendricius/sorcery.git', branch: :access
 gem 'simple_form'
 
 # Use jquery as the JavaScript library
-gem 'jquery-rails', git: "https://github.com/sammynave/jquery-rails.git", branch: "3.0.5.a"
+gem 'jquery-rails', git: "https://github.com/rails/jquery-rails"
 
 gem 'cancan'
 gem 'newrelic_rpm'
@@ -42,6 +42,9 @@ gem 'octokit'
 gem 'omniauth'
 gem 'omniauth-github'
 
+# Use bootstrap as the style framework
+gem 'bootstrap-sass', git: 'https://github.com/twbs/bootstrap-sass', tag: 'v2.3.2.2'
+
 # Bootstrap helpers
 gem "rails-bootstrap-helpers", git: "https://github.com/Tretti/rails-bootstrap-helpers.git"
 
@@ -65,9 +68,6 @@ group :assets do
   gem 'bourbon'
   gem 'font-awesome-sass-rails', '~> 3.0.0.0', git: "https://github.com/nicoles/font-awesome-sass-rails.git"
   gem 'uglifier', '>= 1.0.3'
-
-  # Use bootstrap as the style framework
-  gem 'bootstrap-sass', '~> 2.3.1.1', git: 'https://github.com/thomas-mcdonald/bootstrap-sass', tag: 'v2.3.1.1'
 
   # Formating times
   gem 'momentjs-rails'

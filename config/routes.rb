@@ -3,6 +3,9 @@ Timetracker::Application.routes.draw do
   root :to => "static#home"
 
   resources :users, only: [:new, :create, :show, :edit, :update] do
+    collection do
+      get :usernames
+    end
     member do
       get :github_commit_messages
     end

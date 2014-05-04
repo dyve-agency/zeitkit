@@ -12,18 +12,21 @@
       = f.input :zip
     .span4
       h4 Allow other users to use the same client
-      = f.simple_fields_for :client_shares do |cs|
-        .row-fluid
-          .span8.client-share-input
-            = cs.text_field :user_id, placeholder: "Zeitkit username i.e. hendr", label: false
-          .span4
-            = cs.link_to_remove class: "btn btn-danger" do |link|
-              i.icon-remove
-      = f.link_to_add "Add share", :client_shares, class: "btn"
+      .client-shares-wrapper
+        = f.simple_fields_for :client_shares do |cs|
+          .row-fluid
+            .span8
+              = cs.text_field :user_id, placeholder: "Zeitkit username i.e. hendr", label: false
+            .span4
+              = cs.link_to_remove class: "btn btn-danger" do |link|
+                i.icon-remove
+        = f.link_to_add "Add share", :client_shares, class: "btn"
 
 
   .form-actions
     = f.button :submit, "Save Client"
 
 javascript:
-  window.App.ClientShares.init();
+  $(function() {
+    window.App.ClientShares.init();
+  })
