@@ -31,6 +31,21 @@ GIT
       sass-rails (>= 3.1.1)
 
 GIT
+  remote: https://github.com/ryanb/nested_form
+  revision: 1b0689dfb4d230ceabd278eba159fcb02f23c68a
+  specs:
+    nested_form (0.3.2)
+
+GIT
+  remote: https://github.com/sammynave/jquery-rails.git
+  revision: ee661789c8b17c102ce8d4c67379dbde354f17f8
+  branch: 3.0.5.a
+  specs:
+    jquery-rails (3.0.5.a)
+      railties (>= 3.0, < 5.0)
+      thor (>= 0.14, < 2.0)
+
+GIT
   remote: https://github.com/thomas-mcdonald/bootstrap-sass
   revision: 97501b33aa0026698ba2a102226f276297c665b2
   tag: v2.3.1.1
@@ -119,9 +134,6 @@ GEM
       activesupport (>= 3.0.0)
       multi_json (>= 1.2.0)
     journey (1.0.4)
-    jquery-rails (2.2.1)
-      railties (>= 3.0, < 5.0)
-      thor (>= 0.14, < 2.0)
     json (1.8.1)
     jwt (0.1.8)
       multi_json (>= 1.5)
@@ -139,7 +151,6 @@ GEM
     multi_json (1.9.3)
     multi_xml (0.5.3)
     multipart-post (1.2.0)
-    nested_form (0.3.2)
     newrelic_rpm (3.6.0.83)
     oauth (0.4.7)
     oauth2 (0.8.1)
@@ -279,10 +290,10 @@ DEPENDENCIES
   foreman
   fullcontact
   jbuilder
-  jquery-rails
+  jquery-rails!
   momentjs-rails
   money
-  nested_form
+  nested_form!
   newrelic_rpm
   octokit
   omniauth

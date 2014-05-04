@@ -23,4 +23,5 @@
 //= require stay_in_browser
 //= require moment
 //= require jquery_nested_form
+//= require bootstrap-typeahead
 //= require_tree .

@@ -14,8 +14,8 @@
       h4 Allow other users to use the same client
       = f.simple_fields_for :client_shares do |cs|
         .row-fluid
-          .span8
-            = cs.input :user_id, placeholder: "Zeitkit username i.e. hendr", label: false
+          .span8.client-share-input
+            = cs.text_field :user_id, placeholder: "Zeitkit username i.e. hendr", label: false
           .span4
             = cs.link_to_remove class: "btn btn-danger" do |link|
               i.icon-remove
@@ -24,3 +24,6 @@
 
   .form-actions
     = f.button :submit, "Save Client"
+
+javascript:
+  window.App.ClientShares.init();

@@ -11,7 +11,10 @@ gem 'sorcery', git: 'https://github.com/hendricius/sorcery.git', branch: :access
 
 
 gem 'simple_form'
-gem 'jquery-rails'
+
+# Use jquery as the JavaScript library
+gem 'jquery-rails', git: "https://github.com/sammynave/jquery-rails.git", branch: "3.0.5.a"
+
 gem 'cancan'
 gem 'newrelic_rpm'
 gem 'redcarpet'
@@ -55,7 +58,7 @@ gem "therubyracer"
 gem 'will_paginate-bootstrap', '0.2.5'
 
 # Creating nested forms easily
-gem "nested_form"
+gem "nested_form", git: "https://github.com/ryanb/nested_form"
 
 group :assets do
   gem 'coffee-rails', '~> 3.2.1'
