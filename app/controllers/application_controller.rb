@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   around_filter :set_time_zone
-  before_filter :require_login
+  before_filter :require_login, :except => [:not_authenticated]
   before_filter :check_and_set_mac_design
 
   def check_and_set_mac_design
@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   end
 
   def not_authenticated
-    redirect_to login_url, :alert => "Please first login to access this page."
+    redirect_to root_path, :alert => "Please first login to access this page."
   end
 
   def set_current_user(object_with_user_attribute)
