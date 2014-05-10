@@ -20,6 +20,7 @@ class ClientsController < ApplicationController
   end
 
   def edit
+    @client = current_user.clients.find(params[:id])
   end
 
   def create
@@ -39,7 +40,11 @@ class ClientsController < ApplicationController
 
   def update
     @client = current_user.clients.find(params[:id])
-    if @client.update_attributes(params[:client])
+    @client.assign_attributes(params[:client])
+    @client.client_shares.each do |cs|
+      cs.set_user_id_from_username
+    end
+    if @client.save
       redirect_to clients_path, notice: 'Client was successfully updated.'
     else
       render action: "edit"

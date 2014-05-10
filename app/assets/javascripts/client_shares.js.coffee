@@ -22,5 +22,3 @@ window.App.ClientShares =
         url: "/users/usernames.json"
         triggerLength: 2
       }
-      displayField: "username"
-      valueField: "id"

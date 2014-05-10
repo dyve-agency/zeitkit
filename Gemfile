@@ -61,7 +61,7 @@ gem "therubyracer"
 gem 'will_paginate-bootstrap', '0.2.5'
 
 # Creating nested forms easily
-gem "nested_form", git: "https://github.com/ryanb/nested_form"
+gem "nested_form", git: "git@github.com:hendricius/nested_form.git"
 
 group :assets do
   gem 'coffee-rails', '~> 3.2.1'
