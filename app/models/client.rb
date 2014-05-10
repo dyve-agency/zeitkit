@@ -9,7 +9,8 @@ class Client < ActiveRecord::Base
     :street,
     :city,
     :hourly_rate,
-    :client_shares_attributes
+    :client_shares_attributes,
+    :email_when_team_adds_worklog
 
   belongs_to :user
   has_many :worklogs, dependent: :destroy
