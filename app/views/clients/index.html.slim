@@ -14,7 +14,8 @@ h1 Clients
           td= client_share.client.name
           td= client_share.client.user.username
           td
-            = link_to "Reject", "", class: "btn"
+            = link_to "Reject", client_share_path(client_share), class: "btn",
+              method: :delete, data: {confirm: "Are you sure?" }
 
 - if @client_shares.present?
   p.lead My clients
