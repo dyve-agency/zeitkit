@@ -2,9 +2,10 @@
   .alert.alert-info
     = link_to "x", "#", class: "close", data: {dismiss: "alert"}
     span Worklogs are awesome to track the time you work for clients.
-- if current_user.clients.empty?
+- if current_user.clients.empty? && current_user.client_shares.empty?
   .alert.alert-error
-    span You need to create a client first. 
+    span You need to create a client first.
+    '
     = link_to "Create your first client.", new_client_path
 = simple_form_for @worklog do |f|
   .row
@@ -56,7 +57,7 @@
       = f.input :summary, input_html: {class: "span6 wmd-input worklog-summary", id: "wmd-input"}, label: false
     .span6
       = f.input :client_id, as: :select do
-        = f.select :client_id, current_user.clients.map{|c| [c.name, c.id, {"data-hourly-rate-cents" => c.hourly_rate.cents}]}, required: true
+        = f.select :client_id, current_user.shared_clients.map{|c| [c.name_with_sharer, c.id, {"data-hourly-rate-cents" => c.hourly_rate.cents}]}, required: true
       .accordion#accordion1
         .accordion-group
           .accordion-heading

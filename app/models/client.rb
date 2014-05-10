@@ -34,6 +34,14 @@ class Client < ActiveRecord::Base
     name && city && street && zip
   end
 
+  def name_with_sharer
+    if client_shares.any?
+      "#{name} (#{user.username})"
+    else
+      name
+    end
+  end
+
   def self.updated_since(unixtimestamp)
     self.unscoped.where("updated_at >= ?", Time.at(unixtimestamp.to_i).to_datetime)
   end

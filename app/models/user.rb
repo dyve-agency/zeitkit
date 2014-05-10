@@ -85,6 +85,14 @@ class User < ActiveRecord::Base
     temp_save.save
   end
 
+  def shared_clients
+    Client.where(id: client_shares.map(&:client_id))
+  end
+
+  def clients_and_shared_clients
+    shared_clients + clients
+  end
+
   def string_fields_to_nil
     [:company_name, :zip, :street, :city]
   end
