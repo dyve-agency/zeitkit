@@ -1,4 +1,23 @@
 h1 Clients
+- if @client_shares.present?
+  p.lead Shared with me
+  table.table.table-bordered.table-striped
+    thead
+      tr
+        th Name
+        th Shared by
+        th Controls
+
+    tbody
+      - @client_shares.each do |client_share|
+        tr
+          td= client_share.client.name
+          td= client_share.client.user.username
+          td
+            = link_to "Reject", "", class: "btn"
+
+- if @client_shares.present?
+  p.lead My clients
 table.table.table-bordered.table-striped
   thead
     tr

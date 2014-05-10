@@ -4,11 +4,10 @@ class ClientsController < ApplicationController
   respond_to :html, :json
 
   def index
+    @clients = current_user.clients.order("created_at DESC")
+    @client_shares = current_user.client_shares.includes(client: :user)
     if params[:updated_since]
-      @clients = Client.updated_since(params[:updated_since]).where(user_id: current_user.id)
-      respond_with @clients
-    else
-      respond_with @clients.order("created_at DESC")
+      @clients = @clients.updated_since(params[:updated_since])
     end
   end
 

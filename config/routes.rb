@@ -27,6 +27,8 @@ Timetracker::Application.routes.draw do
       get "pdf_export"
     end
   end
+  resources :client_shares, only: [:destroy]
+
   resources :invoice_default, only: [:update, :edit]
   resources :expenses, except: [:show]
   resources :products, except: [:show]
