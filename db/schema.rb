@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140504195539) do
+ActiveRecord::Schema.define(:version => 20140510223828) do
 
   create_table "access_tokens", :force => true do |t|
     t.string   "token"
@@ -41,13 +41,14 @@ ActiveRecord::Schema.define(:version => 20140504195539) do
   create_table "clients", :force => true do |t|
     t.string   "name"
     t.integer  "hourly_rate_cents"
-    t.integer  "user_id",           :null => false
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.integer  "user_id",                      :null => false
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
     t.string   "city"
     t.string   "street"
     t.string   "zip"
     t.string   "company_name"
+    t.boolean  "email_when_team_adds_worklog"
   end
 
   create_table "expenses", :force => true do |t|

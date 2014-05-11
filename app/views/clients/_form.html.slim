@@ -13,6 +13,8 @@
       = f.input :zip
     .span4
       h4 Allow other users to use the same client
+      .label-checkbox-left.clearfix
+        = f.input :email_when_team_adds_worklog, label: "Send email when team member adds worklog"
       .client-shares-wrapper
         = f.simple_fields_for :client_shares do |cs|
           .row-fluid

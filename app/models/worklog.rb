@@ -42,6 +42,8 @@ class Worklog < ActiveRecord::Base
   before_validation :persist_hourly_rate_from_client, on: :create, if: :not_set_by_user
   before_validation :set_total
 
+  after_create :email_user_of_shared_client_worklog
+
   scope :paid, where(invoice_id: !nil)
   scope :unpaid, where(invoice_id: nil)
   scope :no_invoice, where(invoice_id: nil)
@@ -216,6 +218,33 @@ class Worklog < ActiveRecord::Base
     if !end_time_ok
       multi_errors_add([:end_time, :to_time, :to_date], "Must be greater than the start.")
     end
+  end
+
+  def created_for_shared_client?
+    # We own the client
+    if user.clients.where(id: client_id).any?
+      false
+    else
+      true
+    end
+  end
+
+  def created_for_user
+    if created_for_shared_client?
+      client.user
+    else
+      user
+    end
+  end
+
+  def email_user_of_shared_client_worklog
+    if created_for_shared_client? && client.email_when_team_adds_worklog
+      begin
+        WorklogMailer.worklog_for_shared_client_created(self).deliver
+      rescue
+      end
+    end
+    true
   end
 
 end

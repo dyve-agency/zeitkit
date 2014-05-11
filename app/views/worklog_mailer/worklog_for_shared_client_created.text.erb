@@ -1,0 +1,14 @@
+Hi <%= @owner.username %>,
+
+A new worklog has been created for your shared client. 
+
+Creator:       <%= @user.username %>
+Start:         <%= l @worklog.start_time %>
+End:           <%= l @worklog.end_time %>
+Total Time:    <%= @duration %>
+Billing total: <%= @worklog.total.to_s %>
+
+Summary:
+<%= @worklog.summary %>
+
+You can turn off those notifications by editing the client and disabling the receive email checkbox.
