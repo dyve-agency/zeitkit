@@ -1,0 +1,2 @@
+module KpisHelper
+end

@@ -67,5 +67,7 @@ module Timetracker
     # Forces to use a domain.
     config.middleware.use Rack::ForceDomain, ENV["ZDOMAIN"]
 
+    # Use SASS as preferred syntax
+    config.sass.preferred_syntax = :sass
   end
 end

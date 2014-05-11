@@ -63,6 +63,10 @@ gem 'will_paginate-bootstrap', '0.2.5'
 # Creating nested forms easily
 gem "nested_form", git: "git@github.com:hendricius/nested_form.git"
 
+# Creating charts
+gem 'chartkick', git: "https://github.com/ankane/chartkick.git"
+gem 'groupdate', git: "https://github.com/ankane/groupdate.git"
+
 group :assets do
   gem 'coffee-rails', '~> 3.2.1'
   gem 'bourbon'

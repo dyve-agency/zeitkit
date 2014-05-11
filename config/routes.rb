@@ -1,5 +1,7 @@
 Timetracker::Application.routes.draw do
 
+  get "kpis/new"
+
   root :to => "static#home"
 
   resources :users, only: [:new, :create, :show, :edit, :update] do
@@ -10,6 +12,7 @@ Timetracker::Application.routes.draw do
       get :github_commit_messages
     end
   end
+  resources :kpis, only: [:new, :create]
   resources :clients
   resources :temp_worklog_saves, only: [:update], as: "temp_worklog_save"
   resources :notes do

@@ -7,3 +7,7 @@ en:
     formats:
       default: "%d %b %Y %H:%M:%S"
       day_month_year: "%b %d, %Y"
+      kpi_day: "%d %b %Y"
+      kpi_week: "Week: %W - %b %Y"
+      kpi_month: "%b %Y"
+      kpi_year: "%Y"
