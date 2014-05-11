@@ -8,12 +8,6 @@ GIT
       oauth2 (>= 0.8.0, < 1.0.0)
 
 GIT
-  remote: git@github.com:hendricius/nested_form.git
-  revision: ca85dfbb040391fc3eb4f48cb91c4af70a904733
-  specs:
-    nested_form (0.3.2)
-
-GIT
   remote: https://github.com/Tretti/rails-bootstrap-helpers.git
   revision: 98bc0458f864be3f21f1a53f1a265b15f9e0e883
   specs:
@@ -39,6 +33,12 @@ GIT
   specs:
     contact_us (0.4.0)
       rails (>= 3.0.0)
+
+GIT
+  remote: https://github.com/hendricius/nested_form.git
+  revision: ca85dfbb040391fc3eb4f48cb91c4af70a904733
+  specs:
+    nested_form (0.3.2)
 
 GIT
   remote: https://github.com/nicoles/font-awesome-sass-rails.git

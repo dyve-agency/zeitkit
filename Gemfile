@@ -61,7 +61,7 @@ gem "therubyracer"
 gem 'will_paginate-bootstrap', '0.2.5'
 
 # Creating nested forms easily
-gem "nested_form", git: "git@github.com:hendricius/nested_form.git"
+gem "nested_form", git: "https://github.com/hendricius/nested_form.git"
 
 # Creating charts
 gem 'chartkick', git: "https://github.com/ankane/chartkick.git"
