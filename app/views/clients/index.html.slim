@@ -14,6 +14,10 @@ h1 Clients
           td= client_share.client.name
           td= client_share.client.user.username
           td
+            .btn-group
+            = link_to new_worklog_path(client: client_share.client), class: "btn" do
+              i.icon-plus
+              span Worklog
             = link_to "Reject", client_share_path(client_share), class: "btn",
               method: :delete, data: {confirm: "Are you sure?" }
 
