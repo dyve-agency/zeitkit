@@ -1,15 +1,26 @@
-h1 Key performance indicators
-= simple_form_for @kpi, method: :post, remote: true do |f|
-  = f.input :client_id, collection: current_user.clients_and_shared_clients,
-    label: "Pick the client"
-  = f.input :user_id, collection: (current_user.added_team_members + [current_user]), label_method: -> (u){ u.username }, label: "Pick the user"
+#kpi-data-wrapper
+  = simple_form_for @kpi, method: :post, remote: true do |f|
+    h1 Key performance indicators
+    .row-fluid
+      .span6
+        p Choose the clients
+        = f.select :client_ids,
+          current_user.clients_and_shared_clients.map {|c| [c.name, c.id]},
+          {}, multiple: true
 
-hr
+      .span6
+        p Choose the users
+        = f.select :user_ids,
+          (current_user.added_team_members + [current_user]).map {|u| [u.username, u.id]},
+          {}, multiple: true
 
-#kpi-data
-  = render "data", kpi: @kpi
 
-javascript:
-  $(function() {
-    window.App.Kpis.init();
-  })
+  hr
+
+  #kpi-data
+    = render "data", kpi: @kpi
+
+  javascript:
+    $(function() {
+      window.App.Kpis.init();
+    })

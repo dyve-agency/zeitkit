@@ -3,6 +3,7 @@ window.App ||= {}
 window.App.Kpis =
   init: ->
     form = $('#new_kpi')
+    form.submit()
     form.on 'change', (e) ->
       form.submit()
 
