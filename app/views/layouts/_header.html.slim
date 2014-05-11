@@ -30,6 +30,8 @@
                   = link_to "Invoices", invoices_path
                 li
                   = link_to "Edit defaults", edit_invoice_default_path(current_user.invoice_default)
+            li
+              = link_to "KPI", new_kpi_path
             - if not_on_home?
               li
                 = link_to "Tutorial", show_tutorial_path, class: "show-tutorial"
