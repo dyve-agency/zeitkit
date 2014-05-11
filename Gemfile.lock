@@ -21,6 +21,19 @@ GIT
       rails (>= 3.2.11)
 
 GIT
+  remote: https://github.com/ankane/chartkick.git
+  revision: e547c792681f092e613de2d785afd12d490ba700
+  specs:
+    chartkick (1.2.4)
+
+GIT
+  remote: https://github.com/ankane/groupdate.git
+  revision: 5c027b867f7ad6c3d545b9744fb02baccf5e33ea
+  specs:
+    groupdate (2.1.0)
+      activerecord (>= 3.0.0)
+
+GIT
   remote: https://github.com/hendricius/contact_us.git
   revision: 8b4e273f999fd1e1bab604dd7f40e7c5099ae340
   specs:
@@ -282,11 +295,13 @@ DEPENDENCIES
   bootstrap-sass!
   bourbon
   cancan
+  chartkick!
   coffee-rails (~> 3.2.1)
   contact_us (~> 0.4.0)!
   font-awesome-sass-rails (~> 3.0.0.0)!
   foreman
   fullcontact
+  groupdate!
   jbuilder
   jquery-rails!
   momentjs-rails
