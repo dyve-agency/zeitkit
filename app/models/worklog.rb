@@ -40,9 +40,9 @@ class Worklog < ActiveRecord::Base
   validate :end_time_greater_than_start_time
   validate :duration_less_than_a_year
 
+  before_validation :set_client_share
   before_validation :persist_hourly_rate_from_client, on: :create, if: :not_set_by_user
   before_validation :set_total
-  before_validation :set_client_share_id
 
   after_create :email_user_of_shared_client_worklog
 
@@ -217,7 +217,11 @@ class Worklog < ActiveRecord::Base
   # Active record callbacks #
 
   def persist_hourly_rate_from_client
-    self.hourly_rate = client.hourly_rate
+    if client_share.present?
+      self.hourly_rate = client_share.hourly_rate
+    elsif not_set_by_user?
+      self.hourly_rate = client.hourly_rate
+    end
   end
 
   def not_set_by_user
@@ -250,7 +254,7 @@ class Worklog < ActiveRecord::Base
     end
   end
 
-  def set_client_share_id
+  def set_client_share
     if user && client && created_for_shared_client?
       self.client_share = user.client_shares.where(client_id: self.client_id).first
     end
