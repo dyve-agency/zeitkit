@@ -13,6 +13,8 @@
         = f.select :user_ids,
           (current_user.added_team_members + [current_user]).map {|u| [u.username, u.id]},
           {}, multiple: true
+    = f.input :group_data_by, collection: Kpi::ALLOWED_GROUPING_OPTIONS,
+      label_method: ->(opt) { opt.capitalize }
 
 
   hr
