@@ -93,6 +93,10 @@ class User < ActiveRecord::Base
     shared_clients + clients
   end
 
+  def owns_client?(client)
+    clients.where(id: client.id).any?
+  end
+
   def string_fields_to_nil
     [:company_name, :zip, :street, :city]
   end

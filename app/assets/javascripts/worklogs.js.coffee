@@ -24,6 +24,8 @@ Worklog =
       _this.updateEndTimeStartTime()
     $('.new_worklog, .edit_worklog').on 'change', (e) ->
       _this.updateTotal()
+    $('.new_worklog, .edit_worklog').on 'change', "#worklog_client_id", (e) ->
+      _this.hide_or_show_total_calculations()
 
   setEndToNow: ->
     current = this.getCurrentTime()
@@ -70,6 +72,13 @@ Worklog =
       return selected_client.data().hourlyRateCents
     else
       return false
+
+  hide_or_show_total_calculations: ->
+    toggle_el = $("#worklog-total-calculations")
+    if $('#worklog_client_id option:selected').data().userOwnsClient
+      toggle_el.show()
+    else
+      toggle_el.hide()
 
   calcTotal: (start, end, per_hour) ->
     return if !start || !end

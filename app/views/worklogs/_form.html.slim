@@ -57,19 +57,20 @@
       = f.input :summary, input_html: {class: "span6 wmd-input worklog-summary", id: "wmd-input"}, label: false
     .span6
       = f.input :client_id, as: :select do
-        = f.select :client_id, current_user.shared_clients.map{|c| [c.name_with_sharer, c.id, {"data-hourly-rate-cents" => c.hourly_rate.cents}]}, required: true
-      .accordion#accordion1
-        .accordion-group
-          .accordion-heading
-            a.accordion-toggle data-parent="#accordion1" data-toggle="collapse" href="#adjust-price"
-              | Optionally adjust what you charge.
-          #adjust-price.accordion-body.collapse
-            .accordion-inner
-              = f.input :hourly_rate, as: :string
-      .total
-        span.label.label-success
-          | Total
-          span.worklog-total data-currency="#{@worklog.currency.symbol}" = @worklog.total_with_currency
+        = f.select :client_id, current_user.clients_and_shared_clients.map{|c| [c.name_with_sharer, c.id, {"data-hourly-rate-cents" => c.hourly_rate.cents}, {"data-user-owns-client" => current_user.owns_client?(c)}]}, required: true
+      div#worklog-total-calculations class="#{current_user.owns_client?(@worklog.client) ? "active" : "not-shown"}"
+        .accordion#accordion1
+          .accordion-group
+            .accordion-heading
+              a.accordion-toggle data-parent="#accordion1" data-toggle="collapse" href="#adjust-price"
+                | Optionally adjust what you charge.
+            #adjust-price.accordion-body.collapse
+              .accordion-inner
+                = f.input :hourly_rate, as: :string
+        .total
+          span.label.label-success
+            | Total
+            span.worklog-total data-currency="#{@worklog.currency.symbol}" = @worklog.total_with_currency
       h4 Github Commits
       - if current_user.github_token
         ul#github_commit_messages
