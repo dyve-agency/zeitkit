@@ -1,10 +1,18 @@
 class Kpi
-
+  extend  ActiveModel::Naming
+  extend  ActiveModel::Translation
   include ActiveModel::Validations
   include ActiveModel::Conversion
-  extend ActiveModel::Naming
 
   attr_accessor :client_id, :user_id
+
+  def initialize(params={})
+    params.each do |attr, value|
+      self.public_send("#{attr}=", value)
+    end if params
+
+    super()
+  end
 
   def persisted?
     false
@@ -14,4 +22,7 @@ class Kpi
     true
   end
 
+  def can_display_data?
+    false
+  end
 end

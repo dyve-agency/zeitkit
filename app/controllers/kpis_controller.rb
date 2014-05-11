@@ -5,6 +5,6 @@ class KpisController < ApplicationController
 
   def create
     @kpi = Kpi.new(params[:kpi])
-    render "new"
+    render partial: "data", layout: false, locals: { kpi: @kpi }
   end
 end
