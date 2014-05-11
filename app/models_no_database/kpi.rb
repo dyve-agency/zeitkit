@@ -65,8 +65,12 @@ class Kpi
     self.user_data = temp
   end
 
-  def all_worklogs
-    self.user_data.values
+  def all_worklogs_for_criteria
+    Worklog.where(user_id: user_ids, client_id: client_ids)
+  end
+
+  def worklog_earnings_grouped
+    all_worklogs_for_criteria.send("group_by_#{group_data_by}", :end_time, {format: format_string_for_display}).sum("hourly_rate_cents / 100")
   end
 
   def worklogs_grouped_by
@@ -83,5 +87,10 @@ class Kpi
 
   def group_date_i18n_format
     "kpi_#{group_data_by}".to_sym
+  end
+
+  def format_string_for_display
+    translations = I18n.backend.send(:translations)
+    translations[:en][:time][:formats][group_date_i18n_format]
   end
 end

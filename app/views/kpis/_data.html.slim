@@ -1,4 +1,6 @@
 - if kpi.can_display_data?
+  h3 Overall earnings
+  = column_chart kpi.worklog_earnings_grouped
   h3 Worked hours aggregated
   - kpi.worklogs_grouped_by.each do |group_data|
     .well
