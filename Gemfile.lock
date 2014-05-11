@@ -1,6 +1,6 @@
 GIT
-  remote: git@github.com:NoamB/sorcery.git
-  revision: af9168a0fda602329caa65ab2429f56ac4c6a0f0
+  remote: https://github.com/NoamB/sorcery.git
+  revision: a069ed67ab9aea0650abc888a419fa0856e594ef
   specs:
     sorcery (0.8.5)
       bcrypt (>= 3.1)

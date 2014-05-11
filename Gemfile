@@ -7,8 +7,7 @@ gem 'rails', '3.2.17'
 gem 'pg'
 gem 'slim'
 gem 'slim-rails'
-gem 'sorcery', git: 'git@github.com:NoamB/sorcery.git'
-
+gem 'sorcery', git: 'https://github.com/NoamB/sorcery.git'
 
 gem 'simple_form'
 
