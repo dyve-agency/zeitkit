@@ -1,19 +1,20 @@
-heroku_java_home = '/usr/lib/jvm/java-6-openjdk'
-ENV['JAVA_HOME'] = heroku_java_home if Dir.exist?(heroku_java_home)
-ruby "2.0.0"
+ruby "2.1.1"
 
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.11'
+gem 'rails', '3.2.17'
 
 gem 'pg'
 gem 'slim'
 gem 'slim-rails'
-gem 'sorcery', git: 'https://github.com/hendricius/sorcery.git', branch: :access_token
+gem 'sorcery', git: 'git@github.com:NoamB/sorcery.git'
 
 
 gem 'simple_form'
-gem 'jquery-rails'
+
+# Use jquery as the JavaScript library
+gem 'jquery-rails', git: "https://github.com/rails/jquery-rails"
+
 gem 'cancan'
 gem 'newrelic_rpm'
 gem 'redcarpet'
@@ -41,6 +42,9 @@ gem 'octokit'
 gem 'omniauth'
 gem 'omniauth-github'
 
+# Use bootstrap as the style framework
+gem 'bootstrap-sass', git: 'https://github.com/twbs/bootstrap-sass', tag: 'v2.3.2.2'
+
 # Bootstrap helpers
 gem "rails-bootstrap-helpers", git: "https://github.com/Tretti/rails-bootstrap-helpers.git"
 
@@ -56,14 +60,14 @@ gem "therubyracer"
 # Pagination
 gem 'will_paginate-bootstrap', '0.2.5'
 
+# Creating nested forms easily
+gem "nested_form", git: "git@github.com:hendricius/nested_form.git"
+
 group :assets do
   gem 'coffee-rails', '~> 3.2.1'
   gem 'bourbon'
   gem 'font-awesome-sass-rails', '~> 3.0.0.0', git: "https://github.com/nicoles/font-awesome-sass-rails.git"
   gem 'uglifier', '>= 1.0.3'
-
-  # Use bootstrap as the style framework
-  gem 'bootstrap-sass', '~> 2.3.1.1', git: 'https://github.com/thomas-mcdonald/bootstrap-sass', tag: 'v2.3.1.1'
 
   # Formating times
   gem 'momentjs-rails'

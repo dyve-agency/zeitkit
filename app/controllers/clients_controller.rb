@@ -4,11 +4,10 @@ class ClientsController < ApplicationController
   respond_to :html, :json
 
   def index
+    @clients = current_user.clients.order("created_at DESC")
+    @client_shares = current_user.client_shares.includes(client: :user)
     if params[:updated_since]
-      @clients = Client.updated_since(params[:updated_since]).where(user_id: current_user.id)
-      respond_with @clients
-    else
-      respond_with @clients.order("created_at DESC")
+      @clients = @clients.updated_since(params[:updated_since])
     end
   end
 
@@ -17,9 +16,12 @@ class ClientsController < ApplicationController
     set_current_user @client
     @client.hourly_rate = "1"
     @client.currency
+    @client_share_base = ClientShare.new(client_id: @client.id, hourly_rate: @client.hourly_rate)
   end
 
   def edit
+    @client = current_user.clients.find(params[:id])
+    @client_share_base = ClientShare.new(client_id: @client.id, hourly_rate: @client.hourly_rate)
   end
 
   def create
@@ -33,13 +35,18 @@ class ClientsController < ApplicationController
             <li><a href='#{client_path(@client)}'>Or, take a note.</a></li>
           </ul>".html_safe
     else
+      @client_share_base = ClientShare.new(client_id: @client.id, hourly_rate: @client.hourly_rate)
       render action: "new"
     end
   end
 
   def update
     @client = current_user.clients.find(params[:id])
-    if @client.update_attributes(params[:client])
+    @client.assign_attributes(params[:client])
+    @client.client_shares.each do |cs|
+      cs.set_user_id_from_username
+    end
+    if @client.save
       redirect_to clients_path, notice: 'Client was successfully updated.'
     else
       render action: "edit"

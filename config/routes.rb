@@ -3,6 +3,9 @@ Timetracker::Application.routes.draw do
   root :to => "static#home"
 
   resources :users, only: [:new, :create, :show, :edit, :update] do
+    collection do
+      get :usernames
+    end
     member do
       get :github_commit_messages
     end
@@ -24,6 +27,8 @@ Timetracker::Application.routes.draw do
       get "pdf_export"
     end
   end
+  resources :client_shares, only: [:destroy]
+
   resources :invoice_default, only: [:update, :edit]
   resources :expenses, except: [:show]
   resources :products, except: [:show]

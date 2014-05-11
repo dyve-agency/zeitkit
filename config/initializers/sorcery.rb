@@ -2,7 +2,7 @@
 # The default is nothing which will include only core features (password encryption, login/logout).
 # Available submodules are: :user_activation, :http_basic_auth, :remember_me,
 # :reset_password, :session_timeout, :brute_force_protection, :activity_logging, :external
-Rails.application.config.sorcery.submodules = [:core, :remember_me, :reset_password, :access_token]
+Rails.application.config.sorcery.submodules = [:core, :remember_me, :reset_password]
 
 # Here you can configure each submodule's features.
 Rails.application.config.sorcery.configure do |config|
@@ -393,15 +393,10 @@ Rails.application.config.sorcery.configure do |config|
     # user.provider_uid_attribute_name =
     #
     user.username_attribute_names = [:email]
-    user.access_token_mode = 'single_token'
-    user.access_token_duration = 43200.minutes.to_i
-    user.access_token_duration_from_last_activity = true
-    user.access_token_register_last_activity = true
 
   end
 
   # This line must come after the 'user config' block.
   # Define which model authenticates with sorcery.
   config.user_class = "User"
-  config.restful_json_api = true
 end

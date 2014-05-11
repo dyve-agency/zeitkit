@@ -16,7 +16,8 @@ class User < ActiveRecord::Base
     :first_name,
     :last_name,
     :authentications_attributes,
-    :time_zone
+    :time_zone,
+    :username
 
   has_many :clients
   has_many :worklogs
@@ -26,6 +27,7 @@ class User < ActiveRecord::Base
   has_many :products
   has_many :access_tokens, :dependent => :delete_all
   has_many :authentications, :dependent => :destroy
+  has_many :client_shares, dependent: :destroy
 
   has_one :temp_worklog_save
   has_one :invoice_default
@@ -41,7 +43,9 @@ class User < ActiveRecord::Base
   validates :time_zone, # allows empty timezone. falls back to default timezone
     inclusion: { in: ActiveSupport::TimeZone.all.map(&:name) },
     unless: Proc.new { |u| u.time_zone.blank? }
+  validates :username, presence: true, uniqueness: true
 
+  before_validation :set_temp_username, on: :create
   before_save :update_after_demo_conversion
   before_create :get_name_from_api
   after_create :build_invoice_default
@@ -64,6 +68,13 @@ class User < ActiveRecord::Base
     email
   end
 
+  def self.unused_random_username
+    begin
+      username = "user#{SecureRandom.hex(6)}"
+    end while exists?(username: username)
+    username
+  end
+
   def set_temp_password(temp_pw)
     self.password = temp_pw
     self.password_confirmation = temp_pw
@@ -72,6 +83,18 @@ class User < ActiveRecord::Base
   def build_initial_temp_worklog_save
     temp_save = TempWorklogSave.new(user_id: self.id)
     temp_save.save
+  end
+
+  def shared_clients
+    Client.where(id: client_shares.map(&:client_id))
+  end
+
+  def clients_and_shared_clients
+    shared_clients + clients
+  end
+
+  def owns_client?(client)
+    clients.where(id: client.id).any?
   end
 
   def string_fields_to_nil
@@ -229,6 +252,13 @@ class User < ActiveRecord::Base
 
   def github_client
     @github_client ||= Github.new(self) if github_token
+  end
+
+  def set_temp_username
+    if username.blank?
+      self.username = self.class.unused_random_username
+    end
+    true
   end
 
 end

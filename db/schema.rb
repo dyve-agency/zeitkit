@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131111164305) do
+ActiveRecord::Schema.define(:version => 20140511092913) do
 
   create_table "access_tokens", :force => true do |t|
     t.string   "token"
@@ -30,16 +30,26 @@ ActiveRecord::Schema.define(:version => 20131111164305) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "client_shares", :force => true do |t|
+    t.integer  "client_id"
+    t.integer  "user_id"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+    t.string   "username"
+    t.integer  "hourly_rate_cents"
+  end
+
   create_table "clients", :force => true do |t|
     t.string   "name"
     t.integer  "hourly_rate_cents"
-    t.integer  "user_id",           :null => false
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.integer  "user_id",                      :null => false
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
     t.string   "city"
     t.string   "street"
     t.string   "zip"
     t.string   "company_name"
+    t.boolean  "email_when_team_adds_worklog"
   end
 
   create_table "expenses", :force => true do |t|
@@ -139,6 +149,7 @@ ActiveRecord::Schema.define(:version => 20131111164305) do
     t.string   "last_name"
     t.string   "time_zone"
     t.string   "github_token"
+    t.string   "username"
   end
 
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token"
@@ -155,6 +166,7 @@ ActiveRecord::Schema.define(:version => 20131111164305) do
     t.text     "summary"
     t.integer  "invoice_id"
     t.datetime "deleted_at"
+    t.integer  "client_share_id"
   end
 
 end

@@ -1,4 +1,28 @@
 h1 Clients
+- if @client_shares.present?
+  p.lead Shared with me
+  table.table.table-bordered.table-striped
+    thead
+      tr
+        th Name
+        th Shared by
+        th Controls
+
+    tbody
+      - @client_shares.each do |client_share|
+        tr
+          td= client_share.client.name
+          td= client_share.client.user.username
+          td
+            .btn-group
+            = link_to new_worklog_path(client: client_share.client), class: "btn" do
+              i.icon-plus
+              span Worklog
+            = link_to "Reject", client_share_path(client_share), class: "btn",
+              method: :delete, data: {confirm: "Are you sure?" }
+
+- if @client_shares.present?
+  p.lead My clients
 table.table.table-bordered.table-striped
   thead
     tr

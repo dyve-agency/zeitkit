@@ -22,4 +22,6 @@
 //= require add2home
 //= require stay_in_browser
 //= require moment
+//= require jquery_nested_form
+//= require bootstrap-typeahead-ajax
 //= require_tree .

@@ -1,17 +1,38 @@
-= simple_form_for @client do |f|
-  .row
-    .span4
-      h4 Basic info
-      = f.input :name
-      = f.input :hourly_rate, as: :string, required: true
-      - if !@client.new_record?
-        = f.input :company_name
-    - if !@client.new_record?
-      .span4
-        h4 Optional info (for invoices)
-        = f.input :street
-        = f.input :city
-        = f.input :zip
+= simple_nested_form_for @client do |f|
+  = render "/generic/object_errors", object: @client
+  .row-fluid
+    .span6
+      .row-fluid
+        .span6
+          h4 Basic info
+          = f.input :name
+          = f.input :hourly_rate, as: :string, required: true
+          = f.input :company_name
+        .span6
+          h4 Optional info (for invoices)
+          = f.input :street
+          = f.input :city
+          = f.input :zip
+    .span6
+      h4 Allow other users to use the same client
+      .label-checkbox-left.clearfix
+        = f.input :email_when_team_adds_worklog, label: "Send email when team member adds worklog"
+      .client-shares-wrapper
+        = f.simple_fields_for :client_shares do |cs|
+          .row-fluid
+            .span5
+              = cs.input :username, placeholder: "Zeitkit username i.e. hendr"
+            .span5
+              = cs.input :hourly_rate, as: :string
+            .span2.align-top-with-label
+              = cs.link_to_remove "<i class='icon-remove'></i>".html_safe, class: "btn btn-danger"
+        = f.link_to_add "Add coworker", :client_shares, class: "btn", model_object: @client_share_base
+
 
   .form-actions
     = f.button :submit, "Save Client"
+
+javascript:
+  $(function() {
+    window.App.ClientShares.init();
+  })
