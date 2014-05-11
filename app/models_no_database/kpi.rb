@@ -89,15 +89,24 @@ class Kpi
 
   def worklogs_grouped_by
     user_ids.map do |user_id|
+      data = Worklog.where(user_id: user_id).
+        where(client_id: client_ids).
+        where("start_time >= ? AND end_time <= ?", start_date, end_date).
+        send("group_by_#{group_data_by}", :end_time).
+        sum("end_time - start_time")
+
       OpenStruct.new(
         user: User.find(user_id),
-        data: Worklog.where(user_id: user_id).
-          where(client_id: client_ids).
-          where("start_time >= ? AND end_time <= ?", start_date, end_date).
-          send("group_by_#{group_data_by}", :end_time).
-          sum("end_time - start_time")
+        data: merge_data_with_preset_data(data)
       )
     end
+  end
+
+  # Expects a hash like {DateTime: value}
+  def merge_data_with_preset_data(data)
+    empty_range = empty_date_range
+    queried = Hash[data.map{|date, val| [date.to_i, val]}]
+    Hash[empty_range.merge(queried).map{|timestamp, result| [Time.at(timestamp).to_datetime, result]}].sort_by {|k, v| k }.reverse
   end
 
   def group_date_i18n_format

@@ -15,7 +15,7 @@
             - group_data.data.each do |date, total|
               tr
                 td= l date, format: kpi.group_date_i18n_format
-                td= total
+                td= total || "-"
       - else
         .alert.alert-info No data to display for user
 
