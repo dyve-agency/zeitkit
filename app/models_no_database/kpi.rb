@@ -6,7 +6,7 @@ class Kpi
 
   ALLOWED_GROUPING_OPTIONS = %w[day week month year]
 
-  attr_accessor :client_ids, :user_ids, :user_data, :requester, :group_data_by
+  attr_accessor :client_ids, :user_ids, :user_data, :requester, :group_data_by, :start_date, :end_date
 
   def initialize(params={})
     params.each do |attr, value|
@@ -14,11 +14,13 @@ class Kpi
     end if params
 
     super()
+    set_default_values
+  end
 
+  def set_default_values
     if client_ids.nil?
       self.client_ids = []
     end
-
     if user_ids.nil?
       self.user_ids = []
     end
@@ -26,6 +28,12 @@ class Kpi
 
     if !ALLOWED_GROUPING_OPTIONS.include?(group_data_by)
       self.group_data_by = "day"
+    end
+    if start_date.blank?
+      self.start_date = DateTime.now.beginning_of_year
+    end
+    if end_date.blank?
+      self.end_date = DateTime.now
     end
 
     set_client_ids
@@ -61,12 +69,15 @@ class Kpi
   end
 
   def generate_user_data
-    temp = Worklog.where(user_id: user_ids, client_id: client_ids).includes(:client, :user).group_by{|wl| wl.user }
+    temp = Worklog.where(user_id: user_ids, client_id: client_ids).
+      where("start_time >= ? AND end_time <= ?", start_date, end_date).
+      includes(:client, :user).group_by{|wl| wl.user }
     self.user_data = temp
   end
 
   def all_worklogs_for_criteria
-    Worklog.where(user_id: user_ids, client_id: client_ids)
+    Worklog.where(user_id: user_ids, client_id: client_ids).
+      where("start_time >= ? AND end_time <= ?", start_date, end_date)
   end
 
   def worklog_earnings_grouped
@@ -79,6 +90,7 @@ class Kpi
         user: User.find(user_id),
         data: Worklog.where(user_id: user_id).
           where(client_id: client_ids).
+          where("start_time >= ? AND end_time <= ?", start_date, end_date).
           send("group_by_#{group_data_by}", :end_time).
           sum("end_time - start_time")
       )

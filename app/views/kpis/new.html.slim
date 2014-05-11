@@ -13,9 +13,19 @@
         = f.select :user_ids,
           (current_user.added_team_members + [current_user]).map {|u| [u.username, u.id]},
           {}, multiple: true
-    = f.input :group_data_by, collection: Kpi::ALLOWED_GROUPING_OPTIONS,
-      label_method: ->(opt) { opt.capitalize }
 
+    .row-fluid
+      .span3
+        .control-group
+          label Start Date
+          input type="date" name="kpi[start_date]"
+      .span3
+        .control-group
+          label End Date
+          input type="date" name="kpi[end_date]"
+      .span4
+        = f.input :group_data_by, collection: Kpi::ALLOWED_GROUPING_OPTIONS,
+          label_method: ->(opt) { opt.capitalize }
 
   hr
 
