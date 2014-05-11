@@ -1,4 +1,21 @@
 - if kpi.can_display_data?
-  h5 Data
+  - kpi.user_data.each do |user, worklogs|
+    p.lead User: #{user.username}
+    table.table-condensed.table-striped.table
+      thead
+        tr
+          th Start
+          th End
+          th Client
+          th Total
+          th Details
+      tbody
+        - worklogs.each do |worklog|
+          tr
+            td= l worklog.start_time
+            td= l worklog.end_time
+            td= worklog.client.name
+            td= with_currency worklog.total
+            td= link_to "Details", "", class: "btn btn-mini"
 - else
   h5 No data to display

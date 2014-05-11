@@ -24,4 +24,5 @@
 //= require moment
 //= require jquery_nested_form
 //= require bootstrap-typeahead-ajax
+//= require highcharts
 //= require_tree .

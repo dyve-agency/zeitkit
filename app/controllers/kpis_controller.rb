@@ -5,6 +5,7 @@ class KpisController < ApplicationController
 
   def create
     @kpi = Kpi.new(params[:kpi])
+    @kpi.generate_user_data
     render partial: "data", layout: false, locals: { kpi: @kpi }
   end
 end
