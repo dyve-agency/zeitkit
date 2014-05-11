@@ -32,6 +32,7 @@ class Worklog < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :client
+  belongs_to :client_share
   belongs_to :invoice
 
   validates :user, :client, :start_time, :end_time, presence: true
@@ -41,6 +42,7 @@ class Worklog < ActiveRecord::Base
 
   before_validation :persist_hourly_rate_from_client, on: :create, if: :not_set_by_user
   before_validation :set_total
+  before_validation :set_client_share_id
 
   after_create :email_user_of_shared_client_worklog
 
@@ -184,6 +186,34 @@ class Worklog < ActiveRecord::Base
     self.unscoped.where("updated_at >= ?", Time.at(unixtimestamp.to_i).to_datetime)
   end
 
+  def created_for_shared_client?
+    # We own the client
+    if user.clients.where(id: client_id).any?
+      false
+    else
+      true
+    end
+  end
+
+  def created_for_user
+    if created_for_shared_client?
+      client.user
+    else
+      user
+    end
+  end
+
+  def email_user_of_shared_client_worklog
+    if created_for_shared_client? && client.email_when_team_adds_worklog
+      begin
+        WorklogMailer.worklog_for_shared_client_created(self).deliver
+      rescue
+      end
+    end
+    true
+  end
+
+
   # Active record callbacks #
 
   def persist_hourly_rate_from_client
@@ -220,29 +250,9 @@ class Worklog < ActiveRecord::Base
     end
   end
 
-  def created_for_shared_client?
-    # We own the client
-    if user.clients.where(id: client_id).any?
-      false
-    else
-      true
-    end
-  end
-
-  def created_for_user
-    if created_for_shared_client?
-      client.user
-    else
-      user
-    end
-  end
-
-  def email_user_of_shared_client_worklog
-    if created_for_shared_client? && client.email_when_team_adds_worklog
-      begin
-        WorklogMailer.worklog_for_shared_client_created(self).deliver
-      rescue
-      end
+  def set_client_share_id
+    if user && client && created_for_shared_client?
+      self.client_share = user.client_shares.where(client_id: self.client_id).first
     end
     true
   end

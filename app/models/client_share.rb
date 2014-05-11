@@ -5,6 +5,7 @@ class ClientShare < ActiveRecord::Base
   attr_accessible :client_id, :user_id, :username, :hourly_rate
   belongs_to :client
   belongs_to :user
+  has_many :worklogs
 
   validates :client_id, uniqueness: { scope: :user_id, message: "Can only share the client once per user." }
   validates :user_id, :client_id, presence: true
