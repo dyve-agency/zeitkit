@@ -1,5 +1,8 @@
 class ClientShare < ActiveRecord::Base
-  attr_accessible :client_id, :user_id, :username
+  include TotalHelper
+  total_and_currency_for attribute_name: :hourly_rate, cents_attribute: :hourly_rate_cents
+
+  attr_accessible :client_id, :user_id, :username, :hourly_rate
   belongs_to :client
   belongs_to :user
 

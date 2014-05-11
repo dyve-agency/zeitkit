@@ -16,10 +16,12 @@ class ClientsController < ApplicationController
     set_current_user @client
     @client.hourly_rate = "1"
     @client.currency
+    @client_share_base = ClientShare.new(client_id: @client.id, hourly_rate: @client.hourly_rate)
   end
 
   def edit
     @client = current_user.clients.find(params[:id])
+    @client_share_base = ClientShare.new(client_id: @client.id, hourly_rate: @client.hourly_rate)
   end
 
   def create
@@ -33,6 +35,7 @@ class ClientsController < ApplicationController
             <li><a href='#{client_path(@client)}'>Or, take a note.</a></li>
           </ul>".html_safe
     else
+      @client_share_base = ClientShare.new(client_id: @client.id, hourly_rate: @client.hourly_rate)
       render action: "new"
     end
   end
