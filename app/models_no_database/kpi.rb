@@ -27,10 +27,10 @@ class Kpi
     self.user_data = []
 
     if !ALLOWED_GROUPING_OPTIONS.include?(group_data_by)
-      self.group_data_by = "day"
+      self.group_data_by = "week"
     end
     if start_date.blank?
-      self.start_date = DateTime.now.beginning_of_year
+      self.start_date = DateTime.now - 1.month
     end
     if end_date.blank?
       self.end_date = DateTime.now
@@ -81,7 +81,10 @@ class Kpi
   end
 
   def worklog_earnings_grouped
-    all_worklogs_for_criteria.send("group_by_#{group_data_by}", :end_time, {format: format_string_for_display}).sum("hourly_rate_cents / 100")
+    empty_range = empty_date_range
+    queried = all_worklogs_for_criteria.send("group_by_#{group_data_by}", :end_time, {format: format_string_for_display}).sum("hourly_rate_cents / 100")
+    queried = Hash[queried.map{|date, val| [DateTime.parse(date).to_i, val]}]
+    Hash[empty_range.merge(queried).map{|timestamp, result| [Time.at(timestamp).to_datetime.strftime(format_string_for_display), result]}]
   end
 
   def worklogs_grouped_by
@@ -102,7 +105,17 @@ class Kpi
   end
 
   def format_string_for_display
+    empty_date_range
     translations = I18n.backend.send(:translations)
     translations[:en][:time][:formats][group_date_i18n_format]
+  end
+
+  def empty_date_range
+    step = 1.send(group_data_by.pluralize)
+    result = {}
+    ( start_date .. end_date ).step(step) do |time|
+      result[time.to_i] = nil
+    end
+    result
   end
 end
