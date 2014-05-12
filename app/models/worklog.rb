@@ -41,7 +41,7 @@ class Worklog < ActiveRecord::Base
   validate :duration_less_than_a_year
 
   before_validation :set_client_share
-  before_validation :persist_hourly_rate_from_client, on: :create, if: :not_set_by_user
+  before_validation :persist_hourly_rate_from_client, on: :create
   before_validation :set_total
 
   after_create :email_user_of_shared_client_worklog
@@ -219,7 +219,7 @@ class Worklog < ActiveRecord::Base
   def persist_hourly_rate_from_client
     if client_share.present?
       self.hourly_rate = client_share.hourly_rate
-    elsif not_set_by_user?
+    elsif not_set_by_user
       self.hourly_rate = client.hourly_rate
     end
   end
