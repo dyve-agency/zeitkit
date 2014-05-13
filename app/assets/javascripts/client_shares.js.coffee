@@ -6,7 +6,7 @@ window.App.ClientShares =
     _this.bind_events()
     base_el = $('.client-shares-wrapper')
     base_el.on 'nested:fieldAdded', (e) ->
-      elem = $($(e.field).find('input')[0])
+      elem = $($(e.field).find('.usernames-input input')[0])
       _this.bind_events(elem)
   bind_events: (elem = null)->
     _this = this

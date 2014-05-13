@@ -20,7 +20,7 @@
       .client-shares-wrapper
         = f.simple_fields_for :client_shares do |cs|
           .row-fluid
-            .span5
+            .span5.usernames-input
               = cs.input :username, placeholder: "Zeitkit username i.e. hendr"
             .span5
               = cs.input :hourly_rate, as: :string
