@@ -96,7 +96,8 @@ class Kpi
         send("group_by_#{group_data_by}", :end_time).
         sum("end_time - start_time")
 
-      data = Hash[data.map {|k, v| [k.beginning_of_day, v]}]
+      # Treat all times as UTC to get the mapping to work
+      data = Hash[data.map {|k, v| [DateTime.parse(k.strftime("%F")).beginning_of_day, v]}]
 
       OpenStruct.new(
         user: User.find(user_id),
@@ -117,7 +118,8 @@ class Kpi
   end
 
   def format_string_for_display
-    empty_date_range
+    # Hack for initing translation backend
+    I18n.t :foo
     translations = I18n.backend.send(:translations)
     translations[:en][:time][:formats][group_date_i18n_format]
   end
@@ -125,7 +127,9 @@ class Kpi
   def empty_date_range
     step = 1.send(group_data_by.pluralize)
     result = {}
-    ( start_date.beginning_of_day .. end_date.beginning_of_day ).step(step) do |time|
+    new_start_date = start_date.is_a?(String) ? DateTime.parse(start_date) : start_date
+    new_end_date = end_date.is_a?(String) ? DateTime.parse(end_date) : end_date
+    ( new_start_date.beginning_of_day .. new_end_date.beginning_of_day ).step(step) do |time|
       result[time.to_i] = nil
     end
     result
