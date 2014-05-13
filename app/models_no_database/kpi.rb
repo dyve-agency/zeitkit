@@ -96,6 +96,8 @@ class Kpi
         send("group_by_#{group_data_by}", :end_time).
         sum("end_time - start_time")
 
+      data = Hash[data.map {|k, v| [k.beginnging_of_day, v]}]
+
       OpenStruct.new(
         user: User.find(user_id),
         data: merge_data_with_preset_data(data)
