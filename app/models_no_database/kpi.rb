@@ -123,7 +123,7 @@ class Kpi
   def empty_date_range
     step = 1.send(group_data_by.pluralize)
     result = {}
-    ( start_date .. end_date ).step(step) do |time|
+    ( start_date.beginning_of_day .. end_date.beginning_of_day ).step(step) do |time|
       result[time.to_i] = nil
     end
     result
