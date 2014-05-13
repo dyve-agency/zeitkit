@@ -99,6 +99,7 @@ class User < ActiveRecord::Base
   end
 
   def owns_client?(client)
+    return if client.blank?
     clients.where(id: client.id).any?
   end
 
