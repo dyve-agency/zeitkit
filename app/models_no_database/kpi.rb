@@ -71,6 +71,7 @@ class Kpi
   def generate_user_data
     temp = Worklog.where(user_id: user_ids, client_id: client_ids).
       where("start_time >= ? AND end_time <= ?", start_date, end_date).
+      order("start_time DESC").
       includes(:client, :user).group_by{|wl| wl.user }
     self.user_data = temp
   end
