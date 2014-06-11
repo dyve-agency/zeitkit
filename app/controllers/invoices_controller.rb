@@ -12,7 +12,7 @@ class InvoicesController < ApplicationController
   def pdf_export
     @invoice = @invoice.decorate
     @client = @invoice.client
-    @worklogs = @invoice.worklogs.order("start_time DESC")
+    @worklogs = @invoice.worklogs.order("start_time DESC").includes(:user)
     @sum = Money.new @worklogs.sum(:total_cents), current_user.currency
     seconds = Worklog.range_duration_seconds(@worklogs)
     @hours = Worklog.hours_from_seconds seconds

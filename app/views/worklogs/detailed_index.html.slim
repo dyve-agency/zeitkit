@@ -23,6 +23,8 @@ table.table.table-bordered
       th End
       th Duration
       th Details
+      - if show_user_names
+        th Creator
       th Price
   tbody
     - @worklogs.sort_by{|wl| wl.user}.each do |worklog|
