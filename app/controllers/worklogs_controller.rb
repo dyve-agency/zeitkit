@@ -7,9 +7,9 @@ class WorklogsController < ApplicationController
     @user = current_user
     @clients = @user.clients
     if params[:updated_since]
-      @worklogs = Worklog.updated_since(params[:updated_since]).where(user_id: current_user.id)
+      @worklogs = Worklog.updated_since(params[:updated_since]).where(user_id: current_user.id).includes(client: :user)
     else
-      @worklogs = current_user.worklogs.order("start_time DESC")
+      @worklogs = current_user.worklogs.order("start_time DESC").includes(client: :user)
       params[:client] ? @worklogs = @worklogs.where(client_id: params[:client]) : @worklogs
       params[:paid] == "true" ? @worklogs = @worklogs.paid : @worklogs
       params[:paid] == "false" ? @worklogs = @worklogs.unpaid : @worklogs
@@ -20,10 +20,6 @@ class WorklogsController < ApplicationController
       params[:time] == "last_month" ? @worklogs = @worklogs.last_month : @worklogs
     end
     @worklogs = @worklogs.paginate(:page => params[:page])
-    @sum = Money.new @worklogs.sum(:total_cents), @user.currency
-    seconds = Worklog.range_duration_seconds(@worklogs)
-    @hours = Worklog.hours_from_seconds seconds
-    @minutes = Worklog.remaining_minutes_from_seconds seconds
 
     respond_to do |format|
       format.html # index.html.erb
