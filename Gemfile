@@ -31,9 +31,6 @@ gem 'wkhtmltopdf-binary', git: "https://github.com/tolgap/wkhtmltopdf-binary.git
 # Managing startup behavior of App
 gem 'foreman'
 
-# Use the unicorn web server
-gem 'unicorn'
-
 # Octokit gem for github
 gem 'octokit'
 
