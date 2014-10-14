@@ -1,1 +1,1 @@
-app = angular.module("app", [])
+app = angular.module("app", ["ng-rails-csrf", "rails"])

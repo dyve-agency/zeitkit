@@ -68,6 +68,9 @@ gem 'angularjs-rails'
 gem 'ng-rails-csrf'
 gem 'angularjs-rails-resource', '~> 1.1.1'
 
+# Data to the client
+gem 'gon'
+
 group :assets do
   gem 'coffee-rails', '~> 3.2.1'
   gem 'bourbon'

@@ -16,7 +16,7 @@ div ng-controller="WorklogsController"
         th End
         th Actions
     tbody
-      tr ng-repeat="time for time in worklog.timeframes"
+      tr ng-repeat="time in worklog.timeframes"
         td
           input type="text" ng-model="time.started"
           '
@@ -30,7 +30,7 @@ div ng-controller="WorklogsController"
             i.icon-remove
       tr
         td colspan="3"
-          span.btn.btn-success
+          span.btn.btn-success ng-click="worklog.addBlankTimeframe()"
             | Add timeframe
 
   label What did you do? Markdown supported.
