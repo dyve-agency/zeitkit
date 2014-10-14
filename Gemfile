@@ -2,7 +2,7 @@ ruby "2.1.2"
 
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.17'
+gem 'rails', '4.1.6'
 
 gem 'pg'
 gem 'slim'
@@ -12,7 +12,7 @@ gem 'sorcery', git: 'https://github.com/NoamB/sorcery.git'
 gem 'simple_form'
 
 # Use jquery as the JavaScript library
-gem 'jquery-rails', git: "https://github.com/rails/jquery-rails"
+gem 'jquery-rails'
 
 gem 'cancan'
 gem 'newrelic_rpm'
@@ -39,7 +39,8 @@ gem 'omniauth'
 gem 'omniauth-github'
 
 # Use bootstrap as the style framework
-gem 'bootstrap-sass', git: 'https://github.com/twbs/bootstrap-sass', tag: 'v2.3.2.2'
+gem 'bootstrap-sass', '~> 3.2.0'
+gem 'sass-rails', '>= 3.2'
 
 # Bootstrap helpers
 gem "rails-bootstrap-helpers", git: "https://github.com/Tretti/rails-bootstrap-helpers.git"
@@ -63,20 +64,24 @@ gem "nested_form", git: "https://github.com/hendricius/nested_form.git"
 gem 'chartkick', git: "https://github.com/ankane/chartkick.git"
 gem 'groupdate', git: "https://github.com/ankane/groupdate.git"
 
-group :assets do
-  gem 'coffee-rails', '~> 3.2.1'
-  gem 'bourbon'
-  gem 'font-awesome-sass-rails', '~> 3.0.0.0', git: "https://github.com/nicoles/font-awesome-sass-rails.git"
-  gem 'uglifier', '>= 1.0.3'
+# Angular JS
+gem 'angularjs-rails'
+gem 'ng-rails-csrf'
+gem 'angularjs-rails-resource', '~> 1.1.1'
 
-  # Formating times
-  gem 'momentjs-rails'
-end
+# Data to the client
+gem 'gon'
+
 
 group :development do
   gem 'quiet_assets'
   gem 'sqlite3'
   gem 'pry-rails'
+  gem 'coffee-rails'
+  gem 'bourbon'
+  gem "font-awesome-rails"
+  gem 'uglifier'
+  gem 'momentjs-rails'
 end
 
 group :development, :test do
