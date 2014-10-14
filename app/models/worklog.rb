@@ -207,7 +207,8 @@ class Worklog < ActiveRecord::Base
     if created_for_shared_client? && client.email_when_team_adds_worklog
       begin
         WorklogMailer.worklog_for_shared_client_created(self).deliver
-      rescue
+      rescue => e
+        Rails.logger.fatal "Could not deliver worklog message: #{e.message.to_s} - #{e.backtrace.join("\n")}"
       end
     end
     true
