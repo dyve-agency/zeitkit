@@ -16,3 +16,6 @@
 /tmp
 
 /public/assets
+
+# Ignore rbenv-vars related files
+/.rbenv-vars
