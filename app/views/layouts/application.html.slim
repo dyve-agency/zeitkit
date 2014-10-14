@@ -25,7 +25,7 @@ html lang="en" class="#{check_if_css_class}"
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
       })();
     = csrf_meta_tags
-  body
+  body ng-app="app"
     #wrapper
       = render "layouts/header"
       - if show_tutorial?

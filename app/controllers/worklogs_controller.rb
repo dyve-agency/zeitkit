@@ -29,34 +29,15 @@ class WorklogsController < ApplicationController
   end
 
   def new
-    @worklog.client = set_client
-    @worklog.set_time_helpers_to_now!
-    params[:client] ? @worklog.client = current_user.clients.find(params[:client]) : nil
-    if params[:restore]
-      @worklog = @worklog.restore_based_on_saved_info
-      flash.now[:notice] = "We restored the information that was unsaved."
-    end
-    respond_with @worklog
   end
 
   def edit
-    @worklog.set_time_helpers_to_saved_times!
-    respond_with @worklog
   end
 
   def create
-    @worklog.convert_time_helpers_to_date_time!
-    @worklog.user = current_user
-    flash[:notice] = "Worklog was successfully created. Create another one - or: <a href='#{worklogs_path}'>Go back.</a>".html_safe if @worklog.save
-    respond_with @worklog, location: new_worklog_path
   end
 
   def update
-    @worklog.assign_attributes(params[:worklog])
-    @worklog.convert_time_helpers_to_date_time!
-    @worklog.user = current_user
-    flash[:notice] = "Worklog was successfully updated." if @worklog.save
-    respond_with @worklog, location: worklogs_path
   end
 
   def destroy

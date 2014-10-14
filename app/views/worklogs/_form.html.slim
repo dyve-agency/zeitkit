@@ -7,3 +7,34 @@
     span You need to create a client first.
     '
     = link_to "Create your first client.", new_client_path
+
+div ng-controller="WorklogsController"
+  table.table.table-bordered
+    thead
+      tr
+        th Start
+        th End
+        th Actions
+    tbody
+      tr ng-repeat="time for time in worklog.timeframes"
+        td
+          input type="text" ng-model="time.started"
+          '
+          a href="#" (now)
+        td
+          input type="text" ng-model="time.ended"
+          '
+          a href="#" (now)
+        td
+          span.btn
+            i.icon-remove
+      tr
+        td colspan="3"
+          span.btn.btn-success
+            | Add timeframe
+
+  label What did you do? Markdown supported.
+  textarea placeholder="e.g. finish user feature"
+
+  hr
+  span.btn.btn-primary Save
