@@ -34,11 +34,10 @@ class Worklog < ActiveRecord::Base
   belongs_to :client
   belongs_to :client_share
   belongs_to :invoice
+  has_many :timeframes
 
   validates :user, :client, :start_time, :end_time, presence: true
 
-  validate :end_time_greater_than_start_time
-  validate :duration_less_than_a_year
 
   before_validation :set_client_share
   before_validation :persist_hourly_rate_from_client, on: :create
@@ -99,8 +98,7 @@ class Worklog < ActiveRecord::Base
   end
 
   def duration
-    return if !end_time || !start_time
-    (end_time - start_time).to_i
+    timeframes.map(&:duration).inject(:+) || 0
   end
 
   def duration_hours
@@ -117,11 +115,6 @@ class Worklog < ActiveRecord::Base
 
   def cent_rate_per_second(cents_per_hour)
     cents_per_hour.to_f / 3600
-  end
-
-  def end_time_ok
-    return if !end_time || !start_time
-    end_time > start_time
   end
 
   def set_time_helpers_to_now!
@@ -234,25 +227,6 @@ class Worklog < ActiveRecord::Base
 
   def set_total
     self.total = self.calc_total
-  end
-
-  # Validations #
-  def multi_errors_add(attributes, message)
-    attributes.each do |attri|
-      errors.add(attri, message)
-    end
-  end
-
-  def duration_less_than_a_year
-    if duration && duration > 1.year && end_time_ok
-      multi_errors_add([:start_time, :end_time, :from_date, :from_time, :to_time, :to_date], "Must be smaller than a year")
-    end
-  end
-
-  def end_time_greater_than_start_time
-    if !end_time_ok
-      multi_errors_add([:end_time, :to_time, :to_date], "Must be greater than the start.")
-    end
   end
 
   def set_client_share
