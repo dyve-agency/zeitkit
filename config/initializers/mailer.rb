@@ -1,11 +1,20 @@
 ActionMailer::Base.delivery_method = :smtp
 
-ActionMailer::Base.smtp_settings = {
-  :address              => "mail.gandi.net",
-  :port                 => 587,
-  :domain               => "zeitkit.com",
-  :user_name            => "info@zeitkit.com",
-  :password             => ENV['ZEMAIL_PASSWORD'],
-  :authentication       => "plain",
-  :enable_starttls_auto => true
-}
+if Rails.env.development?
+  ActionMailer::Base.smtp_settings = {
+    address:              ENV['MAILER_ADDRESS'],
+    port:                 ENV['MAILER_PORT']
+  }
+elsif Rails.env.production?
+  ActionMailer::Base.smtp_settings = {
+    :address              => ENV['MAILER_ADDRESS'],
+    :port                 => ENV['MAILER_PORT'],
+    :domain               => ENV['MAILER_DOMAIN'],
+    :user_name            => ENV['MAILER_USERNAME'],
+    :password             => ENV['MAILER_PASSWORD'],
+    :authentication       => ENV['MAILER_AUTHENTICATION'],
+    :enable_starttls_auto => true
+  }
+end
+
+ActionMailer::Base.default from: "Zeitkit Mailer <#{ENV['MAILER_DEFAULT_FROM']}>"

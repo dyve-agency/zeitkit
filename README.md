@@ -8,6 +8,13 @@
 * Reporting to see how your team is doing
 * Fully fledged PDF invoice generation. 100% compilant with German law.
 
+# Setup
+
+Make sure you have mailcatcher installed:
+    gem install mailcatcher
+
+Start everything:
+    bundle exec rails s
 
 ## TODO
 * A lot
