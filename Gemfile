@@ -63,6 +63,11 @@ gem "nested_form", git: "https://github.com/hendricius/nested_form.git"
 gem 'chartkick', git: "https://github.com/ankane/chartkick.git"
 gem 'groupdate', git: "https://github.com/ankane/groupdate.git"
 
+# Angular JS
+gem 'angularjs-rails'
+gem 'ng-rails-csrf'
+gem 'angularjs-rails-resource', '~> 1.1.1'
+
 group :assets do
   gem 'coffee-rails', '~> 3.2.1'
   gem 'bourbon'
