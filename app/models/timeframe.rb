@@ -25,7 +25,7 @@ class Timeframe < ActiveRecord::Base
   end
 
   def end_time_greater_than_start_time
-    if ended && ended >= started
+    if ended && started && started >= ended
       multi_errors_add([:ended], "Must be greater than the start.")
     end
   end
