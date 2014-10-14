@@ -26,6 +26,11 @@
 //= require bootstrap-typeahead-ajax
 //= require highcharts
 //= require chartkick
+
+//= require angular
+//= require ng-rails-csrf
+//= require angularjs/rails/resource
+
 //= require_tree ./public/
 //= require ./angular_init
 //= require_tree ./angular/
