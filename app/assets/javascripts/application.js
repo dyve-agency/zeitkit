@@ -26,4 +26,6 @@
 //= require bootstrap-typeahead-ajax
 //= require highcharts
 //= require chartkick
-//= require_tree .
+//= require_tree ./public/
+//= require ./angular_init
+//= require_tree ./angular/
