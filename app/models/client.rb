@@ -12,6 +12,8 @@ class Client < ActiveRecord::Base
     :client_shares_attributes,
     :email_when_team_adds_worklog
 
+  attr_accessor :is_shared
+
   belongs_to :user
   has_many :worklogs, dependent: :destroy
   has_many :invoices, dependent: :destroy

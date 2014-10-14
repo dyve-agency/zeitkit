@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   around_filter :set_time_zone
   before_filter :require_login, :except => [:not_authenticated]
   before_filter :check_and_set_mac_design
+  before_filter :init_gon, if: :current_user
 
   def check_and_set_mac_design
     cookies[:mac_app] = true if params[:mac_app]
@@ -23,5 +24,9 @@ class ApplicationController < ActionController::Base
     yield
   ensure
     Time.zone = old_time_zone
+  end
+
+  def init_gon
+    gon.current_user_id = current_user.id
   end
 end

@@ -103,4 +103,8 @@ class UsersController < ApplicationController
     render json: result, status: 200
   end
 
+  def clients
+    render json: current_user.clients_and_shared_clients, status: 200
+  end
+
 end

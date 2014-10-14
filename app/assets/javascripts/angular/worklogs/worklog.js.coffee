@@ -5,6 +5,8 @@ app.factory "Worklog", ["RailsResource", "Timeframe", (RailsResource, Timeframe)
     constructor: (opts = {})->
       defaultOpts =
         timeframes: []
+        clients: []
+        clientId: null
       _this = this
       useOpts = _.extend defaultOpts, opts
       _.each useOpts, (val, key) ->

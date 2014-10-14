@@ -9,6 +9,11 @@
     = link_to "Create your first client.", new_client_path
 
 div ng-controller="WorklogsController"
+  label Client
+  select ng-model="worklog.client" ng-options="client.company_name for client in worklog.clients"
+  label Hourly rate
+  input type="text" ng-model="worklog.hourlyRate"
+
   table.table.table-bordered
     thead
       tr

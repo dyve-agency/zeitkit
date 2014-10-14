@@ -91,7 +91,7 @@ class User < ActiveRecord::Base
   end
 
   def shared_clients
-    Client.where(id: client_shares.map(&:client_id))
+    Client.where(id: client_shares.map(&:client_id)).map{|c| c.is_shared = true; c}
   end
 
   def clients_and_shared_clients
