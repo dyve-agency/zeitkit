@@ -44,11 +44,6 @@
         .btn.reset-time
           i.icon-repeat
           |Reset
-      hr
-      h3 Restore
-      = link_to new_worklog_path(restore: true), class: "btn" do
-        i.icon-asterisk
-        |Restore unsaved changes
   hr
   .row
     .span6
@@ -78,3 +73,8 @@
 
 = link_to "", temp_worklog_save_path(current_user.temp_worklog_save),
   class: "temp_worklog_save_path hidden", method: :put
+
+javascript:
+  $(function() {
+    window.App.Worklog.init();
+  })
