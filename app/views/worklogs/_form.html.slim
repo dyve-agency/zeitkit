@@ -71,12 +71,6 @@
           span.label.label-success
             | Total
             span.worklog-total data-currency="#{@worklog.currency.symbol}" = @worklog.total_with_currency
-      h4 Github Commits
-      - if current_user.github_token
-        ul#github_commit_messages
-      - else
-        p You can auth with GitHub. This shows recent GitHub commit messages which you can then add to your worklogs.
-        = link_to boolean_with_icon(condition: current_user.github_token, text: "Authenticate with Github"), "/auth/github", class: "btn btn-primary"
 
 
   .form-actions
@@ -84,7 +78,3 @@
 
 = link_to "", temp_worklog_save_path(current_user.temp_worklog_save),
   class: "temp_worklog_save_path hidden", method: :put
-
-javascript:
-  window.App.Github.init();
-  window.App.Github.github_messages_link = "#{github_commit_messages_user_path(current_user, format: :json)}";
