@@ -22,10 +22,8 @@ html lang="en" class="#{check_if_css_class}"
   body
     #wrapper
       = render "layouts/header"
-      .container.content.clearfix
+      .container
         .row
-          .col-md-12
-            = render "layouts/notices"
-            = yield
-      - if !mac_app?
-        = render "layouts/footer"
+          .col-xs-12
+            .content
+              = yield

@@ -38,36 +38,38 @@
   .col-xs-2.invoice-box
     span.key Invoice date
     span.value= l @invoice.created_at, format: :day_month_year
-.invoice-content
-  table.table
-    thead
-      tr
-        td Description
-        td.last Subtotal
-    tbody
-      - (@invoice.worklogs.oldest_first + @invoice.products.oldest_first.uniq + @invoice.expenses.oldest_first).each do |entry|
-        tr
-          td= entry.invoice_title(@invoice)
-          - if entry.is_a?(Product)
-            td.last= entry.price_tag_total(@invoice)
-          - else
-            td.last= with_currency entry.total
+.row
+  .col-xs-12 style="padding: 0px;"
+    .invoice-content
+      table.table
+        thead
+          tr
+            td Description
+            td.last Subtotal
+        tbody
+          - (@invoice.worklogs.oldest_first + @invoice.products.oldest_first.uniq + @invoice.expenses.oldest_first).each do |entry|
+            tr
+              td= entry.invoice_title(@invoice)
+              - if entry.is_a?(Product)
+                td.last= entry.price_tag_total(@invoice)
+              - else
+                td.last= with_currency entry.total
 .invoice-total
   .row
-    .col-xs-3.offset7.key Subtotal
+    .col-xs-3.col-xs-offset-7.key Subtotal
     .col-xs-2.val= with_currency @invoice.subtotal
   - if @invoice.discount_applied?
     .row
-      .col-xs-3.offset7.key Discount
+      .col-xs-3.col-xs-offset-7.key Discount
       .col-xs-2.val= with_currency @invoice.discount
   .row
-    .col-xs-3.offset7.key Net total
+    .col-xs-3.col-xs-offset-7.key Net total
     .col-xs-2.val= with_currency @invoice.total
   .row.big-border
-    .col-xs-3.offset7.key #{@invoice.including_vat_info}
+    .col-xs-3.col-xs-offset-7.key #{@invoice.including_vat_info}
     .col-xs-2.val #{with_currency @invoice.total_vat}
   .row.bold
-    .col-xs-3.offset7.key Total
+    .col-xs-3.col-xs-offset-7.key Total
     .col-xs-2.val= with_currency @invoice.calc_vat_total
 .row.terms
   .col-xs-4
