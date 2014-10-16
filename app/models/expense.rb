@@ -12,11 +12,10 @@ class Expense < ActiveRecord::Base
 
   validates :user_id, :client_id, :total, :reason, presence: true
 
-  scope :paid, where(invoice_id: !nil)
-  scope :unpaid, where(invoice_id: nil)
-  scope :no_invoice, where(invoice_id: nil)
-
-  scope :oldest_first, order("created_at ASC")
+  scope :paid, -> { where(invoice_id: !nil) }
+  scope :unpaid, -> { where(invoice_id: nil) }
+  scope :no_invoice, -> { where(invoice_id: nil) }
+  scope :oldest_first, -> { order("created_at ASC") }
 
   def string_fields_to_nil
     [:reason]
