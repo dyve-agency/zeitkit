@@ -7,19 +7,19 @@
     button type="button" class="close" data-dismiss="alert" &times
     span You have not entered the full contact info for the client. The invoice may not display properly. #{link_to 'Update contact details now.', edit_client_path(@client)}
 .row.invoice-writer
-  .col-md-4.company-title
+  .col-xs-4.company-title
     h4= current_user.company_name
     h5.hide-for-print= link_to "(Edit details)", edit_user_path(current_user)
-  .col-md-4.company-details
+  .col-xs-4.company-details
     p= current_user.company_name
     p= current_user.street
     p= "#{current_user.zip} #{current_user.city}"
-  .col-md-4
+  .col-xs-4
     h3.intro hi. this is your invoice
 .row.invoice-client
-  .col-md-12
+  .col-xs-12
     hr
-  .col-md-6
+  .col-xs-6
     h3 Client
     - if @client.company_name
       h4= @client.company_name
@@ -29,13 +29,13 @@
     h4= "#{@client.zip} #{@client.city}"
     h5.hide-for-print
       = link_to "(Edit details)", edit_client_path(@client)
-  .col-md-2.invoice-box
+  .col-xs-2.invoice-box
     span.key Invoice number
     span.value #{@invoice.number}
-  .col-md-2.invoice-box.please-pay
+  .col-xs-2.invoice-box.please-pay
     span.key Please pay
     span.value= with_currency @invoice.calc_vat_total
-  .col-md-2.invoice-box
+  .col-xs-2.invoice-box
     span.key Invoice date
     span.value= l @invoice.created_at, format: :day_month_year
 .invoice-content
@@ -54,30 +54,30 @@
             td.last= with_currency entry.total
 .invoice-total
   .row
-    .col-md-3.offset7.key Subtotal
-    .col-md-2.val= with_currency @invoice.subtotal
+    .col-xs-3.offset7.key Subtotal
+    .col-xs-2.val= with_currency @invoice.subtotal
   - if @invoice.discount_applied?
     .row
-      .col-md-3.offset7.key Discount
-      .col-md-2.val= with_currency @invoice.discount
+      .col-xs-3.offset7.key Discount
+      .col-xs-2.val= with_currency @invoice.discount
   .row
-    .col-md-3.offset7.key Net total
-    .col-md-2.val= with_currency @invoice.total
+    .col-xs-3.offset7.key Net total
+    .col-xs-2.val= with_currency @invoice.total
   .row.big-border
-    .col-md-3.offset7.key #{@invoice.including_vat_info}
-    .col-md-2.val #{with_currency @invoice.total_vat}
+    .col-xs-3.offset7.key #{@invoice.including_vat_info}
+    .col-xs-2.val #{with_currency @invoice.total_vat}
   .row.bold
-    .col-md-3.offset7.key Total
-    .col-md-2.val= with_currency @invoice.calc_vat_total
+    .col-xs-3.offset7.key Total
+    .col-xs-2.val= with_currency @invoice.calc_vat_total
 .row.terms
-  .col-md-4
+  .col-xs-4
     h4 Payment
     p= markdown @invoice.payment_info
-  .col-md-4
+  .col-xs-4
     - if @invoice.payment_terms
       h4 Terms
       p= markdown @invoice.payment_terms
-  .col-md-4
+  .col-xs-4
     - if @invoice.note
       h4 Notes
       = markdown @invoice.note
