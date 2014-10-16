@@ -1,25 +1,25 @@
 = will_paginate @collection, renderer: BootstrapPagination::Rails
 
 .row.worklog-filters
-  .span6
+  .col-md-6
     .btn-group
       = link_to 'New Worklog', new_worklog_path, class: "btn btn-primary"
       = link_to worklogs_path(merge_params(format: :csv)), class: "btn" do
         i.icon-cloud-download
         span Download CSV
-  .span6
+  .col-md-6
     .row
-      .span2
+      .col-md-2
         p.lead.pull-right Client
-      .span4
-        select.span4.client-filter
+      .col-md-4
+        select.col-md-4.client-filter
           option data-url="#{worklogs_path(merge_params(client: nil))}"
           - @clients.each do |c|
             = select_worklog_if_params(c)
     .row
-      .span2
+      .col-md-2
         p.lead.pull-right Status
-      .span4
+      .col-md-4
         .btn-group
           = link_to "All",
             worklogs_path(merge_params(paid: nil)),
@@ -31,9 +31,9 @@
             worklogs_path(merge_params(paid: false)),
             class: "btn paid #{check_unpaid}"
     .row
-      .span2
+      .col-md-2
         p.lead.pull-right Time
-      .span4.time-buttons
+      .col-md-4.time-buttons
         .btn-group
           = link_to "All",
             worklogs_path(merge_params(time: nil)),

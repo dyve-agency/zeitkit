@@ -1,12 +1,12 @@
 .container.content.clearfix
   .row.tutorial
     a.tutorial-close.close href="#{hide_tutorial_path}" &times;
-    .span6
+    .col-md-6
       .row.level
-        .span3
+        .col-md-3
           .progress.progress-striped.active
             .bar style="width: #{@tutorial.calc_level + 10}%;"
-        .span3
+        .col-md-3
           h4 Zeitkit level #{@tutorial.calc_level} of #{@tutorial.max_level}
       ul.levels
         li class="#{css_class_if_cond @tutorial.no_demo_user?}"
@@ -29,7 +29,7 @@
           i.icon-github-alt
           = link_to "Add a note", new_note_path
           span.percentage (+#{@tutorial.notes_score} Levels)
-    .span6.alert-success.tip-explanations
+    .col-md-6.alert-success.tip-explanations
       i.icon-lightbulb
       .tips.shown
         h4 About signup

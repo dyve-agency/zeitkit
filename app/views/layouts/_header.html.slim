@@ -1,63 +1,67 @@
-.navbar.navbar-fixed-top.navbar-inverse
-  .navbar-inner
-    .container
-      button.btn.btn-navbar data-target=".nav-collapse" data-toggle="collapse" type="button"
+nav.navbar.navbar-default role="navigation"
+  .container
+    /! Brand and toggle get grouped for better mobile display
+    .navbar-header
+      button.navbar-toggle.collapsed data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" type="button" 
+        span.sr-only Toggle navigation
         span.icon-bar
         span.icon-bar
         span.icon-bar
-      a.brand href="#{dynamic_home_path}"
-        i.icon-briefcase
+      a.navbar-brand href="#{dynamic_home_path}"
+        i.fa.fa-briefcase
+        '
         |Zeitkit
-      .nav-collapse.collapse
-        ul.nav
-          - if current_user
-            li
-              = link_to "Clients", clients_path
-            li
-              = link_to "Notes", notes_path
-            li
-              = link_to "Worklogs", worklogs_path
-            li
-              = link_to "Expenses", expenses_path
-            li
-              = link_to "Products", products_path
-            li class="dropdown"
-              a.dropdown-toggle data-toggle="dropdown" href="#dropdown-menu"
-                |Invoices
-                b.caret
-              ul.dropdown-menu
-                li
-                  = link_to "Invoices", invoices_path
-                li
-                  = link_to "Edit defaults", edit_invoice_default_path(current_user.invoice_default)
-            li
-              = link_to "KPI", new_kpi_path
-            - if not_on_home?
+    /! Collect the nav links, forms, and other content for toggling
+    #bs-example-navbar-collapse-1.collapse.navbar-collapse
+      ul.nav.navbar-nav
+        - if current_user
+          li
+            = link_to "Clients", clients_path
+          li
+            = link_to "Notes", notes_path
+          li
+            = link_to "Worklogs", worklogs_path
+          li
+            = link_to "Expenses", expenses_path
+          li
+            = link_to "Products", products_path
+          li class="dropdown"
+            a.dropdown-toggle data-toggle="dropdown" href="#dropdown-menu"
+              |Invoices
+              b.caret
+            ul.dropdown-menu
               li
-                = link_to "Tutorial", show_tutorial_path, class: "show-tutorial"
-            li class="dropdown"
-              a.dropdown-toggle data-toggle="dropdown" href="#dropdown-menu"
-                = current_user.email_title
-                b.caret
-              ul.dropdown-menu
-                li
-                  = link_to "Edit account", edit_user_path(current_user)
-                li
-                  = link_to "Sign out", logout_path
-            - if current_user.demo?
+                = link_to "Invoices", invoices_path
               li
-                = link_to "Complete signup", edit_user_path(current_user),
-                  class: "white"
+                = link_to "Edit defaults", edit_invoice_default_path(current_user.invoice_default)
+          li
+            = link_to "KPI", new_kpi_path
+          - if not_on_home?
             li
-              i.icon-spinner.icon-spin.loading-animation
-              span.loading-message
-          - if !current_user
+              = link_to "Tutorial", show_tutorial_path, class: "show-tutorial"
+          li class="dropdown"
+            a.dropdown-toggle data-toggle="dropdown" href="#dropdown-menu"
+              = current_user.email_title
+              b.caret
+            ul.dropdown-menu
+              li
+                = link_to "Edit account", edit_user_path(current_user)
+              li
+                = link_to "Sign out", logout_path
+          - if current_user.demo?
             li
-              = link_to "Demo/Tour", signup_email_path, method: :post, class: "signup-link"
-            li
-              = link_to "Or: Register", new_user_path
-            li
-              = link_to "Login", login_path
-            li
-              i.icon-spinner.icon-spin.loading-animation
-              span.loading-message
+              = link_to "Complete signup", edit_user_path(current_user),
+                class: "white"
+          li
+            i.icon-spinner.icon-spin.loading-animation
+            span.loading-message
+        - if !current_user
+          li
+            = link_to "Demo/Tour", signup_email_path, method: :post, class: "signup-link"
+          li
+            = link_to "Or: Register", new_user_path
+          li
+            = link_to "Login", login_path
+          li
+            i.icon-spinner.icon-spin.loading-animation
+            span.loading-message

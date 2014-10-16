@@ -1,11 +1,11 @@
 .footer-wrapper
   .container
     .row
-      .span2
+      .col-md-2
         .footer
           .footer-logo.brand-font Zeitkit
           p.lead The kit for saving time.
-      .span2
+      .col-md-2
         ul
           li
             i.icon-heart
@@ -13,7 +13,7 @@
           li
             i.icon-envelope
             = link_to "Contact", "/contact-us/"
-      .span2
+      .col-md-2
         ul
           - if current_user && current_user.demo?
               li
@@ -28,7 +28,7 @@
                 i.icon-star
                 = link_to "Register", new_user_path, class: "signup-link"
       - if current_user && params[:action] != "home"
-        .span6.random-tip
+        .col-md-6.random-tip
           i.icon-quote-left
           span=Tip.random_tip.html_safe
           i.icon-quote-right

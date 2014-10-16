@@ -1,30 +1,30 @@
 = simple_nested_form_for @client do |f|
   = render "/generic/object_errors", object: @client
   .row-fluid
-    .span6
+    .col-md-6
       .row-fluid
-        .span6
+        .col-md-6
           h4 Basic info
           = f.input :name
           = f.input :hourly_rate, as: :string, required: true
           = f.input :company_name
-        .span6
+        .col-md-6
           h4 Optional info (for invoices)
           = f.input :street
           = f.input :city
           = f.input :zip
-    .span6
+    .col-md-6
       h4 Allow other users to use the same client
       .label-checkbox-left.clearfix
         = f.input :email_when_team_adds_worklog, label: "Send email when team member adds worklog"
       .client-shares-wrapper
         = f.simple_fields_for :client_shares do |cs|
           .row-fluid
-            .span5.usernames-input
+            .col-md-5.usernames-input
               = cs.input :username, placeholder: "Zeitkit username i.e. hendr"
-            .span5
+            .col-md-5
               = cs.input :hourly_rate, as: :string
-            .span2.align-top-with-label
+            .col-md-2.align-top-with-label
               = cs.link_to_remove "<i class='icon-remove'></i>".html_safe, class: "btn btn-danger"
         = f.link_to_add "Add coworker", :client_shares, class: "btn", model_object: @client_share_base
 

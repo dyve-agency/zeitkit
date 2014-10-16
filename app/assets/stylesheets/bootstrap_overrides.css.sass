@@ -9,10 +9,7 @@ $light-blue: #afe4ec
 $dark-blue: #68cad8
 $light-color: $light-blue
 $dark-color: $dark-blue
-.btn
-  @include border-radius(0px)
-  i
-    margin-right: 3px
+
 textarea
   height: 200px
 .checkbox
@@ -28,6 +25,7 @@ body
   color: #555
 body, input, button, select, textarea
   font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif
+
 .navbar .brand
   font-family: 'Pacifico', cursive
   i
@@ -52,34 +50,7 @@ h1, h2, h3, h4, h5, h6, .hero-unit h1
   @include border-radius(0px)
   thead:first-child tr:first-child > th:first-child, thead:last-child tr:first-child > th:last-child
     @include border-radius(0px)
-.navbar-fixed-top .navbar-inner, .navbar-static-top .navbar-inner
-  background: none
-  background-color: #333
-  @include box-shadow(none)
-  color: #fff
-  padding: 7px 0px
-.navbar-inverse .brand, .navbar-inverse .nav > li > a
-  text-shadow: none
-.navbar-inverse .brand
-  color: #fff
-.navbar-inverse .nav > li > a
-  color: #aaa
-.navbar
-  .dropdown-menu
-    min-width: 192px
-.btn-primary
-  border: 1px solid #40a9b8
-  color: #000
-  text-shadow: none
-  @include linear-gradient(top, $light-color 0%, $dark-color 100%)
-  &:hover, &:active, &:focus, .active
-    //@include linear-gradient(top, $dark-color 0%, $light-color 100%)
-    background-image: none
-    background-color: #afe4ec
-    color: #156571
 
-.btn-large
-  @include border-radius(0px)
 
 blockquote
   border-left: 2px solid #fff
@@ -94,12 +65,7 @@ hr
 .table tfoot, .table thead
   text-transform: uppercase
   background: #fafafa
-.table-striped tbody tr:nth-child(even) td, .table-striped tbody tr:nth-child(even) th
-  background: #eee
-.table-striped tbody tr:nth-child(even) td, .table-striped tbody tr:nth-child(even) th
-  background: #f9f9f9
-.table-striped tbody tr:nth-child(odd) td, .table-striped tbody tr:nth-child(odd) th
-  background: #fefefe
+
 .alert
   @include border-radius(0px)
   ul
@@ -108,16 +74,7 @@ hr
     font-weight: bold
 a
   @include transition(color 0.2s ease-in-out)
+
 select[multiple], select[size]
   width: 468px
   height: 300px
-
-.btn-group
-  > .btn:last-child, > .dropdown-toggle, > .btn:first-child
-    @include border-radius(0px)
-
-select, textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input
-  @include border-radius(0px)
-
-.progress
-  @include border-radius(0px)

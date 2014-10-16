@@ -1,9 +1,9 @@
 .row
-  .span8
+  .col-md-8
     h1.note-title.content-heading Note #{@note.client ? ": #{@note.client.name} #{l @note.created_at, format: :day_month_year}" : ""}
     .note-content
       = markdown @note.content
-  .span4
+  .col-md-4
     h1.content-heading Info
     - if @note.client
       p.lead Client: #{@note.client.name}

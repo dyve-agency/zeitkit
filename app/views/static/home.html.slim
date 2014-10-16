@@ -1,7 +1,7 @@
 .hero-unit
   h1 The toolset for developers and freelancers.
   .row
-    .span6
+    .col-md-6
       p The developer companion reducing administrative overhead:
       ul.feature-list
         li
@@ -23,7 +23,7 @@
       - if !current_user
         .signup-links
           = simple_form_for "", url: signup_email_path do |f|
-            input.span3#signup-email[name="signup_email" type="hidden"
+            input.col-md-3#signup-email[name="signup_email" type="hidden"
               placeholder="e.g. me@mymail.com"]
             = f.button :submit, "Get started Free »",
               class: "home-submit btn-large signup-link"
@@ -31,7 +31,7 @@
       - else
         = link_to "My Account", user_path(current_user), class: "btn btn-large"
 
-    .span3.offset1
+    .col-md-3.offset1
       i.icon-briefcase.large-icon.hidden-phone
 javascript:
   window.App.SignupTracker.init()

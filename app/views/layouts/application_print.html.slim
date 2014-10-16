@@ -24,7 +24,7 @@ html lang="en" class="#{check_if_css_class}"
       = render "layouts/header"
       .container.content.clearfix
         .row
-          .span12
+          .col-md-12
             = render "layouts/notices"
             = yield
       - if !mac_app?
