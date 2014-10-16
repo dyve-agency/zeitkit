@@ -19,7 +19,6 @@ gem 'newrelic_rpm'
 gem 'redcarpet'
 gem 'rack-force_domain'
 gem 'money'
-gem 'contact_us', '~> 0.4.0', git: "https://github.com/hendricius/contact_us.git"
 gem 'pdfkit'
 gem 'fullcontact'
 gem 'jbuilder'
@@ -72,6 +71,8 @@ gem 'angularjs-rails-resource', '~> 1.1.1'
 # Data to the client
 gem 'gon'
 
+# Attr accessible
+gem 'protected_attributes', github: 'rails/protected_attributes'
 
 group :development do
   gem 'quiet_assets'
