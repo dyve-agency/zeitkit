@@ -15,10 +15,10 @@ h1 Clients
           td= client_share.client.user.username
           td
             .btn-group
-              = link_to new_worklog_path(client: client_share.client), class: "btn" do
+              = link_to new_worklog_path(client: client_share.client), class: "btn btn-default" do
                 i.fa.fa-plus
                 span Worklog
-              = link_to "Reject", client_share_path(client_share), class: "btn",
+              = link_to "Reject", client_share_path(client_share), class: "btn btn-default",
                 method: :delete, data: {confirm: "Are you sure?" }
 
 - if @client_shares.present?
@@ -37,14 +37,14 @@ table.table.table-bordered.table-striped
         td= with_currency client.hourly_rate
         td
           .btn-group
-            = link_to client, class: "btn" do
+            = link_to client, class: "btn btn-default" do
               i.fa.fa-zoom-in
               span Details
-            = link_to new_worklog_path(client: client), class: "btn" do
+            = link_to new_worklog_path(client: client), class: "btn btn-default" do
               i.fa.fa-plus
               span Worklog
-            = link_to edit_client_path(client), class: "btn hidden-phone" do
+            = link_to edit_client_path(client), class: "btn btn-default hidden-phone" do
               span Edit
-            = link_to client, confirm: 'Are you sure? This can not be undone.  All invoices, worklogs and expenses will be deleted.', method: :delete, class: "btn hidden-phone" do
+            = link_to client, confirm: 'Are you sure? This can not be undone.  All invoices, worklogs and expenses will be deleted.', method: :delete, class: "btn btn-default hidden-phone" do
               span Delete
-= link_to 'New client', new_client_path, class: "btn btn-primary"
+= link_to 'New client', new_client_path, class: "btn btn-default btn-primary"

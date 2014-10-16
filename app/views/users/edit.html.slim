@@ -27,13 +27,13 @@
         = f.input :time_zone, label: "Timezone"
 
     = bs_alert "When creating worklogs we can show recent commit messages from your GitHub repos.", style: "info"
-    = link_to boolean_with_icon(condition: current_user.github_token, text: "Authenticate with Github"), "/auth/github", class: "btn btn-primary"
+    = link_to boolean_with_icon(condition: current_user.github_token, text: "Authenticate with Github"), "/auth/github", class: "btn btn-default btn-primary"
 
     
 
     .form-actions
       .btn-group
         = f.button :submit, "Update"
-        = link_to new_password_reset_path(email: @user.email), class: "btn" do
+        = link_to new_password_reset_path(email: @user.email), class: "btn btn-default" do
           i.fa.fa-edit
           | Change password

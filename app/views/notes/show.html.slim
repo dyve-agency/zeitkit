@@ -11,10 +11,10 @@
     p.lead Last updated: #{l @note.updated_at}
 hr
 .btn-group
-  = link_to 'Edit', edit_note_path(@note), class: "btn"
-  = link_to 'Share', share_note_path(@note), class: "btn", method: :post
-  = link_to 'Unshare', unshare_note_path(@note), class: "btn", method: :post
-  = link_to 'New share link', new_share_link_note_path(@note), class: "btn", method: :post
+  = link_to 'Edit', edit_note_path(@note), class: "btn btn-default"
+  = link_to 'Share', share_note_path(@note), class: "btn btn-default", method: :post
+  = link_to 'Unshare', unshare_note_path(@note), class: "btn btn-default", method: :post
+  = link_to 'New share link', new_share_link_note_path(@note), class: "btn btn-default", method: :post
 - if @note.is_shared?
   .share-note
     h3 Share link

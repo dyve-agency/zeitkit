@@ -87,6 +87,6 @@
   hr
   .btn-group
     = link_to "<i class='icon-edit'></i> Edit invoice".html_safe,
-      edit_invoice_path(@invoice), class: "btn btn-primary"
+      edit_invoice_path(@invoice), class: "btn btn-default btn-primary"
     = link_to "<i class='icon-cloud-download'></i> Download PDF".html_safe,
-      pdf_export_invoice_path(@invoice), class: "btn"
+      pdf_export_invoice_path(@invoice), class: "btn btn-default"

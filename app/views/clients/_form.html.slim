@@ -25,8 +25,8 @@
             .col-md-5
               = cs.input :hourly_rate, as: :string
             .col-md-2.align-top-with-label
-              = cs.link_to_remove "<i class='icon-remove'></i>".html_safe, class: "btn btn-danger"
-        = f.link_to_add "Add coworker", :client_shares, class: "btn", model_object: @client_share_base
+              = cs.link_to_remove "<i class='icon-remove'></i>".html_safe, class: "btn btn-default btn-danger"
+        = f.link_to_add "Add coworker", :client_shares, class: "btn btn-default", model_object: @client_share_base
 
 
   .form-actions

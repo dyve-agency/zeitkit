@@ -13,11 +13,11 @@ h1 Client notes
         hr
         p Created: #{l note.created_at}
         .btn-group
-          = link_to edit_note_path(note), class: "btn" do
+          = link_to edit_note_path(note), class: "btn btn-default" do
             i.fa.fa-edit
             span Edit
           = link_to note, :confirm => 'Are you sure?',
-            :method => :delete, class: "btn hidden-phone" do
+            :method => :delete, class: "btn btn-default hidden-phone" do
             i.fa.fa-remove
             span Delete
   - else
