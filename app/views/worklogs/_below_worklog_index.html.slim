@@ -11,7 +11,7 @@
     .row
       .col-md-2
         p.lead.pull-right Client
-      .col-md-4
+      .col-md-10
         select.col-md-4.client-filter
           option data-url="#{worklogs_path(merge_params(client: nil))}"
           - @clients.each do |c|
@@ -19,7 +19,7 @@
     .row
       .col-md-2
         p.lead.pull-right Status
-      .col-md-4
+      .col-md-10
         .btn-group
           = link_to "All",
             worklogs_path(merge_params(paid: nil)),
@@ -33,7 +33,7 @@
     .row
       .col-md-2
         p.lead.pull-right Time
-      .col-md-4.time-buttons
+      .col-md-10.time-buttons
         .btn-group
           = link_to "All",
             worklogs_path(merge_params(time: nil)),

@@ -9,7 +9,7 @@ gem 'slim'
 gem 'slim-rails'
 gem 'sorcery', git: 'https://github.com/NoamB/sorcery.git'
 
-gem 'simple_form'
+gem 'simple_form', git: "https://github.com/plataformatec/simple_form.git"
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

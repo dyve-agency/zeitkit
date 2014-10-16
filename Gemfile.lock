@@ -41,6 +41,14 @@ GIT
     nested_form (0.3.2)
 
 GIT
+  remote: https://github.com/plataformatec/simple_form.git
+  revision: b5eccd67dc9769d580ef03934d73c63b1735b259
+  specs:
+    simple_form (3.1.0.rc2)
+      actionpack (~> 4.0)
+      activemodel (~> 4.0)
+
+GIT
   remote: https://github.com/tolgap/wkhtmltopdf-binary.git
   revision: 62f001cc143607e3c83dfeb0a980f85f1a67d319
   specs:
@@ -218,9 +226,6 @@ GEM
     sawyer (0.5.5)
       addressable (~> 2.3.5)
       faraday (~> 0.8, < 0.10)
-    simple_form (3.0.2)
-      actionpack (~> 4.0)
-      activemodel (~> 4.0)
     slim (2.0.3)
       temple (~> 0.6.6)
       tilt (>= 1.3.3, < 2.1)
@@ -301,7 +306,7 @@ DEPENDENCIES
   rails-bootstrap-helpers!
   redcarpet
   sass-rails (>= 3.2)
-  simple_form
+  simple_form!
   slim
   slim-rails
   sorcery!
