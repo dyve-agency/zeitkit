@@ -20,7 +20,7 @@ table.table.table-bordered
       td
         .btn-group
           = link_to 'Edit', edit_invoice_path(invoice), class: "btn btn-default"
-          a.btn.dropdown-toggle data-toggle="dropdown" href="#"
+          a.btn.btn-default.dropdown-toggle data-toggle="dropdown" href="#"
             span.caret
           ul.dropdown-menu
             li= render "set_paid", invoice: invoice

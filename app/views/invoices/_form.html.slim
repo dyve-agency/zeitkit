@@ -33,9 +33,9 @@
         - @invoice.products.uniq.each do |product|
           option class="product" value="#{product.id}"= product.display_title + ' - ' + product.invoice_price_title(@invoice)
     .col-md-2.invoice-control-buttons
-      .btn.move-left <
+      .btn.btn-default.move-left <
       hr
-      .btn.move-right >
+      .btn.btn-default.move-right >
     .col-md-5.right-selects
       ul.nav.nav-tabs
         li.active
