@@ -1,129 +1,135 @@
-.container.content.clearfix
-  .row.tutorial
-    a.tutorial-close.close href="#{hide_tutorial_path}" &times;
-    .col-md-6
-      .row.level
-        .col-md-3
-          .progress.progress-striped.active
-            .bar style="width: #{@tutorial.calc_level + 10}%;"
-        .col-md-3
-          h4 Zeitkit level #{@tutorial.calc_level} of #{@tutorial.max_level}
-      ul.levels
-        li class="#{css_class_if_cond @tutorial.no_demo_user?}"
-          i.icon-github-alt
-          = link_to "Complete signup", edit_user_path(current_user)
-          span.percentage (+#{@tutorial.no_demo_user_score} Levels)
-        li class="#{css_class_if_cond @tutorial.clients?}"
-          i.icon-github-alt
-          = link_to "Add a client", new_client_path
-          span.percentage (+#{@tutorial.clients_score} Levels)
-        li class="#{css_class_if_cond @tutorial.worklogs?}"
-          i.icon-github-alt
-          = link_to "Create a worklog", new_worklog_path
-          span.percentage (+#{@tutorial.worklogs_score} Levels)
-        li class="#{css_class_if_cond @tutorial.invoices?}"
-          i.icon-github-alt
-          = link_to "Create an Invoice", new_invoice_path
-          span.percentage (+#{@tutorial.invoices_score} Levels)
-        li class="#{css_class_if_cond @tutorial.notes?}"
-          i.icon-github-alt
-          = link_to "Add a note", new_note_path
-          span.percentage (+#{@tutorial.notes_score} Levels)
-    .col-md-6.alert-success.tip-explanations
-      i.icon-lightbulb
-      .tips.shown
-        h4 About signup
-        ul
-          li
-            i.icon-ok
-            - if current_user.demo?
-              |You are still a demo user.
-            - else
-              |You are no longer a demo user.
-          li
-            i.icon-ok
-            |It's easy, just pick an email and password. Done.
-          li
-            i.icon-ok
-            |Demo users are deleted automatically every 48h.
-          li
-            i.icon-ok
-            - if current_user.demo?
-              |You in #{self_destruct_counter}.
-            - else
-              |Your account is fully registered and won't delete.
-          li
-            i.icon-ok
-            |You can access all features after completing signup.
-      .tips
-        h4 About clients
-        ul
-          li
-            i.icon-ok
-            |Keep track of whom you work with.
-          li
-            i.icon-ok
-            |Clients are the heart of all Zeitkit tools.
-          li
-            i.icon-ok
-            |Log your time, expenses and products.
-          li
-            i.icon-ok
-            |Bill them in a few clicks.
-          li
-            i.icon-ok
-            |Take notes to keep track on progress to close more deals.
-      .tips
-        h4 About worklogs
-        ul
-          li
-            i.icon-ok
-            |Track the time you work for a particular client.
-          li
-            i.icon-ok
-            |Log in detail what you were doing.
-          li
-            i.icon-ok
-            |The logs can be written in markdown.
-          li
-            i.icon-ok
-            |Worklogs can be converted into invoices.
-          li
-            i.icon-ok
-            |Or send detailed overviews as a .csv file.
-      .tips
-        h4 About invoices
-        ul
-          li
-            i.icon-ok
-            |Bill clients with a few clicks.
-          li
-            i.icon-ok
-            |Easily bill your worklogs, expenses, or products.
-          li
-            i.icon-ok
-            |Check which invoices are still unpaid.
-          li
-            i.icon-ok
-            |Generate an awesomesauce .pdf in a single click.
-          li
-            i.icon-ok
-            |Save time by creating a default template.
-      .tips
-        h4 About notes
-        ul
-          li
-            i.icon-ok
-            |Take notes for a particular client.
-          li
-            i.icon-ok
-            |Log TODOS, or recent conversations with the client.
-          li
-            i.icon-ok
-            |Organize your teams by creating individual notes.
-          li
-            i.icon-ok
-            |Share the notes with a single click.
-          li
-            i.icon-ok
-            |For hackers: Nicely write them in markdown language.
+.container
+  .content.tutorial
+    .row
+      a.tutorial-close.close href="#{hide_tutorial_path}" &times;
+      .col-md-6
+        .row.level
+          .col-md-6
+            .progress
+              .progress-bar role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: #{@tutorial.calc_level + 10}%;"
+          .col-md-6
+            h4 Zeitkit level #{@tutorial.calc_level} of #{@tutorial.max_level}
+        ul.levels
+          li class="#{css_class_if_cond @tutorial.no_demo_user?}"
+            i.icon-github-alt
+            = link_to "Complete signup", edit_user_path(current_user)
+            span.percentage
+              = "(+#{@tutorial.no_demo_user_score} Levels)"
+          li class="#{css_class_if_cond @tutorial.clients?}"
+            i.icon-github-alt
+            = link_to "Add a client", new_client_path
+            span.percentage
+              = "(+#{@tutorial.clients_score} Levels)"
+          li class="#{css_class_if_cond @tutorial.worklogs?}"
+            i.icon-github-alt
+            = link_to "Create a worklog", new_worklog_path
+            span.percentage
+              = "(+#{@tutorial.worklogs_score} Levels)"
+          li class="#{css_class_if_cond @tutorial.invoices?}"
+            i.icon-github-alt
+            = link_to "Create an Invoice", new_invoice_path
+            span.percentage
+              = "(+#{@tutorial.invoices_score} Levels)"
+          li class="#{css_class_if_cond @tutorial.notes?}"
+            i.icon-github-alt
+            = link_to "Add a note", new_note_path
+            span.percentage
+              = "(+#{@tutorial.notes_score} Levels)"
+      .col-md-6.alert-success.tip-explanations
+        i.icon-lightbulb
+        .tips.shown
+          h4 About signup
+          ul
+            li
+              i.icon-ok
+              - if current_user.demo?
+                |You are still a demo user.
+              - else
+                |You are no longer a demo user.
+            li
+              i.icon-ok
+              |It's easy, just pick an email and password. Done.
+            li
+              i.icon-ok
+              |Demo users are deleted automatically every 48h.
+            li
+              i.icon-ok
+              - if current_user.demo?
+                |You in #{self_destruct_counter}.
+              - else
+                |Your account is fully registered and won't delete.
+            li
+              i.icon-ok
+              |You can access all features after completing signup.
+        .tips
+          h4 About clients
+          ul
+            li
+              i.icon-ok
+              |Keep track of whom you work with.
+            li
+              i.icon-ok
+              |Clients are the heart of all Zeitkit tools.
+            li
+              i.icon-ok
+              |Log your time, expenses and products.
+            li
+              i.icon-ok
+              |Bill them in a few clicks.
+            li
+              i.icon-ok
+              |Take notes to keep track on progress to close more deals.
+        .tips
+          h4 About worklogs
+          ul
+            li
+              i.icon-ok
+              |Track the time you work for a particular client.
+            li
+              i.icon-ok
+              |Log in detail what you were doing.
+            li
+              i.icon-ok
+              |The logs can be written in markdown.
+            li
+              i.icon-ok
+              |Worklogs can be converted into invoices.
+            li
+              i.icon-ok
+              |Or send detailed overviews as a .csv file.
+        .tips
+          h4 About invoices
+          ul
+            li
+              i.icon-ok
+              |Bill clients with a few clicks.
+            li
+              i.icon-ok
+              |Easily bill your worklogs, expenses, or products.
+            li
+              i.icon-ok
+              |Check which invoices are still unpaid.
+            li
+              i.icon-ok
+              |Generate an awesomesauce .pdf in a single click.
+            li
+              i.icon-ok
+              |Save time by creating a default template.
+        .tips
+          h4 About notes
+          ul
+            li
+              i.icon-ok
+              |Take notes for a particular client.
+            li
+              i.icon-ok
+              |Log TODOS, or recent conversations with the client.
+            li
+              i.icon-ok
+              |Organize your teams by creating individual notes.
+            li
+              i.icon-ok
+              |Share the notes with a single click.
+            li
+              i.icon-ok
+              |For hackers: Nicely write them in markdown language.

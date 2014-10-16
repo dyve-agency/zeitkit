@@ -1,8 +1,8 @@
 = simple_nested_form_for @client do |f|
   = render "/generic/object_errors", object: @client
-  .row-fluid
+  .row
     .col-md-6
-      .row-fluid
+      .row
         .col-md-6
           h4 Basic info
           = f.input :name
@@ -19,7 +19,7 @@
         = f.input :email_when_team_adds_worklog, label: "Send email when team member adds worklog"
       .client-shares-wrapper
         = f.simple_fields_for :client_shares do |cs|
-          .row-fluid
+          .row
             .col-md-5.usernames-input
               = cs.input :username, placeholder: "Zeitkit username i.e. hendr"
             .col-md-5

@@ -1,7 +1,7 @@
 #kpi-data-wrapper
   = simple_form_for @kpi, method: :post, remote: true do |f|
     h1 Key performance indicators
-    .row-fluid
+    .row
       .col-md-6
         p Choose the clients
         = f.select :client_ids,
@@ -14,7 +14,7 @@
           (current_user.added_team_members + [current_user]).map {|u| [u.username, u.id]},
           {}, multiple: true
 
-    .row-fluid
+    .row
       .col-md-3
         .control-group
           label Start Date

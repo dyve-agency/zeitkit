@@ -15,6 +15,9 @@ $dark-color: $dark-orange
 .brand-font
   font-family: "Pacifico", cursive
 .content
+  @include box-sizing(border-box)
+  padding: 30px
+  background: #fff
   @include box-shadow(0px 2px 3px 0px #bbb)
 .footer-wrapper
   .footer-logo
@@ -40,6 +43,7 @@ $dark-color: $dark-orange
     @include box-shadow(none)
     background: none
     margin-top: 0px
+    padding: 0px
   h1, h2, h3, h4, h5, h6, .hero-unit h1
     color: #fff
     text-shadow: 0px 2px 2px #af5422
