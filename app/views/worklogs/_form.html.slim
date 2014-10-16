@@ -12,29 +12,17 @@
     .col-md-4.start-time
       h2 Start
       h4 Date
-      = f.input :from_date, wrapper: :append, label: false do
-        = f.input_field :from_date, class: "datepicker"
-        = content_tag :span, class: "add-on" do
-          = content_tag :i, "", class: "icon-time"
+      = f.input :from_date, input_html: {class: "datepicker"}
       h4 Time
       .bootstrap-timepicker
-        = f.input :from_time, wrapper: :append, label: false do
-          = f.input_field :from_time, class: "timepicker"
-          = content_tag :span, class: "add-on" do
-            = content_tag :i, "", class: "icon-time"
+        = f.input :from_time, input_html: {class: "timepicker"}
     .col-md-4
       h2 End
       h4 Date
-      = f.input :to_date, wrapper: :append, label: false do
-        = f.input_field :to_date, class: "datepicker"
-        = content_tag :span, class: "add-on" do
-          = content_tag :i, "", class: "icon-time"
+      = f.input :to_date, input_html: {class: "datepicker"}
       h4 Time
       .bootstrap-timepicker
-        = f.input :to_time, wrapper: :append, label: false do
-          = f.input_field :to_time, class: "timepicker"
-          = content_tag :span, class: "add-on" do
-            = content_tag :i, "", class: "icon-time"
+        = f.input :to_time, input_html: {class: "timepicker"}
     .col-md-4
       h3 Timer
       .btn-group
