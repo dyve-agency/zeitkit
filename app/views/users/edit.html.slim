@@ -35,5 +35,5 @@
       .btn-group
         = f.button :submit, "Update"
         = link_to new_password_reset_path(email: @user.email), class: "btn" do
-          i.icon-edit
+          i.fa.fa-edit
           | Change password
