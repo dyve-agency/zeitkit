@@ -10,6 +10,7 @@ app.factory "Worklog", ["RailsResource", "Timeframe", (RailsResource, Timeframe)
         client: null
         hourlyRate: 0
         editingComment: false
+        comment: ""
       _this = this
       useOpts = _.extend defaultOpts, opts
       _.each useOpts, (val, key) ->

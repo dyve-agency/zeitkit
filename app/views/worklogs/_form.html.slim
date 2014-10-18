@@ -60,8 +60,16 @@ div ng-controller="WorklogsController"
     | Add timeframe
   hr
 
-  label What did you do? Markdown supported.
-  textarea.form-control placeholder="e.g. finish user feature"
+  .row
+    .col-md-6
+      label What did you do? Markdown supported.
+      textarea.form-control placeholder="e.g. finish user feature" ng-model="worklog.comment"
+    .col-md-6
+      .well
+        div marked="worklog.comment" ng-show="worklog.comment.length"
+        div ng-hide="worklog.comment.length"
+          | No comment added yet.
+  .row
 
   hr
   span.btn.btn-primary Save
