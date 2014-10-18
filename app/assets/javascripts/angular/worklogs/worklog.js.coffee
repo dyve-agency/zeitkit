@@ -21,14 +21,24 @@ app.factory "Worklog", ["RailsResource", "Timeframe", (RailsResource, Timeframe)
     addBlankTimeframe: ->
       t = new Timeframe
       if @timeframes.length
-        t.started = new Date(_.last(@timeframes).started)
-        t.ended = new Date(_.last(@timeframes).ended)
+        last_started = _.last(@timeframes).started
+        if last_started
+          t.started = new Date(last_started)
+        else
+          t.started = new Date
+        last_ended = _.last(@timeframes).ended
+        if last_ended
+          t.ended = new Date(last_ended)
+        else
+          t.ended = new Date
+      else
+        t.started = new Date
+        t.ended = new Date
       @addNewTimeframe t
 
     calcTotal: ->
       totals = _.map @timeframes, (t)=>
         tTotal = t.calcTotal(if @client then @client.secondlyRate() else 0)
-        console.log @client.secondlyRate()
         tTotal
       _.inject(totals, (memo, num)->
           memo + num
