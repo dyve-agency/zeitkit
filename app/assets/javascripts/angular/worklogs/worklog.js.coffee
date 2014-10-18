@@ -25,9 +25,11 @@ app.factory "Worklog", ["RailsResource", "Timeframe", (RailsResource, Timeframe)
 
     calcTotal: ->
       totals = _.map @timeframes, (t)=>
-        t.calcTotal(if @client then @client.secondlyRate() else 0)
+        tTotal = t.calcTotal(if @client then @client.secondlyRate() else 0)
+        console.log @client.secondlyRate()
+        tTotal
       _.inject(totals, (memo, num)->
-          nemo + num
+          memo + num
         , 0)
 
     clientChanged: ->

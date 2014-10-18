@@ -12,9 +12,11 @@ app.factory "Timeframe", ["$http", ($http)->
       _.each useOpts, (val, key) ->
         _this[key] = val
 
-    calcTotal: (hourlyRate)->
-      if started && ended
-        started - ended
+    calcTotal: (ratePerSecond)->
+      if ratePerSecond && @started && @ended
+        ((@ended - @started) / 1000) * ratePerSecond
+      else
+        0
     setEndedNow: ->
       @ended = new Date()
 

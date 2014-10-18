@@ -19,7 +19,8 @@ div ng-controller="WorklogsController"
     .col-xs-2
       label Total
       div
-        span.label.label-success 200€
+        span.label.label-success
+          | {{ worklog.calcTotal() | number:2}}€
   hr
   .well ng-repeat="time in worklog.timeframes"
     .row
