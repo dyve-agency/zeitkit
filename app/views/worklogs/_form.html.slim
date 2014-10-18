@@ -9,48 +9,36 @@
     = link_to "Create your first client.", new_client_path
 = simple_form_for @worklog do |f|
   .row
-    .span4.start-time
+    .col-md-4.start-time
       h2 Start
       h4 Date
-      = f.input :from_date, wrapper: :append, label: false do
-        = f.input_field :from_date, class: "datepicker"
-        = content_tag :span, class: "add-on" do
-          = content_tag :i, "", class: "icon-time"
+      = f.input :from_date, input_html: {class: "datepicker"}
       h4 Time
       .bootstrap-timepicker
-        = f.input :from_time, wrapper: :append, label: false do
-          = f.input_field :from_time, class: "timepicker"
-          = content_tag :span, class: "add-on" do
-            = content_tag :i, "", class: "icon-time"
-    .span4
+        = f.input :from_time, input_html: {class: "timepicker"}
+    .col-md-4
       h2 End
       h4 Date
-      = f.input :to_date, wrapper: :append, label: false do
-        = f.input_field :to_date, class: "datepicker"
-        = content_tag :span, class: "add-on" do
-          = content_tag :i, "", class: "icon-time"
+      = f.input :to_date, input_html: {class: "datepicker"}
       h4 Time
       .bootstrap-timepicker
-        = f.input :to_time, wrapper: :append, label: false do
-          = f.input_field :to_time, class: "timepicker"
-          = content_tag :span, class: "add-on" do
-            = content_tag :i, "", class: "icon-time"
-    .span4
+        = f.input :to_time, input_html: {class: "timepicker"}
+    .col-md-4
       h3 Timer
       .btn-group
-        .btn.end-time-now
-          i.icon-time
+        .btn.btn-default.end-time-now
+          i.fa.fa-time
           |Stop
-        .btn.reset-time
-          i.icon-repeat
+        .btn.btn-default.reset-time
+          i.fa.fa-repeat
           |Reset
   hr
   .row
-    .span6
+    .col-md-6
       h4 What did you do?
       #wmd-button-bar
-      = f.input :summary, input_html: {class: "span6 wmd-input worklog-summary", id: "wmd-input"}, label: false
-    .span6
+      = f.input :summary, input_html: {class: "col-md-6 wmd-input worklog-summary", id: "wmd-input"}, label: false
+    .col-md-6
       = f.input :client_id, as: :select do
         = f.select :client_id, current_user.clients_and_shared_clients.map{|c| [c.name_with_sharer, c.id, {"data-hourly-rate-cents" => c.hourly_rate.cents}, {"data-user-owns-client" => current_user.owns_client?(c)}]}, required: true
       div#worklog-total-calculations class="#{current_user.owns_client?(@worklog.client) ? "active" : "not-shown"}"

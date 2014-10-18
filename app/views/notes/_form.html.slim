@@ -1,6 +1,6 @@
 = simple_form_for @note do |f|
   #wmd-button-bar
-  = f.input :content, input_html: {class: "span12 wmd-input", id: "wmd-input"}
+  = f.input :content, input_html: {class: "col-md-12 wmd-input", id: "wmd-input"}
   = f.input :client_id, collection: current_user.clients
   .form-actions
     = f.button :submit

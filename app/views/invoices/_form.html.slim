@@ -10,7 +10,7 @@
     h3 Client: #{@invoice.client.name}
   hr
   .row
-    .span12
+    .col-md-12
       h3 Invoice the client.
       .hidden-inputs.hidden
         .always
@@ -24,7 +24,7 @@
             input name="invoice[expense_ids][]" value="#{expense.id}"
           - @invoice.products.each do |product|
             input name="invoice[product_ids][]" value="#{product.id}"
-    .span5
+    .col-md-5
       select.invoice-select.select multiple="multiple"
         - @invoice.worklogs.each do |worklog|
           option class="worklog" value="#{worklog.id}"= worklog.title
@@ -32,11 +32,11 @@
           option class="expense" value="#{expense.id}"= expense.title
         - @invoice.products.uniq.each do |product|
           option class="product" value="#{product.id}"= product.display_title + ' - ' + product.invoice_price_title(@invoice)
-    .span2.invoice-control-buttons
-      .btn.move-left <
+    .col-md-2.invoice-control-buttons
+      .btn.btn-default.move-left <
       hr
-      .btn.move-right >
-    .span5.right-selects
+      .btn.btn-default.move-right >
+    .col-md-5.right-selects
       ul.nav.nav-tabs
         li.active
           a href="#worklogs" data-toggle="tab" Worklogs
@@ -83,19 +83,19 @@
   hr
   h3 Finalize.
   .row
-    .span3
+    .col-md-3
       = f.input :includes_vat, label: false, hint: "The total includes value added tax."
       = f.input :vat
       = f.input :number
       = f.input :discount
-    .span3
+    .col-md-3
       = f.input :payment_info
-    .span3
+    .col-md-3
       = f.input :payment_terms
-    .span3
+    .col-md-3
       = f.input :note
   .form-actions
     .btn-group
       = f.button :submit, "Save"
       - if !@invoice.new_record?
-        = link_to '<i class="icon-zoom-in"></i> Details'.html_safe, @invoice, class: "btn"
+        = link_to '<i class="icon-zoom-in"></i> Details'.html_safe, @invoice, class: "btn btn-default"
