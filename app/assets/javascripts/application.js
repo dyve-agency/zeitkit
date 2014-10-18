@@ -14,8 +14,6 @@
 //= require jquery_ujs
 //= require underscore
 //= require bootstrap
-//= require bootstrap-datepicker
-//= require bootstrap-timepicker
 //= require Markdown.Converter
 //= require Markdown.Sanitizer
 //= require Markdown.Editor
@@ -30,6 +28,7 @@
 //= require angular
 //= require ng-rails-csrf
 //= require angularjs/rails/resource
+//= require datetimepicker
 
 //= require_tree ./public/
 //= require ./angular_init

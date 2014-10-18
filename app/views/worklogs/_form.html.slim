@@ -9,37 +9,58 @@
     = link_to "Create your first client.", new_client_path
 
 div ng-controller="WorklogsController"
-  label Client
-  select ng-model="worklog.client" ng-options="client.company_name for client in worklog.clients"
-  label Hourly rate
-  input type="text" ng-model="worklog.hourlyRate"
-
-  table.table.table-bordered
-    thead
-      tr
-        th Start
-        th End
-        th Actions
-    tbody
-      tr ng-repeat="time in worklog.timeframes"
-        td
-          input type="text" ng-model="time.started"
-          '
-          a href="#" (now)
-        td
-          input type="text" ng-model="time.ended"
-          '
-          a href="#" (now)
-        td
-          span.btn
-            i.icon-remove
-      tr
-        td colspan="3"
-          span.btn.btn-success ng-click="worklog.addBlankTimeframe()"
-            | Add timeframe
+  .row
+    .col-xs-5
+      label Client
+      select.form-control ng-model="worklog.client" ng-options="client.company_name for client in worklog.clients" ng-change="worklog.clientChanged()"
+    .col-xs-5
+      label Hourly rate
+      input.form-control type="text" ng-model="worklog.hourlyRate"
+    .col-xs-2
+      label Total
+      div
+        span.label.label-success 200€
+  hr
+  .well ng-repeat="time in worklog.timeframes"
+    .row
+      .col-xs-12.col-md-6
+        .row
+          .col-xs-12
+            .btn-group.pull-right
+              span.btn.btn-default ng-click="time.setStartedNow()"
+                | Now
+              span.btn.btn-default ng-click="worklog.removeTimeframe(time)"
+                i.fa.fa-remove
+        .dropdown
+          a#dropdown2.dropdown-toggle data-target="#" data-toggle="dropdown" href="#" role="button"
+            .input-group
+              input.form-control data-ng-model="time.started" type="text"
+                span.input-group-addon
+                  i.fa.fa-calendar
+          ul.dropdown-menu aria-labelledby="dLabel" role="menu"
+            datetimepicker data-datetimepicker-config=("{ dropdownSelector: '#dropdown2' }") data-ng-model="time.started"
+      .col-xs-12.col-md-6
+        .row
+          .col-xs-12
+            .btn-group.pull-right
+              span.btn.btn-default ng-click="time.setEndedNow()"
+                | Now
+              span.btn.btn-default ng-click="worklog.removeTimeframe(time)"
+                i.fa.fa-remove
+        .dropdown
+          a#dropdown3.dropdown-toggle data-target="#" data-toggle="dropdown" href="#" role="button"
+            .input-group
+              input.form-control data-ng-model="time.ended" type="text"
+                span.input-group-addon
+                  i.fa.fa-calendar
+          ul.dropdown-menu aria-labelledby="dLabel" role="menu"
+            datetimepicker data-datetimepicker-config=("{ dropdownSelector: '#dropdown3' }") data-ng-model="time.ended"
+  span.btn.btn-success ng-click="worklog.addBlankTimeframe()"
+    | Add timeframe
+  hr
 
   label What did you do? Markdown supported.
-  textarea placeholder="e.g. finish user feature"
+  textarea.form-control placeholder="e.g. finish user feature"
 
   hr
   span.btn.btn-primary Save
