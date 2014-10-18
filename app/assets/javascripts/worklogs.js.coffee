@@ -1,9 +1,5 @@
 window.App ||= {}
 
-$ ->
-  Worklog.init()
-  SaveTime.init()
-
 Worklog =
   elems:
     worklog_summary: ->
@@ -14,12 +10,10 @@ Worklog =
       e.preventDefault()
       _this.setEndToNow()
       _this.setStartToNow()
-      SaveTime.updateRemote()
     $('.end-time-now').on 'click touchstart', (e) ->
       e.preventDefault()
       _this.setEndToNow()
       _this.updateTotal()
-      SaveTime.updateRemote()
     $('.start-time').on 'change', (e) ->
       _this.updateEndTimeStartTime()
     $('.new_worklog, .edit_worklog').on 'change', (e) ->
@@ -129,25 +123,4 @@ Worklog =
       new_val = "#{old_val}\n * #{text}"
     summary.val(new_val)
 
-SaveTime =
-  elems: {
-    form: ->
-      $('.new_worklog')
-  }
-  init: ->
-    _this = this
-    this.elems.form().on 'change', (e) ->
-      _this.updateRemote()
-    $('.dismiss-save-time').on 'click touchstart', (e) ->
-      _this.dismissSaveTime($(e.currentTarget))
-      return false
-  updateRemote: ->
-    _this = this
-    window.App.ajax_loading_message = "saving..."
-    $.ajax $('.temp_worklog_save_path').attr('href') + ".json",
-      type: 'PUT'
-      dataType: 'json'
-      data: _this.elems.form().serialize()
-
 window.App.Worklog = Worklog
-window.App.SaveTime = SaveTime

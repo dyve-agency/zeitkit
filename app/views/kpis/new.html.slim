@@ -1,29 +1,29 @@
 #kpi-data-wrapper
   = simple_form_for @kpi, method: :post, remote: true do |f|
     h1 Key performance indicators
-    .row-fluid
-      .span6
+    .row
+      .col-md-6
         p Choose the clients
         = f.select :client_ids,
           current_user.clients_and_shared_clients.map {|c| [c.name, c.id]},
           {}, multiple: true
 
-      .span6
+      .col-md-6
         p Choose the users
         = f.select :user_ids,
           (current_user.added_team_members + [current_user]).map {|u| [u.username, u.id]},
           {}, multiple: true
 
-    .row-fluid
-      .span3
+    .row
+      .col-md-3
         .control-group
           label Start Date
           input type="date" name="kpi[start_date]"
-      .span3
+      .col-md-3
         .control-group
           label End Date
           input type="date" name="kpi[end_date]"
-      .span4
+      .col-md-4
         = f.input :group_data_by, collection: Kpi::ALLOWED_GROUPING_OPTIONS,
           label_method: ->(opt) { opt.capitalize }
 

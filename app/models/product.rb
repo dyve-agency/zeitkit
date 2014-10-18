@@ -12,11 +12,16 @@ class Product < ActiveRecord::Base
 
   validates :user_id, :total, :title, :charge, presence: true
 
-  scope :paid, joins('LEFT OUTER JOIN invoices_products ON products.id=invoices_products.product_id').where('invoices_products.invoice_id IS NOT NULL')
-  scope :unpaid, joins('LEFT OUTER JOIN invoices_products ON products.id=invoices_products.product_id').where('invoices_products.invoice_id IS NULL')
-  scope :no_invoice, joins('LEFT OUTER JOIN invoices_products ON products.id=invoices_products.product_id').where('invoices_products.invoice_id IS NULL')
-
-  scope :oldest_first, order("created_at ASC")
+  scope :paid, -> {
+    joins('LEFT OUTER JOIN invoices_products ON products.id=invoices_products.product_id').where('invoices_products.invoice_id IS NOT NULL')
+  }
+  scope :unpaid, -> {
+    joins('LEFT OUTER JOIN invoices_products ON products.id=invoices_products.product_id').where('invoices_products.invoice_id IS NULL')
+  }
+  scope :no_invoice, -> {
+    joins('LEFT OUTER JOIN invoices_products ON products.id=invoices_products.product_id').where('invoices_products.invoice_id IS NULL')
+  }
+  scope :oldest_first, -> { order("created_at ASC") }
 
   before_validation :check_if_charge_missing, :only => [:charge]
 

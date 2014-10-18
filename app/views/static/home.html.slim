@@ -1,37 +1,37 @@
 .hero-unit
   h1 The toolset for developers and freelancers.
   .row
-    .span6
+    .col-md-6
       p The developer companion reducing administrative overhead:
       ul.feature-list
         li
-          i.icon-time
+          i.fa.fa-time
           span Track time and expenses for clients.
         li
-          i.icon-github
+          i.fa.fa-github
           span Integration with GitHub for billing commits.
         li
-          i.icon-credit-card
+          i.fa.fa-credit-card
           span Painlessly invoice based on worklogs and expenses.
         li
-          i.icon-dashboard
+          i.fa.fa-dashboard
           span Organize your clients and keep track of todos.
         li
-          i.icon-heart
+          i.fa.fa-heart
           span Made for developers by developers.
 
       - if !current_user
         .signup-links
           = simple_form_for "", url: signup_email_path do |f|
-            input.span3#signup-email[name="signup_email" type="hidden"
+            input.col-md-3#signup-email[name="signup_email" type="hidden"
               placeholder="e.g. me@mymail.com"]
             = f.button :submit, "Get started Free »",
               class: "home-submit btn-large signup-link"
           p No contracts, no fees. It's free. Signup.time < 2.seconds.
       - else
-        = link_to "My Account", user_path(current_user), class: "btn btn-large"
+        = link_to "My Account", user_path(current_user), class: "btn btn-default btn-large"
 
-    .span3.offset1
-      i.icon-briefcase.large-icon.hidden-phone
+    .col-md-3.offset1
+      i.fa.fa-briefcase.large-icon.hidden-phone
 javascript:
   window.App.SignupTracker.init()

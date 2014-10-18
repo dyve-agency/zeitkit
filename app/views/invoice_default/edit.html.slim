@@ -1,24 +1,24 @@
 = simple_form_for shallow_args(current_user, @invoice_default) do |f|
   .alert.alert-info This template is used whenever you create a new invoice.
   .row
-    .span3
+    .col-md-3
       = f.input :vat
-    .span3.default-includes-vat.mobile-no-padding
+    .col-md-3.default-includes-vat.mobile-no-padding
       = f.input :includes_vat, label: false, hint: "The invoice total includes VAT. If not, it is charge on top of the total."
   hr
   .row
-    .span4
+    .col-md-4
       h4 Payment info
       #wmd-button-bar
-      = f.input :payment_info, input_html: {class: "span4 wmd-input", id: "wmd-input"}, label: false
-    .span4
+      = f.input :payment_info, input_html: {class: "col-md-4 wmd-input", id: "wmd-input"}, label: false
+    .col-md-4
       h4 Payment terms
       #wmd-button-bar-second
-      = f.input :payment_terms, input_html: {class: "span4 wmd-input", id: "wmd-input-second"}, label: false
-    .span4
+      = f.input :payment_terms, input_html: {class: "col-md-4 wmd-input", id: "wmd-input-second"}, label: false
+    .col-md-4
       h4 Note
       #wmd-button-bar-third
-      = f.input :note, input_html: {class: "span4 wmd-input", id: "wmd-input-third"}, label: false
+      = f.input :note, input_html: {class: "col-md-4 wmd-input", id: "wmd-input-third"}, label: false
   .form-actions
     = f.button :submit, "Save"
 javascript:

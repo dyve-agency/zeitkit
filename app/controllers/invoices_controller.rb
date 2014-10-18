@@ -18,7 +18,7 @@ class InvoicesController < ApplicationController
     @minutes = Worklog.remaining_minutes_from_seconds seconds
     # For this to work you need to precompile your assets once.
     @invoice_pdf = PDFKit.new(render_to_string(action: "show", :layout => 'application_print'))
-    @invoice_pdf.stylesheets << "#{Rails.root}/public/assets/application_print.css"
+    @invoice_pdf.stylesheets << temp_stylesheet
     if params[:export_worklogs] && @invoice.worklogs.present?
       send_file merge_pdf_files
       return
@@ -29,8 +29,7 @@ class InvoicesController < ApplicationController
 
   def merge_pdf_files
     @worklogs_pdf = PDFKit.new(render_to_string(action: "../worklogs/detailed_index", :layout => 'application_print'))
-    @worklogs_pdf.stylesheets << "#{Rails.root}/public/assets/application_print.css"
-
+    @worklogs_pdf.stylesheets << temp_stylesheet
     tmp_invoice_file = "#{Rails.root}/tmp/invoice-#{@invoice.id}.pdf"
     tmp_worklog_file = "#{Rails.root}/tmp/worklog-#{@invoice.id}.pdf"
     @worklogs_pdf.to_file(tmp_worklog_file)
@@ -150,4 +149,12 @@ class InvoicesController < ApplicationController
   def set_invoice_expenses
     @client ? @client.expenses.unpaid.no_invoice.oldest_first : nil
   end
+
+  def temp_stylesheet
+    css = Rails.application.assets.find_asset('application_print').body
+    temp_css_file = "#{Rails.root}/tmp/tmp-#{Time.now.to_i}.css"
+    File.open(temp_css_file, 'w') { |file| file.write(css) }
+    temp_css_file
+  end
+
 end

@@ -1,11 +1,12 @@
 $orange: orange
 $orange-bright: #FFDAB9
 .tutorial
+  margin-bottom: 30px
   position: relative
   .tutorial-close
     position: absolute
     top: -3px
-    right: -26px
+    right: 3px
     font-size: 30px
   .span2
     text-align: center
@@ -47,7 +48,8 @@ ul.levels
     list-style-type: none
     line-height: 28px
   ul
-    margin-left: 10px
+    margin-left: 0px
+    padding-left: 0px
     i
       margin-right: 10px
 .tips
@@ -56,11 +58,3 @@ ul.levels
     display: block
 .content ~ .content
   margin-top: 40px
-
-@include keyframes(bulb-light)
-  0%
-    color: $orange
-  50%
-    color: $orange-bright
-  100%
-    color: $orange

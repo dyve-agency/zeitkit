@@ -1,8 +1,8 @@
 = simple_form_for @expense do |f|
   .row
-    .span3
+    .col-md-3
       = f.input :client_id, collection: current_user.clients
-    .span3
+    .col-md-3
       = f.input :total
   = f.input :reason
   .form-actions
