@@ -24,7 +24,7 @@ class Worklog < ActiveRecord::Base
     :to_date,
     :to_time
 
-  default_scope where(deleted_at: nil)
+  default_scope -> { where(deleted_at: nil) }
 
   def self.deleted
     self.unscoped.where('deleted_at IS NOT NULL')
@@ -45,10 +45,10 @@ class Worklog < ActiveRecord::Base
 
   after_create :email_user_of_shared_client_worklog
 
-  scope :paid, where(invoice_id: !nil)
-  scope :unpaid, where(invoice_id: nil)
-  scope :no_invoice, where(invoice_id: nil)
-  scope :oldest_first, order("end_time ASC")
+  scope :paid, -> { where(invoice_id: !nil) }
+  scope :unpaid, -> { where(invoice_id: nil) }
+  scope :no_invoice, -> { where(invoice_id: nil) }
+  scope :oldest_first, -> { order("end_time ASC") }
 
   def self.to_csv(worklogs)
     CSV.generate do |csv|

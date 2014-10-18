@@ -19,8 +19,8 @@ table.table.table-bordered
       td.hidden-phone= invoice.paid_on ? l(invoice.paid_on, format: :day_month_year) : "Unpaid #{invoice.days_not_paid.to_i} day(s)"
       td
         .btn-group
-          = link_to 'Edit', edit_invoice_path(invoice), class: "btn"
-          a.btn.dropdown-toggle data-toggle="dropdown" href="#"
+          = link_to 'Edit', edit_invoice_path(invoice), class: "btn btn-default"
+          a.btn.btn-default.dropdown-toggle data-toggle="dropdown" href="#"
             span.caret
           ul.dropdown-menu
             li= render "set_paid", invoice: invoice
@@ -32,6 +32,6 @@ table.table.table-bordered
             li= link_to 'Delete', invoice, confirm: 'Are you sure? This can not be undone.', method: :delete
 
 .btn-group
-  = link_to "New invoice", new_invoice_path, class: "btn btn-primary"
+  = link_to "New invoice", new_invoice_path, class: "btn btn-default btn-primary"
   = link_to "<i class='icon-edit'></i> Template".html_safe,
-    edit_invoice_default_path(current_user.invoice_default), class: "btn"
+    edit_invoice_default_path(current_user.invoice_default), class: "btn btn-default"

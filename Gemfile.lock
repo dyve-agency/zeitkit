@@ -1,10 +1,17 @@
 GIT
-  remote: https://github.com/NoamB/sorcery.git
-  revision: a069ed67ab9aea0650abc888a419fa0856e594ef
+  remote: git://github.com/rails/protected_attributes.git
+  revision: 21efae9e2e2ca418e2e069403117ec452a66db5c
   specs:
-    sorcery (0.8.5)
-      bcrypt (>= 3.1)
-      oauth (~> 0.4.4)
+    protected_attributes (1.0.8)
+      activemodel (>= 4.0.1, < 5.0)
+
+GIT
+  remote: https://github.com/NoamB/sorcery.git
+  revision: fdae28ea597e3375a20d80050aabc09937e75b5f
+  specs:
+    sorcery (0.8.6)
+      bcrypt (~> 3.1)
+      oauth (~> 0.4, >= 0.4.4)
       oauth2 (>= 0.8.0, < 1.0.0)
 
 GIT
@@ -16,23 +23,23 @@ GIT
 
 GIT
   remote: https://github.com/ankane/chartkick.git
-  revision: e547c792681f092e613de2d785afd12d490ba700
+  revision: 31a8e5224e26449158a2f6c63f157aabd90147a5
   specs:
-    chartkick (1.2.4)
+    chartkick (1.3.2)
 
 GIT
   remote: https://github.com/ankane/groupdate.git
-  revision: 5c027b867f7ad6c3d545b9744fb02baccf5e33ea
+  revision: 120de656146ef83e8b988ed81a00248086536d65
   specs:
-    groupdate (2.1.0)
-      activerecord (>= 3.0.0)
+    groupdate (2.3.0)
+      activesupport (>= 3)
 
 GIT
-  remote: https://github.com/hendricius/contact_us.git
-  revision: 8b4e273f999fd1e1bab604dd7f40e7c5099ae340
+  remote: https://github.com/bootstrap-ruby/will_paginate-bootstrap.git
+  revision: 22a06630c3150af6c84550f39864e45d6b48f2e0
   specs:
-    contact_us (0.4.0)
-      rails (>= 3.0.0)
+    will_paginate-bootstrap (1.0.1)
+      will_paginate (>= 3.0.3)
 
 GIT
   remote: https://github.com/hendricius/nested_form.git
@@ -41,257 +48,228 @@ GIT
     nested_form (0.3.2)
 
 GIT
-  remote: https://github.com/nicoles/font-awesome-sass-rails.git
-  revision: 3dc12ca74891fd358f635ffc4be980a5cd2fd213
+  remote: https://github.com/pdfkit/pdfkit.git
+  revision: e6a52a30268d68f5cfbdaf1db23fc8d628bef28c
   specs:
-    font-awesome-sass-rails (3.0.0.0)
-      railties (>= 3.1.1)
-      sass-rails (>= 3.1.1)
+    pdfkit (0.7.0)
 
 GIT
-  remote: https://github.com/rails/jquery-rails
-  revision: 7ae3bec2982692f8c0a1aa7816575ba4ac599df9
+  remote: https://github.com/plataformatec/simple_form.git
+  revision: b5eccd67dc9769d580ef03934d73c63b1735b259
   specs:
-    jquery-rails (3.1.0)
-      railties (>= 3.0, < 5.0)
-      thor (>= 0.14, < 2.0)
-
-GIT
-  remote: https://github.com/tolgap/wkhtmltopdf-binary.git
-  revision: 62f001cc143607e3c83dfeb0a980f85f1a67d319
-  specs:
-    wkhtmltopdf-binary (0.11.1)
-
-GIT
-  remote: https://github.com/twbs/bootstrap-sass
-  revision: b55d889b46a640b99bdf8f832fad9a1f2c03ded1
-  tag: v2.3.2.2
-  specs:
-    bootstrap-sass (2.3.2.2)
-      sass (~> 3.2)
+    simple_form (3.1.0.rc2)
+      actionpack (~> 4.0)
+      activemodel (~> 4.0)
 
 GEM
   remote: https://rubygems.org/
   specs:
-    Ascii85 (1.0.2)
-    actionmailer (3.2.17)
-      actionpack (= 3.2.17)
-      mail (~> 2.5.4)
-    actionpack (3.2.17)
-      activemodel (= 3.2.17)
-      activesupport (= 3.2.17)
-      builder (~> 3.0.0)
+    actionmailer (4.1.6)
+      actionpack (= 4.1.6)
+      actionview (= 4.1.6)
+      mail (~> 2.5, >= 2.5.4)
+    actionpack (4.1.6)
+      actionview (= 4.1.6)
+      activesupport (= 4.1.6)
+      rack (~> 1.5.2)
+      rack-test (~> 0.6.2)
+    actionview (4.1.6)
+      activesupport (= 4.1.6)
+      builder (~> 3.1)
       erubis (~> 2.7.0)
-      journey (~> 1.0.4)
-      rack (~> 1.4.5)
-      rack-cache (~> 1.2)
-      rack-test (~> 0.6.1)
-      sprockets (~> 2.2.1)
-    activemodel (3.2.17)
-      activesupport (= 3.2.17)
-      builder (~> 3.0.0)
-    activerecord (3.2.17)
-      activemodel (= 3.2.17)
-      activesupport (= 3.2.17)
-      arel (~> 3.0.2)
-      tzinfo (~> 0.3.29)
-    activeresource (3.2.17)
-      activemodel (= 3.2.17)
-      activesupport (= 3.2.17)
-    activesupport (3.2.17)
-      i18n (~> 0.6, >= 0.6.4)
-      multi_json (~> 1.0)
-    addressable (2.3.5)
-    afm (0.2.0)
-    angularjs-rails (1.2.22)
+    activemodel (4.1.6)
+      activesupport (= 4.1.6)
+      builder (~> 3.1)
+    activerecord (4.1.6)
+      activemodel (= 4.1.6)
+      activesupport (= 4.1.6)
+      arel (~> 5.0.0)
+    activesupport (4.1.6)
+      i18n (~> 0.6, >= 0.6.9)
+      json (~> 1.7, >= 1.7.7)
+      minitest (~> 5.1)
+      thread_safe (~> 0.1)
+      tzinfo (~> 1.1)
+    addressable (2.3.6)
+    angularjs-rails (1.3.0)
     angularjs-rails-resource (1.1.1)
-    arel (3.0.3)
+    arel (5.0.1.20140414130214)
     bcrypt (3.1.7)
-    bourbon (3.1.3)
-      sass (>= 3.2.0)
+    bootstrap-sass (3.2.0.2)
+      sass (~> 3.2)
+    bourbon (3.2.3)
+      sass (~> 3.2)
       thor
-    builder (3.0.4)
-    cancan (1.6.9)
+    builder (3.2.2)
+    cancan (1.6.10)
     chronic (0.10.2)
-    coderay (1.0.9)
-    coffee-rails (3.2.2)
+    coderay (1.1.0)
+    coffee-rails (4.1.0)
       coffee-script (>= 2.2.0)
-      railties (~> 3.2.0)
-    coffee-script (2.2.0)
+      railties (>= 4.0.0, < 5.0)
+    coffee-script (2.3.0)
       coffee-script-source
       execjs
-    coffee-script-source (1.6.2)
-    dotenv (0.9.0)
-    dotenv-rails (0.9.0)
-      dotenv (= 0.9.0)
+    coffee-script-source (1.8.0)
+    dotenv (1.0.2)
+    dotenv-rails (1.0.2)
+      dotenv (= 1.0.2)
     erubis (2.7.0)
-    execjs (1.4.0)
-      multi_json (~> 1.0)
-    faraday (0.8.9)
-      multipart-post (~> 1.2.0)
-    faraday_middleware (0.8.8)
-      faraday (>= 0.7.4, < 0.9)
+    execjs (2.2.2)
+    faraday (0.9.0)
+      multipart-post (>= 1.2, < 3)
+    faraday_middleware (0.9.1)
+      faraday (>= 0.7.4, < 0.10)
+    font-awesome-rails (4.2.0.0)
+      railties (>= 3.2, < 5.0)
     foreman (0.63.0)
       dotenv (>= 0.7)
       thor (>= 0.13.6)
-    fullcontact (0.4.4)
-      faraday (~> 0.8)
-      faraday_middleware (~> 0.8.6)
-      hashie (~> 1.2.0)
-      multi_xml (>= 0.4.2)
-      rash (~> 0.3.0)
+    fullcontact (0.7.0)
+      faraday (~> 0.9.0)
+      faraday_middleware (>= 0.9)
+      hashie (>= 2.0)
+      multi_xml (>= 0.5)
+      rash (>= 0.4)
     gon (5.2.0)
       actionpack (>= 2.3.0)
       json
       multi_json
       request_store (>= 1.0.5)
-    hashery (2.1.1)
-    hashie (1.2.0)
+    hashie (2.0.5)
     hike (1.2.3)
-    httpauth (0.2.1)
-    i18n (0.6.9)
-    jbuilder (1.3.0)
-      activesupport (>= 3.0.0)
-      multi_json (>= 1.2.0)
-    journey (1.0.4)
+    i18n (0.6.11)
+    jbuilder (2.2.2)
+      activesupport (>= 3.0.0, < 5)
+      multi_json (~> 1.2)
+    jquery-rails (3.1.2)
+      railties (>= 3.0, < 5.0)
+      thor (>= 0.14, < 2.0)
     json (1.8.1)
-    jwt (0.1.13)
-      multi_json (>= 1.5)
-    libv8 (3.16.14.3)
-    mail (2.5.4)
-      mime-types (~> 1.16)
-      treetop (~> 1.4.8)
-    method_source (0.8.1)
-    mime-types (1.25.1)
-    momentjs-rails (2.2.1)
+    jwt (1.0.0)
+    libv8 (3.16.14.7)
+    mail (2.6.1)
+      mime-types (>= 1.16, < 3)
+    method_source (0.8.2)
+    mime-types (2.4.2)
+    minitest (5.4.2)
+    momentjs-rails (2.8.3)
       railties (>= 3.1)
-    money (5.1.1)
-      i18n (~> 0.6.0)
-    multi_json (1.10.0)
-    multi_xml (0.5.3)
-    multipart-post (1.2.0)
-    newrelic_rpm (3.6.0.83)
+    money (6.3.0)
+      i18n (>= 0.6.4, <= 0.7.0.dev)
+    multi_json (1.10.1)
+    multi_xml (0.5.5)
+    multipart-post (2.0.0)
+    newrelic_rpm (3.9.5.251)
     ng-rails-csrf (0.1.0)
     oauth (0.4.7)
-    oauth2 (0.8.1)
-      faraday (~> 0.8)
-      httpauth (~> 0.1)
-      jwt (~> 0.1.4)
-      multi_json (~> 1.0)
+    oauth2 (0.9.4)
+      faraday (>= 0.8, < 0.10)
+      jwt (~> 1.0)
+      multi_json (~> 1.3)
+      multi_xml (~> 0.5)
       rack (~> 1.2)
-    octokit (2.5.0)
-      sawyer (~> 0.5.1)
-    omniauth (1.1.4)
-      hashie (>= 1.2, < 3)
-      rack
-    omniauth-github (1.1.1)
+    octokit (3.4.2)
+      sawyer (~> 0.5.3)
+    omniauth (1.2.2)
+      hashie (>= 1.2, < 4)
+      rack (~> 1.0)
+    omniauth-github (1.1.2)
       omniauth (~> 1.0)
       omniauth-oauth2 (~> 1.1)
-    omniauth-oauth2 (1.1.1)
-      oauth2 (~> 0.8.0)
-      omniauth (~> 1.0)
-    pdf-reader (1.3.3)
-      Ascii85 (~> 1.0.0)
-      afm (~> 0.2.0)
-      hashery (~> 2.0)
-      ruby-rc4
-      ttfunk
-    pdfkit (0.5.4)
-    permanent_records (3.1.3)
-      activerecord
-    pg (0.15.1)
-    polyglot (0.3.4)
-    prawn (0.12.0)
-      pdf-reader (>= 0.9.0)
-      ttfunk (~> 1.0.2)
-    pry (0.9.12)
-      coderay (~> 1.0.5)
-      method_source (~> 0.8)
+    omniauth-oauth2 (1.1.2)
+      faraday (>= 0.8, < 0.10)
+      multi_json (~> 1.3)
+      oauth2 (~> 0.9.3)
+      omniauth (~> 1.2)
+    pdf-core (0.4.0)
+    permanent_records (3.1.6)
+      activerecord (>= 3.0.0)
+    pg (0.17.1)
+    prawn (1.3.0)
+      pdf-core (~> 0.4.0)
+      ttfunk (~> 1.4.0)
+    pry (0.10.1)
+      coderay (~> 1.1.0)
+      method_source (~> 0.8.1)
       slop (~> 3.4)
-    pry-rails (0.2.2)
+    pry-rails (0.3.2)
       pry (>= 0.9.10)
-    quiet_assets (1.0.2)
+    quiet_assets (1.0.3)
       railties (>= 3.1, < 5.0)
-    rack (1.4.5)
-    rack-cache (1.2)
-      rack (>= 0.4)
-    rack-force_domain (0.2.0)
-    rack-ssl (1.3.4)
-      rack
+    rack (1.5.2)
+    rack-force_domain (0.3.0)
     rack-test (0.6.2)
       rack (>= 1.0)
-    railroady (1.1.0)
-    rails (3.2.17)
-      actionmailer (= 3.2.17)
-      actionpack (= 3.2.17)
-      activerecord (= 3.2.17)
-      activeresource (= 3.2.17)
-      activesupport (= 3.2.17)
-      bundler (~> 1.0)
-      railties (= 3.2.17)
-    railties (3.2.17)
-      actionpack (= 3.2.17)
-      activesupport (= 3.2.17)
-      rack-ssl (~> 1.3.2)
+    railroady (1.2.0)
+    rails (4.1.6)
+      actionmailer (= 4.1.6)
+      actionpack (= 4.1.6)
+      actionview (= 4.1.6)
+      activemodel (= 4.1.6)
+      activerecord (= 4.1.6)
+      activesupport (= 4.1.6)
+      bundler (>= 1.3.0, < 2.0)
+      railties (= 4.1.6)
+      sprockets-rails (~> 2.0)
+    railties (4.1.6)
+      actionpack (= 4.1.6)
+      activesupport (= 4.1.6)
       rake (>= 0.8.7)
-      rdoc (~> 3.4)
-      thor (>= 0.14.6, < 2.0)
-    rake (10.3.1)
-    rash (0.3.2)
-      hashie (~> 1.2.0)
-    rdoc (3.12.2)
-      json (~> 1.4)
-    redcarpet (2.2.2)
+      thor (>= 0.18.1, < 2.0)
+    rake (10.3.2)
+    rash (0.4.0)
+      hashie (~> 2.0.0)
+    redcarpet (3.2.0)
     ref (1.0.5)
     request_store (1.1.0)
-    ruby-rc4 (0.1.5)
-    sass (3.3.7)
-    sass-rails (3.2.6)
-      railties (~> 3.2.0)
-      sass (>= 3.1.10)
-      tilt (~> 1.3)
-    sawyer (0.5.1)
+    sass (3.2.19)
+    sass-rails (4.0.3)
+      railties (>= 4.0.0, < 5.0)
+      sass (~> 3.2.0)
+      sprockets (~> 2.8, <= 2.11.0)
+      sprockets-rails (~> 2.0)
+    sawyer (0.5.5)
       addressable (~> 2.3.5)
       faraday (~> 0.8, < 0.10)
-    simple_form (2.1.1)
-      actionpack (~> 3.0)
-      activemodel (~> 3.0)
-    slim (1.3.8)
-      temple (~> 0.6.3)
-      tilt (~> 1.3.3)
-    slim-rails (1.1.1)
-      actionpack (>= 3.0, < 4.1)
-      activesupport (>= 3.0, < 4.1)
-      railties (>= 3.0, < 4.1)
-      slim (~> 1.3)
-    slop (3.4.4)
-    sprockets (2.2.2)
+    slim (2.1.0)
+      temple (~> 0.6.9)
+      tilt (>= 1.3.3, < 2.1)
+    slim-rails (2.1.5)
+      actionpack (>= 3.0, < 4.2)
+      activesupport (>= 3.0, < 4.2)
+      railties (>= 3.0, < 4.2)
+      slim (~> 2.0)
+    slop (3.6.0)
+    sprockets (2.11.0)
       hike (~> 1.2)
       multi_json (~> 1.0)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
-    sqlite3 (1.3.7)
-    temple (0.6.3)
-    therubyracer (0.12.0)
+    sprockets-rails (2.2.0)
+      actionpack (>= 3.0)
+      activesupport (>= 3.0)
+      sprockets (>= 2.8, < 4.0)
+    sqlite3 (1.3.9)
+    temple (0.6.9)
+    therubyracer (0.12.1)
       libv8 (~> 3.16.14.0)
       ref
     thor (0.19.1)
-    tilt (1.3.7)
-    treetop (1.4.15)
-      polyglot
-      polyglot (>= 0.3.1)
-    ttfunk (1.0.3)
-    tzinfo (0.3.39)
-    uglifier (2.0.1)
+    thread_safe (0.3.4)
+    tilt (1.4.1)
+    ttfunk (1.4.0)
+    tzinfo (1.2.2)
+      thread_safe (~> 0.1)
+    uglifier (2.5.3)
       execjs (>= 0.3.0)
-      multi_json (~> 1.0, >= 1.0.2)
-    validates_email_format_of (1.5.3)
-    whenever (0.8.4)
-      activesupport (>= 2.3.4)
+      json (>= 1.8.0)
+    validates_email_format_of (1.6.1)
+      i18n
+    whenever (0.9.3)
       chronic (>= 0.6.3)
-    will_paginate (3.0.5)
-    will_paginate-bootstrap (0.2.5)
-      will_paginate (>= 3.0.3)
+    will_paginate (3.0.7)
+    wkhtmltopdf-binary (0.9.9.3)
 
 PLATFORMS
   ruby
@@ -299,20 +277,19 @@ PLATFORMS
 DEPENDENCIES
   angularjs-rails
   angularjs-rails-resource (~> 1.1.1)
-  bootstrap-sass!
+  bootstrap-sass (~> 3.2.0)
   bourbon
   cancan
   chartkick!
-  coffee-rails (~> 3.2.1)
-  contact_us (~> 0.4.0)!
+  coffee-rails
   dotenv-rails
-  font-awesome-sass-rails (~> 3.0.0.0)!
+  font-awesome-rails
   foreman
   fullcontact
   gon
   groupdate!
   jbuilder
-  jquery-rails!
+  jquery-rails
   momentjs-rails
   money
   nested_form!
@@ -321,25 +298,27 @@ DEPENDENCIES
   octokit
   omniauth
   omniauth-github
-  pdfkit
+  pdfkit!
   permanent_records (~> 3.1.3)
   pg
   prawn
+  protected_attributes!
   pry-rails
   quiet_assets
   rack-force_domain
   railroady
-  rails (= 3.2.17)
+  rails (= 4.1.6)
   rails-bootstrap-helpers!
   redcarpet
-  simple_form
+  sass-rails (>= 3.2)
+  simple_form!
   slim
   slim-rails
   sorcery!
   sqlite3
   therubyracer
-  uglifier (>= 1.0.3)
+  uglifier
   validates_email_format_of
   whenever
-  will_paginate-bootstrap (= 0.2.5)
-  wkhtmltopdf-binary!
+  will_paginate-bootstrap!
+  wkhtmltopdf-binary (~> 0.9.9.3)

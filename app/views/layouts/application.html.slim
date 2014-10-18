@@ -31,10 +31,10 @@ html lang="en" class="#{check_if_css_class}"
       = render "layouts/header"
       - if show_tutorial?
         = render "layouts/tutorial"
-      .container.content.clearfix
+      .container
         .row
-          .span12
-            = render "layouts/notices"
-            = yield
-      - if !mac_app?
-        = render "layouts/footer"
+          .col-md-12
+            .content
+              = render "layouts/notices"
+              = yield
+      = render "layouts/footer"

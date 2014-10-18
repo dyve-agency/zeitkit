@@ -20,7 +20,7 @@ table.table.table-bordered
         td.hidden-phone= with_currency worklog.total
         td
           .btn-group.pull-right
-            = link_to 'Edit', edit_worklog_path(worklog), class: "btn"
+            = link_to 'Edit', edit_worklog_path(worklog), class: "btn btn-default"
             = link_to 'Delete', worklog, :confirm => 'Are you sure?', :method => :delete,
-              class: "btn hidden-phone"
+              class: "btn btn-default hidden-phone"
 = render "below_worklog_index"

@@ -15,9 +15,9 @@ table.table.table-bordered.table-striped
         td= l note.created_at
         td
           .btn-group
-            = link_to '<i class="icon-zoom-in"></i> Details'.html_safe, note, class: "btn"
-            = link_to 'Edit', edit_note_path(note), class: "btn"
+            = link_to '<i class="icon-zoom-in"></i> Details'.html_safe, note, class: "btn btn-default"
+            = link_to 'Edit', edit_note_path(note), class: "btn btn-default"
             = link_to 'Delete', note, :confirm => 'Are you sure?',
-              :method => :delete, class: "btn hidden-phone"
+              :method => :delete, class: "btn btn-default hidden-phone"
 
-= link_to 'New Note', new_note_path, class: "btn btn-primary"
+= link_to 'New Note', new_note_path, class: "btn btn-default btn-primary"

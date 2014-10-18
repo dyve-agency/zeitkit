@@ -7,77 +7,82 @@
     button type="button" class="close" data-dismiss="alert" &times
     span You have not entered the full contact info for the client. The invoice may not display properly. #{link_to 'Update contact details now.', edit_client_path(@client)}
 .row.invoice-writer
-  .span4.company-title
+  .col-xs-4.company-title
     h4= current_user.company_name
     h5.hide-for-print= link_to "(Edit details)", edit_user_path(current_user)
-  .span4.company-details
+  .col-xs-4.company-details
     p= current_user.company_name
     p= current_user.street
     p= "#{current_user.zip} #{current_user.city}"
-  .span4
+  .col-xs-4
     h3.intro hi. this is your invoice
 .row.invoice-client
-  .span12
-    hr
-  .span6
-    h3 Client
-    - if @client.company_name
-      h4= @client.company_name
-    - else
-      h4= @client.name
-    h4= @client.street
-    h4= "#{@client.zip} #{@client.city}"
-    h5.hide-for-print
-      = link_to "(Edit details)", edit_client_path(@client)
-  .span2.invoice-box
-    span.key Invoice number
-    span.value #{@invoice.number}
-  .span2.invoice-box.please-pay
-    span.key Please pay
-    span.value= with_currency @invoice.calc_vat_total
-  .span2.invoice-box
-    span.key Invoice date
-    span.value= l @invoice.created_at, format: :day_month_year
-.invoice-content
-  table.table
-    thead
-      tr
-        td Description
-        td.last Subtotal
-    tbody
-      - (@invoice.worklogs.oldest_first + @invoice.products.oldest_first.uniq + @invoice.expenses.oldest_first).each do |entry|
-        tr
-          td= entry.invoice_title(@invoice)
-          - if entry.is_a?(Product)
-            td.last= entry.price_tag_total(@invoice)
-          - else
-            td.last= with_currency entry.total
+  .col-xs-12
+    .row
+      .col-xs-12
+        hr
+    .row
+      .col-xs-6
+        h3 Client
+        - if @client.company_name
+          h4= @client.company_name
+        - else
+          h4= @client.name
+        h4= @client.street
+        h4= "#{@client.zip} #{@client.city}"
+        h5.hide-for-print
+          = link_to "(Edit details)", edit_client_path(@client)
+      .col-xs-2.invoice-box
+        span.key Number
+        span.value #{@invoice.number}
+      .col-xs-2.invoice-box.please-pay
+        span.key Please pay
+        span.value= with_currency @invoice.calc_vat_total
+      .col-xs-2.invoice-box style="font-size: 13px"
+        span.key Invoice date
+        span.value= l @invoice.created_at, format: :day_month_year
+.row
+  .col-xs-12 style="padding: 0px;"
+    .invoice-content
+      table.table
+        thead
+          tr
+            td Description
+            td.last Subtotal
+        tbody
+          - (@invoice.worklogs.oldest_first + @invoice.products.oldest_first.uniq + @invoice.expenses.oldest_first).each do |entry|
+            tr
+              td= entry.invoice_title(@invoice)
+              - if entry.is_a?(Product)
+                td.last= entry.price_tag_total(@invoice)
+              - else
+                td.last= with_currency entry.total
 .invoice-total
   .row
-    .span3.offset7.key Subtotal
-    .span2.val= with_currency @invoice.subtotal
+    .col-xs-3.col-xs-offset-7.key Subtotal
+    .col-xs-2.val= with_currency @invoice.subtotal
   - if @invoice.discount_applied?
     .row
-      .span3.offset7.key Discount
-      .span2.val= with_currency @invoice.discount
+      .col-xs-3.col-xs-offset-7.key Discount
+      .col-xs-2.val= with_currency @invoice.discount
   .row
-    .span3.offset7.key Net total
-    .span2.val= with_currency @invoice.total
+    .col-xs-3.col-xs-offset-7.key Net total
+    .col-xs-2.val= with_currency @invoice.total
   .row.big-border
-    .span3.offset7.key #{@invoice.including_vat_info}
-    .span2.val #{with_currency @invoice.total_vat}
+    .col-xs-3.col-xs-offset-7.key #{@invoice.including_vat_info}
+    .col-xs-2.val #{with_currency @invoice.total_vat}
   .row.bold
-    .span3.offset7.key Total
-    .span2.val= with_currency @invoice.calc_vat_total
+    .col-xs-3.col-xs-offset-7.key Total
+    .col-xs-2.val= with_currency @invoice.calc_vat_total
 .row.terms
-  .span4
+  .col-xs-4
     h4 Payment
     p= markdown @invoice.payment_info
-  .span4
+  .col-xs-4
     - if @invoice.payment_terms
       h4 Terms
       p= markdown @invoice.payment_terms
-  .span4
+  .col-xs-4
     - if @invoice.note
       h4 Notes
       = markdown @invoice.note
@@ -87,6 +92,6 @@
   hr
   .btn-group
     = link_to "<i class='icon-edit'></i> Edit invoice".html_safe,
-      edit_invoice_path(@invoice), class: "btn btn-primary"
+      edit_invoice_path(@invoice), class: "btn btn-default btn-primary"
     = link_to "<i class='icon-cloud-download'></i> Download PDF".html_safe,
-      pdf_export_invoice_path(@invoice), class: "btn"
+      pdf_export_invoice_path(@invoice), class: "btn btn-default"

@@ -2,11 +2,11 @@
   h1 Register
   = simple_form_for @user do |f|
     .row
-      .span4
+      .col-md-4
         = f.input :email, label: "Your email", input_html: {value: ''}
         = f.input :password, required: true, label: "Pick a password"
         = f.input :password_confirmation, required: true, label: "Confirm password"
-      .span4
+      .col-md-4
         p.lead By registering all your demo data is saved and you get access to all features.
         p.lead Have fun with Zeitkit.
     .form-actions
@@ -15,12 +15,12 @@
   h1 Edit contact info
   = simple_form_for @user do |f|
     .row
-      .span4
+      .col-md-4
         = f.input :email
         = f.input :username
         = f.input :company_name
         = f.input :currency, :as => :select, :collection => Money::Currency.pretty_currency_names, label_method: :first, value_method: :last, include_blank: false
-      .span4
+      .col-md-4
         = f.input :street
         = f.input :city
         = f.input :zip
@@ -29,6 +29,6 @@
     .form-actions
       .btn-group
         = f.button :submit, "Update"
-        = link_to new_password_reset_path(email: @user.email), class: "btn" do
-          i.icon-edit
+        = link_to new_password_reset_path(email: @user.email), class: "btn btn-default" do
+          i.fa.fa-edit
           | Change password

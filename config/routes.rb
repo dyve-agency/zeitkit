@@ -49,6 +49,6 @@ Timetracker::Application.routes.draw do
   post "hide_tutorial" => "tutorial#hide", as: "hide_tutorial"
   get "show_tutorial" => "tutorial#show", as: "show_tutorial"
 
-  match "/auth/:provider/callback" => "sessions#auth_provider_callback"
+  get "/auth/:provider/callback" => "sessions#auth_provider_callback"
 
 end
