@@ -63,7 +63,7 @@ div ng-controller="WorklogsController"
   .row
     .col-md-6
       label What did you do? Markdown supported.
-      textarea.form-control placeholder="e.g. finish user feature" ng-model="worklog.comment"
+      textarea.form-control placeholder="e.g. finish user feature" ng-model="worklog.comment" auto-grow="auto-grow"
     .col-md-6
       .well
         div marked="worklog.comment" ng-show="worklog.comment.length"
