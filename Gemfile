@@ -19,13 +19,15 @@ gem 'newrelic_rpm'
 gem 'redcarpet'
 gem 'rack-force_domain'
 gem 'money'
-gem 'pdfkit'
+gem 'pdfkit', git: "https://github.com/pdfkit/pdfkit.git"
 gem 'fullcontact'
 gem 'jbuilder'
 gem "permanent_records", "~> 3.1.3"
 gem 'validates_email_format_of'
 
-gem 'wkhtmltopdf-binary', git: "https://github.com/tolgap/wkhtmltopdf-binary.git"
+# Wkhtmltopdf
+gem 'wkhtmltopdf-binary', '~> 0.9.9.3'
+
 
 # Managing startup behavior of App
 gem 'foreman'

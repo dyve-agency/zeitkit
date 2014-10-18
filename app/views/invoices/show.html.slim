@@ -18,26 +18,29 @@
     h3.intro hi. this is your invoice
 .row.invoice-client
   .col-xs-12
-    hr
-  .col-xs-6
-    h3 Client
-    - if @client.company_name
-      h4= @client.company_name
-    - else
-      h4= @client.name
-    h4= @client.street
-    h4= "#{@client.zip} #{@client.city}"
-    h5.hide-for-print
-      = link_to "(Edit details)", edit_client_path(@client)
-  .col-xs-2.invoice-box
-    span.key Invoice number
-    span.value #{@invoice.number}
-  .col-xs-2.invoice-box.please-pay
-    span.key Please pay
-    span.value= with_currency @invoice.calc_vat_total
-  .col-xs-2.invoice-box
-    span.key Invoice date
-    span.value= l @invoice.created_at, format: :day_month_year
+    .row
+      .col-xs-12
+        hr
+    .row
+      .col-xs-6
+        h3 Client
+        - if @client.company_name
+          h4= @client.company_name
+        - else
+          h4= @client.name
+        h4= @client.street
+        h4= "#{@client.zip} #{@client.city}"
+        h5.hide-for-print
+          = link_to "(Edit details)", edit_client_path(@client)
+      .col-xs-2.invoice-box
+        span.key Number
+        span.value #{@invoice.number}
+      .col-xs-2.invoice-box.please-pay
+        span.key Please pay
+        span.value= with_currency @invoice.calc_vat_total
+      .col-xs-2.invoice-box style="font-size: 13px"
+        span.key Invoice date
+        span.value= l @invoice.created_at, format: :day_month_year
 .row
   .col-xs-12 style="padding: 0px;"
     .invoice-content
