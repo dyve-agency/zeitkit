@@ -56,7 +56,7 @@ gem "prawn"
 gem "therubyracer"
 
 # Pagination
-gem 'will_paginate-bootstrap', '0.2.5'
+gem 'will_paginate-bootstrap', git: "https://github.com/bootstrap-ruby/will_paginate-bootstrap.git"
 
 # Creating nested forms easily
 gem "nested_form", git: "https://github.com/hendricius/nested_form.git"

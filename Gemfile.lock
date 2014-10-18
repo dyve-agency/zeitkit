@@ -35,6 +35,13 @@ GIT
       activesupport (>= 3)
 
 GIT
+  remote: https://github.com/bootstrap-ruby/will_paginate-bootstrap.git
+  revision: 22a06630c3150af6c84550f39864e45d6b48f2e0
+  specs:
+    will_paginate-bootstrap (1.0.1)
+      will_paginate (>= 3.0.3)
+
+GIT
   remote: https://github.com/hendricius/nested_form.git
   revision: ca85dfbb040391fc3eb4f48cb91c4af70a904733
   specs:
@@ -262,8 +269,6 @@ GEM
     whenever (0.9.3)
       chronic (>= 0.6.3)
     will_paginate (3.0.7)
-    will_paginate-bootstrap (0.2.5)
-      will_paginate (>= 3.0.3)
     wkhtmltopdf-binary (0.9.9.3)
 
 PLATFORMS
@@ -315,5 +320,5 @@ DEPENDENCIES
   uglifier
   validates_email_format_of
   whenever
-  will_paginate-bootstrap (= 0.2.5)
+  will_paginate-bootstrap!
   wkhtmltopdf-binary (~> 0.9.9.3)
