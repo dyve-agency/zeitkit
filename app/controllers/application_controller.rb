@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  around_filter :set_time_zone
+  #around_filter :set_time_zone
   before_filter :require_login, :except => [:not_authenticated]
   before_filter :check_and_set_mac_design
   before_filter :init_gon, if: :current_user

@@ -28,6 +28,7 @@
 //= require angularjs/rails/resource
 //= require datetimepicker
 //= require angular-marked
+//= require angular-ui-bootstrap
 
 //= require_tree ./public/
 //= require ./angular_init

@@ -1,7 +1,6 @@
 class WorklogsController < ApplicationController
-  load_and_authorize_resource
 
-  respond_to :json, :html
+  #load_and_authorize_resource
 
   def index
     @user = current_user
@@ -35,9 +34,22 @@ class WorklogsController < ApplicationController
   end
 
   def create
+    form = WorklogForm.new_from_params(params[:worklog], user: current_user)
+    if form.save
+      render json: form.worklog, status: 200
+    else
+      render json: form.errors.full_messages, status: 422
+    end
   end
 
   def update
+    worklog = current_user.worklogs.find(params[:id])
+    form = WorklogForm.new_from_params(params, user: current_user, worklog: worklog)
+    if form.save
+      render json: form.worklog, status: 200
+    else
+      render json: form.errors.full_messages, status: 422
+    end
   end
 
   def destroy

@@ -10,6 +10,14 @@
 
 div ng-controller="WorklogsController"
   .row
+    .col-xs-12
+      alert type="danger" ng-show="worklog.errors.length"
+        p There were a few errors on saving.
+        ul
+          li ng-repeat="error in worklog.errors"
+            | {{ error }}
+
+  .row
     .col-xs-5
       label Client
       select.form-control ng-model="worklog.client" ng-options="client.company_name for client in worklog.clients" ng-change="worklog.clientChanged()"
@@ -72,7 +80,7 @@ div ng-controller="WorklogsController"
   .row
 
   hr
-  span.btn.btn-primary ng-click="worklog.saveWrapper()" ng-class="{'disabled', worklog.loading}"
+  span.btn.btn-primary ng-click="worklog.saveWrapper()" ng-class="{'disabled': worklog.loading}"
     | Save
     span ng-show="worklog.loading"
       '

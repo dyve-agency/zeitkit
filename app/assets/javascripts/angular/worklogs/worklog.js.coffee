@@ -20,6 +20,7 @@ app.factory "Worklog", ["RailsResource", "Timeframe", "railsSerializer", (RailsR
         comment: ""
         id: null
         loading: false
+        errors: []
       _this = this
       useOpts = _.extend defaultOpts, opts
       _.each useOpts, (val, key) ->
@@ -63,11 +64,15 @@ app.factory "Worklog", ["RailsResource", "Timeframe", "railsSerializer", (RailsR
 
     saveWrapper: ->
       return if @loading
+      # Reset all errors
+      @errors = []
       @loading = true
       callb = if @isNew() then @create() else @save()
       callb.then((data)=>
         @loading = false
       , (error)=>
+        if error.data
+          @errors = error.data
         @loading = false
       )
 
