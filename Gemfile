@@ -76,6 +76,9 @@ gem 'gon'
 # Attr accessible
 gem 'protected_attributes', github: 'rails/protected_attributes'
 
+# Nicer service classes
+gem "virtus"
+
 group :development do
   gem 'quiet_assets'
   gem 'sqlite3'
