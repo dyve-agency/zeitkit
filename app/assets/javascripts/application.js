@@ -22,6 +22,7 @@
 //= require highcharts
 //= require chartkick
 //= require marked
+//= require bootstrap-notify
 
 //= require angular
 //= require ng-rails-csrf

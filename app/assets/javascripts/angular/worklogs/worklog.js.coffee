@@ -1,6 +1,6 @@
 app = angular.module("app")
 
-app.factory "Worklog", ["RailsResource", "Timeframe", "railsSerializer", "Client", (RailsResource, Timeframe, railsSerializer, Client)->
+app.factory "Worklog", ["RailsResource", "Timeframe", "railsSerializer", "Client", "UiNotifier", (RailsResource, Timeframe, railsSerializer, Client, UiNotifier)->
   class Worklog extends RailsResource
     @configure url: '/worklogs', name: 'worklog', serializer: railsSerializer(->
       this.exclude("clients")
@@ -21,6 +21,7 @@ app.factory "Worklog", ["RailsResource", "Timeframe", "railsSerializer", "Client
         id: null
         loading: false
         errors: []
+        notifier: new UiNotifier
       _this = this
       useOpts = _.extend defaultOpts, opts
       _.each useOpts, (val, key) ->
@@ -69,8 +70,15 @@ app.factory "Worklog", ["RailsResource", "Timeframe", "railsSerializer", "Client
       @errors = []
       @loading = true
       callb = if @isNew() then @create() else @save()
-      callb.then((data)=>
+      timeframes = @timeframes
+      clients    = @clients
+      client     = @client
+      callb.then((new_worklog)=>
         @loading = false
+        @client = client
+        @clients = clients
+        @timeframes = timeframes
+        @notifier.success("Worklog has been successfully saved.")
       , (error)=>
         if error.data
           @errors = error.data
@@ -88,7 +96,7 @@ app.factory "Worklog", ["RailsResource", "Timeframe", "railsSerializer", "Client
         f.ended   = new Date(tf.ended)
         f
       @comment    = wl.comment
-      @comment += ""
+      @id         = wl.id
 
     secondlyRate: ->
       @hourlyRate / 3600

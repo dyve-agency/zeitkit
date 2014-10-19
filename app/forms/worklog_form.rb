@@ -43,7 +43,7 @@ class WorklogForm
         if tf.is_a? Timeframe
           result << tf
         else
-          result << Timeframe.new(tf)
+          result << Timeframe.new(tf.except(:id, :created_at, :updated_at))
         end
       end
     else
@@ -58,10 +58,11 @@ class WorklogForm
   end
 
   def assign_new_attributes(use_worklog)
-    use_worklog.hourly_rate = Money.new hourly_rate
+    use_worklog.hourly_rate = Money.new hourly_rate.to_f * 100
     use_worklog.summary = comment
     use_worklog.user = user
     use_worklog.client = client
+    use_worklog.timeframes = timeframes
     use_worklog
   end
 

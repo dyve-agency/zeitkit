@@ -1,14 +1,16 @@
-- if current_user.worklogs.empty?
-  .alert.alert-info
-    = link_to "x", "#", class: "close", data: {dismiss: "alert"}
-    span Worklogs are awesome to track the time you work for clients.
-- if current_user.clients.empty? && current_user.client_shares.empty?
-  .alert.alert-error
-    span You need to create a client first.
-    '
-    = link_to "Create your first client.", new_client_path
-
 div ng-controller="WorklogsController"
+  h1
+    |{{ worklog.isNew() ? 'New worklog' : 'Editing worklog' }}
+  - if current_user.worklogs.empty?
+    .alert.alert-info
+      = link_to "x", "#", class: "close", data: {dismiss: "alert"}
+      span Worklogs are awesome to track the time you work for clients.
+  - if current_user.clients.empty? && current_user.client_shares.empty?
+    .alert.alert-error
+      span You need to create a client first.
+      '
+      = link_to "Create your first client.", new_client_path
+
   .row
     .col-xs-12
       alert type="danger" ng-show="worklog.errors.length"
@@ -54,7 +56,7 @@ div ng-controller="WorklogsController"
               span.btn.btn-default ng-click="worklog.removeTimeframe(time)"
                 i.fa.fa-remove
   span.btn.btn-success ng-click="worklog.addBlankTimeframe()"
-    | Add timeframe
+    | Add range
   hr
 
   .row
@@ -70,7 +72,7 @@ div ng-controller="WorklogsController"
 
   hr
   span.btn.btn-primary ng-click="worklog.saveWrapper()" ng-class="{'disabled': worklog.loading}"
-    | Save
+    | Save worklog
     span ng-show="worklog.loading"
       '
       i.fa.fa-spinner.fa-spin
