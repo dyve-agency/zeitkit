@@ -25,7 +25,7 @@ Timetracker::Application.routes.draw do
     end
   end
 
-  resources :worklogs, except: [:show]
+  resources :worklogs
   resources :invoices do
     member do
       post "toggle_paid"

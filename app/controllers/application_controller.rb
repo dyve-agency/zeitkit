@@ -29,4 +29,11 @@ class ApplicationController < ActionController::Base
   def init_gon
     gon.current_user_id = current_user.id
   end
+
+
+  # ActiveModel serializer, skip the root node.
+  def default_serializer_options
+    { root: false }
+  end
+
 end

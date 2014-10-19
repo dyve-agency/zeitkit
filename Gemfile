@@ -79,6 +79,9 @@ gem 'protected_attributes', github: 'rails/protected_attributes'
 # Nicer service classes
 gem "virtus"
 
+# Serializers for models
+gem 'active_model_serializers'
+
 group :development do
   gem 'quiet_assets'
   gem 'sqlite3'

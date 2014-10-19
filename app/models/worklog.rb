@@ -36,12 +36,10 @@ class Worklog < ActiveRecord::Base
   belongs_to :invoice
   has_many :timeframes
 
-  validates :user, :client, :start_time, :end_time, presence: true
+  validates :user, :client, presence: true
 
 
   before_validation :set_client_share
-  before_validation :persist_hourly_rate_from_client, on: :create
-  before_validation :set_total
 
   after_create :email_user_of_shared_client_worklog
 
@@ -78,6 +76,10 @@ class Worklog < ActiveRecord::Base
     ["Client", "Start time", "End time", "Hours", "Minutes", "Hourly Rate", "Total", "Summary"]
   end
 
+  def self.updated_since(unixtimestamp)
+    self.unscoped.where("updated_at >= ?", Time.at(unixtimestamp.to_i).to_datetime)
+  end
+
   def array_data_to_export
     [client.name,
     I18n.localize(start_time),
@@ -109,64 +111,6 @@ class Worklog < ActiveRecord::Base
     self.class.remaining_minutes_from_seconds duration
   end
 
-  def calc_total
-    Money.new cent_rate_per_second(hourly_rate_cents) * duration, currency
-  end
-
-  def cent_rate_per_second(cents_per_hour)
-    cents_per_hour.to_f / 3600
-  end
-
-  def set_time_helpers_to_now!
-    set_time_helpers_to_time!(Time.zone.now, Time.zone.now)
-  end
-
-  def set_time_helpers_to_saved_times!
-    set_time_helpers_to_time!(start_time, end_time)
-  end
-
-  def set_time_helpers_to_time!(start_time, end_time)
-    self.from_date = start_time.strftime("%d/%m/%Y")
-    self.to_date = end_time.strftime("%d/%m/%Y")
-    self.from_time = start_time.strftime("%H:%M:%S")
-    self.to_time = end_time.strftime("%H:%M:%S")
-  end
-
-  def from_converted
-    begin
-      date = self.from_date.split("/").reverse.map(&:to_i)
-      time = self.from_time.split(":").map(&:to_i)
-      from_to_time(date, time)
-    rescue
-      nil
-    end
-  end
-
-
-  def from_to_time(date, time)
-    Time.zone.local(date[0], date[1], date[2], time[0], time[1], time[2])
-  end
-
-  def to_converted
-    begin
-      date = self.to_date.split("/").reverse.map(&:to_i)
-      time = self.to_time.split(":").map(&:to_i)
-      from_to_time(date, time)
-    rescue
-      nil
-    end
-  end
-
-  def convert_time_helpers_to_date_time!
-    self.start_time = from_converted
-    self.end_time = to_converted
-  end
-
-  def restore_based_on_saved_info
-    return if !user
-    self.class.new(user.temp_worklog_save.restoreable_options)
-  end
-
   def title
     "#{end_time.strftime("%d.%m.%Y")} - #{duration_hours.to_s}h:#{duration_minutes.to_s}min. #{total.to_s}#{total.currency.symbol}"
   end
@@ -175,8 +119,12 @@ class Worklog < ActiveRecord::Base
     "Work: #{end_time.strftime("%d.%m.%Y")} - #{duration_hours.to_s}h:#{duration_minutes.to_s}min x #{hourly_rate}#{hourly_rate.currency.symbol}"
   end
 
-  def self.updated_since(unixtimestamp)
-    self.unscoped.where("updated_at >= ?", Time.at(unixtimestamp.to_i).to_datetime)
+  def start_time
+    timeframes.min {|tf| tf.started }.started
+  end
+
+  def end_time
+    timeframes.max {|tf| tf.ended }.ended
   end
 
   def created_for_shared_client?
@@ -208,25 +156,11 @@ class Worklog < ActiveRecord::Base
   end
 
 
-  # Active record callbacks #
-
-  def persist_hourly_rate_from_client
-    if client_share.present?
-      self.hourly_rate = client_share.hourly_rate
-    elsif not_set_by_user
-      self.hourly_rate = client.hourly_rate
-    end
-  end
-
   def not_set_by_user
     # This check only works for new records, as the hourly rate is persisted
     # after.
     return if !new_record?
     hourly_rate.cents == 0
-  end
-
-  def set_total
-    self.total = self.calc_total
   end
 
   def set_client_share

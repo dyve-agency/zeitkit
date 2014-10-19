@@ -31,12 +31,19 @@ class WorklogsController < ApplicationController
   end
 
   def edit
+    @worklog = current_user.worklogs.find(params[:id])
+    gon.worklog_id = @worklog.id
+  end
+
+  def show
+    @worklog = current_user.worklogs.find(params[:id])
+    render json: @worklog, status: 200
   end
 
   def create
     form = WorklogForm.new_from_params(params[:worklog], user: current_user)
     if form.save
-      render json: form.worklog, status: 200
+      render json: form.worklog, status: 200, root: "worklog"
     else
       render json: form.errors.full_messages, status: 422
     end
@@ -46,7 +53,7 @@ class WorklogsController < ApplicationController
     worklog = current_user.worklogs.find(params[:id])
     form = WorklogForm.new_from_params(params, user: current_user, worklog: worklog)
     if form.save
-      render json: form.worklog, status: 200
+      render json: form.worklog, status: 200, root: "worklog"
     else
       render json: form.errors.full_messages, status: 422
     end

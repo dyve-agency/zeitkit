@@ -20,7 +20,7 @@ div ng-controller="WorklogsController"
   .row
     .col-xs-5
       label Client
-      select.form-control ng-model="worklog.client" ng-options="client.company_name for client in worklog.clients" ng-change="worklog.clientChanged()"
+      select.form-control ng-model="worklog.client" ng-options="client.companyName for client in worklog.clients" ng-change="worklog.clientChanged()"
     .col-xs-5
       label Hourly rate
       input.form-control type="text" ng-model="worklog.hourlyRate"
@@ -34,36 +34,25 @@ div ng-controller="WorklogsController"
     .row
       .col-xs-12.col-md-6
         .row
-          .col-xs-12
-            .btn-group.pull-right
+          .col-xs-6
+            quick-datepicker ng-model='time.started'
+          .col-xs-6
+            .btn-group
               span.btn.btn-default ng-click="time.setStartedNow()"
                 | Now
               span.btn.btn-default ng-click="worklog.removeTimeframe(time)"
                 i.fa.fa-remove
-        .dropdown
-          a.dropdown-toggle data-target="#" data-toggle="dropdown" href="#" role="button" id="open-{{ $index }}"
-            .input-group
-              input.form-control data-ng-model="time.started" type="text"
-                span.input-group-addon
-                  i.fa.fa-calendar
-          ul.dropdown-menu aria-labelledby="dLabel" role="menu"
-            datetimepicker datetimepicker-config="{ dropdownSelector: '#open-{{ $index }}' }" ng-model="time.started"
+
       .col-xs-12.col-md-6
         .row
-          .col-xs-12
-            .btn-group.pull-right
+          .col-xs-6
+            quick-datepicker ng-model='time.ended'
+          .col-xs-6
+            .btn-group
               span.btn.btn-default ng-click="time.setEndedNow()"
                 | Now
               span.btn.btn-default ng-click="worklog.removeTimeframe(time)"
                 i.fa.fa-remove
-        .dropdown
-          a.dropdown-toggle data-target="#" data-toggle="dropdown" href="#" role="button" id="close-{{ $index }}"
-            .input-group
-              input.form-control data-ng-model="time.ended" type="text"
-                span.input-group-addon
-                  i.fa.fa-calendar
-          ul.dropdown-menu aria-labelledby="dLabel" role="menu"
-            datetimepicker data-datetimepicker-config=("{ dropdownSelector: '#close-{{ $index }}' }") data-ng-model="time.ended"
   span.btn.btn-success ng-click="worklog.addBlankTimeframe()"
     | Add timeframe
   hr
@@ -71,7 +60,7 @@ div ng-controller="WorklogsController"
   .row
     .col-md-6
       label What did you do? Markdown supported.
-      textarea.form-control placeholder="e.g. finish user feature" ng-model="worklog.comment" auto-grow="auto-grow"
+      textarea.form-control.default-textarea placeholder="e.g. finish user feature" ng-model="worklog.comment"
     .col-md-6
       .well
         div marked="worklog.comment" ng-show="worklog.comment.length"

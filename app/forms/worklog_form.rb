@@ -9,7 +9,11 @@ class WorklogForm
   attribute :timeframes, Array
   attribute :hourly_rate, Numeric
   attribute :comment, String, default: ""
+  attribute :client_id, Numeric
+  attribute :client, Client
 
+  validates :user, presence: true
+  validates :client, presence: true
   validates :hourly_rate, numericality: {greater_than: 0}
   validates :comment, presence: true
   validate :timeframes_validator
@@ -25,7 +29,8 @@ class WorklogForm
     if valid?
       wl = worklog || to_worklog
       wl = assign_new_attributes(wl)
-      wl.save!
+      self.worklog = wl
+      worklog.save!
     else
       false
     end
@@ -47,9 +52,16 @@ class WorklogForm
     super result
   end
 
+  def client_id=(new_id)
+    self.client = Client.where(id: new_id).first
+    super new_id
+  end
+
   def assign_new_attributes(use_worklog)
-    use_worklog.hourly_rate = hourly_rate
+    use_worklog.hourly_rate = Money.new hourly_rate
     use_worklog.summary = comment
+    use_worklog.user = user
+    use_worklog.client = client
     use_worklog
   end
 

@@ -26,9 +26,9 @@
 //= require angular
 //= require ng-rails-csrf
 //= require angularjs/rails/resource
-//= require datetimepicker
-//= require angular-marked
 //= require angular-ui-bootstrap
+//= require ng-quick-date
+//= require angular-marked
 
 //= require_tree ./public/
 //= require ./angular_init

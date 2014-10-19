@@ -1,6 +1,6 @@
 app = angular.module("app")
 
-app.factory "Worklog", ["RailsResource", "Timeframe", "railsSerializer", (RailsResource, Timeframe, railsSerializer)->
+app.factory "Worklog", ["RailsResource", "Timeframe", "railsSerializer", "Client", (RailsResource, Timeframe, railsSerializer, Client)->
   class Worklog extends RailsResource
     @configure url: '/worklogs', name: 'worklog', serializer: railsSerializer(->
       this.exclude("clients")
@@ -48,14 +48,15 @@ app.factory "Worklog", ["RailsResource", "Timeframe", "railsSerializer", (RailsR
 
     calcTotal: ->
       totals = _.map @timeframes, (t)=>
-        tTotal = t.calcTotal(if @client then @client.secondlyRate() else 0)
+        tTotal = t.calcTotal(@secondlyRate())
         tTotal
       _.inject(totals, (memo, num)->
           memo + num
         , 0)
 
     clientChanged: ->
-      @hourlyRate = @client.hourly_rate_cents / 100
+      @hourlyRate = @client.hourlyRate()
+
     removeTimeframe: (timeframe)->
       @timeframes = _.reject(@timeframes, (tf)-> tf == timeframe)
 
@@ -75,6 +76,22 @@ app.factory "Worklog", ["RailsResource", "Timeframe", "railsSerializer", (RailsR
           @errors = error.data
         @loading = false
       )
+    applyDataFromWorklog: (wl)->
+      @hourlyRate = wl.hourlyRate
+      @clients    = _.map wl.clients, (cl)-> new Client(cl)
+      @clientId   = wl.clientId
+      # Load the real client object
+      @client     = _.select(@clients, (cl)=> cl.id == @clientId)[0]
+      @timeframes = _.map wl.timeframes, (tf)->
+        f = new Timeframe(tf)
+        f.started = new Date(tf.started)
+        f.ended   = new Date(tf.ended)
+        f
+      @comment    = wl.comment
+      @comment += ""
+
+    secondlyRate: ->
+      @hourlyRate / 3600
 
   Worklog
 ]

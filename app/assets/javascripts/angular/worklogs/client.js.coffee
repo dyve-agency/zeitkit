@@ -11,10 +11,7 @@ app.factory "Client", ["$http", ($http)->
         _this[key] = val
 
     hourlyRate: ->
-      @hourly_rate_cents / 100
-
-    secondlyRate: ->
-      @hourlyRate() / 3600
+      @hourlyRateCents / 100
 
   Client
 ]

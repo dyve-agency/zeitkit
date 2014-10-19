@@ -17,6 +17,7 @@ app.factory "Timeframe", ["$http", ($http)->
         ((@ended - @started) / 1000) * ratePerSecond
       else
         0
+
     setEndedNow: ->
       @ended = new Date()
 

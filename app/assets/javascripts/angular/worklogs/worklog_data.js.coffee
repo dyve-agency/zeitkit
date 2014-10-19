@@ -1,17 +1,22 @@
 app = angular.module("app")
 
 app.factory "worklogData", ["Worklog", "Timeframe", "$http", "Client", (Worklog, Timeframe, $http, Client)->
-  loadClients = ->
+
+  loadClients = (worklog)->
     $http.get("/users/#{gon.current_user_id}/clients").success((data)->
-      wl.clients = _.map data, (d)-> new Client(d)
+      worklog.clients = _.map data, (d)-> new Client(d)
     )
+
+  wl = new Worklog()
+  wl = new Worklog
+  wl.timeframes = []
+  wl.timeframes = []
   if gon? && gon && gon.worklog_id
-    # TODO implement edit action
+    Worklog.get(gon.worklog_id).then((worklog)->
+      wl.applyDataFromWorklog(worklog)
+    )
   else
-    wl = new Worklog
-    wl.timeframes = []
-    wl.timeframes = []
-    loadClients()
+    loadClients(wl)
 
   wl
 ]
