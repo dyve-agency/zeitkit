@@ -24,6 +24,7 @@ Timetracker::Application.routes.draw do
       post "unshare"
     end
   end
+
   resources :worklogs, except: [:show]
   resources :invoices do
     member do

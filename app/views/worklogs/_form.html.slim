@@ -72,4 +72,8 @@ div ng-controller="WorklogsController"
   .row
 
   hr
-  span.btn.btn-primary Save
+  span.btn.btn-primary ng-click="worklog.saveWrapper()" ng-class="{'disabled', worklog.loading}"
+    | Save
+    span ng-show="worklog.loading"
+      '
+      i.fa.fa-spinner.fa-spin

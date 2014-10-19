@@ -1,7 +1,15 @@
 app = angular.module("app")
 
-app.factory "Worklog", ["RailsResource", "Timeframe", (RailsResource, Timeframe)->
+app.factory "Worklog", ["RailsResource", "Timeframe", "railsSerializer", (RailsResource, Timeframe, railsSerializer)->
   class Worklog extends RailsResource
+    @configure url: '/worklogs', name: 'worklog', serializer: railsSerializer(->
+      this.exclude("clients")
+      this.exclude("client")
+      this.exclude("loading")
+      this.add("client_id", (wl)->
+        if wl.client then wl.client.id else null
+      )
+    )
     constructor: (opts = {})->
       defaultOpts =
         timeframes: []
@@ -9,8 +17,9 @@ app.factory "Worklog", ["RailsResource", "Timeframe", (RailsResource, Timeframe)
         clientId: null
         client: null
         hourlyRate: 0
-        editingComment: false
         comment: ""
+        id: null
+        loading: false
       _this = this
       useOpts = _.extend defaultOpts, opts
       _.each useOpts, (val, key) ->
@@ -48,5 +57,19 @@ app.factory "Worklog", ["RailsResource", "Timeframe", (RailsResource, Timeframe)
       @hourlyRate = @client.hourly_rate_cents / 100
     removeTimeframe: (timeframe)->
       @timeframes = _.reject(@timeframes, (tf)-> tf == timeframe)
+
+    isNew: ->
+      !@id
+
+    saveWrapper: ->
+      return if @loading
+      @loading = true
+      callb = if @isNew() then @create() else @save()
+      callb.then((data)=>
+        @loading = false
+      , (error)=>
+        @loading = false
+      )
+
   Worklog
 ]
