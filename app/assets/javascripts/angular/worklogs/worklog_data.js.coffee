@@ -4,10 +4,14 @@ app.factory "worklogData", ["Worklog", "Timeframe", "$http", "Client", (Worklog,
 
   loadClients = (worklog)->
     $http.get("/users/#{gon.current_user_id}/clients").success((data)->
-      worklog.clients = _.map data, (d)-> new Client(d)
+      worklog.clients = _.map data, (d)->
+        c = new Client
+        c.companyName = d.company_name
+        c.hourlyRateCents = d.hourly_rate_cents
+        c.id = d.id
+        c
     )
 
-  wl = new Worklog()
   wl = new Worklog
   wl.timeframes = []
   wl.timeframes = []
