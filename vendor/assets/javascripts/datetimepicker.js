@@ -55,8 +55,9 @@ angular.module('ui.bootstrap.datetimepicker', [])
       if (configuration.minuteStep <= 0 || configuration.minuteStep >= 60) {
         throw ("minuteStep must be greater than zero and less than 60");
       }
+
       if (configuration.dropdownSelector !== null && !angular.isString(configuration.dropdownSelector)) {
-        throw ("dropdownSelector must be a string");
+        //throw ("dropdownSelector must be a string");
       }
     };
 

@@ -33,13 +33,13 @@ div ng-controller="WorklogsController"
               span.btn.btn-default ng-click="worklog.removeTimeframe(time)"
                 i.fa.fa-remove
         .dropdown
-          a#dropdown2.dropdown-toggle data-target="#" data-toggle="dropdown" href="#" role="button"
+          a.dropdown-toggle data-target="#" data-toggle="dropdown" href="#" role="button" id="open-{{ $index }}"
             .input-group
               input.form-control data-ng-model="time.started" type="text"
                 span.input-group-addon
                   i.fa.fa-calendar
           ul.dropdown-menu aria-labelledby="dLabel" role="menu"
-            datetimepicker data-datetimepicker-config=("{ dropdownSelector: '#dropdown2' }") data-ng-model="time.started"
+            datetimepicker datetimepicker-config="{ dropdownSelector: '#open-{{ $index }}' }" ng-model="time.started"
       .col-xs-12.col-md-6
         .row
           .col-xs-12
@@ -49,13 +49,13 @@ div ng-controller="WorklogsController"
               span.btn.btn-default ng-click="worklog.removeTimeframe(time)"
                 i.fa.fa-remove
         .dropdown
-          a#dropdown3.dropdown-toggle data-target="#" data-toggle="dropdown" href="#" role="button"
+          a.dropdown-toggle data-target="#" data-toggle="dropdown" href="#" role="button" id="close-{{ $index }}"
             .input-group
               input.form-control data-ng-model="time.ended" type="text"
                 span.input-group-addon
                   i.fa.fa-calendar
           ul.dropdown-menu aria-labelledby="dLabel" role="menu"
-            datetimepicker data-datetimepicker-config=("{ dropdownSelector: '#dropdown3' }") data-ng-model="time.ended"
+            datetimepicker data-datetimepicker-config=("{ dropdownSelector: '#close-{{ $index }}' }") data-ng-model="time.ended"
   span.btn.btn-success ng-click="worklog.addBlankTimeframe()"
     | Add timeframe
   hr
