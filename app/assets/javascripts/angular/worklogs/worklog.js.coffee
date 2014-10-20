@@ -97,7 +97,7 @@ app.factory "Worklog", ["RailsResource", "Timeframe", "railsSerializer", "Client
       @clients    = @clients.concat(shared)
 
       @clientId   = wl.clientId
-      selectClientById()
+      @selectClientById()
       @timeframes = _.map wl.timeframes, (tf)->
         f = new Timeframe(tf)
         f.started = new Date(tf.started)
@@ -113,6 +113,8 @@ app.factory "Worklog", ["RailsResource", "Timeframe", "railsSerializer", "Client
     selectClientById: ->
       client     = _.select(@clients, (cl)=> cl.id == @clientId)[0]
       @client = client
+      @clientChanged()
+      @client
 
   Worklog
 ]
