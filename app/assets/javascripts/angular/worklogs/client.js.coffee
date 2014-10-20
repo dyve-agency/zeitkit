@@ -6,6 +6,8 @@ app.factory "Client", ["$http", ($http)->
       defaultOpts =
         hourly_rate_cents: 0
         shared: false
+        companyName: ""
+        name: ""
       _this = this
       useOpts = _.extend defaultOpts, opts
       _.each useOpts, (val, key) ->
@@ -13,6 +15,12 @@ app.factory "Client", ["$http", ($http)->
 
     hourlyRate: ->
       @hourlyRateCents / 100
+
+    nameOrCompanyName: ->
+      if @name.length
+        @name
+      else
+        @companyName
 
   Client
 ]

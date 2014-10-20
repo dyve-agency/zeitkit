@@ -6,11 +6,12 @@ app.factory "worklogData", ["Worklog", "Timeframe", "$http", "Client", (Worklog,
 
     loadingSucces = (data, shared = false) ->
       converted = _.map data, (d)->
-        c = new Client
-        c.companyName = d.company_name
+        c                 = new Client
+        c.name            = d.name
+        c.companyName     = d.company_name
         c.hourlyRateCents = d.hourly_rate_cents
-        c.id = d.id
-        c.shared = shared
+        c.id              = d.id
+        c.shared          = shared
         c
       worklog.clients = worklog.clients.concat(converted)
       worklog.clientId = gon.client_id if gon.client_id
