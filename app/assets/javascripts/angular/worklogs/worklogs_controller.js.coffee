@@ -6,7 +6,6 @@ app.controller "WorklogsController", ["$scope", "worklogData", ($scope, worklogD
   $scope.$watch("worklog.client", (newValue, oldValue)->
     t = $scope.worklog.calcTotal()
     $scope.worklog.total = t
-    console.log $scope.worklog
   )
   $scope.$watch("worklog.hourlyRate", (newValue, oldValue)->
     t = $scope.worklog.calcTotal()

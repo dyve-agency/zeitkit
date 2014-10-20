@@ -14,6 +14,7 @@ app.factory "Worklog", ["RailsResource", "Timeframe", "railsSerializer", "Client
       defaultOpts =
         timeframes: []
         clients: []
+        sharedClients: []
         clientId: null
         client: null
         hourlyRate: 0
@@ -88,9 +89,15 @@ app.factory "Worklog", ["RailsResource", "Timeframe", "railsSerializer", "Client
     applyDataFromWorklog: (wl)->
       @hourlyRate = wl.hourlyRate
       @clients    = _.map wl.clients, (cl)-> new Client(cl)
+      # Concat all shared clients
+      shared = _.map wl.sharedClients, (scl)->
+        c = new Client(scl)
+        c.shared = true
+        c
+      @clients    = @clients.concat(shared)
+
       @clientId   = wl.clientId
-      # Load the real client object
-      @client     = _.select(@clients, (cl)=> cl.id == @clientId)[0]
+      selectClientById()
       @timeframes = _.map wl.timeframes, (tf)->
         f = new Timeframe(tf)
         f.started = new Date(tf.started)
@@ -102,6 +109,10 @@ app.factory "Worklog", ["RailsResource", "Timeframe", "railsSerializer", "Client
 
     secondlyRate: ->
       @hourlyRate / 3600
+
+    selectClientById: ->
+      client     = _.select(@clients, (cl)=> cl.id == @clientId)[0]
+      @client = client
 
   Worklog
 ]

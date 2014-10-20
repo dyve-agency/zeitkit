@@ -26,6 +26,9 @@ class WorklogsController < ApplicationController
   end
 
   def new
+    if params[:client]
+      gon.client_id = params[:client].to_i
+    end
   end
 
   def edit
