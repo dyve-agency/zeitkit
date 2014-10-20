@@ -82,6 +82,9 @@ gem "virtus"
 # Serializers for models
 gem 'active_model_serializers'
 
+# Decorators
+gem 'draper', git: "https://github.com/drapergem/draper.git"
+
 group :development do
   gem 'quiet_assets'
   gem 'sqlite3'

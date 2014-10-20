@@ -48,6 +48,16 @@ GIT
       will_paginate (>= 3.0.3)
 
 GIT
+  remote: https://github.com/drapergem/draper.git
+  revision: e54bd73ff95cd3bffe22d32a91e65bacc63eba3b
+  specs:
+    draper (1.4.0)
+      actionpack (>= 3.0)
+      activemodel (>= 3.0)
+      activesupport (>= 3.0)
+      request_store (~> 1.0)
+
+GIT
   remote: https://github.com/hendricius/nested_form.git
   revision: ca85dfbb040391fc3eb4f48cb91c4af70a904733
   specs:
@@ -306,6 +316,7 @@ DEPENDENCIES
   chartkick!
   coffee-rails
   dotenv-rails
+  draper!
   font-awesome-rails
   foreman
   fullcontact
