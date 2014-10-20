@@ -21,7 +21,11 @@ class ApplicationController < ActionController::Base
   # Patching the sorcery current user method
   alias_method :old_current_user, :current_user
   def current_user
-    old_current_user.decorate
+    if old_current_user
+      old_current_user.decorate
+    else
+      old_current_user
+    end
   end
 
   def set_time_zone
