@@ -12,7 +12,7 @@ table.table.table-bordered
   tbody
     - @worklogs.each do |worklog|
       tr class="#{success_or_warning worklog.invoiced?}"
-        td= worklog.client.name
+        td= truncate worklog.client.name, length: 20
         td.hidden-phone= l worklog.start_time
         td.hidden-phone= l worklog.end_time
         td= worklog.duration_hours
