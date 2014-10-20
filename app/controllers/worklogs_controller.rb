@@ -1,7 +1,5 @@
 class WorklogsController < ApplicationController
 
-  load_and_authorize_resource
-
   def index
     @user = current_user
     @clients = @user.clients
@@ -31,10 +29,12 @@ class WorklogsController < ApplicationController
   end
 
   def edit
+    @worklog = current_user.worklogs.find(params[:id])
     gon.worklog_id = @worklog.id
   end
 
   def show
+    @worklog = current_user.worklogs.find(params[:id])
     render json: @worklog, status: 200
   end
 
@@ -48,6 +48,7 @@ class WorklogsController < ApplicationController
   end
 
   def update
+    @worklog = current_user.worklogs.find(params[:id])
     form = WorklogForm.new_from_params(params[:worklog], user: current_user, worklog: @worklog)
     if form.save
       render json: form.worklog, status: 200, root: "worklog"
@@ -57,18 +58,9 @@ class WorklogsController < ApplicationController
   end
 
   def destroy
-    @worklog.destroy
+    @worklog = current_user.worklogs.find(params[:id])
     flash[:notice] = "Worklog successfully deleted."
     respond_with @worklog, location: worklogs_path
-  end
-
-  def set_client
-    if current_user.worklogs.any?
-      @client = current_user.worklogs.last.client
-    elsif current_user.clients.count == 1
-      @client = current_user.clients.first
-    end
-    @client
   end
 
 end
