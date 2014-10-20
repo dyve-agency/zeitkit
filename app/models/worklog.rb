@@ -120,11 +120,11 @@ class Worklog < ActiveRecord::Base
   end
 
   def start_time
-    timeframes.min {|tf| tf.started }.started
+    timeframes.order("started ASC").limit(1).first.started
   end
 
   def end_time
-    timeframes.max {|tf| tf.ended }.ended
+    timeframes.order("ended desc").limit(1).first.ended
   end
 
   def created_for_shared_client?
