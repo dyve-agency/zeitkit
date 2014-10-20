@@ -12,7 +12,7 @@
       .col-md-2
         p.lead.pull-right Client
       .col-md-10
-        select.col-md-4.client-filter
+        select.col-md-4.client-filter.form-control
           option data-url="#{worklogs_path(merge_params(client: nil))}"
           - @clients.each do |c|
             = select_worklog_if_params(c)
