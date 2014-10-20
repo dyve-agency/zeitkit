@@ -78,15 +78,15 @@ class WorklogForm
 
   def timeframes_validator
     if timeframes.blank?
-      errors.add :timeframes, "Must be present"
+      errors.add :timeframes, "- must be present"
       return
     end
 
     unless timeframes.all? {|tf| tf.valid? }
-      errors.add :timeframes, "Some of the timeframes are not valid"
+      errors.add :timeframes, " - some of the timeframes are not valid"
       tf = timeframes.find {|tf| !tf.valid? }
       # Add first timeframe messages errors.
-      errors.add :timeframes, tf.errors.full_messages_joined
+      errors.add :timeframes, "- #{tf.errors.full_messages_joined}"
     end
   end
 

@@ -14,7 +14,7 @@ gem 'simple_form', git: "https://github.com/plataformatec/simple_form.git"
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 
-#gem 'cancancan', git: "https://github.com/CanCanCommunity/cancancan.git"
+gem 'cancancan', git: "https://github.com/CanCanCommunity/cancancan.git"
 gem 'newrelic_rpm'
 gem 'redcarpet'
 gem 'rack-force_domain'

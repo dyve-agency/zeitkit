@@ -1,6 +1,6 @@
 class WorklogsController < ApplicationController
 
-  #load_and_authorize_resource
+  load_and_authorize_resource
 
   def index
     @user = current_user
@@ -31,12 +31,10 @@ class WorklogsController < ApplicationController
   end
 
   def edit
-    @worklog = current_user.worklogs.find(params[:id])
     gon.worklog_id = @worklog.id
   end
 
   def show
-    @worklog = current_user.worklogs.find(params[:id])
     render json: @worklog, status: 200
   end
 
@@ -50,8 +48,7 @@ class WorklogsController < ApplicationController
   end
 
   def update
-    worklog = current_user.worklogs.find(params[:id])
-    form = WorklogForm.new_from_params(params[:worklog], user: current_user, worklog: worklog)
+    form = WorklogForm.new_from_params(params[:worklog], user: current_user, worklog: @worklog)
     if form.save
       render json: form.worklog, status: 200, root: "worklog"
     else

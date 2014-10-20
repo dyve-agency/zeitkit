@@ -6,6 +6,12 @@ GIT
       activemodel (>= 4.0.1, < 5.0)
 
 GIT
+  remote: https://github.com/CanCanCommunity/cancancan.git
+  revision: f02386e5058212238a7bcfe4fa3cba6964a273a9
+  specs:
+    cancancan (1.9.2)
+
+GIT
   remote: https://github.com/NoamB/sorcery.git
   revision: fdae28ea597e3375a20d80050aabc09937e75b5f
   specs:
@@ -296,6 +302,7 @@ DEPENDENCIES
   angularjs-rails-resource (~> 1.1.1)
   bootstrap-sass (~> 3.2.0)
   bourbon
+  cancancan!
   chartkick!
   coffee-rails
   dotenv-rails
