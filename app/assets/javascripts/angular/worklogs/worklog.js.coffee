@@ -21,6 +21,7 @@ app.factory "Worklog", ["RailsResource", "Timeframe", "railsSerializer", "Client
         id: null
         loading: false
         errors: []
+        total: 0
         notifier: new UiNotifier
       _this = this
       useOpts = _.extend defaultOpts, opts
@@ -97,6 +98,7 @@ app.factory "Worklog", ["RailsResource", "Timeframe", "railsSerializer", "Client
         f
       @comment    = wl.comment
       @id         = wl.id
+      @total      = wl.total
 
     secondlyRate: ->
       @hourlyRate / 3600

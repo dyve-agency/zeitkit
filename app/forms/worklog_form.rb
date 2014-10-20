@@ -11,10 +11,12 @@ class WorklogForm
   attribute :comment, String, default: ""
   attribute :client_id, Numeric
   attribute :client, Client
+  attribute :total, Numeric
 
   validates :user, presence: true
   validates :client, presence: true
   validates :hourly_rate, numericality: {greater_than: 0}
+  validates :total, numericality: {greater_than: 0}
   validates :comment, presence: true
   validate :timeframes_validator
 
@@ -59,10 +61,11 @@ class WorklogForm
 
   def assign_new_attributes(use_worklog)
     use_worklog.hourly_rate = Money.new hourly_rate.to_f * 100
-    use_worklog.summary = comment
-    use_worklog.user = user
-    use_worklog.client = client
-    use_worklog.timeframes = timeframes
+    use_worklog.summary     = comment
+    use_worklog.user        = user
+    use_worklog.client      = client
+    use_worklog.timeframes  = timeframes
+    use_worklog.total       = Money.new total.to_f * 100
     use_worklog
   end
 

@@ -30,7 +30,7 @@ div ng-controller="WorklogsController"
       label Total
       div
         span.label.label-success
-          | {{ worklog.calcTotal() | number:2}}€
+          | {{ worklog.total | number:2}}€
   hr
   .well ng-repeat="time in worklog.timeframes"
     .row
