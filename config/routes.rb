@@ -11,6 +11,7 @@ Timetracker::Application.routes.draw do
     member do
       get :github_commit_messages
       get :clients
+      get :shared_clients
     end
   end
   resources :kpis, only: [:new, :create]

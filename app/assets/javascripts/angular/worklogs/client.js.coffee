@@ -5,6 +5,7 @@ app.factory "Client", ["$http", ($http)->
     constructor: (opts)->
       defaultOpts =
         hourly_rate_cents: 0
+        shared: false
       _this = this
       useOpts = _.extend defaultOpts, opts
       _.each useOpts, (val, key) ->
