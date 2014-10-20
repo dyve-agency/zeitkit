@@ -1,4 +1,11 @@
-h1 Worklogs
+.row
+  .col-md-6.col-xs-12
+    h1 Worklogs
+  .col-md-6.col-xs-12
+    .well
+      ul
+        li Hours worked this month: #{current_user.hours_this_month}
+        li Hours worked last month: #{current_user.hours_last_month}
 table.table.table-bordered
   thead
     tr

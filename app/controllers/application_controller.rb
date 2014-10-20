@@ -18,6 +18,12 @@ class ApplicationController < ActionController::Base
     object_with_user_attribute.user = current_user
   end
 
+  # Patching the sorcery current user method
+  alias_method :old_current_user, :current_user
+  def current_user
+    old_current_user.decorate
+  end
+
   def set_time_zone
     old_time_zone = Time.zone
     Time.zone = current_user.time_zone if logged_in? && current_user.time_zone
