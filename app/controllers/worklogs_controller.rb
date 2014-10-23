@@ -62,6 +62,7 @@ class WorklogsController < ApplicationController
 
   def destroy
     @worklog = current_user.worklogs.find(params[:id])
+    @worklog.destroy!
     redirect_to worklogs_path, notice: "Worklog successfully deleted."
   end
 
