@@ -87,13 +87,13 @@ gem 'draper', git: "https://github.com/drapergem/draper.git"
 
 # CSS mixins
 gem 'bourbon'
+gem "font-awesome-rails"
 
 group :development do
   gem 'quiet_assets'
   gem 'sqlite3'
   gem 'pry-rails'
   gem 'coffee-rails'
-  gem "font-awesome-rails"
   gem 'uglifier'
   gem 'momentjs-rails'
 end
