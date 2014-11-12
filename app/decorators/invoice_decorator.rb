@@ -3,6 +3,9 @@ class InvoiceDecorator < Draper::Decorator
 
 
   def hours_worked
-    h.distance_of_time_in_words 0, (worklogs.map(&:duration).inject(:+) || 0).to_i, false
+    total_seconds = invoice.worklog_duration
+    minutes       = (total_seconds / 60) % 60
+    hours         = total_seconds / (60 * 60)
+    h.hours_minutes_combined hours, minutes
   end
 end

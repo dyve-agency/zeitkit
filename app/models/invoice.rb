@@ -129,6 +129,10 @@ class Invoice < ActiveRecord::Base
     Expense.where(invoice_id: id).update_all(invoice_id: nil)
   end
 
+  def worklog_duration
+    (worklogs.map(&:duration).inject(:+) || 0)
+  end
+
   def deassociate_products
     InvoicesProducts.where(invoice_id: id).destroy_all
   end
