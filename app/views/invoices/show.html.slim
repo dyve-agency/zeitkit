@@ -37,7 +37,7 @@
         span.value #{@invoice.number}
       .col-xs-2.invoice-box.please-pay
         span.key Please pay
-        span.value= with_currency @invoice.calc_vat_total
+        span.value.nowrap= with_currency @invoice.calc_vat_total
       .col-xs-2.invoice-box style="font-size: 13px"
         span.key Invoice date
         span.value= l @invoice.created_at, format: :day_month_year
