@@ -10,6 +10,7 @@ class InvoicesController < ApplicationController
   end
 
   def pdf_export
+    @invoice = @invoice.decorate
     @client = @invoice.client
     @worklogs = @invoice.worklogs.order("start_time DESC")
     @sum = Money.new @worklogs.sum(:total_cents), current_user.currency
