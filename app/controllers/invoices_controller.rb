@@ -40,6 +40,7 @@ class InvoicesController < ApplicationController
   def show
     @invoice = @invoice.decorate
     @client = @invoice.client
+    render :show, layout: "application_print"
   end
 
 
