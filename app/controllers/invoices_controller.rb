@@ -12,8 +12,8 @@ class InvoicesController < ApplicationController
   def pdf_export
     @invoice = @invoice.decorate
     @client = @invoice.client
-    @worklogs = @invoice.worklogs.order("start_time DESC").includes(:user)
-    @sum = Money.new @worklogs.sum(:total_cents), current_user.currency
+    @worklogs = @invoice.worklogs.order("start_time DESC").includes(:user, :timeframes).decorate
+    @sum = Money.new @worklogs.map(&:total).inject(:+)
     seconds = Worklog.range_duration_seconds(@worklogs)
     @hours = Worklog.hours_from_seconds seconds
     @minutes = Worklog.remaining_minutes_from_seconds seconds
@@ -26,15 +26,16 @@ class InvoicesController < ApplicationController
   def worklogs_export
     @invoice = @invoice.decorate
     @client = @invoice.client
-    @worklogs = @invoice.worklogs.order("start_time DESC")
-    @sum = Money.new @worklogs.sum(:total_cents), current_user.currency
+    @worklogs = @invoice.worklogs.order("start_time DESC").includes(:user, :timeframes).decorate
+    @sum = @worklogs.map(&:total).inject(:+)
     seconds = Worklog.range_duration_seconds(@worklogs)
     @hours = Worklog.hours_from_seconds seconds
     @minutes = Worklog.remaining_minutes_from_seconds seconds
 
     @worklogs_pdf = PDFKit.new(render_to_string(action: "../worklogs/detailed_index", :layout => 'application_print'))
     @worklogs_pdf.stylesheets << temp_stylesheet
-    send_data(@worklogs_pdf.to_pdf, :filename => "worklogs-#{@invoice.number}", :type => 'application/pdf')
+    #send_data(@worklogs_pdf.to_pdf, :filename => "worklogs-#{@invoice.number}", :type => 'application/pdf')
+    render "/worklogs/detailed_index", layout: "application_print"
   end
 
   def show

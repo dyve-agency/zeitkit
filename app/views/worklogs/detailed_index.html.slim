@@ -15,12 +15,10 @@ table.table.table-bordered
 hr
 
 h1 All worklogs detailed
-table.table.table-bordered
+table.table.table-bordered.table-condensed
   thead
     tr
       th User
-      th Start
-      th End
       th Duration
       th Details
       th Price
@@ -28,16 +26,25 @@ table.table.table-bordered
     - @worklogs.sort_by{|wl| wl.user}.each do |worklog|
       tr
         td= worklog.user.username
-        td= l worklog.start_time, format: :worklog_summary
-        td= l worklog.end_time, format: :worklog_summary
-        td= hours_minutes_combined worklog.duration_hours, worklog.duration_minutes
+        td
+          ul.table-list
+            - worklog.timeframes.each do |tf|
+              li
+                = tf.started_formatted
+                '
+                |-
+                '
+                = tf.ended_formatted
+                br
+                strong
+                  |=
+                  '
+                  = tf.hours_minutes
         td.markdown-table-cell style="width: 300px;"= markdown worklog.summary
         td.nowrap= with_currency worklog.total
   tfoot.hidden-phone
     tr
       td Sums:
-      td
-      td
       td.lower-case= hours_minutes_combined @hours, @minutes
       td
       td.nowrap= with_currency @sum
