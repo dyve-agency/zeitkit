@@ -1,5 +1,20 @@
-h1= "Worklogs: #{@client.name || @client.company_name}"
+h1 Summary by User for: #{@client.name || @client.company_name}
+table.table.table-bordered
+  thead
+    tr
+      th User
+      th Duration
+      th Price
+  tbody
+    - @worklogs.group_by {|wl| wl.user}.each do |user, worklogs|
+      tr
+        td= user.username
+        td= distance_of_time_in_words 0, (worklogs.map(&:duration).inject(:+) || 0).to_i, false
+        td= with_currency (worklogs.map(&:total).inject(:+) || 0)
 
+hr
+
+h1 All worklogs detailed
 table.table.table-bordered
   thead
     tr
@@ -15,11 +30,12 @@ table.table.table-bordered
         td= l worklog.end_time
         td= hours_minutes_combined worklog.duration_hours, worklog.duration_minutes
         td= markdown worklog.summary
-        td= with_currency worklog.total
+        td.nowrap= with_currency worklog.total
   tfoot.hidden-phone
     tr
       td Sums:
       td
-      td.lower-case= hours_minutes_combined @hours, @minutes
+      td.lower-case= distance_of_time_in_words 0, (@worklogs.map(&:duration).inject(:+) || 0).to_i, false
       td
-      td= with_currency @sum
+      td.nowrap= with_currency @sum
+
