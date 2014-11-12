@@ -20,25 +20,21 @@ class InvoicesController < ApplicationController
     # For this to work you need to precompile your assets once.
     @invoice_pdf = PDFKit.new(render_to_string(action: "show", :layout => 'application_print'))
     @invoice_pdf.stylesheets << temp_stylesheet
-    if params[:export_worklogs] && @invoice.worklogs.present?
-      send_file merge_pdf_files
-      return
-    else
-      send_data(@invoice_pdf.to_pdf, :filename => @invoice.filename, :type => 'application/pdf')
-    end
+    send_data(@invoice_pdf.to_pdf, :filename => @invoice.filename, :type => 'application/pdf')
   end
 
-  def merge_pdf_files
+  def worklogs_export
+    @invoice = @invoice.decorate
+    @client = @invoice.client
+    @worklogs = @invoice.worklogs.order("start_time DESC")
+    @sum = Money.new @worklogs.sum(:total_cents), current_user.currency
+    seconds = Worklog.range_duration_seconds(@worklogs)
+    @hours = Worklog.hours_from_seconds seconds
+    @minutes = Worklog.remaining_minutes_from_seconds seconds
+
     @worklogs_pdf = PDFKit.new(render_to_string(action: "../worklogs/detailed_index", :layout => 'application_print'))
     @worklogs_pdf.stylesheets << temp_stylesheet
-    tmp_invoice_file = "#{Rails.root}/tmp/invoice-#{@invoice.id}.pdf"
-    tmp_worklog_file = "#{Rails.root}/tmp/worklog-#{@invoice.id}.pdf"
-    @worklogs_pdf.to_file(tmp_worklog_file)
-    @invoice_pdf.to_file(tmp_invoice_file)
-    pdf_merger = PdfMerger.new
-    file_name = "#{Rails.root}/tmp/#{@invoice.filename}.pdf"
-    pdf_merger.merge([tmp_invoice_file, tmp_worklog_file], file_name)
-    file_name
+    send_data(@worklogs_pdf.to_pdf, :filename => "worklogs-#{@invoice.number}", :type => 'application/pdf')
   end
 
   def show

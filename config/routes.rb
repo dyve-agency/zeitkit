@@ -31,6 +31,7 @@ Timetracker::Application.routes.draw do
     member do
       post "toggle_paid"
       get "pdf_export"
+      get "worklogs_export"
     end
   end
   resources :client_shares, only: [:destroy]
