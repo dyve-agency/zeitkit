@@ -34,8 +34,7 @@ class InvoicesController < ApplicationController
 
     @worklogs_pdf = PDFKit.new(render_to_string(action: "../worklogs/detailed_index", :layout => 'application_print'))
     @worklogs_pdf.stylesheets << temp_stylesheet
-    #send_data(@worklogs_pdf.to_pdf, :filename => "worklogs-#{@invoice.number}", :type => 'application/pdf')
-    render "/worklogs/detailed_index", layout: "application_print"
+    send_data(@worklogs_pdf.to_pdf, :filename => "worklogs-#{@invoice.number}", :type => 'application/pdf')
   end
 
   def show
