@@ -11,3 +11,4 @@ en:
       kpi_week: "Week: %W - %b %Y"
       kpi_month: "%b %Y"
       kpi_year: "%Y"
+      worklog_summary: "%Y-%m-%d %H:%M"

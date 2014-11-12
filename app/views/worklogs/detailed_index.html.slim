@@ -18,24 +18,27 @@ h1 All worklogs detailed
 table.table.table-bordered
   thead
     tr
+      th User
       th Start
       th End
       th Duration
       th Details
       th Price
   tbody
-    - @worklogs.each do |worklog|
+    - @worklogs.sort_by{|wl| wl.user}.each do |worklog|
       tr
-        td= l worklog.start_time
-        td= l worklog.end_time
+        td= worklog.user.username
+        td= l worklog.start_time, format: :worklog_summary
+        td= l worklog.end_time, format: :worklog_summary
         td= hours_minutes_combined worklog.duration_hours, worklog.duration_minutes
-        td= markdown worklog.summary
+        td style="width: 300px;"= markdown worklog.summary
         td.nowrap= with_currency worklog.total
   tfoot.hidden-phone
     tr
       td Sums:
       td
-      td.lower-case= distance_of_time_in_words 0, (@worklogs.map(&:duration).inject(:+) || 0).to_i, false
+      td
+      td.lower-case= hours_minutes_combined @hours, @minutes
       td
       td.nowrap= with_currency @sum
 
