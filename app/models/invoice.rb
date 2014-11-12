@@ -102,6 +102,10 @@ class Invoice < ActiveRecord::Base
     self.total = Money.new 0, currency
   end
 
+  def total_worklogs
+    worklogs.map(&:total).inject(:+)
+  end
+
   def set_total!
     set_subtotal!
     cents_total = subtotal.cents - discount.cents

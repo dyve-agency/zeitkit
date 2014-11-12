@@ -89,6 +89,8 @@ gem 'draper', git: "https://github.com/drapergem/draper.git"
 gem 'bourbon'
 gem "font-awesome-rails"
 
+gem 'dotiw'
+
 group :development do
   gem 'quiet_assets'
   gem 'sqlite3'

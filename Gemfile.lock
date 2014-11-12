@@ -139,6 +139,9 @@ GEM
     dotenv (1.0.2)
     dotenv-rails (1.0.2)
       dotenv (= 1.0.2)
+    dotiw (2.0)
+      actionpack (>= 3)
+      i18n
     equalizer (0.0.9)
     erubis (2.7.0)
     execjs (2.2.2)
@@ -316,6 +319,7 @@ DEPENDENCIES
   chartkick!
   coffee-rails
   dotenv-rails
+  dotiw
   draper!
   font-awesome-rails
   foreman

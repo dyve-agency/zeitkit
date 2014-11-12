@@ -50,7 +50,11 @@
             td Description
             td.last Subtotal
         tbody
-          - (@invoice.worklogs.oldest_first + @invoice.products.oldest_first.uniq + @invoice.expenses.oldest_first).each do |entry|
+          - if @invoice.worklogs.any?
+            tr
+              td Hours worked: #{@invoice.hours_worked}
+              td.last= with_currency @invoice.total_worklogs
+          - (@invoice.products.oldest_first.uniq + @invoice.expenses.oldest_first).each do |entry|
             tr
               td= entry.invoice_title(@invoice)
               - if entry.is_a?(Product)

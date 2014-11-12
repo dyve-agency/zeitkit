@@ -41,12 +41,10 @@ class InvoicesController < ApplicationController
   end
 
   def show
+    @invoice = @invoice.decorate
     @client = @invoice.client
-    respond_to do |format|
-      format.html
-      format.json { render json: @invoice}
-    end
   end
+
 
   # GET /invoices/new
   # GET /invoices/new.json
