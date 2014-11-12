@@ -23,8 +23,6 @@ table.table.table-bordered
       th End
       th Duration
       th Details
-      - if show_user_names
-        th Creator
       th Price
   tbody
     - @worklogs.sort_by{|wl| wl.user}.each do |worklog|
@@ -33,7 +31,7 @@ table.table.table-bordered
         td= l worklog.start_time, format: :worklog_summary
         td= l worklog.end_time, format: :worklog_summary
         td= hours_minutes_combined worklog.duration_hours, worklog.duration_minutes
-        td style="width: 300px;"= markdown worklog.summary
+        td.markdown-table-cell style="width: 300px;"= markdown worklog.summary
         td.nowrap= with_currency worklog.total
   tfoot.hidden-phone
     tr
