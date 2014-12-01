@@ -41,6 +41,13 @@ GIT
       activesupport (>= 3)
 
 GIT
+  remote: https://github.com/bokmann/font-awesome-rails.git
+  revision: 5d296e41a401539fb4fcc6619e85f5d4fc2a654c
+  specs:
+    font-awesome-rails (4.2.0.0)
+      railties (>= 3.2, < 5.0)
+
+GIT
   remote: https://github.com/bootstrap-ruby/will_paginate-bootstrap.git
   revision: 22a06630c3150af6c84550f39864e45d6b48f2e0
   specs:
@@ -149,8 +156,6 @@ GEM
       multipart-post (>= 1.2, < 3)
     faraday_middleware (0.9.1)
       faraday (>= 0.7.4, < 0.10)
-    font-awesome-rails (4.2.0.0)
-      railties (>= 3.2, < 5.0)
     foreman (0.63.0)
       dotenv (>= 0.7)
       thor (>= 0.13.6)
@@ -167,7 +172,7 @@ GEM
       request_store (>= 1.0.5)
     hashie (2.0.5)
     hike (1.2.3)
-    i18n (0.6.11)
+    i18n (0.7.0.beta1)
     ice_nine (0.11.0)
     jbuilder (2.2.2)
       activesupport (>= 3.0.0, < 5)
@@ -182,7 +187,7 @@ GEM
       mime-types (>= 1.16, < 3)
     method_source (0.8.2)
     mime-types (2.4.2)
-    minitest (5.4.2)
+    minitest (5.4.3)
     momentjs-rails (2.8.3)
       railties (>= 3.1)
     money (6.3.0)
@@ -247,7 +252,7 @@ GEM
       activesupport (= 4.1.6)
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
-    rake (10.3.2)
+    rake (10.4.0)
     rash (0.4.0)
       hashie (~> 2.0.0)
     redcarpet (3.2.0)
@@ -321,7 +326,7 @@ DEPENDENCIES
   dotenv-rails
   dotiw
   draper!
-  font-awesome-rails
+  font-awesome-rails!
   foreman
   fullcontact
   gon

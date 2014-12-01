@@ -87,7 +87,7 @@ gem 'draper', git: "https://github.com/drapergem/draper.git"
 
 # CSS mixins
 gem 'bourbon'
-gem "font-awesome-rails"
+gem "font-awesome-rails", git: "https://github.com/bokmann/font-awesome-rails.git"
 
 gem 'dotiw'
 
