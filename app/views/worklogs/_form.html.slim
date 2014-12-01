@@ -37,7 +37,11 @@ div ng-controller="WorklogsController"
       .col-xs-12.col-md-6
         .row
           .col-xs-6
-            quick-datepicker ng-model='time.started'
+            p.input-group
+              input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="time.started" is-open="$parent.opened" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close"
+              span.input-group-btn
+                button.btn.btn-default ng-click="open($event)" type="button"
+                  i.glyphicon.glyphicon-calendar
           .col-xs-6
             .btn-group
               span.btn.btn-default ng-click="time.setStartedNow()"
