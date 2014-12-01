@@ -15,4 +15,17 @@ app.controller "WorklogsController", ["$scope", "worklogData", ($scope, worklogD
     t = $scope.worklog.calcTotal()
     $scope.worklog.total = t
   , true)
+
+  $scope.dateOptions =
+    formatYear: "yy"
+    startingDay: 1
+
+  $scope.open = ($event, timeframe)->
+    timeframe.opened = true
+    $event.preventDefault()
+    $event.stopPropagation()
+
+  $scope.hstep = 1
+  $scope.mstep = 10
+
 ]

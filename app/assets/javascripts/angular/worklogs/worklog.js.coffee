@@ -81,6 +81,9 @@ app.factory "Worklog", ["RailsResource", "Timeframe", "railsSerializer", "Client
         @clients = clients
         @timeframes = timeframes
         @notifier.success("Worklog has been successfully saved.")
+        setTimeout(->
+          window.location.reload()
+        , 200)
       , (error)=>
         if error.data
           @errors = error.data
