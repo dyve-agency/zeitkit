@@ -76,6 +76,12 @@ div ng-controller="WorklogsController"
             i.fa.fa-remove
             '
             | Remove
+      .col-xs-12 ng-show="time.issueDetected()"
+        hr
+        .alert.alert-warning.no-margin
+          ul
+            li ng-repeat="warn in time.checkForIssues()"
+              | {{ warn }}
   span.btn.btn-success ng-click="worklog.addBlankTimeframe()"
     | Add range
   hr
