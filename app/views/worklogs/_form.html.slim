@@ -38,10 +38,12 @@ div ng-controller="WorklogsController"
         .row
           .col-xs-6
             p.input-group
-              input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="time.started" is-open="$parent.opened" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close"
+              input type="text" class="form-control" datepicker-popup="{{'yyyy-MM-dd'}}" ng-model="time.started" is-open="time.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close"
               span.input-group-btn
-                button.btn.btn-default ng-click="open($event)" type="button"
+                button.btn.btn-default ng-click="open($event, time)" type="button"
                   i.glyphicon.glyphicon-calendar
+            timepicker ng-model="time.started" hour-step="1" minute-step="10" show-meridian="false"
+
           .col-xs-6
             .btn-group
               span.btn.btn-default ng-click="time.setStartedNow()"

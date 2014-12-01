@@ -2,7 +2,6 @@ app = angular.module("app")
 
 app.controller "WorklogsController", ["$scope", "worklogData", ($scope, worklogData)->
   $scope.worklog = worklogData
-  $scope.opened = false
 
   $scope.$watch("worklog.client", (newValue, oldValue)->
     t = $scope.worklog.calcTotal()
@@ -21,10 +20,12 @@ app.controller "WorklogsController", ["$scope", "worklogData", ($scope, worklogD
     formatYear: "yy"
     startingDay: 1
 
-  $scope.format = "yyyy-MM-dd"
-
-  $scope.open = ($event)->
-    $scope.opened = true
+  $scope.open = ($event, timeframe)->
+    timeframe.opened = true
     $event.preventDefault()
     $event.stopPropagation()
+
+  $scope.hstep = 1
+  $scope.mstep = 10
+
 ]
