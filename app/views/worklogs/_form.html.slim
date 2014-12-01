@@ -82,8 +82,13 @@ div ng-controller="WorklogsController"
           ul
             li ng-repeat="warn in time.checkForIssues()"
               | {{ warn }}
-  span.btn.btn-success ng-click="worklog.addBlankTimeframe()"
-    | Add range
+  .btn-group
+    span.btn.btn-success ng-click="worklog.addBlankTimeframe()"
+      i.fa.fa-plus
+      | Add range
+    span.btn.btn-default ng-click="worklog.roundupTimeframes()"
+      i.fa.fa-dollar
+      | Round up timeframes
   hr
 
   .row

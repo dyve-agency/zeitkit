@@ -119,5 +119,13 @@ app.factory "Worklog", ["RailsResource", "Timeframe", "railsSerializer", "Client
       @clientChanged()
       @client
 
+    roundupTimeframes: ->
+      _.each @timeframes, (tf)=>
+        if tf.ended
+          tf.ended = @roundDateUp(tf.ended)
+    roundDateUp: (date)->
+      coeff = 1000 * 60 * 5
+      new Date(Math.ceil(date.getTime() / coeff) * coeff)
+
   Worklog
 ]
