@@ -91,13 +91,15 @@ gem "font-awesome-rails", git: "https://github.com/bokmann/font-awesome-rails.gi
 
 gem 'dotiw'
 
+# Moment.js lib
+gem 'momentjs-rails'
+
 group :development do
   gem 'quiet_assets'
   gem 'sqlite3'
   gem 'pry-rails'
   gem 'coffee-rails'
   gem 'uglifier'
-  gem 'momentjs-rails'
 end
 
 group :development, :test do
