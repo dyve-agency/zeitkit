@@ -27,6 +27,11 @@
               li
                 i.fa.fa-star
                 = link_to "Register", new_user_path, class: "signup-link"
+          li
+            iframe src="http://ghbtns.com/github-btn.html?user=zeitio&repo=zeitkit&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="110" height="20"
+          li
+            iframe src="http://ghbtns.com/github-btn.html?user=zeitio&repo=zeitkit&type=fork&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="95" height="20"
+
       - if current_user && params[:action] != "home"
         .col-md-6.random-tip
           i.fa.fa-quote-left
