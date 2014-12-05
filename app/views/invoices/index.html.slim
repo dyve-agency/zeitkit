@@ -4,7 +4,8 @@ table.table.table-bordered
     tr
       th.hidden-phone Number
       th Client
-      th Total
+      th.text-right Total
+      th.text-right Total incl. VAT
       th.hidden-phone Created on
       th.hidden-phone Paid on
       th Controls
@@ -14,7 +15,8 @@ table.table.table-bordered
     tr class="#{success_or_warning invoice.paid_on}"
       td.hidden-phone= invoice.number
       td= link_to invoice.client.name, edit_client_path(invoice.client)
-      td= with_currency invoice.total
+      td.text-right= with_currency invoice.total
+      td.text-right= with_currency invoice.calc_vat_total
       td.hidden-phone= l invoice.created_at, format: :day_month_year
       td.hidden-phone= invoice.paid_on ? l(invoice.paid_on, format: :day_month_year) : "Unpaid #{invoice.days_not_paid.to_i} day(s)"
       td
