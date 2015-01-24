@@ -32,8 +32,8 @@ gem install mailcatcher
 # Start mailcatcher
 mailcatcher
 ```
-    
-Intstall all ruby gems:
+
+Install all ruby gems:
 
 ```
 bundle install
