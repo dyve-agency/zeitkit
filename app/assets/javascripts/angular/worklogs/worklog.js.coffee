@@ -59,6 +59,8 @@ app.factory "Worklog", ["RailsResource", "Timeframe", "railsSerializer", "Client
 
     clientChanged: ->
       @hourlyRate = if @client then @client.hourlyRate() else 0
+      @currency = if @client then @client.currency
+
 
     removeTimeframe: (timeframe)->
       @timeframes = _.reject(@timeframes, (tf)-> tf == timeframe)

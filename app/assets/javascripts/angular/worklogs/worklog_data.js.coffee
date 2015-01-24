@@ -10,6 +10,7 @@ app.factory "worklogData", ["Worklog", "Timeframe", "$http", "Client", (Worklog,
         c.name            = d.name
         c.companyName     = d.company_name
         c.hourlyRateCents = d.hourly_rate_cents
+        c.currency        = d.currency
         c.id              = d.id
         c.shared          = shared
         c

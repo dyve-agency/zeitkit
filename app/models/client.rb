@@ -33,6 +33,14 @@ class Client < ActiveRecord::Base
     [:company_name, :zip, :street, :city]
   end
 
+  def currency
+    if user
+      user.currency.symbol
+    else
+      Money.default_currency.symbol
+    end
+  end
+
   def contact_info_entered?
     name && city && street && zip
   end
