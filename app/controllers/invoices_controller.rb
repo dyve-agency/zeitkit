@@ -20,7 +20,7 @@ class InvoicesController < ApplicationController
     # For this to work you need to precompile your assets once.
     @invoice_pdf = PDFKit.new(render_to_string(action: "show", :layout => 'application_print'))
     @invoice_pdf.stylesheets << temp_stylesheet
-    send_data(@invoice_pdf.to_pdf, :filename => @invoice.filename, :type => 'application/pdf')
+    send_data(@invoice_pdf.to_pdf, filename: @invoice.pdf_export_file_name, type: 'application/pdf')
   end
 
   def worklogs_export
@@ -32,9 +32,9 @@ class InvoicesController < ApplicationController
     @hours = Worklog.hours_from_seconds seconds
     @minutes = Worklog.remaining_minutes_from_seconds seconds
 
-    @worklogs_pdf = PDFKit.new(render_to_string(action: "../worklogs/detailed_index", :layout => 'application_print'))
+    @worklogs_pdf = PDFKit.new(render_to_string(action: "../worklogs/detailed_index", layout: 'application_print'))
     @worklogs_pdf.stylesheets << temp_stylesheet
-    send_data(@worklogs_pdf.to_pdf, :filename => "worklogs-#{@invoice.number}", :type => 'application/pdf')
+    send_data(@worklogs_pdf.to_pdf, filename: @invoice.worklogs_export_file_name, type: 'application/pdf')
   end
 
   def show
