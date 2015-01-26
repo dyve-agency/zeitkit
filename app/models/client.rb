@@ -35,9 +35,9 @@ class Client < ActiveRecord::Base
 
   def currency
     if user
-      user.currency.symbol
+      user.currency
     else
-      Money.default_currency.symbol
+      Money.default_currency
     end
   end
 

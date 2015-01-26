@@ -29,8 +29,10 @@ div ng-controller="WorklogsController"
     .col-xs-2 ng-hide="worklog.client.shared"
       label Total
       div
+        pre
+          | {{ worklog.client | json }}
         span.label.label-success
-          | {{ worklog.total | currency: worklog.currency}}
+          | {{ worklog.total | currency: worklog.client.currency}}
   hr
   .well ng-repeat="time in worklog.timeframes"
     .row

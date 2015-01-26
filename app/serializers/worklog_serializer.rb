@@ -1,6 +1,8 @@
 class WorklogSerializer < ActiveModel::Serializer
   attributes :id, :comment, :hourly_rate, :client_id, :timeframes, :client, :clients, :total, :shared_clients
 
+  belongs_to :client
+
   def comment
     object.summary
   end
@@ -11,10 +13,6 @@ class WorklogSerializer < ActiveModel::Serializer
 
   def timeframes
     object.timeframes
-  end
-
-  def client
-    object.client
   end
 
   def clients

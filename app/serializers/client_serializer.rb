@@ -4,4 +4,5 @@ class ClientSerializer < ActiveModel::Serializer
   def hourly_rate
     object.hourly_rate.to_f
   end
+
 end

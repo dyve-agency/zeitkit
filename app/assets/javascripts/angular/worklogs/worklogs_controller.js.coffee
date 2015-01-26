@@ -1,7 +1,13 @@
 app = angular.module("app")
 
-app.controller "WorklogsController", ["$scope", "worklogData", ($scope, worklogData)->
-  $scope.worklog = worklogData
+app.controller "WorklogsController", ["$scope", "$q", "Worklog", "Client", ($scope, $q, Worklog, Client)->
+  idPresent = gon? && gon && gon.worklog_id
+  $q.all([
+    Client.query({})
+    Worklog.get(gon.worklog_id) if idPresent
+  ]).then (results)->
+    $scope.clients = results[0]
+    $scope.worklog = if idPresent then results[1] else new Worklog
 
   $scope.$watch("worklog.client", (newValue, oldValue)->
     t = $scope.worklog.calcTotal()
