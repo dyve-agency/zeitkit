@@ -100,15 +100,15 @@ class UsersController < ApplicationController
         where("username ILIKE ? AND username != ?", "%#{params[:query]}%", current_user.username).
         limit(10).map(&:username)
     end
-    render json: result, status: 200
+    render json: result.to_json, status: 200
   end
 
   def clients
-    render json: current_user.clients, status: 200
+    render json: current_user.clients.to_json, status: 200
   end
 
   def shared_clients
-    render json: current_user.shared_clients, status: 200
+    render json: current_user.shared_clients.to_json, status: 200
   end
 
 end
