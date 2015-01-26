@@ -3,12 +3,16 @@ app = angular.module("app")
 app.factory "Worklog", ["RailsResource", "Timeframe", "railsSerializer", "Client", "UiNotifier", (RailsResource, Timeframe, railsSerializer, Client, UiNotifier)->
   class Worklog extends RailsResource
     @configure url: '/worklogs', name: 'worklog', serializer: railsSerializer(->
-      this.exclude("clients")
-      this.exclude("client")
-      this.exclude("loading")
-      this.add("client_id", (wl)->
+      @exclude("clients")
+      @exclude("client")
+      @exclude("loading")
+      @exclude("currency")
+      @exclude("errors")
+      @add("client_id", (wl)->
         if wl.client then wl.client.id else null
       )
+      @resource "client", "Client"
+      @resource "timeframes", "Timeframe"
     )
     constructor: (opts = {})->
       defaultOpts =
@@ -58,7 +62,7 @@ app.factory "Worklog", ["RailsResource", "Timeframe", "railsSerializer", "Client
         , 0)
 
     clientChanged: ->
-      @hourlyRate = if @client then @client.hourlyRate() else 0
+      @hourlyRate = if @client then @client.hourlyRate else 0
       @currency = if @client then @client.currency
 
 
@@ -79,9 +83,6 @@ app.factory "Worklog", ["RailsResource", "Timeframe", "railsSerializer", "Client
       client     = @client
       callb.then((new_worklog)=>
         @loading = false
-        @client = client
-        @clients = clients
-        @timeframes = timeframes
         @notifier.success("Worklog has been successfully saved.")
         setTimeout(->
           window.location.reload()

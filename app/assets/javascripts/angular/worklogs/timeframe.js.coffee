@@ -1,7 +1,11 @@
 app = angular.module("app")
 
-app.factory "Timeframe", ["$http", ($http)->
-  class Timeframe
+app.factory "Timeframe", ["RailsResource", "railsSerializer", (RailsResource, railsSerializer)->
+  class Timeframe extends RailsResource
+    @configure url: '/timeframes', name: 'timeframe', serializer: railsSerializer(->
+      @exclude("client")
+      @resource "worklog", "Worklog"
+    )
     constructor: (opts)->
       defaultOpts =
         started: null

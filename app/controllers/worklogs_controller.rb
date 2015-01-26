@@ -46,7 +46,7 @@ class WorklogsController < ApplicationController
     if form.save
       render json: form.worklog, status: 200, root: "worklog"
     else
-      render json: form.errors.full_messages, status: 422
+      render json: form.errors.full_messages.to_json, status: 422
     end
   end
 

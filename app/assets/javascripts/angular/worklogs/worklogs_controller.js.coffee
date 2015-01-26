@@ -1,30 +1,39 @@
 app = angular.module("app")
 
 app.controller "WorklogsController", ["$scope", "$q", "Worklog", "Client", ($scope, $q, Worklog, Client)->
-  idPresent = gon? && gon && gon.worklog_id
-  $q.all([
-    Client.query({})
-    Worklog.get(gon.worklog_id) if idPresent
-  ]).then (results)->
-    $scope.clients = results[0]
-    $scope.worklog = if idPresent then results[1] else new Worklog
+  $scope.init = ->
+    $scope.hstep = 1
+    $scope.mstep = 10
+    $scope.clients = []
+    $scope.dateOptions =
+      formatYear: "yy"
+      startingDay: 1
+    idPresent = gon? && gon && gon.worklog_id
 
-  $scope.$watch("worklog.client", (newValue, oldValue)->
-    t = $scope.worklog.calcTotal()
-    $scope.worklog.total = t
-  )
-  $scope.$watch("worklog.hourlyRate", (newValue, oldValue)->
-    t = $scope.worklog.calcTotal()
-    $scope.worklog.total = t
-  )
-  $scope.$watch("worklog.timeframes", (newValue, oldValue)->
-    t = $scope.worklog.calcTotal()
-    $scope.worklog.total = t
-  , true)
+    # Only fetch worklog if it is present
+    query = _.select [
+      Client.query({}),
+      if idPresent then Worklog.get(gon.worklog_id) else null
+    ], (e)->
+      e
 
-  $scope.dateOptions =
-    formatYear: "yy"
-    startingDay: 1
+    $q.all(query).then (results)->
+      $scope.clients = results[0]
+      $scope.worklog = if idPresent then results[1] else new Worklog
+
+      # All loaded, start watching.
+      $scope.$watch("worklog.client", (newValue, oldValue)->
+        t = $scope.worklog.calcTotal()
+        $scope.worklog.total = t
+      )
+      $scope.$watch("worklog.hourlyRate", (newValue, oldValue)->
+        t = $scope.worklog.calcTotal()
+        $scope.worklog.total = t
+      )
+      $scope.$watch("worklog.timeframes", (newValue, oldValue)->
+        t = $scope.worklog.calcTotal()
+        $scope.worklog.total = t
+      , true)
 
   $scope.open = ($event, timeframe)->
     $event.preventDefault()
@@ -36,7 +45,6 @@ app.controller "WorklogsController", ["$scope", "$q", "Worklog", "Client", ($sco
     $event.stopPropagation()
     timeframe.openedEnded = true
 
-  $scope.hstep = 1
-  $scope.mstep = 10
+  $scope.init()
 
 ]

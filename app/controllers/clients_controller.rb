@@ -4,10 +4,16 @@ class ClientsController < ApplicationController
   respond_to :html, :json
 
   def index
-    @clients = current_user.clients.order("created_at DESC")
-    @client_shares = current_user.client_shares.includes(client: :user)
-    if params[:updated_since]
-      @clients = @clients.updated_since(params[:updated_since])
+    respond_to do |format|
+      format.html do
+        @clients = current_user.clients.order("created_at DESC")
+        @client_shares = current_user.client_shares.includes(client: :user)
+        if params[:updated_since]
+          @clients = @clients.updated_since(params[:updated_since])
+        end
+        render "index"
+      end
+      format.json {render json: current_user.clients_and_shared_clients}
     end
   end
 

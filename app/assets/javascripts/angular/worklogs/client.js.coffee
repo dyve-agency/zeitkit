@@ -1,8 +1,9 @@
 app = angular.module("app")
 
-app.factory "Client", ["$http", ($http)->
-  class Client
-    constructor: (opts)->
+app.factory "Client", ["RailsResource", (RailsResource)->
+  class Client extends RailsResource
+    @configure url: '/clients', name: 'client'
+    constructor: (opts = {})->
       defaultOpts =
         hourly_rate_cents: 0
         shared: false
@@ -12,9 +13,6 @@ app.factory "Client", ["$http", ($http)->
       useOpts = _.extend defaultOpts, opts
       _.each useOpts, (val, key) ->
         _this[key] = val
-
-    hourlyRate: ->
-      @hourlyRateCents / 100
 
     nameOrCompanyName: ->
       if @name.length
