@@ -1,0 +1,5 @@
+h1.page-header Team: #{@team.name}
+
+= simple_form_for @form, url: team_path(@team), method: :get do |f|
+  = f.input :start_date, as: :date
+  = f.input :end_date, as: :date
