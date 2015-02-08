@@ -41,5 +41,35 @@ class TeamAggregator
     end
   end
 
+  def results
+    team.users.map do |user|
+      result_data = generate_result_data user
+      ResultEntry.new(result_data)
+    end
+  end
+
+  def generate_result_data user
+    {
+      username: user.username,
+      seconds_worked: 9199,
+      total_cents: 1000
+    }
+  end
+
+  class ResultEntry
+    include Virtus.model
+    attribute :username
+    attribute :seconds_worked
+    attribute :total_cents
+
+    def total
+      total_cents
+    end
+
+    def hours_formatted
+      seconds_worked
+    end
+  end
+
 
 end
