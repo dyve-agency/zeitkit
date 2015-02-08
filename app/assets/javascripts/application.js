@@ -23,6 +23,8 @@
 //= require chartkick
 //= require marked
 //= require bootstrap-notify
+//= require bootstrap-datetimepicker
+//= require pickers
 
 //= require angular
 //= require ng-rails-csrf

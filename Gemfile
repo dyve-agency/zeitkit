@@ -106,3 +106,5 @@ group :development, :test do
   gem 'dotenv-rails'
   gem 'railroady'
 end
+
+gem 'datetimepicker-rails', github: 'zpaulovics/datetimepicker-rails', branch: 'master', submodules: true

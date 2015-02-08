@@ -6,6 +6,14 @@ GIT
       activemodel (>= 4.0.1, < 5.0)
 
 GIT
+  remote: git://github.com/zpaulovics/datetimepicker-rails.git
+  revision: cba2e2f0dd029017a65a571eac186e658426cf1b
+  branch: master
+  submodules: true
+  specs:
+    datetimepicker-rails (3.1.1)
+
+GIT
   remote: git@github.com:rails-api/active_model_serializers.git
   revision: 652493848addf6870776619053df0036b1e22a3b
   specs:
@@ -328,6 +336,7 @@ DEPENDENCIES
   cancancan!
   chartkick!
   coffee-rails
+  datetimepicker-rails!
   dotenv-rails
   dotiw
   draper!

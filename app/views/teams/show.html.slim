@@ -1,5 +1,14 @@
 h1.page-header Team: #{@team.name}
 
 = simple_form_for @form, url: team_path(@team), method: :get do |f|
-  = f.input :start_date, as: :date
-  = f.input :end_date, as: :date
+  .row
+    .col-xs-6.col-md-3
+      = f.input :start_date, as: :date_picker
+    .col-xs-6.col-md-3
+      = f.input :end_date, as: :date_picker
+    .col-xs-6.col-md-3
+      = f.input :specific_range, as: :select,
+        collection: TeamAggregator::RANGE_VALUES, label_method: ->(o) { t(o) }
+    .col-xs-6.col-md-3
+      .aligned-submit-button
+        = f.button :submit, "Submit", class: "btn-primary"
