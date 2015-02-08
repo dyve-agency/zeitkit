@@ -9,42 +9,45 @@
 # from scratch. The latter is a flawed and unsustainable approach (the more migrations
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
-# It's strongly recommended to check this file into your version control system.
+# It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141014201134) do
+ActiveRecord::Schema.define(version: 20150208162646) do
 
-  create_table "access_tokens", :force => true do |t|
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "access_tokens", force: true do |t|
     t.string   "token"
-    t.boolean  "expirable",        :default => true
+    t.boolean  "expirable",        default: true
     t.datetime "last_activity_at"
     t.integer  "user_id"
-    t.datetime "created_at",                         :null => false
-    t.datetime "updated_at",                         :null => false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
   end
 
-  create_table "authentications", :force => true do |t|
+  create_table "authentications", force: true do |t|
     t.integer  "user_id"
     t.integer  "uid"
     t.string   "provider"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table "client_shares", :force => true do |t|
+  create_table "client_shares", force: true do |t|
     t.integer  "client_id"
     t.integer  "user_id"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
     t.string   "username"
     t.integer  "hourly_rate_cents"
   end
 
-  create_table "clients", :force => true do |t|
+  create_table "clients", force: true do |t|
     t.string   "name"
     t.integer  "hourly_rate_cents"
-    t.integer  "user_id",                      :null => false
-    t.datetime "created_at",                   :null => false
-    t.datetime "updated_at",                   :null => false
+    t.integer  "user_id",                      null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.string   "city"
     t.string   "street"
     t.string   "zip"
@@ -52,28 +55,28 @@ ActiveRecord::Schema.define(:version => 20141014201134) do
     t.boolean  "email_when_team_adds_worklog"
   end
 
-  create_table "expenses", :force => true do |t|
+  create_table "expenses", force: true do |t|
     t.integer  "user_id"
     t.integer  "client_id"
     t.integer  "total_cents"
     t.text     "reason"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.integer  "invoice_id"
   end
 
-  create_table "invoice_defaults", :force => true do |t|
+  create_table "invoice_defaults", force: true do |t|
     t.float    "vat"
     t.boolean  "includes_vat"
     t.text     "payment_terms"
     t.text     "payment_info"
     t.text     "note"
     t.integer  "user_id"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
-  create_table "invoices", :force => true do |t|
+  create_table "invoices", force: true do |t|
     t.integer  "user_id"
     t.integer  "client_id"
     t.string   "number"
@@ -82,8 +85,8 @@ ActiveRecord::Schema.define(:version => 20141014201134) do
     t.datetime "paid_on"
     t.float    "vat"
     t.text     "note"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
     t.text     "content"
     t.text     "payment_terms"
     t.text     "payment_info"
@@ -91,33 +94,49 @@ ActiveRecord::Schema.define(:version => 20141014201134) do
     t.integer  "subtotal_cents"
   end
 
-  create_table "invoices_products", :force => true do |t|
+  create_table "invoices_products", force: true do |t|
     t.integer "product_id"
     t.integer "invoice_id"
   end
 
-  create_table "notes", :force => true do |t|
+  create_table "notes", force: true do |t|
     t.text     "content"
     t.integer  "user_id"
     t.integer  "client_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.string   "share_token"
   end
 
-  create_table "products", :force => true do |t|
+  create_table "products", force: true do |t|
     t.integer  "user_id"
     t.integer  "total_cents"
     t.float    "charge"
     t.text     "title"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
-  create_table "temp_worklog_saves", :force => true do |t|
+  create_table "teams", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "teams_users", id: false, force: true do |t|
     t.integer  "user_id"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.integer  "team_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "teams_users", ["team_id"], name: "index_teams_users_on_team_id", using: :btree
+  add_index "teams_users", ["user_id"], name: "index_teams_users_on_user_id", using: :btree
+
+  create_table "temp_worklog_saves", force: true do |t|
+    t.integer  "user_id"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
     t.text     "summary"
     t.string   "from_date"
     t.string   "from_time"
@@ -128,20 +147,20 @@ ActiveRecord::Schema.define(:version => 20141014201134) do
     t.integer  "hourly_rate_cents"
   end
 
-  create_table "timeframes", :force => true do |t|
+  create_table "timeframes", force: true do |t|
     t.datetime "started"
     t.datetime "ended"
     t.integer  "worklog_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table "users", :force => true do |t|
-    t.string   "email",                           :null => false
+  create_table "users", force: true do |t|
+    t.string   "email",                           null: false
     t.string   "crypted_password"
     t.string   "salt"
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.string   "remember_me_token"
     t.datetime "remember_me_token_expires_at"
     t.string   "reset_password_token"
@@ -160,15 +179,15 @@ ActiveRecord::Schema.define(:version => 20141014201134) do
     t.string   "username"
   end
 
-  add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token"
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", using: :btree
 
-  create_table "worklogs", :force => true do |t|
+  create_table "worklogs", force: true do |t|
     t.datetime "start_time"
     t.datetime "end_time"
     t.integer  "user_id"
     t.integer  "client_id"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
     t.integer  "hourly_rate_cents"
     t.integer  "total_cents"
     t.text     "summary"
