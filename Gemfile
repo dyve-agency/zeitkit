@@ -18,7 +18,7 @@ gem 'cancancan', git: "https://github.com/CanCanCommunity/cancancan.git"
 gem 'newrelic_rpm'
 gem 'redcarpet'
 gem 'rack-force_domain'
-gem 'money'
+gem 'money-rails'
 gem 'pdfkit', git: "https://github.com/pdfkit/pdfkit.git"
 gem 'fullcontact'
 gem 'jbuilder'

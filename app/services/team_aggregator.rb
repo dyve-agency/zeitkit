@@ -3,6 +3,9 @@ class TeamAggregator
   include Virtus.model
   include ActiveModel::Model
   attribute :team
+  attribute :base_user
+
+  # Attributes for date filtering
   attribute :start_date
   attribute :end_date
   attribute :specific_range
@@ -41,6 +44,24 @@ class TeamAggregator
     end
   end
 
+  def start_date=(new_val)
+    result = nil
+    begin
+      result = Date.parse(new_val)
+    rescue
+    end
+    super result
+  end
+
+  def end_date=(new_val)
+    result = nil
+    begin
+      result = Date.parse(new_val)
+    rescue
+    end
+    super result
+  end
+
   def results
     team.users.map do |user|
       result_data = generate_result_data user
@@ -48,12 +69,26 @@ class TeamAggregator
     end
   end
 
+  def sorted_results
+    results.sort_by {|r| r.total }.reverse
+  end
+
   def generate_result_data user
+    use_worklogs = worklogs user
     {
       username: user.username,
-      seconds_worked: 9199,
-      total_cents: 1000
+      seconds_worked: use_worklogs.map(&:duration).inject(:+) || 0,
+      total_cents: use_worklogs.map(&:total_cents).inject(:+) || 0,
+      currency: (user.currency || Money.default_currency)
     }
+  end
+
+  def worklogs user
+    user.worklogs.joins(:timeframes).
+      where("timeframes.ended >= ?", start_date).
+      where("timeframes.started <= ?", end_date).
+      preload(:timeframes).
+      group("worklogs.id")
   end
 
   class ResultEntry
@@ -61,14 +96,18 @@ class TeamAggregator
     attribute :username
     attribute :seconds_worked
     attribute :total_cents
+    attribute :currency
 
     def total
-      total_cents
+      Money.new total_cents, currency
     end
 
     def hours_formatted
-      seconds_worked
+      minutes = (seconds_worked / 60) % 60
+      hours = seconds_worked / (60 * 60)
+      format("%02dH:%02dM", hours, minutes) #=> "01:00:00"
     end
+
   end
 
 

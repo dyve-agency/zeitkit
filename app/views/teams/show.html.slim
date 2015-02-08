@@ -25,4 +25,4 @@ h1.page-header Team: #{@team.name}
             tr
               td= r.username
               td= r.hours_formatted
-              td= r.total
+              td= humanized_money_with_symbol r.total
