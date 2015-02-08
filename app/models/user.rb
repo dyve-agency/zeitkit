@@ -28,6 +28,7 @@ class User < ActiveRecord::Base
   has_many :access_tokens, :dependent => :delete_all
   has_many :authentications, :dependent => :destroy
   has_many :client_shares, dependent: :destroy
+  has_and_belongs_to_many :teams
 
   has_one :temp_worklog_save
   has_one :invoice_default

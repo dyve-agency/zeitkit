@@ -1,0 +1,28 @@
+h1.page-header Team: #{@team.name}
+
+= simple_form_for @form, url: team_path(@team), method: :get do |f|
+  .row
+    .col-xs-6.col-md-3
+      = f.input :start_date, as: :date_picker
+    .col-xs-6.col-md-3
+      = f.input :end_date, as: :date_picker
+    .col-xs-6.col-md-3
+      = f.input :specific_range, as: :select,
+        collection: TeamAggregator::RANGE_VALUES, label_method: ->(o) { t(o) }
+    .col-xs-6.col-md-3
+      .aligned-submit-button
+        = f.button :submit, "Submit", class: "btn-primary"
+  .row
+    .col-xs-12
+      table.table.table-bordered
+        thead
+          tr
+            th User
+            th Hours
+            th Total
+        tbody
+          - @form.results.each do |r|
+            tr
+              td= r.username
+              td= r.hours_formatted
+              td= humanized_money_with_symbol r.total

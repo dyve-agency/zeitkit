@@ -6,6 +6,14 @@ GIT
       activemodel (>= 4.0.1, < 5.0)
 
 GIT
+  remote: git://github.com/zpaulovics/datetimepicker-rails.git
+  revision: cba2e2f0dd029017a65a571eac186e658426cf1b
+  branch: master
+  submodules: true
+  specs:
+    datetimepicker-rails (3.1.1)
+
+GIT
   remote: git@github.com:rails-api/active_model_serializers.git
   revision: 652493848addf6870776619053df0036b1e22a3b
   specs:
@@ -195,8 +203,15 @@ GEM
     minitest (5.5.1)
     momentjs-rails (2.8.3)
       railties (>= 3.1)
-    money (6.3.0)
-      i18n (>= 0.6.4, <= 0.7.0.dev)
+    monetize (1.1.0)
+      money (~> 6.5.0)
+    money (6.5.1)
+      i18n (>= 0.6.4, <= 0.7.0)
+    money-rails (1.3.0)
+      activesupport (>= 3.0)
+      monetize (~> 1.1.0)
+      money (~> 6.5.0)
+      railties (>= 3.0)
     multi_json (1.10.1)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
@@ -328,6 +343,7 @@ DEPENDENCIES
   cancancan!
   chartkick!
   coffee-rails
+  datetimepicker-rails!
   dotenv-rails
   dotiw
   draper!
@@ -339,7 +355,7 @@ DEPENDENCIES
   jbuilder
   jquery-rails
   momentjs-rails
-  money
+  money-rails
   nested_form!
   newrelic_rpm
   ng-rails-csrf
