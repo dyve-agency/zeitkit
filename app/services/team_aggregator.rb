@@ -85,8 +85,8 @@ class TeamAggregator
 
   def worklogs user
     user.worklogs.joins(:timeframes).
-      where("timeframes.ended >= ?", start_date).
-      where("timeframes.started <= ?", end_date).
+      where("timeframes.ended >= ?", start_date.to_datetime).
+      where("timeframes.started <= ?", end_date.to_datetime).
       preload(:timeframes).
       group("worklogs.id")
   end
