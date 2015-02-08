@@ -47,7 +47,7 @@ class TeamAggregator
   def start_date=(new_val)
     result = nil
     begin
-      result = Date.parse(new_val)
+      result = new_val.is_a?(String) ? Date.parse(new_val) : new_val
     rescue
     end
     super result
@@ -56,7 +56,7 @@ class TeamAggregator
   def end_date=(new_val)
     result = nil
     begin
-      result = Date.parse(new_val)
+      result = new_val.is_a?(String) ? Date.parse(new_val) : new_val
     rescue
     end
     super result

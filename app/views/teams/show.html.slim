@@ -21,7 +21,7 @@ h1.page-header Team: #{@team.name}
             th Hours
             th Total
         tbody
-          - @form.results.each do |r|
+          - @form.sorted_results.each do |r|
             tr
               td= r.username
               td= r.hours_formatted
