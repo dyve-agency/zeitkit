@@ -71,6 +71,10 @@ class ClientsController < ApplicationController
   end
 
   def activity
+    if params[:client_token] != @client.client_token || @client.user_id != current_user.try(:id)
+      redirect_to root_path, alert: "No access, sorry."
+    end
+
     @total_costs = 0
     @client = Client.find(params[:id])
     @form           = ClientAggregator.new(params[:client_aggregator])
