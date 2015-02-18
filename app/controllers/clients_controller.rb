@@ -69,4 +69,16 @@ class ClientsController < ApplicationController
     @note = Note.new
     @note.client = @client
   end
+
+  def activity
+    @total_costs = 0
+    @client = Client.find(params[:id])
+    @form           = ClientAggregator.new(params[:client_aggregator])
+    @form.client    = @client
+    @form.base_user = current_user
+    if params[:client_aggregator].blank?
+      @form.specific_range = "this_month"
+    end
+    @form.aggregate
+  end
 end
