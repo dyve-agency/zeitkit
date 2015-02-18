@@ -1,6 +1,5 @@
 class Client < ActiveRecord::Base
   include HourlyRateHelper
-
   include NilStrings
 
   attr_accessible :name,
@@ -23,6 +22,9 @@ class Client < ActiveRecord::Base
 
   accepts_nested_attributes_for :client_shares, allow_destroy: true
 
+  before_validation :generate_access_token, on: :create
+
+  validates :client_token, uniqueness: true, presence: true
   validates :user, :name, presence: true
   validates :name, uniqueness: {scope: :user_id, message: "You can only have the client once."}
   validates_numericality_of :hourly_rate, :greater_than => 0, :allow_blank => false
@@ -64,5 +66,11 @@ class Client < ActiveRecord::Base
       errors.add(:base, "You can only share the client once per user" )
     end
     true
+  end
+
+  def generate_access_token
+    begin
+      self.client_token = SecureRandom.hex
+    end while Client.exists?(client_token: self.client_token)
   end
 end

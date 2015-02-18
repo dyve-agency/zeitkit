@@ -47,4 +47,5 @@ table.table.table-bordered.table-striped
               span Edit
             = link_to client, confirm: 'Are you sure? This can not be undone.  All invoices, worklogs and expenses will be deleted.', method: :delete, class: "btn btn-default hidden-phone" do
               span Delete
+            = link_to "Activity Log", activity_client_path(client), class: "btn btn-default hidden-phone"
 = link_to 'New client', new_client_path, class: "btn btn-default btn-primary"

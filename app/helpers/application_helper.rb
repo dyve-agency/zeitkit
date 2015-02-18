@@ -43,4 +43,8 @@ module ApplicationHelper
     ""
   end
 
+
+  def absolute_path path
+    request.host_with_port + path
+  end
 end
