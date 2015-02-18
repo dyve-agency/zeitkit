@@ -11,13 +11,14 @@ h1 Clients
     tbody
       - @client_shares.each do |client_share|
         tr
-          td= client_share.client.name
-          td= client_share.client.user.username
+          td = client_share.client.name
+          td = client_share.client.user.username
           td
             .btn-group
               = link_to new_worklog_path(client: client_share.client), class: "btn btn-default" do
                 i.fa.fa-plus
                 span Worklog
+              = link_to "Activity Log", activity_client_path(client_share.client_id), class: "btn btn-default"
               = link_to "Reject", client_share_path(client_share), class: "btn btn-default",
                 method: :delete, data: {confirm: "Are you sure?" }
 

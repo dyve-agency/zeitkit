@@ -13,7 +13,6 @@ class ClientsController < ApplicationController
         if params[:updated_since]
           @clients = @clients.updated_since(params[:updated_since])
         end
-        render "index"
       end
       format.json {render json: current_user.clients_and_shared_clients}
     end
@@ -74,7 +73,9 @@ class ClientsController < ApplicationController
 
   def activity
     @client = Client.find(params[:id])
-    if params[:client_token] == @client.client_token || @client.user_id == current_user.try(:id)
+    if params[:client_token] == @client.client_token
+      # ALL OKAY
+    elsif current_user && current_user.clients_and_shared_clients.include?(@client)
       # ALL OKAY
     else
       redirect_to root_path, alert: "No access, sorry."
