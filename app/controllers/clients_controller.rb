@@ -1,5 +1,7 @@
 class ClientsController < ApplicationController
-  load_and_authorize_resource
+  load_and_authorize_resource except: [:activity]
+  skip_before_filter :require_login, only: [:activity]
+
 
   respond_to :html, :json
 
@@ -71,12 +73,13 @@ class ClientsController < ApplicationController
   end
 
   def activity
-    if params[:client_token] != @client.client_token || @client.user_id != current_user.try(:id)
+    @client = Client.find(params[:id])
+    if params[:client_token] == @client.client_token || @client.user_id == current_user.try(:id)
+      # ALL OKAY
+    else
       redirect_to root_path, alert: "No access, sorry."
     end
 
-    @total_costs = 0
-    @client = Client.find(params[:id])
     @form           = ClientAggregator.new(params[:client_aggregator])
     @form.client    = @client
     @form.base_user = current_user

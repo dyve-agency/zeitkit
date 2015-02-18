@@ -1,5 +1,9 @@
 h1.page-header Client: #{@client.name}
+p Share this site with your clients! 
+p = link_to "http://#{absolute_path activity_client_path(@client, client_token: @client.client_token)}" do
+  | http://#{absolute_path activity_client_path(@client, client_token: @client.client_token)}
 = simple_form_for @form, url: activity_client_path(@client), method: :get do |f|
+  = hidden_field_tag "client_token", @client.client_token
   .row
     .col-xs-6.col-md-3
       = f.input :start_date, as: :date_picker
