@@ -95,7 +95,7 @@ class ClientAggregator
       preload(:timeframes).
       group("worklogs.id")
   end
-  
+
   def total_time
     seconds = results.map(&:seconds_worked).inject(:+) || 0 #results.map{ |res| res.seconds_worked }
     minutes = (seconds / 60) % 60
@@ -136,7 +136,7 @@ class ClientAggregator
       hours = seconds_worked / (60 * 60)
       format("%02dH:%02dM", hours, minutes) #=> "01:00:00"
     end
-    
+
     def seconds_to_hours
       seconds_worked / (60 * 60)
     end
@@ -147,7 +147,10 @@ class ClientAggregator
 
     def summary_markdown
       markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
-      markdown.render(worklog_summary)
+      # Convert new lines into br
+      # http://stackoverflow.com/questions/611609/in-rails-is-there-a-rails-method-to-convert-newlines-to-br
+      formatted_worklog_summary = worklog_summary.gsub(/(?:\n\r?|\r\n?)/, '<br/>')
+      markdown.render( formatted_worklog_summary )
     end
   end
 end
