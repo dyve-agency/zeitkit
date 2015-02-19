@@ -15,7 +15,11 @@ Timetracker::Application.routes.draw do
     end
   end
   resources :kpis, only: [:new, :create]
-  resources :clients
+  resources :clients do
+    member do
+      get "activity"
+    end
+  end
   resources :temp_worklog_saves, only: [:update], as: "temp_worklog_save"
   resources :notes do
     member do

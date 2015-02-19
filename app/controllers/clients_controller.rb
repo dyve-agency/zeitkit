@@ -1,5 +1,7 @@
 class ClientsController < ApplicationController
-  load_and_authorize_resource
+  load_and_authorize_resource except: [:activity]
+  skip_before_filter :require_login, only: [:activity]
+
 
   respond_to :html, :json
 
@@ -11,7 +13,6 @@ class ClientsController < ApplicationController
         if params[:updated_since]
           @clients = @clients.updated_since(params[:updated_since])
         end
-        render "index"
       end
       format.json {render json: current_user.clients_and_shared_clients}
     end
@@ -68,5 +69,24 @@ class ClientsController < ApplicationController
     @notes = @client.notes.order("created_at DESC")
     @note = Note.new
     @note.client = @client
+  end
+
+  def activity
+    @client = Client.find(params[:id])
+    if params[:client_token] == @client.client_token
+      # ALL OKAY
+    elsif current_user && current_user.clients_and_shared_clients.include?(@client)
+      # ALL OKAY
+    else
+      redirect_to root_path, alert: "No access, sorry."
+    end
+
+    @form           = ClientAggregator.new(params[:client_aggregator])
+    @form.client    = @client
+    @form.base_user = current_user
+    if params[:client_aggregator].blank?
+      @form.specific_range = "this_month"
+    end
+    @form.aggregate
   end
 end
