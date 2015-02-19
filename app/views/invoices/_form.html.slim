@@ -26,9 +26,9 @@
             input name="invoice[product_ids][]" value="#{product.id}"
     .col-md-5
       select.invoice-select.select multiple="multiple"
-        - @invoice.worklogs.each do |worklog|
+        - @invoice.worklogs.sort_by(&:created_at).each do |worklog|
           option class="worklog" value="#{worklog.id}"= worklog.title
-        - @invoice.expenses.each do |expense|
+        - @invoice.expenses.sort_by(&:created_at).each do |expense|
           option class="expense" value="#{expense.id}"= expense.title
         - @invoice.products.uniq.each do |product|
           option class="product" value="#{product.id}"= product.display_title + ' - ' + product.invoice_price_title(@invoice)
