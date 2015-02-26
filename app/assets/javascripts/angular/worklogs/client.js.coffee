@@ -16,9 +16,8 @@ app.factory "Client", ["RailsResource", (RailsResource)->
 
     nameOrCompanyName: ->
       if @name.length
-        @name
+        "#{@name} [#{@user.username}]"
       else
-        @companyName
-
+        "#{@companyName} [#{@user.username}]"
   Client
 ]
