@@ -1,7 +1,5 @@
 Timetracker::Application.routes.draw do
 
-  get "kpis/new"
-
   root :to => "static#home"
 
   resources :users, only: [:new, :create, :show, :edit, :update] do
@@ -14,7 +12,6 @@ Timetracker::Application.routes.draw do
       get :shared_clients
     end
   end
-  resources :kpis, only: [:new, :create]
   resources :clients do
     member do
       get "activity"
@@ -58,5 +55,4 @@ Timetracker::Application.routes.draw do
   get "show_tutorial" => "tutorial#show", as: "show_tutorial"
 
   get "/auth/:provider/callback" => "sessions#auth_provider_callback"
-
 end
