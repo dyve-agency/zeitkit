@@ -35,7 +35,7 @@ p = link_to "http://#{absolute_path activity_client_path(@client, client_token: 
               td.no-wrap = r.started_formatted
               td.no-wrap = r.ended_formatted
               td = r.hours_formatted
-              td = r.summary_markdown.html_safe
+              td = markdown r.worklog_summary
               td.text-right = humanized_money_with_symbol r.total
         tfoot
           tr

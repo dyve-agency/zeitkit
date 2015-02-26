@@ -145,12 +145,5 @@ class ClientAggregator
       (seconds_worked / 60) % 60
     end
 
-    def summary_markdown
-      markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
-      # Convert new lines into br
-      # http://stackoverflow.com/questions/611609/in-rails-is-there-a-rails-method-to-convert-newlines-to-br
-      formatted_worklog_summary = worklog_summary.gsub(/(?:\n\r?|\r\n?)/, '<br/>')
-      markdown.render( formatted_worklog_summary )
-    end
   end
 end
