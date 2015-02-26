@@ -14,7 +14,7 @@ class ClientsController < ApplicationController
           @clients = @clients.updated_since(params[:updated_since])
         end
       end
-      format.json {render json: current_user.clients_and_shared_clients}
+      format.json {render json: current_user.clients_and_shared_clients.to_json(include: :user)}
     end
   end
 
@@ -89,4 +89,5 @@ class ClientsController < ApplicationController
     end
     @form.aggregate
   end
+
 end
