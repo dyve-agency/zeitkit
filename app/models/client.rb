@@ -9,7 +9,8 @@ class Client < ActiveRecord::Base
     :city,
     :hourly_rate,
     :client_shares_attributes,
-    :email_when_team_adds_worklog
+    :email_when_team_adds_worklog,
+    :credit_block_reason
 
   attr_accessor :is_shared
 

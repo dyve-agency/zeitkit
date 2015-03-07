@@ -21,6 +21,8 @@ en:
         payment_info: Payment info (Markdown)
         payment_terms: Payment terms (Markdown)
         vat: VAT
+      client:
+        credit_block_reason: Reason for why work is blocked. Shown to team.
       product:
         charge: Surcharge in %
     hints:
@@ -33,6 +35,8 @@ en:
         charge: Allows you to add a surcharge to the product price for your client. I.e. when you are reselling a server.
       invoice:
         discount: This value will be substracted from the invoice total.
+      client:
+        credit_block_reason: When a client is late on payments this can be used to show an alert to your co-workers. When they are creating a worklog they will see an alert that the credit is blocked. This is useful to avoid unpaid invoices. Once your client paid, simply remove the text from this input.
     placeholders:
       session:
         username: "i.e. me@example.com"
@@ -67,6 +71,7 @@ en:
         street: e.g. Mysterialane 123
         city: e.g. Raccooncity
         zip: e.g. 424242
+        credit_block_reason: I.e. Invoices are late.
       expense:
         reason: e.g. Train ride 16/03/2013
       note:

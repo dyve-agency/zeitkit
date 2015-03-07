@@ -8,7 +8,7 @@ class ClientsController < ApplicationController
   def index
     respond_to do |format|
       format.html do
-        @clients = current_user.clients.order("created_at DESC")
+        @clients = current_user.clients.order("name asc")
         @client_shares = current_user.client_shares.includes(client: :user)
         if params[:updated_since]
           @clients = @clients.updated_since(params[:updated_since])

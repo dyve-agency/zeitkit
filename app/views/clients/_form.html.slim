@@ -13,6 +13,9 @@
           = f.input :street
           = f.input :city
           = f.input :zip
+      .row
+        .col-md-12
+          = f.input :credit_block_reason, input_html: {style: "height: 100px;" }
     .col-md-6
       h4 Allow other users to use the same client
       .label-checkbox-left.clearfix

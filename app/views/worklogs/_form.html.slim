@@ -31,6 +31,12 @@ div ng-controller="WorklogsController"
       div
         span.label.label-success
           | {{ worklog.total | currency: worklog.client.currency.symbol}}
+  .row ng-show="worklog.client.creditBlockReason.length"
+    .col-xs-12
+      .alert.alert-danger.margin-top-15.margin-bottom-0
+        p A credit block has been issued for the client. Worklogs will not be billed. The reason specified:
+        p
+          | {{ worklog.client.creditBlockReason }}
   hr
   .well ng-repeat="time in worklog.timeframes"
     .row
