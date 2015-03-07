@@ -2,35 +2,40 @@
   .content.tutorial
     .row
       a.tutorial-close.close href="#{hide_tutorial_path}" &times;
-      .col-md-6
+      .col-md-6.left-tutorial-column
         .row.level
           .col-md-6
             .progress
-              .progress-bar role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: #{@tutorial.calc_level + 10}%;"
+              .progress-bar role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="#{@tutorial.max_level}" style="width: #{@tutorial.calc_completion_percentage}%;"
           .col-md-6
             h4 Zeitkit level #{@tutorial.calc_level} of #{@tutorial.max_level}
         ul.levels
-          li class="#{css_class_if_cond @tutorial.no_demo_user?}"
+          li class="#{css_class_if_cond @tutorial.completed_no_demo_user?}"
             i.fa.fa-github-alt
             = link_to "Complete signup", edit_user_path(current_user)
             span.percentage
               = "(+#{@tutorial.no_demo_user_score} Levels)"
-          li class="#{css_class_if_cond @tutorial.clients?}"
+          li class="#{css_class_if_cond @tutorial.completed_clients?}"
             i.fa.fa-github-alt
             = link_to "Add a client", new_client_path
             span.percentage
               = "(+#{@tutorial.clients_score} Levels)"
-          li class="#{css_class_if_cond @tutorial.worklogs?}"
+          li class="#{css_class_if_cond @tutorial.completed_worklogs?}"
             i.fa.fa-github-alt
             = link_to "Create a worklog", new_worklog_path
             span.percentage
               = "(+#{@tutorial.worklogs_score} Levels)"
-          li class="#{css_class_if_cond @tutorial.invoices?}"
+          li class="#{css_class_if_cond @tutorial.completed_invoices?}"
             i.fa.fa-github-alt
             = link_to "Create an Invoice", new_invoice_path
             span.percentage
               = "(+#{@tutorial.invoices_score} Levels)"
-          li class="#{css_class_if_cond @tutorial.notes?}"
+          li class="#{css_class_if_cond @tutorial.completed_team?}"
+            i.fa.fa-github-alt
+            = link_to "Create a team", new_team_path
+            span.percentage
+              = "(+#{@tutorial.team_score} Levels)"
+          li class="#{css_class_if_cond @tutorial.completed_notes?}"
             i.fa.fa-github-alt
             = link_to "Add a note", new_note_path
             span.percentage
@@ -77,7 +82,7 @@
               |Bill them in a few clicks.
             li
               i.fa.fa-check
-              |Take notes to keep track on progress to close more deals.
+              |Share a private link with clients. This way they can see the used budget and progress.
         .tips
           h4 About worklogs
           ul
@@ -115,6 +120,21 @@
               i.fa.fa-check
               |Save time by creating a default template.
         .tips
+          h4 About teams
+          ul
+            li
+              i.fa.fa-check
+              |See what your team is working on.
+            li
+              i.fa.fa-check
+              |See the budget used per team member.
+            li
+              i.fa.fa-check
+              |See who is working how many hours.
+            li
+              i.fa.fa-check
+              |Learn from historic reports of your team.
+        .tips
           h4 About notes
           ul
             li
@@ -132,3 +152,8 @@
             li
               i.fa.fa-check
               |For hackers: Nicely write them in markdown language.
+javascript:
+  $(function(){
+    var left_height = $('.left-tutorial-column').height();
+    $('.tip-explanations').css({height: left_height});
+  })

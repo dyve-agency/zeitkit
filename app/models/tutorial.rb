@@ -11,25 +11,9 @@ class Tutorial
     clients: 25,
     invoices: 15,
     notes: 10,
-    no_demo_user: 30
+    no_demo_user: 30,
+    team: 20
   }
-
-  # Adds methods which if the user has:
-  # clients?
-  # worklogs?
-  # notes?
-  # invoices?
-  # no_demo_user?
-  SCORES.keys.each do |arg|
-    method_name = (arg.to_s + "?").to_sym
-    send :define_method, method_name do
-      if arg == :no_demo_user
-        eval("!user.demo?")
-      else
-        eval("user." + arg.to_s + ".any?")
-      end
-    end
-  end
 
   # Adds methods to return the score
   # clients_score
@@ -51,15 +35,43 @@ class Tutorial
   def calc_level
     total_score = 0
     SCORES.each do |score, levels|
-      total_score += levels if send((score.to_s + "?").to_sym)
+      total_score += levels if send("completed_#{score}?")
     end
     total_score
   end
 
   def show_tutorial?
     SCORES.keys.any? do |score|
-      !send((score.to_s + "?").to_sym)
+      !send("completed_#{score}?")
     end
+  end
+
+  def completed_clients?
+    user.clients.present?
+  end
+
+  def completed_worklogs?
+    user.worklogs.present?
+  end
+
+  def completed_notes?
+    user.notes.present?
+  end
+
+  def completed_invoices?
+    user.invoices.present?
+  end
+
+  def completed_no_demo_user?
+    !user.demo?
+  end
+
+  def completed_team?
+    user.teams.present?
+  end
+
+  def calc_completion_percentage
+    (calc_level.to_f / max_level.to_f) * 100
   end
 
 end
