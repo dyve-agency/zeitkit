@@ -18,6 +18,15 @@ class TeamInviteForm
     model.team_id = team.id
     model.state = "pending"
     model.save!
+    begin
+      email_user.deliver
+    rescue => e
+      raise e if Rails.env.development?
+    end
+  end
+
+  def email_user
+    TeamMailer.invite_user(user: user, team: team, inviter: inviter)
   end
 
   def persisted?
