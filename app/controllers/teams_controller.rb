@@ -1,6 +1,6 @@
 class TeamsController < ApplicationController
 
-  before_filter :load_team, only: %i[show edit update]
+  before_filter :load_team, only: %i[show edit update destroy]
 
   def index
     @teams = current_user.teams.includes(:users).order("name DESC").decorate
@@ -41,6 +41,15 @@ class TeamsController < ApplicationController
       @form.specific_range = "this_month"
     end
     @form.aggregate
+  end
+
+  def destroy
+    if @team.created_by? current_user
+      @team.destroy
+      redirect_to teams_path, notice: "Team successfully deleted"
+    else
+      redirect_to teams_path, alert: "Could not delete team"
+    end
   end
 
 private
