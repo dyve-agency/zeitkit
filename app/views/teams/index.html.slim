@@ -12,7 +12,7 @@ table.table.table-bordered
   tbody
     - @teams.each do |t|
       tr
-        td= t.name
+        td= link_to t.name, t
         td
           = t.users.length
           |x
