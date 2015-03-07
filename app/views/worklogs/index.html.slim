@@ -3,15 +3,16 @@
     h1.no-margin Worklogs
     = link_to 'New Worklog', new_worklog_path, class: "btn btn-default btn-primary margin-top-8"
   .col-md-8.col-xs-12
-    .well.row
-      .col-md-6
-        ul
-          li Hours worked today: #{current_user.hours_today}
-          li Hours worked this week: #{current_user.hours_this_week}
-      .col-md-6
-        ul
-          li Hours worked this month: #{current_user.hours_this_month}
-          li Hours worked last month: #{current_user.hours_last_month}
+    .well
+      .row
+        .col-md-6
+          ul
+            li Hours worked today: #{current_user.hours_today}
+            li Hours worked this week: #{current_user.hours_this_week}
+        .col-md-6
+          ul
+            li Hours worked this month: #{current_user.hours_this_month}
+            li Hours worked last month: #{current_user.hours_last_month}
 table.table.table-bordered
   thead
     tr
