@@ -66,7 +66,7 @@ class InvoicesController < ApplicationController
 
   def edit
     @client = @invoice.client
-    @worklogs = @client.worklogs.unpaid.no_invoice.oldest_first
+    @worklogs = @client.worklogs.unpaid.no_invoice.includes(:timeframes).sort_by(&:start_time)
     @expenses = @client.expenses.unpaid.no_invoice.oldest_first
     @products = current_user.products.oldest_first
   end
@@ -139,7 +139,7 @@ class InvoicesController < ApplicationController
   end
 
   def set_invoice_worklogs
-    @client ? @client.worklogs.unpaid.no_invoice.oldest_first : nil
+    @client ? @client.worklogs.unpaid.no_invoice.includes(:timeframes).sort_by(&:start_time) : nil
   end
 
   def set_invoice_expenses
