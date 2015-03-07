@@ -1,4 +1,7 @@
-h1 Invoices
+.pull-right
+  = link_to "New invoice", new_invoice_path, class: "btn btn-default btn-primary"
+h1.margin-top-0 Invoices
+.clear-fix
 table.table.table-bordered
   thead
     tr
@@ -32,8 +35,3 @@ table.table.table-bordered
             li= link_to "Download Worklogs PDF".html_safe,
               worklogs_export_invoice_path(invoice)
             li= link_to 'Delete', invoice, confirm: 'Are you sure? This can not be undone.', method: :delete
-
-.btn-group
-  = link_to "New invoice", new_invoice_path, class: "btn btn-default btn-primary"
-  = link_to "<i class='icon-edit'></i> Template".html_safe,
-    edit_invoice_default_path(current_user.invoice_default), class: "btn btn-default"
