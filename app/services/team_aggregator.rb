@@ -63,7 +63,7 @@ class TeamAggregator
   end
 
   def results
-    team.users.map do |user|
+    team.confirmed_users.map do |user|
       result_data = generate_result_data user
       ResultEntry.new(result_data)
     end

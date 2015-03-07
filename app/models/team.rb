@@ -9,4 +9,8 @@ class Team < ActiveRecord::Base
   def created_by? user
     creator.try(:id) == user.try(:id)
   end
+
+  def confirmed_users
+    users.where("team_users.state = ?", "confirmed")
+  end
 end
