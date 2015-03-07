@@ -45,7 +45,12 @@ Timetracker::Application.routes.draw do
       get :members
     end
   end
-  resources :team_users, only: %i[create destroy show]
+  resources :team_users, only: %i[create destroy show] do
+    member do
+      post :accept
+      post :reject
+    end
+  end
 
   resources :sessions
   resources :password_resets, only: [:create, :edit, :update, :new]

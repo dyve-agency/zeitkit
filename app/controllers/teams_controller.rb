@@ -3,7 +3,8 @@ class TeamsController < ApplicationController
   before_filter :load_team, only: %i[show edit update destroy members]
 
   def index
-    @teams = current_user.teams.includes(:users).order("name DESC").decorate
+    @team_users = current_user.team_users.preload(:user, team: [:users]).joins(:team).order("name ASC").where(state: "confirmed")
+    @pending_invites = current_user.team_users.pending
   end
 
   def new
@@ -31,8 +32,10 @@ class TeamsController < ApplicationController
     @team = Team.new(params[:team])
     @team.creator = current_user
     @team.users << current_user
+    tf = @team.team_users.first
+    tf.state = "confirmed"
     if @team.save
-      redirect_to teams_path, notice: "Team successfully created"
+      redirect_to members_team_path(@team), notice: "Team successfully created. You can now invite users."
     else
       render "new"
     end

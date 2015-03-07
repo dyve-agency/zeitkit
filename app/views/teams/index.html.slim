@@ -2,6 +2,17 @@
   = link_to "New Team", new_team_path, class: "btn btn-default btn-primary"
 h1.margin-top-0 Teams
 .clear-fix
+
+- if @pending_invites.present?
+  - @pending_invites.each do |tu|
+    .alert.alert-info
+      | You were invited to the team: #{tu.team.name}.
+      '
+      = link_to "Accept", accept_team_user_path(tu), class: "btn btn-default btn-xs", method: :post
+      '
+      |or
+      '
+      = link_to "Reject.", reject_team_user_path(tu), class: "btn btn-default btn-xs", method: :post
 table.table.table-bordered
   thead
     tr
@@ -10,18 +21,18 @@ table.table.table-bordered
       th Controls
 
   tbody
-    - @teams.each do |t|
+    - @team_users.each do |tu|
       tr
-        td= link_to t.name, t
+        td= link_to tu.team.name, tu.team
         td
-          = link_to members_team_path(t) do
-            = t.users.length
+          = link_to members_team_path(tu.team) do
+            = tu.team.users.length
             |x
         td
           .btn-group
-            = link_to "Edit", edit_team_path(t), class: "btn btn-default"
-            = link_to "Members", members_team_path(t), class: "btn btn-default"
-            - if t.created_by? current_user
-              = link_to "Delete", team_path(t), method: :delete,
+            = link_to "Edit", edit_team_path(tu.team), class: "btn btn-default"
+            = link_to "Members", members_team_path(tu.team), class: "btn btn-default"
+            - if tu.team.created_by? current_user
+              = link_to "Delete", team_path(tu.team), method: :delete,
                 class: "btn btn-default",
                 data: {confirm: "Are you sure? This deletes the team for all users."}

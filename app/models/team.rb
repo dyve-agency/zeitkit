@@ -4,7 +4,8 @@ class Team < ActiveRecord::Base
   belongs_to :creator, class_name: "User"
 
   attr_accessible :name
-  validates :name, :creator, presence: true
+  validates :name, presence: true
+  validates :creator, presence: true, on: :create
 
   def created_by? user
     creator.try(:id) == user.try(:id)
