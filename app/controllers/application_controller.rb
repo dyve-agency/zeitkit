@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  #around_filter :set_time_zone
+  around_filter :set_time_zone
   before_filter :require_login, :except => [:not_authenticated]
   before_filter :check_and_set_mac_design
   before_filter :init_gon, if: :current_user
@@ -30,7 +30,7 @@ class ApplicationController < ActionController::Base
 
   def set_time_zone
     old_time_zone = Time.zone
-    Time.zone = current_user.time_zone if logged_in? && current_user.time_zone
+    Time.zone = current_user.time_zone if current_user.try(:time_zone)
     yield
   ensure
     Time.zone = old_time_zone
@@ -39,7 +39,6 @@ class ApplicationController < ActionController::Base
   def init_gon
     gon.current_user_id = current_user.id
   end
-
 
   # ActiveModel serializer, skip the root node.
   def default_serializer_options
