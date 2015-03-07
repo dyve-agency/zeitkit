@@ -13,6 +13,14 @@ class TeamsController < ApplicationController
   def edit
   end
 
+  def update
+    if @team.update_attributes params[:team]
+      redirect_to teams_path, notice: "Team successfully updated"
+    else
+      render "edit"
+    end
+  end
+
   def create
     @team = Team.new(params[:team])
     @team.creator = current_user
