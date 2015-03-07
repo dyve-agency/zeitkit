@@ -15,15 +15,15 @@ nav.navbar.navbar-default role="navigation"
       ul.nav.navbar-nav
         - if current_user
           li
-            = link_to "Clients", clients_path
-          li
-            = link_to "Notes", notes_path
-          li
             = link_to "Worklogs", worklogs_path
+          li
+            = link_to "Clients", clients_path
           li
             = link_to "Expenses", expenses_path
           li
             = link_to "Products", products_path
+          li
+            = link_to "Notes", notes_path
           li class="dropdown"
             a.dropdown-toggle data-toggle="dropdown" href="#dropdown-menu"
               |Invoices
