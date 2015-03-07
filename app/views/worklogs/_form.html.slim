@@ -31,7 +31,7 @@ div ng-controller="WorklogsController"
       div
         span.label.label-success
           | {{ worklog.total | currency: worklog.client.currency.symbol}}
-  .row ng-show="worklog.client.creditBlockReason.length"
+  .row ng-show="worklog.creditBlocked()"
     .col-xs-12
       .alert.alert-danger.margin-top-15.margin-bottom-0
         p A credit block has been issued for the client. Worklogs will not be billed. The reason specified:
@@ -89,7 +89,7 @@ div ng-controller="WorklogsController"
             li ng-repeat="warn in time.checkForIssues()"
               | {{ warn }}
   .btn-group
-    span.btn.btn-success ng-click="worklog.addBlankTimeframe()"
+    span.btn.btn-success ng-click="worklog.addBlankTimeframe()" ng-class="{'disabled': worklog.creditBlocked()}"
       i.fa.fa-plus
       | Add range
     span.btn.btn-default ng-click="worklog.roundupTimeframes()"
@@ -110,7 +110,7 @@ div ng-controller="WorklogsController"
   .row
 
   hr
-  span.btn.btn-primary ng-click="worklog.saveWrapper()" ng-class="{'disabled': worklog.loading}"
+  span.btn.btn-primary ng-click="worklog.saveWrapper()" ng-class="{'disabled': worklog.loading || worklog.creditBlocked()}"
     | Save worklog
     span ng-show="worklog.loading"
       '

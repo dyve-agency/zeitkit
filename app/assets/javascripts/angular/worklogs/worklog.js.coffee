@@ -135,5 +135,8 @@ app.factory "Worklog", ["RailsResource", "Timeframe", "railsSerializer", "Client
       coeff = 1000 * 60 * 5
       new Date(Math.floor(date.getTime() / coeff) * coeff)
 
+    creditBlocked: ->
+      @client && @client.creditBlockReason && @client.creditBlockReason.length
+
   Worklog
 ]
