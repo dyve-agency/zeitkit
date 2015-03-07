@@ -2,7 +2,7 @@
   .alert.alert-info This template is used whenever you create a new invoice.
   .row
     .col-md-3
-      = f.input :vat
+      = f.input :vat, label: "VAT in %"
     .col-md-3
       = f.input :includes_vat, label: "Includes VAT",
         wrapper: :vertical_boolean
