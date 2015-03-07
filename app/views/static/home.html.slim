@@ -2,7 +2,10 @@
   h1 The toolset for developers and freelancers.
   .row
     .col-md-8
-      p The developer companion reducing administrative overhead:
+      p
+        | A fully fledged toolset to make working remotely more productive.
+        br
+        = link_to "Made by remote workers with years of experience.", "http://zeit.io"
       ul.feature-list
         li
           i.fa.fa-clock-o
@@ -10,6 +13,9 @@
         li
           i.fa.fa-group
           span Administer your team with shared clients.
+        li
+          i.fa.fa-clock-o
+          span Share current budget and progress with clients.
         li
           i.fa.fa-credit-card
           span Painlessly invoice based on worklogs and expenses.
@@ -20,14 +26,13 @@
           i.fa.fa-github
           span
             = link_to "https://github.com/ZEITIO/zeitkit" do
-              |100% open source.
+              |100% open source. Fork + make Zeitkit better.
       = simple_form_for "", url: signup_email_path do |f|
         input.col-md-3#signup-email[name="signup_email" type="hidden"
           placeholder="e.g. me@mymail.com"]
         = f.button :submit, "Create your account.",
           class: "home-submit btn-large signup-link"
       p No contracts, no fees. It's free. Signup.time < 2.seconds.
-      hr.colorgraph
 
     .col-md-4.hidden-sm
       i.fa.fa-clock-o.large-icon
