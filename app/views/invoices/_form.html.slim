@@ -25,7 +25,7 @@
           - @invoice.products.each do |product|
             input name="invoice[product_ids][]" value="#{product.id}"
     .col-md-5
-      select.invoice-select.select multiple="multiple"
+      select.invoice-select.select.form-control multiple="multiple"
         - @invoice.worklogs.sort_by(&:created_at).each do |worklog|
           option class="worklog" value="#{worklog.id}"= worklog.title
         - @invoice.expenses.sort_by(&:created_at).each do |expense|
@@ -50,10 +50,10 @@
             h3 Please pick a client first.
           - elsif @worklogs && @worklogs.empty?
             h3 There are no unpaid worklogs.
-            select.worklogs-select.select.hidden multiple="multiple"
+            select.worklogs-select.select.form-control hidden multiple="multiple"
           - else
             h3.hidden There are no unpaid worklogs.
-            select.worklogs-select.select multiple="multiple"
+            select.worklogs-select.select.form-control multiple="multiple"
               - @worklogs.each do |worklog|
                 option class="worklog" value="#{worklog.id}"= worklog.title
         #expenses.tab-pane
@@ -61,10 +61,10 @@
             h3 Please pick a client first.
           - elsif @expenses && @expenses.empty?
             h3 There are no unpaid expenses.
-            select.expenses-select.select.hidden multiple="multiple"
+            select.expenses-select.select.hidden.form-control multiple="multiple"
           - else
             h3.hidden There are no unpaid expenses.
-            select.expenses-select.select multiple="multiple"
+            select.expenses-select.select.form-control multiple="multiple"
               - @expenses.each do |expense|
                 option class="expense" value="#{expense.id}"= expense.title
         #products.tab-pane
@@ -73,11 +73,11 @@
           - if @products && @products.empty?
             h3
               = link_to "Please create a product first.", new_product_path
-            select.products-select.select.hidden multiple="multiple"
+            select.products-select.select.hidden.form-control multiple="multiple"
           - else
             h3.hidden
               = link_to "Please create a product first.", new_product_path
-            select.products-select.select multiple="multiple"
+            select.products-select.select.form-control multiple="multiple"
               - @products.each do |product|
                 option class="product" data-title="#{product.display_title}" data-currency="#{product.currency.symbol}" data-price="#{product.charged_total / 100}" value="#{product.id}"= product.display_title + ' - ' + product.price_tag
   hr
