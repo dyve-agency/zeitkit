@@ -6,6 +6,7 @@ class InvoicesController < ApplicationController
 
   def index
     @invoices = @invoices.order("created_at DESC")
+    @chart_data = current_user.invoices.where("created_at >= ?", 1.year.ago).group_by_month(:created_at).sum("total_cents / 100")
     respond_with @invoices
   end
 

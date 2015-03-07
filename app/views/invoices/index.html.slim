@@ -2,6 +2,9 @@
   = link_to "New invoice", new_invoice_path, class: "btn btn-default btn-primary"
 h1.margin-top-0 Invoices
 .clear-fix
+- if @invoices.present?
+  p Invoiced amount by month
+  = line_chart @chart_data
 table.table.table-bordered
   thead
     tr
