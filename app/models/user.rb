@@ -17,6 +17,8 @@ class User < ActiveRecord::Base
     :last_name,
     :authentications_attributes,
     :time_zone,
+    :first_name,
+    :last_name,
     :username
 
   has_many :clients

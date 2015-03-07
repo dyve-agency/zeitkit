@@ -18,12 +18,14 @@
       .col-md-4
         = f.input :email
         = f.input :username
+        = f.input :first_name
+        = f.input :last_name
         = f.input :company_name
-        = f.input :currency, :as => :select, :collection => Money::Currency.pretty_currency_names, label_method: :first, value_method: :last, include_blank: false
       .col-md-4
         = f.input :street
         = f.input :city
         = f.input :zip
+        = f.input :currency, :as => :select, :collection => Money::Currency.pretty_currency_names, label_method: :first, value_method: :last, include_blank: false
         = f.input :time_zone, label: "Timezone"
 
     .form-actions
