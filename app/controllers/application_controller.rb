@@ -6,6 +6,12 @@ class ApplicationController < ActionController::Base
   before_filter :check_and_set_mac_design
   before_filter :init_gon, if: :current_user
 
+  # FIX issue with rails responding with plain json. See:
+  # http://stackoverflow.com/questions/16400639/back-button-chrome-gets-json-instead-of-html-in-play-framework
+  before_filter do
+    response.headers["Vary"]= "Accept"
+  end
+
   def check_and_set_mac_design
     cookies[:mac_app] = true if params[:mac_app]
   end
