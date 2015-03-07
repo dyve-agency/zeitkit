@@ -19,7 +19,10 @@ app.controller "WorklogsController", ["$scope", "$q", "Worklog", "Client", ($sco
 
     $q.all(query).then (results)->
       $scope.clients = results[0]
-      $scope.worklog = if idPresent then results[1] else new Worklog
+      if idPresent
+        $scope.worklog = results[1]
+      else
+        $scope.worklog = new Worklog
 
       # All loaded, start watching.
       $scope.$watch("worklog.client", (newValue, oldValue)->
@@ -34,6 +37,11 @@ app.controller "WorklogsController", ["$scope", "$q", "Worklog", "Client", ($sco
         t = $scope.worklog.calcTotal()
         $scope.worklog.total = t
       , true)
+
+      if gon.client_id
+        getSelectedClient = ->
+          _.select($scope.clients, (c)-> c.id == gon.client_id)[0]
+        $scope.worklog.client = getSelectedClient()
 
   $scope.open = ($event, timeframe)->
     $event.preventDefault()
