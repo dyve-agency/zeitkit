@@ -17,8 +17,11 @@ table.table.table-bordered
         td= tu.user.username
         td= tu.state
         td
-          = link_to "Remove", tu, class: "btn btn-default",
-            method: :delete
+          - if @team.created_by? current_user
+            = link_to "Remove", tu, class: "btn btn-default",
+              method: :delete
+          - else
+            | -
 hr.colorgraph
 h2 Invite new user to team
 = simple_form_for @form, url: team_users_path, method: "POST" do |f|
