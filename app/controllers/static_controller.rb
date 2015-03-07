@@ -4,6 +4,7 @@ class StaticController < ApplicationController
 
   def home
     @css_class = "home-design"
+    redirect_to worklogs_path if current_user
   end
 end
 

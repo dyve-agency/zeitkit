@@ -1,7 +1,7 @@
 .hero-unit
   h1 The toolset for developers and freelancers.
   .row
-    .col-md-6
+    .col-md-8
       p The developer companion reducing administrative overhead:
       ul.feature-list
         li
@@ -21,17 +21,15 @@
           span
             = link_to "https://github.com/ZEITIO/zeitkit" do
               |100% open source.
-      - if !current_user
-        = simple_form_for "", url: signup_email_path do |f|
-          input.col-md-3#signup-email[name="signup_email" type="hidden"
-            placeholder="e.g. me@mymail.com"]
-          = f.button :submit, "Create your account.",
-            class: "home-submit btn-large signup-link"
-        p No contracts, no fees. It's free. Signup.time < 2.seconds.
-      - else
-        = link_to "My Account", user_path(current_user), class: "btn btn-default btn-large"
+      = simple_form_for "", url: signup_email_path do |f|
+        input.col-md-3#signup-email[name="signup_email" type="hidden"
+          placeholder="e.g. me@mymail.com"]
+        = f.button :submit, "Create your account.",
+          class: "home-submit btn-large signup-link"
+      p No contracts, no fees. It's free. Signup.time < 2.seconds.
+      hr.colorgraph
 
-    .col-md-3.offset1.hidden-sm
-      i.fa.fa-briefcase.large-icon
+    .col-md-4.hidden-sm
+      i.fa.fa-clock-o.large-icon
 javascript:
   window.App.SignupTracker.init()
