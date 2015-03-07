@@ -84,7 +84,9 @@
   h3 Finalize.
   .row
     .col-md-3
-      = f.input :includes_vat, label: false, hint: "The total includes value added tax."
+      = f.input :includes_vat, wrapper: :vertical_boolean,
+        label: "The total includes value added tax"
+      .clearfix
       = f.input :vat
       = f.input :number
       = f.input :discount
