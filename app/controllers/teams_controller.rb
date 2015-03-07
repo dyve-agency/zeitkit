@@ -14,7 +14,7 @@ class TeamsController < ApplicationController
   end
 
   def members
-    @team_users = @team.team_users.order("users.username ASC").
+    @team_users = @team.team_users.order("state DESC, users.username ASC").
       joins(:user).preload(:user)
     @form = TeamInviteForm.new(team_id: @team.id)
   end

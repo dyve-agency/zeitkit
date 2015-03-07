@@ -8,12 +8,14 @@ table.table.table-bordered
   thead
     tr
       th Name
+      th State
       th Controls
 
   tbody
     - @team_users.each do |tu|
       tr
         td= tu.user.username
+        td= tu.state
         td
           = link_to "Remove", tu, class: "btn btn-default",
             method: :delete
