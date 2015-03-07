@@ -1,4 +1,9 @@
 class TeamsController < ApplicationController
+
+  def index
+    @teams = current_user.teams.includes(:users).order("name DESC").decorate
+  end
+
   def show
     @team           = current_user.teams.find(params[:id])
     @form           = TeamAggregator.new(params[:team_aggregator])
