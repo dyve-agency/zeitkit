@@ -43,8 +43,16 @@ module ApplicationHelper
     ""
   end
 
-
   def absolute_path path
     request.host_with_port + path
   end
+
+  def dev_tools
+    if Rails.env.development? || Rails.env.staging?
+      capture do
+        render partial:"shared/dev_tools"
+      end
+    end
+  end
+
 end

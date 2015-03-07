@@ -52,11 +52,11 @@ class User < ActiveRecord::Base
   after_create :build_invoice_default
   after_create :build_initial_temp_worklog_save
 
-  scope :paid, where(invoice_id: !nil)
-  scope :no_demo_user, where("email NOT LIKE 'demo%@zeitkit.com'")
-  scope :demo_user, where("email LIKE 'demo%@zeitkit.com'")
-  scope :no_signup_email_sent, where(signup_email_sent: false)
-  scope :older_than_30_minutes, lambda {where("created_at <= ?", 30.minutes.ago)}
+  scope :paid, -> { where(invoice_id: !nil) }
+  scope :no_demo_user, -> { where("email NOT LIKE 'demo%@zeitkit.com'") }
+  scope :demo_user, -> { where("email LIKE 'demo%@zeitkit.com'") }
+  scope :no_signup_email_sent, -> { where(signup_email_sent: false) }
+  scope :older_than_30_minutes, -> { where("created_at <= ?", 30.minutes.ago) }
 
   def self.unused_random_email
     email = nil

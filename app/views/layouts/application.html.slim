@@ -17,6 +17,7 @@ html lang="en" class="#{check_if_css_class}"
     = javascript_include_tag "application"
     = csrf_meta_tags
   body
+    = dev_tools
     #wrapper
       = render "layouts/header"
       - if show_tutorial?

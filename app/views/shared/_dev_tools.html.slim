@@ -1,0 +1,9 @@
+#dev-tools
+  = form_tag({:controller => "/dev", :action=>"impersonate"}, :class=>"form-inline", rel:"auto-submit") do
+    = link_to "routes", "/rails/info/routes", class:"btn"
+    = link_to "mailcatcher", "http://127.0.0.1:1080", class:"btn"
+    = select_tag "user_id", options_for_select(User.no_demo_user.order("id ASC").collect{|u| ["[#{u.email}] #{u.id}", u.id] },  [current_user.try(:email), current_user.try(:id)] ), style:"width:200px"
+    button.btn.btn-xs.btn-white onClick="$('#dev-tools form').submit();"
+      i.fa.fa-arrow-right
+    = link_to "X", "#", class:"btn", onClick:"$('#dev-tools').hide();return false;"
+  = link_to "<<", "#", class:"btn hide-when-active", onClick:"$('#dev-tools').toggleClass('active');return false;", onMouseOver:"$('#dev-tools').toggleClass('active');return false;"
