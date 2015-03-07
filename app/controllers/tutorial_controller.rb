@@ -1,16 +1,15 @@
 class TutorialController < ApplicationController
 
-  respond_to :json, :html
-
   def hide
-    session[:show_tutorial] = false
-    respond_with [], status: 204, location: "hide_tutorial"
+    current_user.show_tutorial = false
+    current_user.save
+    render json: {}, status: 204
   end
 
   def show
-    session[:show_tutorial] = true
-    @tutorial = Tutorial.new current_user
-    render partial: "layouts/tutorial", layout: false
+    current_user.show_tutorial = true
+    current_user.save
+    render json: {}, status: 200
   end
 
 end

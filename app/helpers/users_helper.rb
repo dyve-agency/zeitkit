@@ -6,10 +6,15 @@ module UsersHelper
     "#{destruct[:hours]} hour(s), #{destruct[:minutes]} minute(s) and #{destruct[:seconds]} second(s)"
   end
 
-  def show_tutorial?
-    if (current_user && current_user.show_tutorial? && not_on_home? && session[:show_tutorial] != false) || session[:show_tutorial] && not_on_home? && current_user
+  def tutorial
+    if show_tutorial?
       @tutorial ||= Tutorial.new(current_user)
+      render "layouts/tutorial"
     end
+  end
+
+  def show_tutorial?
+    current_user && current_user.show_tutorial?
   end
 
 end

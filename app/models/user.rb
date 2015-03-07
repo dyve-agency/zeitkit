@@ -192,7 +192,7 @@ class User < ActiveRecord::Base
   end
 
   def show_tutorial?
-    Tutorial.new(self).show_tutorial?
+    show_tutorial
   end
 
   def self.email_new_users

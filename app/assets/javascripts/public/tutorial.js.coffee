@@ -55,7 +55,6 @@ Tutorial =
       type: 'GET'
       dataType: 'html'
       success: (response) ->
-        $('.navbar-fixed-top').after(response)
-        _that.initHider()
+        window.location.reload()
       error: () ->
         console.log('there was an error')
