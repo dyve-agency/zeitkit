@@ -1,7 +1,27 @@
 class TeamsController < ApplicationController
 
+  before_filter :load_team, only: %i[show edit update]
+
   def index
     @teams = current_user.teams.includes(:users).order("name DESC").decorate
+  end
+
+  def new
+    @team = Team.new
+  end
+
+  def edit
+  end
+
+  def create
+    @team = Team.new(params[:team])
+    @team.creator = current_user
+    @team.users << current_user
+    if @team.save
+      redirect_to teams_path, notice: "Team successfully created"
+    else
+      render "new"
+    end
   end
 
   def show
@@ -13,5 +33,10 @@ class TeamsController < ApplicationController
       @form.specific_range = "this_month"
     end
     @form.aggregate
+  end
+
+private
+  def load_team
+    @team = current_user.teams.find(params[:id])
   end
 end
