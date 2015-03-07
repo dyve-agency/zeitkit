@@ -96,7 +96,7 @@ class User < ActiveRecord::Base
   end
 
   def clients_and_shared_clients
-    shared_clients + clients
+    @clients_and_shared ||= Client.where(id: (shared_clients + clients).map(&:id))
   end
 
   def owns_client?(client)

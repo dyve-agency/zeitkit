@@ -2,7 +2,7 @@ class WorklogsController < ApplicationController
 
   def index
     @user = current_user
-    @clients = @user.clients_and_shared_clients
+    @clients = @user.clients_and_shared_clients.order("name ASC")
     if params[:updated_since]
       @worklogs = Worklog.updated_since(params[:updated_since]).where(user_id: current_user.id).includes({client: :user}, :timeframes).joins(:timeframes).order("timeframes.started DESC")
     else
