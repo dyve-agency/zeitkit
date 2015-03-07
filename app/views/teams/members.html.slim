@@ -1,0 +1,27 @@
+h1.margin-top-0
+  = @team.name
+  '
+  |-
+  '
+  | team members
+table.table.table-bordered
+  thead
+    tr
+      th Name
+      th Controls
+
+  tbody
+    - @team_users.each do |tu|
+      tr
+        td= tu.user.username
+        td
+          = link_to "Remove", tu, class: "btn btn-default",
+            method: :delete
+hr.colorgraph
+h2 Invite new user to team
+= simple_form_for @form, url: team_users_path, method: "POST" do |f|
+  .row
+    .col-md-6
+      = f.input :username
+      = f.input :team_id, as: :hidden
+      = f.button :submit, "Invite"

@@ -14,11 +14,13 @@ table.table.table-bordered
       tr
         td= link_to t.name, t
         td
-          = t.users.length
-          |x
+          = link_to members_team_path(t) do
+            = t.users.length
+            |x
         td
           .btn-group
             = link_to "Edit", edit_team_path(t), class: "btn btn-default"
+            = link_to "Members", members_team_path(t), class: "btn btn-default"
             - if t.created_by? current_user
               = link_to "Delete", team_path(t), method: :delete,
                 class: "btn btn-default",

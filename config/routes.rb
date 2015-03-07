@@ -40,7 +40,12 @@ Timetracker::Application.routes.draw do
   resources :invoice_default, only: [:update, :edit]
   resources :expenses, except: [:show]
   resources :products, except: [:show]
-  resources :teams
+  resources :teams do
+    member do
+      get :members
+    end
+  end
+  resources :team_users, only: %i[create destroy show]
 
   resources :sessions
   resources :password_resets, only: [:create, :edit, :update, :new]

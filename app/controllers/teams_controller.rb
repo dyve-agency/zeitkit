@@ -1,6 +1,6 @@
 class TeamsController < ApplicationController
 
-  before_filter :load_team, only: %i[show edit update destroy]
+  before_filter :load_team, only: %i[show edit update destroy members]
 
   def index
     @teams = current_user.teams.includes(:users).order("name DESC").decorate
@@ -11,6 +11,12 @@ class TeamsController < ApplicationController
   end
 
   def edit
+  end
+
+  def members
+    @team_users = @team.team_users.order("users.username ASC").
+      joins(:user).preload(:user)
+    @form = TeamInviteForm.new(team_id: @team.id)
   end
 
   def update
