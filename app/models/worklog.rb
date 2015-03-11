@@ -163,6 +163,11 @@ class Worklog < ActiveRecord::Base
     hourly_rate.cents == 0
   end
 
+  # Freshly calculate the total from each timeframe of the worklog.
+  def calc_total
+    duration / 1.hour * hourly_rate
+  end
+
   def set_client_share
     if user && client && created_for_shared_client?
       self.client_share = user.client_shares.where(client_id: self.client_id).first
