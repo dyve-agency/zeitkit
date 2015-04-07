@@ -5,7 +5,7 @@
         = link_to "Please create a client first.", new_client_path
     - else
       h3 Pick the client.
-      = f.input :client_id, collection: current_user.clients
+      = f.input :client_id, collection: current_user.clients.order("name ASC")
   - else
     h3 Client: #{@invoice.client.name}
   hr
