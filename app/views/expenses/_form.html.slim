@@ -1,7 +1,7 @@
 = simple_form_for @expense do |f|
   .row
     .col-md-3
-      = f.input :client_id, collection: current_user.clients
+      = f.input :client_id, collection: current_user.clients, default: ''
     .col-md-3
       = f.input :total
   = f.input :reason
