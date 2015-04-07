@@ -139,6 +139,11 @@ class InvoicesController < ApplicationController
     @client
   end
 
+  def reset_date
+    @invoice.update_column :created_at, DateTime.now
+    redirect_to invoices_path, notice: "Invoice date was updated"
+  end
+
   def set_invoice_worklogs
     @client ? @client.worklogs.unpaid.no_invoice.includes(:timeframes).sort_by(&:start_time) : nil
   end

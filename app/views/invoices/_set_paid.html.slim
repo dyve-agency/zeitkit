@@ -1,10 +1,8 @@
 - if invoice.paid_on
   = link_to toggle_paid_invoice_path(invoice),
     class: "hidden-phone", method: :post do
-    i.fa.fa-remove
     span Set unpaid
 - else
   = link_to toggle_paid_invoice_path(invoice),
     class: "hidden-phone", method: :post do
-    i.fa.fa-check
     span Set paid

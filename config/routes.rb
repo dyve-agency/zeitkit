@@ -31,6 +31,7 @@ Timetracker::Application.routes.draw do
   resources :invoices do
     member do
       post "toggle_paid"
+      post "reset_date"
       get "pdf_export"
       get "worklogs_export"
     end

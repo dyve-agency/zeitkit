@@ -33,6 +33,8 @@ table.table.table-bordered
           ul.dropdown-menu
             li= render "set_paid", invoice: invoice
             li= link_to 'Details'.html_safe, invoice
+            li= link_to 'Reset Invoice Date',
+            reset_date_invoice_path(invoice), method: :post, data: {confirm: "Are you sure? This will reset the invoice date to now. Not undoable."}
             li= link_to "Download PDF".html_safe,
               pdf_export_invoice_path(invoice)
             li= link_to "Download Worklogs PDF".html_safe,
