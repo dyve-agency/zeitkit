@@ -23,6 +23,7 @@ div ng-controller="WorklogsController"
     .col-xs-5
       label Client
       select.form-control ng-model="worklog.client" ng-options="client.nameOrCompanyName() for client in clients | orderBy:'nameOrCompanyName()' track by client.id" ng-change="worklog.clientChanged()"
+        option value="" ng-if="false"
     .col-xs-5 ng-hide="worklog.client.shared"
       label Hourly rate
       input.form-control type="text" ng-model="worklog.hourlyRate"

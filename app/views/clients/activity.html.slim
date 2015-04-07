@@ -11,7 +11,7 @@ p = link_to "http://#{absolute_path activity_client_path(@client, client_token: 
       = f.input :end_date, as: :date_picker
     .col-xs-6.col-md-3
       = f.input :specific_range, as: :select,
-        collection: ClientAggregator::RANGE_VALUES, label_method: ->(o) { t(o) }
+        collection: ClientAggregator::RANGE_VALUES, label_method: ->(o) { t(o) }, default: ''
     .col-xs-6.col-md-3
       .aligned-submit-button
         = f.button :submit, "Submit", class: "btn-primary"
