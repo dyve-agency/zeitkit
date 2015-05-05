@@ -1,8 +1,7 @@
 class ClientsController < ApplicationController
   load_and_authorize_resource except: [:activity]
   skip_before_filter :require_login, only: [:activity]
-
-
+  serialization_scope :current_user
   respond_to :html, :json
 
   def index

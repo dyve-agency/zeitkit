@@ -15,9 +15,9 @@ GIT
 
 GIT
   remote: git@github.com:rails-api/active_model_serializers.git
-  revision: 652493848addf6870776619053df0036b1e22a3b
+  revision: 6a06b90743c3de6dda829ee72e40eb4135f65b56
   specs:
-    active_model_serializers (0.10.0.pre)
+    active_model_serializers (0.10.0.rc1)
       activemodel (>= 4.0)
 
 GIT
@@ -200,7 +200,7 @@ GEM
       mime-types (>= 1.16, < 3)
     method_source (0.8.2)
     mime-types (2.4.2)
-    minitest (5.5.1)
+    minitest (5.6.1)
     momentjs-rails (2.8.3)
       railties (>= 3.1)
     monetize (1.1.0)
@@ -311,7 +311,7 @@ GEM
       libv8 (~> 3.16.14.0)
       ref
     thor (0.19.1)
-    thread_safe (0.3.4)
+    thread_safe (0.3.5)
     tilt (1.4.1)
     ttfunk (1.4.0)
     tzinfo (1.2.2)
