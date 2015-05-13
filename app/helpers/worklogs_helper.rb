@@ -56,6 +56,10 @@ module WorklogsHelper
     "#{hours}h:#{minutes}min"
   end
 
+  def hours_minutes_seconds_combined(hours, minutes, seconds)
+    "#{hours}h:#{minutes}min:#{seconds}sec."
+  end
+
   def boolean_with_icon(condition: false, text: "")
     if condition
       "<i class='icon-ok'></i> #{text}".html_safe

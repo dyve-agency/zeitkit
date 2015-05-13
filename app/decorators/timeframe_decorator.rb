@@ -19,4 +19,11 @@ class TimeframeDecorator < Draper::Decorator
     h.hours_minutes_combined hours, minutes
   end
 
+  def hours_minutes_seconds
+    minutes       = (duration / 60) % 60
+    hours         = duration / (60 * 60)
+    seconds       = duration - (minutes * 60 + hours * 3600)
+    h.hours_minutes_seconds_combined hours, minutes, seconds
+  end
+
 end
