@@ -24,13 +24,7 @@ class AccessToken < ActiveRecord::Base
 
       tokens = tokens.with_expirable(true)
 
-      if ! tokens.empty?
-        if defined?(MongoMapper) && self.ancestors.include?(MongoMapper::Document)
-          tokens.each {|t| t.delete } # ...
-        else
-          tokens.delete_all
-        end
-      end
+      tokens.delete_all unless tokens.empty?
     end
   end
 
@@ -69,19 +63,6 @@ class AccessToken < ActiveRecord::Base
 
   # Auxiliary class method, query adapter
   def self.query_adapter(attr, comparison_operator, value)
-    if (defined?(Mongoid) && self.ancestors.include?(Mongoid::Document)) ||
-       (defined?(MongoMapper) && self.ancestors.include?(MongoMapper::Document))
-
-       case comparison_operator
-       when '='
-         self.where(attr => value)
-       when '<'
-         self.where(attr.lt => value)
-       else
-         nil
-       end
-
-    else
       case comparison_operator
       when '='
         self.where(attr => value)
@@ -90,7 +71,6 @@ class AccessToken < ActiveRecord::Base
       else
         nil
       end
-    end
   end
 
   #
