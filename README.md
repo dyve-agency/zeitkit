@@ -25,9 +25,16 @@ The goal of Zeitkit has been to develop a super simple time tracking software th
 
 ## Setup
 
+Prerequisite: 
+```
+Ruby 2.2.2
+Postgresql 9.3+
+Redis server
+```
+
 Make sure you have mailcatcher installed:
 
-```
+```shell
 gem install mailcatcher
 # Start mailcatcher
 mailcatcher
@@ -35,13 +42,13 @@ mailcatcher
 
 Install all ruby gems:
 
-```
+```ruby
 bundle install
 ```
 
 Start everything:
 
-```
+```shell
 bundle exec rails s
 ```
 
@@ -52,4 +59,4 @@ http://localhost:3000
 ```
 
 ## TODO
-* A lot
+* Session store should be configurable with an environment variable REDIS_SESSION_STORE

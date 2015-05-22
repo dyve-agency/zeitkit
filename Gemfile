@@ -25,6 +25,9 @@ gem 'jbuilder'
 gem "permanent_records", "~> 3.1.3"
 gem 'validates_email_format_of'
 
+# Session store and cache
+gem 'redis-rails'
+
 # Wkhtmltopdf
 gem 'wkhtmltopdf-binary', '~> 0.9.9.3'
 
