@@ -84,7 +84,8 @@ class ClientAggregator
       worklog_id: worklog.id,
       worklog_summary: worklog.summary,
       started: worklog.start_time,
-      ended: worklog.end_time
+      ended: worklog.end_time,
+      timeframes: worklog.timeframes
     }
   end
 
@@ -118,6 +119,7 @@ class ClientAggregator
     attribute :worklog_summary
     attribute :started
     attribute :ended
+    attribute :timeframes
 
     def started_formatted
       I18n.l started, format: :short
