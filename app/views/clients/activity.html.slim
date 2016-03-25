@@ -32,8 +32,12 @@ p = link_to "http://#{absolute_path activity_client_path(@client, client_token: 
             tr
               td = r.worklog_id
               td = r.username
-              td.no-wrap = r.started_formatted
-              td.no-wrap = r.ended_formatted
+              td
+                - r.timeframes.each do |tfs|
+                  span.timeframes = tfs.started.to_formatted_s(:short)
+              td
+                - r.timeframes.each do |tfe|
+                  span.timeframes = tfe.ended.to_formatted_s(:short)
               td = r.hours_formatted
               td = markdown r.worklog_summary
               td.text-right = humanized_money_with_symbol r.total
