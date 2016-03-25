@@ -9,7 +9,8 @@ table.table.table-bordered
     - @worklogs.group_by {|wl| wl.user}.each do |user, worklogs|
       tr
         td= user.username
-        td= distance_of_time_in_words 0, (worklogs.map(&:duration).inject(:+) || 0).to_i, false
+        /td= distance_of_time_in_words 0, (worklogs.map(&:duration).inject(:+) || 0).to_i, false
+        td= hours_minutes_combined @hours, @minutes
         td= with_currency (worklogs.map(&:total).inject(:+) || 0)
 
 hr
@@ -48,4 +49,3 @@ table.table.table-bordered.table-condensed
       td.lower-case= hours_minutes_combined @hours, @minutes
       td
       td.nowrap= with_currency @sum
-
