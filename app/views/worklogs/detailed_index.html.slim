@@ -3,14 +3,14 @@ table.table.table-bordered
   thead
     tr
       th User
-      th Duration
+      th Duration (HH:MM:SS)
       th Price
   tbody
     - @worklogs.group_by {|wl| wl.user}.each do |user, worklogs|
       tr
         td= user.username
+        td = Time.at(worklogs.map(&:duration).inject(:+) || 0).utc.strftime("%H:%M:%S")
         /td= distance_of_time_in_words 0, (worklogs.map(&:duration).inject(:+) || 0).to_i, false
-        td= hours_minutes_combined @hours, @minutes
         td= with_currency (worklogs.map(&:total).inject(:+) || 0)
 
 hr
