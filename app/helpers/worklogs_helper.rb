@@ -52,6 +52,14 @@ module WorklogsHelper
     request.parameters.merge(new_param_hash)
   end
 
+  def hours_minutes_combined_from_seconds(total_seconds)
+    minutes = total_seconds / 60
+    seconds = total_seconds % 60
+    hours = minutes / 60
+    minutes = minutes % 60
+    return "#{hours}h:#{minutes}min:#{seconds}s"
+  end
+
   def hours_minutes_combined(hours, minutes)
     "#{hours}h:#{minutes}min"
   end
