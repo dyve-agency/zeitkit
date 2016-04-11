@@ -63,7 +63,7 @@ class Invoice < ActiveRecord::Base
   def days_not_paid
     return if paid_on
     if invoice_date
-      generated_at = invoice_date.to_datetime
+      generated_at = invoice_date
     else
       generated_at = created_at
     end
