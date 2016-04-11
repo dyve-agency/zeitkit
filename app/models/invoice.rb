@@ -62,7 +62,12 @@ class Invoice < ActiveRecord::Base
 
   def days_not_paid
     return if paid_on
-    (Time.zone.now - created_at) / 1.day
+    if invoice_date
+      generated_at = invoice_date.to_datetime
+    else
+      generated_at = created_at
+    end
+    (Time.zone.now - generated_at) / 1.day
   end
 
   # Returns a phrase including the vat.
