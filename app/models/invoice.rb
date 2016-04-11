@@ -9,7 +9,7 @@ class Invoice < ActiveRecord::Base
 
   attr_accessible :client_id, :includes_vat, :user_id, :vat, :paid_on,
     :total, :note, :number, :payment_terms, :payment_info, :worklog_ids,
-    :expense_ids, :product_ids, :content, :discount
+    :expense_ids, :product_ids, :content, :discount, :invoice_date
 
   belongs_to :user
   belongs_to :client
