@@ -5,8 +5,8 @@ class InvoicesController < ApplicationController
   respond_to :html, :json
 
   def index
-    @invoices = @invoices.order("created_at DESC")
-    @chart_data = current_user.invoices.where("created_at >= ?", 1.year.ago).group_by_month(:created_at).sum("total_cents / 100")
+    @invoices = @invoices.order("invoice_date DESC")
+    @chart_data = current_user.invoices.where("invoice_date >= ?", 1.year.ago).group_by_month(:invoice_date).sum("total_cents / 100")
     respond_with @invoices
   end
 
