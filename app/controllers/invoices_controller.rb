@@ -141,6 +141,7 @@ class InvoicesController < ApplicationController
 
   def reset_date
     @invoice.update_column :created_at, DateTime.now
+    @invoice.update_column :invoice_date, Date.today
     redirect_to invoices_path, notice: "Invoice date was updated"
   end
 
