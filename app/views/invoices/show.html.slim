@@ -40,7 +40,11 @@
         span.value.nowrap= with_currency @invoice.calc_vat_total
       .col-xs-2.invoice-box style="font-size: 13px"
         span.key Invoice date
-        span.value= l @invoice.created_at, format: :day_month_year
+        - if @invoice.invoice_date
+          span.value= l @invoice.invoice_date, format: :day_month_year
+        - else
+          span.value= l @invoice.created_at, format: :day_month_year
+
 .row
   .col-xs-12
     .invoice-content
