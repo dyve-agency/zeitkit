@@ -12,3 +12,6 @@ en:
       kpi_month: "%b %Y"
       kpi_year: "%Y"
       worklog_summary: "%Y-%m-%d %H:%M"
+  date:
+    formats:
+      day_month_year: "%B %e, %Y"
