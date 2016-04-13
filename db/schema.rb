@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150307232255) do
+ActiveRecord::Schema.define(version: 20160411171919) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,8 +21,8 @@ ActiveRecord::Schema.define(version: 20150307232255) do
     t.boolean  "expirable",        default: true
     t.datetime "last_activity_at"
     t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
   end
 
   create_table "add_attributes_to_users", force: true do |t|
@@ -36,15 +36,15 @@ ActiveRecord::Schema.define(version: 20150307232255) do
     t.integer  "user_id"
     t.integer  "uid"
     t.string   "provider"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "client_shares", force: true do |t|
     t.integer  "client_id"
     t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
     t.string   "username"
     t.integer  "hourly_rate_cents"
   end
@@ -53,8 +53,8 @@ ActiveRecord::Schema.define(version: 20150307232255) do
     t.string   "name"
     t.integer  "hourly_rate_cents"
     t.integer  "user_id",                      null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.string   "city"
     t.string   "street"
     t.string   "zip"
@@ -69,8 +69,8 @@ ActiveRecord::Schema.define(version: 20150307232255) do
     t.integer  "client_id"
     t.integer  "total_cents"
     t.text     "reason"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.integer  "invoice_id"
   end
 
@@ -81,8 +81,8 @@ ActiveRecord::Schema.define(version: 20150307232255) do
     t.text     "payment_info"
     t.text     "note"
     t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "invoices", force: true do |t|
@@ -94,13 +94,14 @@ ActiveRecord::Schema.define(version: 20150307232255) do
     t.datetime "paid_on"
     t.float    "vat"
     t.text     "note"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
     t.text     "content"
     t.text     "payment_terms"
     t.text     "payment_info"
     t.integer  "discount_cents"
     t.integer  "subtotal_cents"
+    t.datetime "invoice_date"
   end
 
   create_table "invoices_products", force: true do |t|
@@ -112,8 +113,8 @@ ActiveRecord::Schema.define(version: 20150307232255) do
     t.text     "content"
     t.integer  "user_id"
     t.integer  "client_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.string   "share_token"
   end
 
@@ -122,8 +123,8 @@ ActiveRecord::Schema.define(version: 20150307232255) do
     t.integer  "total_cents"
     t.float    "charge"
     t.text     "title"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "team_users", force: true do |t|
@@ -156,8 +157,8 @@ ActiveRecord::Schema.define(version: 20150307232255) do
 
   create_table "temp_worklog_saves", force: true do |t|
     t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
     t.text     "summary"
     t.string   "from_date"
     t.string   "from_time"
@@ -180,8 +181,8 @@ ActiveRecord::Schema.define(version: 20150307232255) do
     t.string   "email",                                          null: false
     t.string   "crypted_password"
     t.string   "salt"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
     t.string   "remember_me_token"
     t.datetime "remember_me_token_expires_at"
     t.string   "reset_password_token"
@@ -208,8 +209,8 @@ ActiveRecord::Schema.define(version: 20150307232255) do
     t.datetime "end_time"
     t.integer  "user_id"
     t.integer  "client_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
     t.integer  "hourly_rate_cents"
     t.integer  "total_cents"
     t.text     "summary"

@@ -9,7 +9,7 @@ class Invoice < ActiveRecord::Base
 
   attr_accessible :client_id, :includes_vat, :user_id, :vat, :paid_on,
     :total, :note, :number, :payment_terms, :payment_info, :worklog_ids,
-    :expense_ids, :product_ids, :content, :discount
+    :expense_ids, :product_ids, :content, :discount, :invoice_date
 
   belongs_to :user
   belongs_to :client
@@ -62,7 +62,12 @@ class Invoice < ActiveRecord::Base
 
   def days_not_paid
     return if paid_on
-    (Time.zone.now - created_at) / 1.day
+    if invoice_date
+      generated_at = invoice_date
+    else
+      generated_at = created_at
+    end
+    (Time.zone.now - generated_at) / 1.day
   end
 
   # Returns a phrase including the vat.
