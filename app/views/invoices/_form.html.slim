@@ -1,7 +1,7 @@
 = simple_form_for @invoice do |f|
   - if @invoice.new_record?
     - if current_user.clients.empty?
-      .alert.alert-error
+      .alert.alert-danger
         = link_to "Please create a client first.", new_client_path
     - else
       h3 Pick the client.
