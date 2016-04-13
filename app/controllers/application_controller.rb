@@ -17,7 +17,13 @@ class ApplicationController < ActionController::Base
   end
 
   def not_authenticated
-    redirect_to root_path, :alert => "Please first login to access this page."
+    # Necessary so unregistered users can send messages.
+    # skip_filter in contacts_controller does not seem to work/influence this..
+    if params[:controller] == "contact_us/contacts"
+      return
+    else
+      redirect_to root_path, :alert => "Please first login to access this page."
+    end
   end
 
   def set_current_user(object_with_user_attribute)
