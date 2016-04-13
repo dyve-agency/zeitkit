@@ -9,7 +9,7 @@ ContactUs.setup do |config|
   config.mailer_from = ENV['MAILER_DEFAULT_FROM']
 
   # Configure the e-mail address which should receive the contact form email notifications.
-  config.mailer_to = "pm@zeit.io"
+  config.mailer_to = ENV['MAILER_DEFAULT_FROM']
 
   # ==> Form Configuration
 
