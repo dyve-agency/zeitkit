@@ -1,4 +1,8 @@
-h1 Clients
+.row
+  .col-xs-12
+    h1.no-margin Clients
+    = link_to 'New Client', new_client_path, class: "btn btn-default btn-primary margin-top-8 margin-bottom-19"
+
 - if @client_shares.present?
   p.lead Shared with me
   table.table.table-bordered.table-striped
@@ -55,4 +59,4 @@ table.table.table-bordered.table-striped
             = link_to activity_client_path(client), class: "btn btn-default hidden-phone" do
               i.fa.fa-clock-o
               | Activity log
-= link_to 'New client', new_client_path, class: "btn btn-default btn-primary"
+= link_to 'New Client', new_client_path, class: "btn btn-default btn-primary"

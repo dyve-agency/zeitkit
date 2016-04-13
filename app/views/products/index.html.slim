@@ -1,4 +1,8 @@
-h1 Products
+.row
+  .col-xs-12
+    h1.no-margin Products
+    = link_to 'New Product', new_product_path, class: "btn btn-default btn-primary margin-top-8 margin-bottom-19"
+
 - if current_user.products.empty?
   .alert.alert-info
     = link_to "x", "#", class: "close", data: {dismiss: "alert"}
@@ -27,4 +31,4 @@ table.table.table-bordered
             = link_to 'Delete', product, :confirm => 'Are you sure?', :method => :delete,
               class: "btn btn-default hidden-phone"
 .btn-group
-  = link_to "New product", new_product_path, class: "btn btn-default btn-primary"
+  = link_to "New Product", new_product_path, class: "btn btn-default btn-primary"
