@@ -1,4 +1,9 @@
-h1 Notes
+.row
+  .col-xs-12
+    h1.no-margin Notes
+    = link_to 'New Note', new_note_path, class: "btn btn-default btn-primary margin-top-8 margin-bottom-19"
+
+
 table.table.table-bordered.table-striped
   thead
     tr
@@ -19,5 +24,5 @@ table.table.table-bordered.table-striped
             = link_to 'Edit', edit_note_path(note), class: "btn btn-default"
             = link_to 'Delete', note, :confirm => 'Are you sure?',
               :method => :delete, class: "btn btn-default hidden-phone"
-
-= link_to 'New Note', new_note_path, class: "btn btn-default btn-primary"
+.btn-group
+  = link_to 'New Note', new_note_path, class: "btn btn-default btn-primary"

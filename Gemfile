@@ -2,7 +2,7 @@ ruby "2.2.2"
 
 source 'https://rubygems.org'
 
-gem 'rails', '4.1.6'
+gem 'rails', '4.2.0'
 
 gem 'pg'
 gem 'slim'
@@ -14,7 +14,7 @@ gem 'simple_form', git: "https://github.com/plataformatec/simple_form.git"
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 
-gem 'cancancan', git: "https://github.com/CanCanCommunity/cancancan.git"
+gem 'cancancan', git: "https://github.com/CanCanCommunity/cancancan.git", branch: "develop"
 gem 'newrelic_rpm'
 gem 'redcarpet'
 gem 'rack-force_domain'
@@ -24,6 +24,10 @@ gem 'fullcontact'
 gem 'jbuilder'
 gem "permanent_records", "~> 3.1.3"
 gem 'validates_email_format_of'
+
+# Necessary since 4.2.0 to use 'respond_to'
+gem "responders"
+gem 'contact_us', '~> 1.0.1'
 
 # Session store and cache
 gem 'redis-rails'

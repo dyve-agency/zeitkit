@@ -1,4 +1,8 @@
-h1 Expenses
+.row
+  .col-xs-12
+    h1.no-margin Expenses
+    = link_to 'New Expense', new_expense_path, class: "btn btn-default btn-primary margin-top-8 margin-bottom-19"
+
 - if current_user.expenses.empty?
   .alert.alert-info
     = link_to "x", "#", class: "close", data: {dismiss: "alert"}
@@ -36,4 +40,4 @@ table.table.table-bordered
       td= with_currency Money.new @expenses.sum(:total_cents), current_user.currency
       td
 .btn-group
-  = link_to "New expense", new_expense_path, class: "btn btn-default btn-primary"
+  = link_to "New Expense", new_expense_path, class: "btn btn-default btn-primary"

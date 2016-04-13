@@ -1,7 +1,7 @@
 = simple_form_for @invoice do |f|
   - if @invoice.new_record?
     - if current_user.clients.empty?
-      .alert.alert-error
+      .alert.alert-danger
         = link_to "Please create a client first.", new_client_path
     - else
       h3 Pick the client.
@@ -60,7 +60,8 @@
           - if !@invoice.client
             h3 Please pick a client first.
           - elsif @expenses && @expenses.empty?
-            h3 There are no unpaid expenses.
+            h3 There are no unpaid expenses for this client.
+            span = link_to "Create new expenses for this client.", new_expense_for_client_path(@invoice.client)
             select.expenses-select.select.hidden.form-control multiple="multiple"
           - else
             h3.hidden There are no unpaid expenses.

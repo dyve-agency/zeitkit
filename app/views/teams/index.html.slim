@@ -1,7 +1,7 @@
-.pull-right
-  = link_to "New Team", new_team_path, class: "btn btn-default btn-primary"
-h1.margin-top-0 Teams
-.clear-fix
+.row
+  .col-xs-12
+    h1.no-margin Teams
+    = link_to 'New Team', new_team_path, class: "btn btn-default btn-primary margin-top-8 margin-bottom-19"
 
 - if @pending_invites.present?
   - @pending_invites.each do |tu|
