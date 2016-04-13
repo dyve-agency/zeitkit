@@ -40,6 +40,7 @@ Timetracker::Application.routes.draw do
 
   resources :invoice_default, only: [:update, :edit]
   resources :expenses, except: [:show]
+  get "expenses/new/:client_id", to: "expenses#new", as: "new_expense_for_client"
   resources :products, except: [:show]
   resources :teams do
     member do

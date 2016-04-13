@@ -10,7 +10,14 @@ class ExpensesController < ApplicationController
   end
 
   def new
-    @expense.client = set_client
+    if params[:client_id]
+      client = Client.find(params[:client_id])
+      if client
+        @expense.client = client
+      end
+    else
+      @expense.client = set_client
+    end
   end
 
   def edit
