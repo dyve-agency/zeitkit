@@ -17,13 +17,7 @@ class ApplicationController < ActionController::Base
   end
 
   def not_authenticated
-    # Necessary so unregistered users can send messages.
-    # skip_filter in contacts_controller does not seem to work/influence this..
-    if params[:controller] == "contact_us/contacts"
-      return
-    else
-      redirect_to root_path, :alert => "Please first login to access this page."
-    end
+    redirect_to root_path, :alert => "Please first login to access this page."
   end
 
   def set_current_user(object_with_user_attribute)
@@ -31,12 +25,12 @@ class ApplicationController < ActionController::Base
   end
 
   # Patching the sorcery current user method
-  alias_method :old_current_user, :current_user
+  #alias_method :old_current_user, :current_user
   def current_user
-    if old_current_user
-      old_current_user.decorate
-    else
-      old_current_user
+    begin
+      super.decorate
+    rescue
+      nil
     end
   end
 
