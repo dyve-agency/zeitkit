@@ -1,39 +1,43 @@
 GIT
   remote: git://github.com/rails/protected_attributes.git
-  revision: 21efae9e2e2ca418e2e069403117ec452a66db5c
+  revision: ef8ffc4b6c3d34a226a23595cb2ed199d02198d0
   specs:
-    protected_attributes (1.0.8)
+    protected_attributes (1.1.3)
       activemodel (>= 4.0.1, < 5.0)
 
 GIT
   remote: git://github.com/zpaulovics/datetimepicker-rails.git
-  revision: cba2e2f0dd029017a65a571eac186e658426cf1b
+  revision: 36d21cec5da7f5b214925804f60e63c61c747023
   branch: master
   submodules: true
   specs:
-    datetimepicker-rails (3.1.1)
+    datetimepicker-rails (4.7.16)
+      momentjs-rails (>= 2.9.0)
 
 GIT
   remote: git@github.com:rails-api/active_model_serializers.git
-  revision: 6a06b90743c3de6dda829ee72e40eb4135f65b56
+  revision: e2ded594d31fa97201c3e2fa1106708d68d86751
   specs:
-    active_model_serializers (0.10.0.rc1)
+    active_model_serializers (0.10.0.rc5)
+      actionpack (>= 4.0)
       activemodel (>= 4.0)
+      railties (>= 4.0)
 
 GIT
   remote: https://github.com/CanCanCommunity/cancancan.git
-  revision: f02386e5058212238a7bcfe4fa3cba6964a273a9
+  revision: fbff9a114ccb76205b164c85a9b2f7d211e95171
+  branch: develop
   specs:
-    cancancan (1.9.2)
+    cancancan (1.13.1)
 
 GIT
   remote: https://github.com/NoamB/sorcery.git
-  revision: fdae28ea597e3375a20d80050aabc09937e75b5f
+  revision: c5138780d0f2cc23b19641913b6c6d613177e0dd
   specs:
-    sorcery (0.8.6)
+    sorcery (0.9.1)
       bcrypt (~> 3.1)
       oauth (~> 0.4, >= 0.4.4)
-      oauth2 (>= 0.8.0, < 1.0.0)
+      oauth2 (>= 0.8.0)
 
 GIT
   remote: https://github.com/Tretti/rails-bootstrap-helpers.git
@@ -44,36 +48,36 @@ GIT
 
 GIT
   remote: https://github.com/ankane/chartkick.git
-  revision: 31a8e5224e26449158a2f6c63f157aabd90147a5
+  revision: f76ccae0facff24fd7ceb621c48234b5ec7379dc
   specs:
-    chartkick (1.3.2)
+    chartkick (1.4.2)
 
 GIT
   remote: https://github.com/ankane/groupdate.git
-  revision: 17c75ee8b5ab03e58d3ddf9e246d0909f6e2ad3f
+  revision: f514b84370b2c180b42f30511232e5725104e2da
   specs:
-    groupdate (2.4.0)
+    groupdate (2.5.2)
       activesupport (>= 3)
 
 GIT
   remote: https://github.com/bokmann/font-awesome-rails.git
-  revision: 5d296e41a401539fb4fcc6619e85f5d4fc2a654c
+  revision: cf18e0018a893ef8b8679c187f041c48386f5b05
   specs:
-    font-awesome-rails (4.2.0.0)
-      railties (>= 3.2, < 5.0)
+    font-awesome-rails (4.6.1.0)
+      railties (>= 3.2, < 5.1)
 
 GIT
   remote: https://github.com/bootstrap-ruby/will_paginate-bootstrap.git
-  revision: 22a06630c3150af6c84550f39864e45d6b48f2e0
+  revision: 5fb486741b975f0971a7ab71bcb7b2b3162b5c0b
   specs:
     will_paginate-bootstrap (1.0.1)
       will_paginate (>= 3.0.3)
 
 GIT
   remote: https://github.com/drapergem/draper.git
-  revision: e54bd73ff95cd3bffe22d32a91e65bacc63eba3b
+  revision: 57a514133bc241e74cc4e8877d014cad4e1f12c6
   specs:
-    draper (1.4.0)
+    draper (2.1.0)
       actionpack (>= 3.0)
       activemodel (>= 3.0)
       activesupport (>= 3.0)
@@ -87,202 +91,233 @@ GIT
 
 GIT
   remote: https://github.com/pdfkit/pdfkit.git
-  revision: e6a52a30268d68f5cfbdaf1db23fc8d628bef28c
+  revision: 57658c789524aaf2196515c07a74542c41acf1e2
   specs:
-    pdfkit (0.7.0)
+    pdfkit (0.8.2)
 
 GIT
   remote: https://github.com/plataformatec/simple_form.git
-  revision: b5eccd67dc9769d580ef03934d73c63b1735b259
+  revision: ac63da0f0b38df82385493f25f649e320b0acb4a
   specs:
-    simple_form (3.1.0.rc2)
-      actionpack (~> 4.0)
-      activemodel (~> 4.0)
+    simple_form (3.2.1)
+      actionpack (> 4, < 5.1)
+      activemodel (> 4, < 5.1)
 
 GEM
   remote: https://rubygems.org/
   specs:
-    actionmailer (4.1.6)
-      actionpack (= 4.1.6)
-      actionview (= 4.1.6)
+    actionmailer (4.2.0)
+      actionpack (= 4.2.0)
+      actionview (= 4.2.0)
+      activejob (= 4.2.0)
       mail (~> 2.5, >= 2.5.4)
-    actionpack (4.1.6)
-      actionview (= 4.1.6)
-      activesupport (= 4.1.6)
-      rack (~> 1.5.2)
+      rails-dom-testing (~> 1.0, >= 1.0.5)
+    actionpack (4.2.0)
+      actionview (= 4.2.0)
+      activesupport (= 4.2.0)
+      rack (~> 1.6.0)
       rack-test (~> 0.6.2)
-    actionview (4.1.6)
-      activesupport (= 4.1.6)
+      rails-dom-testing (~> 1.0, >= 1.0.5)
+      rails-html-sanitizer (~> 1.0, >= 1.0.1)
+    actionview (4.2.0)
+      activesupport (= 4.2.0)
       builder (~> 3.1)
       erubis (~> 2.7.0)
-    activemodel (4.1.6)
-      activesupport (= 4.1.6)
+      rails-dom-testing (~> 1.0, >= 1.0.5)
+      rails-html-sanitizer (~> 1.0, >= 1.0.1)
+    activejob (4.2.0)
+      activesupport (= 4.2.0)
+      globalid (>= 0.3.0)
+    activemodel (4.2.0)
+      activesupport (= 4.2.0)
       builder (~> 3.1)
-    activerecord (4.1.6)
-      activemodel (= 4.1.6)
-      activesupport (= 4.1.6)
-      arel (~> 5.0.0)
-    activesupport (4.1.6)
-      i18n (~> 0.6, >= 0.6.9)
+    activerecord (4.2.0)
+      activemodel (= 4.2.0)
+      activesupport (= 4.2.0)
+      arel (~> 6.0)
+    activesupport (4.2.0)
+      i18n (~> 0.7)
       json (~> 1.7, >= 1.7.7)
       minitest (~> 5.1)
-      thread_safe (~> 0.1)
+      thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
-    addressable (2.3.6)
-    angularjs-rails (1.3.0)
+    addressable (2.4.0)
+    angularjs-rails (1.5.0)
     angularjs-rails-resource (1.1.1)
-    arel (5.0.1.20140414130214)
+    arel (6.0.3)
+    autoprefixer-rails (6.3.6)
+      execjs
     axiom-types (0.1.1)
       descendants_tracker (~> 0.0.4)
       ice_nine (~> 0.11.0)
       thread_safe (~> 0.3, >= 0.3.1)
-    bcrypt (3.1.7)
-    bootstrap-sass (3.3.1.0)
-      sass (~> 3.2)
-    bourbon (3.2.3)
-      sass (~> 3.2)
-      thor
+    bcrypt (3.1.11)
+    bootstrap-sass (3.3.6)
+      autoprefixer-rails (>= 5.2.1)
+      sass (>= 3.3.4)
+    bourbon (4.2.6)
+      sass (~> 3.4)
+      thor (~> 0.19)
     builder (3.2.2)
     chronic (0.10.2)
-    coderay (1.1.0)
+    coderay (1.1.1)
     coercible (1.0.0)
       descendants_tracker (~> 0.0.1)
-    coffee-rails (4.1.0)
+    coffee-rails (4.1.1)
       coffee-script (>= 2.2.0)
-      railties (>= 4.0.0, < 5.0)
-    coffee-script (2.3.0)
+      railties (>= 4.0.0, < 5.1.x)
+    coffee-script (2.4.1)
       coffee-script-source
       execjs
-    coffee-script-source (1.8.0)
+    coffee-script-source (1.10.0)
+    concurrent-ruby (1.0.1)
+    contact_us (1.0.1)
+      rails (>= 4.2.0)
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
-    dotenv (1.0.2)
-    dotenv-rails (1.0.2)
-      dotenv (= 1.0.2)
-    dotiw (2.0)
+    dotenv (2.1.1)
+    dotenv-rails (2.1.1)
+      dotenv (= 2.1.1)
+      railties (>= 4.0, < 5.1)
+    dotiw (3.1.1)
       actionpack (>= 3)
       i18n
-    equalizer (0.0.9)
+    equalizer (0.0.11)
     erubis (2.7.0)
-    execjs (2.2.2)
-    faraday (0.9.0)
+    execjs (2.6.0)
+    faraday (0.9.2)
       multipart-post (>= 1.2, < 3)
-    faraday_middleware (0.9.1)
+    faraday_middleware (0.10.0)
       faraday (>= 0.7.4, < 0.10)
-    foreman (0.63.0)
-      dotenv (>= 0.7)
-      thor (>= 0.13.6)
-    fullcontact (0.7.0)
+    foreman (0.78.0)
+      thor (~> 0.19.1)
+    fullcontact (0.13.0)
       faraday (~> 0.9.0)
       faraday_middleware (>= 0.9)
-      hashie (>= 2.0)
-      multi_xml (>= 0.5)
-      rash (>= 0.4)
-    gon (5.2.0)
-      actionpack (>= 2.3.0)
+      hashie (>= 2.0, < 4.0)
+      plissken
+    globalid (0.3.6)
+      activesupport (>= 4.1.0)
+    gon (6.0.1)
+      actionpack (>= 3.0)
       json
       multi_json
-      request_store (>= 1.0.5)
-    hashie (2.0.5)
-    hike (1.2.3)
+      request_store (>= 1.0)
+    hashie (3.4.3)
     i18n (0.7.0)
-    ice_nine (0.11.0)
-    jbuilder (2.2.2)
-      activesupport (>= 3.0.0, < 5)
+    ice_nine (0.11.2)
+    jbuilder (2.4.1)
+      activesupport (>= 3.0.0, < 5.1)
       multi_json (~> 1.2)
-    jquery-rails (3.1.2)
-      railties (>= 3.0, < 5.0)
+    jquery-rails (4.1.1)
+      rails-dom-testing (>= 1, < 3)
+      railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
-    json (1.8.2)
-    jwt (1.0.0)
-    libv8 (3.16.14.7)
-    mail (2.6.1)
-      mime-types (>= 1.16, < 3)
+    json (1.8.3)
+    jwt (1.5.1)
+    libv8 (3.16.14.13)
+    loofah (2.0.3)
+      nokogiri (>= 1.5.9)
+    mail (2.6.4)
+      mime-types (>= 1.16, < 4)
     method_source (0.8.2)
-    mime-types (2.4.2)
-    minitest (5.6.1)
-    momentjs-rails (2.8.3)
+    mime-types (3.0)
+      mime-types-data (~> 3.2015)
+    mime-types-data (3.2016.0221)
+    mini_portile2 (2.0.0)
+    minitest (5.8.4)
+    momentjs-rails (2.11.1)
       railties (>= 3.1)
-    monetize (1.1.0)
-      money (~> 6.5.0)
-    money (6.5.1)
+    monetize (1.4.0)
+      money (~> 6.7)
+    money (6.7.0)
       i18n (>= 0.6.4, <= 0.7.0)
-    money-rails (1.3.0)
+      sixarm_ruby_unaccent (>= 1.1.1, < 2)
+    money-rails (1.6.0)
       activesupport (>= 3.0)
-      monetize (~> 1.1.0)
-      money (~> 6.5.0)
+      monetize (~> 1.4.0)
+      money (~> 6.7)
       railties (>= 3.0)
-    multi_json (1.10.1)
+    multi_json (1.11.2)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
-    newrelic_rpm (3.9.5.251)
+    newrelic_rpm (3.15.1.316)
     ng-rails-csrf (0.1.0)
-    oauth (0.4.7)
-    oauth2 (0.9.4)
+    nokogiri (1.6.7.2)
+      mini_portile2 (~> 2.0.0.rc2)
+    oauth (0.5.1)
+    oauth2 (1.1.0)
       faraday (>= 0.8, < 0.10)
-      jwt (~> 1.0)
+      jwt (~> 1.0, < 1.5.2)
       multi_json (~> 1.3)
       multi_xml (~> 0.5)
-      rack (~> 1.2)
-    octokit (3.4.2)
-      sawyer (~> 0.5.3)
-    omniauth (1.2.2)
+      rack (>= 1.2, < 3)
+    octokit (4.3.0)
+      sawyer (~> 0.7.0, >= 0.5.3)
+    omniauth (1.3.1)
       hashie (>= 1.2, < 4)
-      rack (~> 1.0)
+      rack (>= 1.0, < 3)
     omniauth-github (1.1.2)
       omniauth (~> 1.0)
       omniauth-oauth2 (~> 1.1)
-    omniauth-oauth2 (1.1.2)
-      faraday (>= 0.8, < 0.10)
-      multi_json (~> 1.3)
-      oauth2 (~> 0.9.3)
+    omniauth-oauth2 (1.4.0)
+      oauth2 (~> 1.0)
       omniauth (~> 1.2)
-    pdf-core (0.4.0)
+    pdf-core (0.6.1)
     permanent_records (3.1.6)
       activerecord (>= 3.0.0)
-    pg (0.17.1)
-    prawn (1.3.0)
-      pdf-core (~> 0.4.0)
+    pg (0.18.4)
+    plissken (0.2.0)
+      symbolize (~> 4.2)
+    prawn (2.1.0)
+      pdf-core (~> 0.6.1)
       ttfunk (~> 1.4.0)
-    pry (0.10.1)
+    pry (0.10.3)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
-    pry-rails (0.3.2)
+    pry-rails (0.3.4)
       pry (>= 0.9.10)
-    quiet_assets (1.0.3)
+    quiet_assets (1.1.0)
       railties (>= 3.1, < 5.0)
-    rack (1.5.2)
+    rack (1.6.4)
     rack-force_domain (0.3.0)
-    rack-test (0.6.2)
+    rack-test (0.6.3)
       rack (>= 1.0)
-    railroady (1.2.0)
-    rails (4.1.6)
-      actionmailer (= 4.1.6)
-      actionpack (= 4.1.6)
-      actionview (= 4.1.6)
-      activemodel (= 4.1.6)
-      activerecord (= 4.1.6)
-      activesupport (= 4.1.6)
+    railroady (1.4.2)
+    rails (4.2.0)
+      actionmailer (= 4.2.0)
+      actionpack (= 4.2.0)
+      actionview (= 4.2.0)
+      activejob (= 4.2.0)
+      activemodel (= 4.2.0)
+      activerecord (= 4.2.0)
+      activesupport (= 4.2.0)
       bundler (>= 1.3.0, < 2.0)
-      railties (= 4.1.6)
-      sprockets-rails (~> 2.0)
-    railties (4.1.6)
-      actionpack (= 4.1.6)
-      activesupport (= 4.1.6)
+      railties (= 4.2.0)
+      sprockets-rails
+    rails-deprecated_sanitizer (1.0.3)
+      activesupport (>= 4.2.0.alpha)
+    rails-dom-testing (1.0.7)
+      activesupport (>= 4.2.0.beta, < 5.0)
+      nokogiri (~> 1.6.0)
+      rails-deprecated_sanitizer (>= 1.0.1)
+    rails-html-sanitizer (1.0.3)
+      loofah (~> 2.0)
+    railties (4.2.0)
+      actionpack (= 4.2.0)
+      activesupport (= 4.2.0)
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
-    rake (10.4.2)
-    rash (0.4.0)
-      hashie (~> 2.0.0)
-    redcarpet (3.2.0)
-    redis (3.2.1)
-    redis-actionpack (4.0.0)
+    rake (11.1.2)
+    redcarpet (3.3.4)
+    redis (3.2.2)
+    redis-actionpack (4.0.1)
       actionpack (~> 4)
       redis-rack (~> 1.5.0)
       redis-store (~> 1.1.0)
-    redis-activesupport (4.0.0)
-      activesupport (~> 4)
+    redis-activesupport (4.1.5)
+      activesupport (>= 3, < 5)
       redis-store (~> 1.1.0)
     redis-rack (1.5.0)
       rack (~> 1.5)
@@ -291,61 +326,67 @@ GEM
       redis-actionpack (~> 4)
       redis-activesupport (~> 4)
       redis-store (~> 1.1.0)
-    redis-store (1.1.4)
+    redis-store (1.1.7)
       redis (>= 2.2)
-    ref (1.0.5)
-    request_store (1.1.0)
-    sass (3.2.19)
-    sass-rails (4.0.3)
+    ref (2.0.0)
+    request_store (1.3.1)
+    responders (2.1.0)
+      railties (>= 4.2.0, < 5)
+    sass (3.4.22)
+    sass-rails (5.0.4)
       railties (>= 4.0.0, < 5.0)
-      sass (~> 3.2.0)
-      sprockets (~> 2.8, <= 2.11.0)
-      sprockets-rails (~> 2.0)
-    sawyer (0.5.5)
-      addressable (~> 2.3.5)
-      faraday (~> 0.8, < 0.10)
-    slim (2.1.0)
-      temple (~> 0.6.9)
-      tilt (>= 1.3.3, < 2.1)
-    slim-rails (2.1.5)
-      actionpack (>= 3.0, < 4.2)
-      activesupport (>= 3.0, < 4.2)
-      railties (>= 3.0, < 4.2)
-      slim (~> 2.0)
-    slop (3.6.0)
-    sprockets (2.11.0)
-      hike (~> 1.2)
-      multi_json (~> 1.0)
-      rack (~> 1.0)
-      tilt (~> 1.1, != 1.3.0)
-    sprockets-rails (2.2.0)
-      actionpack (>= 3.0)
-      activesupport (>= 3.0)
+      sass (~> 3.1)
       sprockets (>= 2.8, < 4.0)
-    sqlite3 (1.3.9)
-    temple (0.6.9)
-    therubyracer (0.12.1)
+      sprockets-rails (>= 2.0, < 4.0)
+      tilt (>= 1.1, < 3)
+    sawyer (0.7.0)
+      addressable (>= 2.3.5, < 2.5)
+      faraday (~> 0.8, < 0.10)
+    sixarm_ruby_unaccent (1.1.1)
+    slim (3.0.6)
+      temple (~> 0.7.3)
+      tilt (>= 1.3.3, < 2.1)
+    slim-rails (3.0.1)
+      actionmailer (>= 3.1, < 5.0)
+      actionpack (>= 3.1, < 5.0)
+      activesupport (>= 3.1, < 5.0)
+      railties (>= 3.1, < 5.0)
+      slim (~> 3.0)
+    slop (3.6.0)
+    sprockets (3.6.0)
+      concurrent-ruby (~> 1.0)
+      rack (> 1, < 3)
+    sprockets-rails (3.0.4)
+      actionpack (>= 4.0)
+      activesupport (>= 4.0)
+      sprockets (>= 3.0.0)
+    sqlite3 (1.3.11)
+    symbolize (4.5.2)
+      activemodel (>= 3.2, < 5)
+      activesupport (>= 3.2, < 5)
+      i18n
+    temple (0.7.6)
+    therubyracer (0.12.2)
       libv8 (~> 3.16.14.0)
       ref
     thor (0.19.1)
     thread_safe (0.3.5)
-    tilt (1.4.1)
+    tilt (2.0.2)
     ttfunk (1.4.0)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
-    uglifier (2.5.3)
-      execjs (>= 0.3.0)
-      json (>= 1.8.0)
-    validates_email_format_of (1.6.1)
+    uglifier (3.0.0)
+      execjs (>= 0.3.0, < 3)
+    validates_email_format_of (1.6.3)
       i18n
-    virtus (1.0.3)
+    virtus (1.0.5)
       axiom-types (~> 0.1)
       coercible (~> 1.0)
       descendants_tracker (~> 0.0, >= 0.0.3)
       equalizer (~> 0.0, >= 0.0.9)
-    whenever (0.9.3)
+    whenever (0.9.4)
       chronic (>= 0.6.3)
-    will_paginate (3.0.7)
+    will_paginate (3.1.0)
     wkhtmltopdf-binary (0.9.9.3)
 
 PLATFORMS
@@ -360,6 +401,7 @@ DEPENDENCIES
   cancancan!
   chartkick!
   coffee-rails
+  contact_us (~> 1.0.1)
   datetimepicker-rails!
   dotenv-rails
   dotiw
@@ -388,10 +430,11 @@ DEPENDENCIES
   quiet_assets
   rack-force_domain
   railroady
-  rails (= 4.1.6)
+  rails (= 4.2.0)
   rails-bootstrap-helpers!
   redcarpet
   redis-rails
+  responders
   sass-rails (>= 3.2)
   simple_form!
   slim
@@ -405,3 +448,6 @@ DEPENDENCIES
   whenever
   will_paginate-bootstrap!
   wkhtmltopdf-binary (~> 0.9.9.3)
+
+BUNDLED WITH
+   1.11.2
