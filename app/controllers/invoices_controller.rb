@@ -155,7 +155,7 @@ class InvoicesController < ApplicationController
 
   def temp_stylesheet
     manifest      = Rails.application.assets_manifest
-    path          = File.join(manifest.dir, manifest.assets['aplication_print.css'])
+    path          = File.join(manifest.dir, manifest.assets['application_print.css'])
     css           = File.read(path)
     temp_css_file = "#{Rails.root}/tmp/tmp-#{Time.now.to_i}.css"
     File.open(temp_css_file, 'w') { |file| file.write(css) }
