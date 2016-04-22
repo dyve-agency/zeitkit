@@ -22,7 +22,10 @@ app.factory "Timeframe", ["RailsResource", "railsSerializer", (RailsResource, ra
       else
         0
     durationSeconds: ->
-      (@ended - @started) / 1000
+      # For some reason the provided @ended and @started formats aren't working.
+      # It's necessary to recreate a new Date, based on the dates provided.
+      # Else the calculation causes a NaN
+      return (((new Date(@ended)) - (new Date(@started))) / 1000)
 
     setEndedNow: ->
       @ended = new Date()
