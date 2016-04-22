@@ -42,5 +42,7 @@ table.table.table-bordered
               worklogs_export_invoice_path(invoice)
             li= link_to 'Delete', invoice, confirm: 'Are you sure? This can not be undone.', method: :delete
 
+.pull-right
+  = will_paginate @collection, renderer: BootstrapPagination::Rails, class: "no-margin"
 .btn-group
   = link_to 'New Invoice', new_invoice_path, class: "btn btn-default btn-primary"
