@@ -29,7 +29,7 @@ class InvoicesController < ApplicationController
     @client = @invoice.client
     @worklogs = @invoice.worklogs.order("start_time DESC").includes(:user, :timeframes).decorate
     @sum = @worklogs.map(&:total).inject(:+)
-    seconds = @worklogs.map(&:duration).inject(:+)
+    seconds = @worklogs.map(&:duration).inject(:+) || 0
     @hours = Worklog.hours_from_seconds seconds
     @minutes = Worklog.remaining_minutes_from_seconds seconds
 
