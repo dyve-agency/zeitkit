@@ -17,7 +17,8 @@ class Worklog < ActiveRecord::Base
     :from_date,
     :from_time,
     :to_date,
-    :to_time
+    :to_time,
+    :team_id
 
   attr_accessor :from_date,
     :from_time,
@@ -34,6 +35,7 @@ class Worklog < ActiveRecord::Base
   belongs_to :client
   belongs_to :client_share
   belongs_to :invoice
+  belongs_to :team
   has_many :timeframes
 
   validates :user, :client, presence: true
