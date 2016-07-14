@@ -43,7 +43,7 @@ class Worklog < ActiveRecord::Base
 
   after_create :email_user_of_shared_client_worklog
 
-  scope :paid, -> { where(invoice_id: !nil) }
+  scope :paid, -> { where.not(invoice_id: nil) }
   scope :unpaid, -> { where(invoice_id: nil) }
   scope :no_invoice, -> { where(invoice_id: nil) }
   scope :oldest_first, -> { order("end_time ASC") }
