@@ -28,9 +28,8 @@ class UsersController < ApplicationController
   def show
     respond_to do |format|
       format.html {}
-      format.json { render json: current_user }
+      format.json { render json: current_user, include: :teams }
     end
-
   end
 
   def signup_email

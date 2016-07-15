@@ -21,7 +21,6 @@ app.factory "Worklog", ["RailsResource", "Timeframe", "railsSerializer", "Client
         sharedClients: []
         clientId: null
         client: null
-        # teams: []
         hourlyRate: 0
         comment: ""
         id: null
