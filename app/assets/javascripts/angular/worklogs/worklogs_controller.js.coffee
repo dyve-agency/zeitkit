@@ -5,6 +5,8 @@ app.controller "WorklogsController", ["$scope", "$q", "Worklog", "Client", ($sco
     $scope.hstep = 1
     $scope.mstep = 10
     $scope.clients = []
+    # How to fetch all teams of the current user?
+    # $scope.teams = []
     $scope.dateOptions =
       formatYear: "yy"
       startingDay: 1
