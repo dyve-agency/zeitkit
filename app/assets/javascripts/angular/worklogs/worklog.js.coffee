@@ -42,16 +42,22 @@ app.factory "Worklog", ["RailsResource", "Timeframe", "railsSerializer", "Client
         last_started = _.last(@timeframes).started
         if last_started
           t.started = new Date(last_started)
+          t.started.setSeconds(0,0)
         else
           t.started = new Date
+          t.started.setSeconds(0,0)
         last_ended = _.last(@timeframes).ended
         if last_ended
           t.ended = new Date(last_ended)
+          t.ended.setSeconds(0,0)
         else
           t.ended = new Date
+          t.ended.setSeconds(0,0)
       else
         t.started = new Date
         t.ended = new Date
+        t.started.setSeconds(0,0)
+        t.ended.setSeconds(0,0)
       @addNewTimeframe t
 
 

@@ -1,10 +1,11 @@
 app = angular.module("app")
 
-app.controller "WorklogsController", ["$scope", "$q", "Worklog", "Client", ($scope, $q, Worklog, Client)->
+app.controller "WorklogsController", ["$scope", "$q", "Worklog", "Client", "User", ($scope, $q, Worklog, Client, User)->
   $scope.init = ->
     $scope.hstep = 1
     $scope.mstep = 10
     $scope.clients = []
+    $scope.currentUser = null
     $scope.dateOptions =
       formatYear: "yy"
       startingDay: 1
@@ -13,14 +14,17 @@ app.controller "WorklogsController", ["$scope", "$q", "Worklog", "Client", ($sco
     # Only fetch worklog if it is present
     query = _.select [
       Client.query({}),
+      User.get(gon.current_user_id),
       if idPresent then Worklog.get(gon.worklog_id) else null
     ], (e)->
       e
 
     $q.all(query).then (results)->
       $scope.clients = results[0]
+      $scope.currentUser = results[1]
+
       if idPresent
-        $scope.worklog = results[1]
+        $scope.worklog = results[2]
       else
         $scope.worklog = new Worklog
 

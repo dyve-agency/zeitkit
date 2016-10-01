@@ -195,19 +195,6 @@ class User < ActiveRecord::Base
     show_tutorial
   end
 
-  def self.email_new_users
-    self.no_signup_email_sent.older_than_30_minutes.no_demo_user.each do |user|
-      begin
-        UserMailer.signup_email(user).deliver
-      rescue
-        nil
-      ensure
-        user.signup_email_sent = true
-        user.save
-      end
-    end
-  end
-
   # Attempt to get the name from the Fullcontact API
   # NOTE: This absolutely has to always return true because it is used in
   #       a before_create. If it returns false a rollback will be issued

@@ -21,6 +21,7 @@ table.table.table-bordered
       th.hidden-phone End
       th Duration
       th.hidden-phone Price
+      th Team
       th Controls
   tbody
     - @worklogs.each do |worklog|
@@ -31,6 +32,9 @@ table.table.table-bordered
         td.hidden-phone= l worklog.end_time, format: :short
         td= worklog.duration_hours_minutes
         td.hidden-phone= with_currency worklog.total
+        td
+          - if worklog.team.present?
+            = worklog.team.name.to_s
         td
           .btn-group.pull-right
             = link_to 'Edit', edit_worklog_path(worklog), class: "btn btn-default"
