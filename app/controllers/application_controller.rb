@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  helper Starburst::AnnouncementsHelper
   protect_from_forgery
 
   around_filter :set_time_zone

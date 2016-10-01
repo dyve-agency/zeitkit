@@ -39,7 +39,9 @@ app.controller "WorklogsController", ["$scope", "$q", "Worklog", "Client", "User
       )
       $scope.$watch("worklog.timeframes", (newValue, oldValue)->
         t = $scope.worklog.calcTotal()
+        duration = $scope.worklog.calcTotalDuration()
         $scope.worklog.total = t
+        $scope.worklog.totalDuration = moment.duration(duration, 'seconds')
       , true)
 
       if gon.client_id

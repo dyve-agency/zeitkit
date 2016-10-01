@@ -80,6 +80,9 @@ gem 'angularjs-rails-resource', '~> 1.1.1'
 # Data to the client
 gem 'gon'
 
+# One time Announcement
+gem "starburst"
+
 # Attr accessible
 gem 'protected_attributes', github: 'rails/protected_attributes'
 
@@ -107,6 +110,7 @@ group :development do
   gem 'pry-rails'
   gem 'coffee-rails'
   gem 'uglifier'
+  gem "better_errors"
 end
 
 group :development, :test do

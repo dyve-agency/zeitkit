@@ -27,6 +27,7 @@ app.factory "Worklog", ["RailsResource", "Timeframe", "railsSerializer", "Client
         loading: false
         errors: []
         total: 0
+        totalDuration: 0
         notifier: new UiNotifier
       _this = this
       useOpts = _.extend defaultOpts, opts
@@ -58,6 +59,8 @@ app.factory "Worklog", ["RailsResource", "Timeframe", "railsSerializer", "Client
         t.started.setSeconds(0,0)
         t.ended.setSeconds(0,0)
       @addNewTimeframe t
+
+
 
     calcTotal: ->
       totals = _.map @timeframes, (t)=>
@@ -145,6 +148,13 @@ app.factory "Worklog", ["RailsResource", "Timeframe", "railsSerializer", "Client
 
     creditBlocked: ->
       @client && @client.creditBlockReason && @client.creditBlockReason.length
+
+    calcTotalDuration: ->
+      durations = _.map @timeframes, (tf) ->
+        tf.durationSeconds()
+      _.inject(durations, (memo, num)->
+          memo + num
+      , 0)
 
   Worklog
 ]

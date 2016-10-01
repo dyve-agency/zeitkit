@@ -1,5 +1,4 @@
 Timetracker::Application.routes.draw do
-
   root :to => "static#home"
 
   resources :users, only: [:new, :create, :show, :edit, :update] do
@@ -70,4 +69,7 @@ Timetracker::Application.routes.draw do
 
   # Development routes
   match "/dev/:action" => "dev#:action", :via => :all, :as => 'dev'
+
+  # Announcement related
+  mount Starburst::Engine => "/starburst"
 end
