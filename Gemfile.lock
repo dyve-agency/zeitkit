@@ -361,6 +361,8 @@ GEM
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
     sqlite3 (1.3.11)
+    starburst (1.0.3)
+      rails (>= 3.0)
     symbolize (4.5.2)
       activemodel (>= 3.2, < 5)
       activesupport (>= 3.2, < 5)
@@ -441,6 +443,7 @@ DEPENDENCIES
   slim-rails
   sorcery!
   sqlite3
+  starburst
   therubyracer
   uglifier
   validates_email_format_of
@@ -449,5 +452,8 @@ DEPENDENCIES
   will_paginate-bootstrap!
   wkhtmltopdf-binary (~> 0.9.9.3)
 
+RUBY VERSION
+   ruby 2.2.2p95
+
 BUNDLED WITH
-   1.11.2
+   1.12.5

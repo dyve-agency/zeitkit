@@ -25,6 +25,7 @@ html lang="en" class="#{check_if_css_class}"
         .row
           .col-md-12
             .content ng-app="app"
+              = render :partial => "announcements/starburst/announcement_bootstrap"
               = render "layouts/notices"
               = yield
       = render "layouts/footer"

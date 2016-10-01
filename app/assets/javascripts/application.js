@@ -23,6 +23,7 @@
 //= require bootstrap-notify
 //= require bootstrap-datetimepicker
 //= require pickers
+//= require starburst/starburst
 
 //= require angular
 //= require ng-rails-csrf
