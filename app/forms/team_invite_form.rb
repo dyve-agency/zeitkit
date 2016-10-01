@@ -7,7 +7,7 @@ class TeamInviteForm
   attribute :username
   attribute :inviter
 
-  validate :inviter, :team, :user, presence: true
+  validates :inviter, :team, :user, presence: true
   validate :team_must_belong_to_inviter
   validate :user_must_exist
   validate :user_may_not_be_in_team_already

@@ -52,7 +52,12 @@ class WorklogsController < ApplicationController
 
   def update
     @worklog = current_user.worklogs.find(params[:id])
-    form = WorklogForm.new_from_params(params[:worklog], user: current_user, worklog: @worklog)
+    if (params[:worklog][:team_id].present?)
+      @team = Team.find(params[:worklog][:team_id])
+    else
+      @team = nil
+    end
+    form = WorklogForm.new_from_params(params[:worklog], user: current_user, worklog: @worklog, team: @team)
     if form.save
       render json: form.worklog, status: 200, root: "worklog"
     else

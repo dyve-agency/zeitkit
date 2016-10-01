@@ -13,6 +13,9 @@ class WorklogForm
   attribute :client, Client
   attribute :total, Numeric
 
+  attribute :team_id, Numeric
+  attribute :team, Team
+
   validates :user, presence: true
   validates :client, presence: true
   validates :hourly_rate, numericality: {greater_than: 0}
@@ -20,8 +23,9 @@ class WorklogForm
   validates :comment, presence: true
   validate :timeframes_validator
 
-  def self.new_from_params(params, user: nil, worklog: nil)
+  def self.new_from_params(params, user: nil, worklog: nil, team: nil)
     obj = new(params)
+    obj.team = team
     obj.user = user
     obj.worklog = worklog
     obj
@@ -63,6 +67,7 @@ class WorklogForm
     use_worklog.hourly_rate = Money.new hourly_rate.to_f * 100
     use_worklog.summary     = comment
     use_worklog.user        = user
+    use_worklog.team        = team
     use_worklog.client      = client
     use_worklog.timeframes  = timeframes
     use_worklog.total       = Money.new total.to_f * 100

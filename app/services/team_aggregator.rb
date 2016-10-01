@@ -77,8 +77,8 @@ class TeamAggregator
     use_worklogs = worklogs user
     {
       username: user.username,
-      seconds_worked: use_worklogs.map(&:duration).inject(:+) || 0,
-      total_cents: use_worklogs.map(&:total_cents).inject(:+) || 0,
+      seconds_worked: use_worklogs.where(team_id: team).map(&:duration).inject(:+) || 0,
+      total_cents: use_worklogs.where(team_id: team).map(&:total_cents).inject(:+) || 0,
       currency: (user.currency || Money.default_currency)
     }
   end
