@@ -24,7 +24,7 @@ div ng-controller="WorklogsController"
       label Client
       select.form-control ng-model="worklog.client" ng-options="client.nameOrCompanyName() for client in clients | orderBy:'nameOrCompanyName()' track by client.id" ng-change="worklog.clientChanged()"
         option value="" ng-if="false"
-    .col-xs-3
+    .col-xs-2
       label Team
       select.form-control ng-model="worklog.teamId" ng-options="team.id as team.name for team in currentUser.teams"
         option value=""
@@ -33,8 +33,12 @@ div ng-controller="WorklogsController"
       label Hourly rate
       input.form-control type="text" ng-model="worklog.hourlyRate"
     .col-xs-2 ng-hide="worklog.client.shared"
+      label Hours worked
+      p.margin-top-5
+        | {{worklog.totalDuration.hours()}}h {{worklog.totalDuration.minutes()}}m
+    .col-xs-1 ng-hide="worklog.client.shared"
       label Total
-      div
+      div.margin-top-5
         span.label.label-success
           | {{ worklog.total | currency: worklog.client.currency.symbol}}
   .row ng-show="worklog.creditBlocked()"
