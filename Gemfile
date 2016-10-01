@@ -110,6 +110,7 @@ group :development do
   gem 'pry-rails'
   gem 'coffee-rails'
   gem 'uglifier'
+  gem "better_errors"
 end
 
 group :development, :test do
