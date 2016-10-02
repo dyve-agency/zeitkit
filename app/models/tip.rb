@@ -15,11 +15,12 @@ class Tip
       "If you are new to markdown, have a look at <a href='http://daringfireball.net/projects/markdown/syntax'>this guide.</a>",
       "Notes are awesome for keeping track on your TODOS. We log our meetings including TODOS.",
       "You can share important notes with your client via a unique share link.",
+      "You can share the activity logs with your <a href='http://zeitkit.com/clients'>clients</a>. No need for them to register first, if they don't want to.",
       "Filter worklogs to see what you got done in a specific time period.",
       "Sometimes required for corporate clients: Worklogs can be exported as .CSV.",
       "Ideas/Feedback? Email us at <a href='mailto:info@zeitkit.com'>info@zeitkit.com</a>.",
-      "Android User? <a href='https://play.google.com/store/apps/details?id=com.zeitkit.app'>Get the Zeitkit App to start tracking from your mobile.</a>",
-      "On your mobile? Zeitkit is nicely responsive and works on your mobile too."
+      "On your mobile? Zeitkit is nicely responsive and works on your mobile too.",
+      "Make sure to assign your worklog to a team, so you can track your work team-based!"
     ]
   end
 
