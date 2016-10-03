@@ -6,7 +6,7 @@ class WorklogsController < ApplicationController
     if params[:updated_since]
       @worklogs = Worklog.updated_since(params[:updated_since]).where(user_id: current_user.id).includes({client: :user}, :timeframes).joins(:timeframes).order("timeframes.started DESC")
     else
-      @worklogs = current_user.worklogs.includes({client: :user}, :timeframes).joins(:timeframes).order("timeframes.started DESC").group("timeframes.started, clients.id, users.id, timeframes.id")
+      @worklogs = current_user.worklogs.includes({client: :user}, :timeframes).joins(:timeframes).order("timeframes.started DESC").group("timeframes.started, clients.id, users.id, timeframes.id, worklogs.id")
       params[:client] ? @worklogs = @worklogs.where(client_id: params[:client]) : @worklogs
       params[:paid] == "true" ? @worklogs = @worklogs.paid : @worklogs
       params[:paid] == "false" ? @worklogs = @worklogs.unpaid : @worklogs
