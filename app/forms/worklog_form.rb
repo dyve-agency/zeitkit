@@ -12,7 +12,6 @@ class WorklogForm
   attribute :client_id, Numeric
   attribute :client, Client
   attribute :total, Numeric
-
   attribute :team_id, Numeric
   attribute :team, Team
 
@@ -63,12 +62,18 @@ class WorklogForm
     super new_id
   end
 
+  def team_id=(new_id)
+    self.team = Team.where(id: new_id).first
+    super new_id
+  end
+
   def assign_new_attributes(use_worklog)
     use_worklog.hourly_rate = Money.new hourly_rate.to_f * 100
     use_worklog.summary     = comment
     use_worklog.user        = user
     use_worklog.team        = team
     use_worklog.client      = client
+    use_worklog.team        = team
     use_worklog.timeframes  = timeframes
     use_worklog.total       = Money.new total.to_f * 100
     use_worklog
