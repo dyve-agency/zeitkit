@@ -4,8 +4,6 @@ class Worklog < ActiveRecord::Base
   include TotalHelper
   total_and_currency_for attribute_name: :total, cents_attribute: :total_cents
 
-  include TimeFilter
-
   attr_accessible :client_id,
     :end_time,
     :start_time,
@@ -49,6 +47,11 @@ class Worklog < ActiveRecord::Base
   scope :unpaid, -> { where(invoice_id: nil) }
   scope :no_invoice, -> { where(invoice_id: nil) }
   scope :oldest_first, -> { order("end_time ASC") }
+  scope :today, ->(scope) { where(id: scope.joins(:timeframes).having("MAX(timeframes.ended) >= ?", Time.zone.now.midnight).group("worklogs.id")) }
+  scope :this_week, ->(scope) { where(id: scope.joins(:timeframes).having("MAX(timeframes.ended) BETWEEN ? AND ?", Time.zone.now.beginning_of_week, Time.zone.now).group("worklogs.id")) }
+  scope :this_month, ->(scope) { where(id: scope.joins(:timeframes).having("MAX(timeframes.ended) BETWEEN ? AND ?", Time.zone.now.beginning_of_month, Time.zone.now).group("worklogs.id")) }
+  scope :older_than_this_month, ->(scope) { where(id: scope.joins(:timeframes).having("MAX(timeframes.ended) < ?", Time.zone.now.beginning_of_month).group("worklogs.id")) }
+  scope :last_month, ->(scope) { where(id: scope.joins(:timeframes).having("MAX(timeframes.ended) BETWEEN ? AND ?", (Time.zone.now.beginning_of_month - 1.month), Time.zone.now.beginning_of_month).group("worklogs.id")) }
 
   def self.to_csv(worklogs)
     CSV.generate do |csv|

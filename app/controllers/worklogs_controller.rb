@@ -6,15 +6,16 @@ class WorklogsController < ApplicationController
     if params[:updated_since]
       @worklogs = Worklog.updated_since(params[:updated_since]).where(user_id: current_user.id).includes({client: :user}, :timeframes).joins(:timeframes).order("timeframes.started DESC")
     else
-      @worklogs = current_user.worklogs.includes({client: :user}, :timeframes).joins(:timeframes).order("timeframes.started DESC").group("timeframes.started, clients.id, users.id, timeframes.id, worklogs.id")
+      @worklogs = current_user.worklogs.includes({client: :user}, :timeframes).joins(:timeframes).order("timeframes.started DESC")
+      scope_for_subquery = current_user.worklogs.reorder('')
       params[:client] ? @worklogs = @worklogs.where(client_id: params[:client]) : @worklogs
       params[:paid] == "true" ? @worklogs = @worklogs.paid : @worklogs
       params[:paid] == "false" ? @worklogs = @worklogs.unpaid : @worklogs
-      params[:time] == "today" ? @worklogs = @worklogs.today : @worklogs
-      params[:time] == "this_week" ? @worklogs = @worklogs.this_week : @worklogs
-      params[:time] == "this_month" ? @worklogs = @worklogs.this_month : @worklogs
-      params[:time] == "older_than_this_month" ? @worklogs = @worklogs.older_than_this_month : @worklogs
-      params[:time] == "last_month" ? @worklogs = @worklogs.last_month : @worklogs
+      params[:time] == "today" ? @worklogs = @worklogs.today(scope_for_subquery) : @worklogs
+      params[:time] == "this_week" ? @worklogs = @worklogs.this_week(scope_for_subquery) : @worklogs
+      params[:time] == "this_month" ? @worklogs = @worklogs.this_month(scope_for_subquery) : @worklogs
+      params[:time] == "older_than_this_month" ? @worklogs = @worklogs.older_than_this_month(scope_for_subquery) : @worklogs
+      params[:time] == "last_month" ? @worklogs = @worklogs.last_month(scope_for_subquery) : @worklogs
     end
     @worklogs = @worklogs.paginate(:page => params[:page])
 
