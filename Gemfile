@@ -1,6 +1,6 @@
 ruby "2.2.2"
 
-source 'https://rubygems.org'
+source 'http://rubygems.org'
 
 gem 'rails', '4.2.0'
 
@@ -60,7 +60,7 @@ gem "whenever"
 gem "prawn"
 
 # JS precompiler
-gem "therubyracer"
+# gem "therubyracer"
 
 # Pagination
 gem 'will_paginate-bootstrap', git: "https://github.com/bootstrap-ruby/will_paginate-bootstrap.git"
