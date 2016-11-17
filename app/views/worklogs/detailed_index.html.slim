@@ -23,12 +23,12 @@ table.table.table-bordered.table-condensed
       th Details
       th Price
   tbody
-    - @worklogs.each do |worklog|
+    - @worklogs.sort_by{|w| w.timeframes.map(&:started).min }.each do |worklog|
       tr
         td= worklog.user.username
         td
           ul.table-list
-            - worklog.timeframes.each do |tf|
+            - worklog.timeframes.sort_by(&:started).each do |tf|
               li
                 = tf.started_formatted
                 '
