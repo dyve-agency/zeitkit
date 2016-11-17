@@ -16,7 +16,7 @@ html lang="en" class="#{check_if_css_class}"
     = stylesheet_link_tag    "application", :media => "all"
     = javascript_include_tag "application"
     = csrf_meta_tags
-  body
+  body ng-app="app" ng-cloak=""
     = dev_tools
     #wrapper
       = render "layouts/header"
@@ -24,7 +24,7 @@ html lang="en" class="#{check_if_css_class}"
       .container
         .row
           .col-md-12
-            .content ng-app="app"
+            .content
               = render :partial => "announcements/starburst/announcement_bootstrap"
               = render "layouts/notices"
               = yield
