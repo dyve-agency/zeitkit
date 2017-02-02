@@ -46,3 +46,11 @@ table.table.table-bordered
   = will_paginate @invoices, renderer: BootstrapPagination::Rails, class: "no-margin"
 .btn-group
   = link_to 'New Invoice', new_invoice_path, class: "btn btn-default btn-primary"
+
+javascript:
+  $(function() {
+    setTimeout(function() {
+      var chart = Chartkick.charts["chart-1"].redraw();
+      console.log("Timeout");
+    }, 1);
+  })

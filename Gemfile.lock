@@ -48,9 +48,9 @@ GIT
 
 GIT
   remote: https://github.com/ankane/chartkick.git
-  revision: f76ccae0facff24fd7ceb621c48234b5ec7379dc
+  revision: 0a5923e1f2c302279f8bad2b9d45db95c0758db7
   specs:
-    chartkick (1.4.2)
+    chartkick (2.2.2)
 
 GIT
   remote: https://github.com/ankane/groupdate.git
