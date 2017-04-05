@@ -31,7 +31,11 @@ table.table.table-bordered
         td.hidden-phone= l worklog.start_time, format: :short
         td.hidden-phone= l worklog.end_time, format: :short
         td= worklog.duration_hours_minutes
-        td.hidden-phone= with_currency worklog.total
+        td.hidden-phone
+          - if worklog.client_share_id.present?
+            | -
+          - else
+            = with_currency worklog.total
         td
           - if worklog.team.present?
             = worklog.team.name.to_s
