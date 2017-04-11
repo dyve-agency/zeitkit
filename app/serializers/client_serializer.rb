@@ -1,5 +1,5 @@
 class ClientSerializer < ActiveModel::Serializer
-  attributes :id, :name, :company_name, :hourly_rate, :hourly_rate_cents, :currency, :user, :credit_block_reason
+  attributes :id, :name, :company_name, :hourly_rate, :hourly_rate_cents, :currency, :user, :credit_block_reason, :shared
 
   def hourly_rate
     if object.user == current_user
@@ -11,6 +11,10 @@ class ClientSerializer < ActiveModel::Serializer
 
   def credit_block_reason
     object.credit_block_reason.present? ? object.credit_block_reason : ""
+  end
+
+  def shared
+    object.user_id != current_user.id
   end
 
 end

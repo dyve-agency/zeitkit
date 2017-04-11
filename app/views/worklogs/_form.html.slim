@@ -28,15 +28,14 @@ div ng-controller="WorklogsController"
       label Team
       select.form-control ng-model="worklog.teamId" ng-options="team.id as team.name for team in currentUser.teams"
         option value=""
-
-    .col-xs-2 ng-hide="worklog.client.shared"
+    .col-xs-2 ng-class="{ 'invisible': worklog.client.shared }"
       label Hourly rate
       input.form-control type="text" ng-model="worklog.hourlyRate"
-    .col-xs-2 ng-hide="worklog.client.shared"
+    .col-xs-2
       label Hours worked
       p.margin-top-5
         | {{worklog.totalDuration.hours()}}h {{worklog.totalDuration.minutes()}}m
-    .col-xs-1 ng-hide="worklog.client.shared"
+    .col-xs-1 ng-class="{ 'invisible': worklog.client.shared }"
       label Total
       div.margin-top-5
         span.label.label-success
