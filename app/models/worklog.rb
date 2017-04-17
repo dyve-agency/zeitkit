@@ -132,6 +132,12 @@ class Worklog < ActiveRecord::Base
     timeframes.order("ended desc").limit(1).first.ended
   end
 
+  # returns the client share that links this worklog to the original user and
+  # the user that owns the worklog.
+  def client_share
+    client.client_shares.where(user_id: self.user_id).first
+  end
+
   def created_for_shared_client?
     # We own the client
     if user.clients.where(id: client_id).any?

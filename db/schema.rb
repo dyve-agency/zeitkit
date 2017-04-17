@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161001092629) do
+ActiveRecord::Schema.define(version: 20170417195659) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,10 +43,13 @@ ActiveRecord::Schema.define(version: 20161001092629) do
   create_table "client_shares", force: :cascade do |t|
     t.integer  "client_id"
     t.integer  "user_id"
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
-    t.string   "username",          limit: 255
+    t.datetime "created_at",                                                  null: false
+    t.datetime "updated_at",                                                  null: false
+    t.string   "username",                        limit: 255
     t.integer  "hourly_rate_cents"
+    t.boolean  "works_as_subcontractor",                      default: false
+    t.integer  "subcontractor_hourly_rate_cents",             default: 0
+    t.string   "subcontractor_shown_name"
   end
 
   create_table "clients", force: :cascade do |t|

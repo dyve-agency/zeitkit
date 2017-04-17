@@ -20,15 +20,29 @@
       h4 Allow other users to use the same client
       .label-checkbox-left.clearfix
         = f.input :email_when_team_adds_worklog, label: "Send email when team member adds worklog"
+      .row
+        .col-md-12
+          .alert.alert-info
+            | Subcontractor mode allows you to share this client with your subcontractors. You can then change the username that will be displayed in the worklogs, as well as specify the rate at which you purchase the services.
       .client-shares-wrapper
         = f.simple_fields_for :client_shares do |cs|
           .row
-            .col-md-5.usernames-input
+            .col-md-7.usernames-input
               = cs.input :username, placeholder: "Zeitkit username i.e. hendr"
             .col-md-5
               = cs.input :hourly_rate, as: :string
-            .col-md-2.align-top-with-label
-              = cs.link_to_remove "<i class='fa fa-remove'></i>".html_safe, class: "btn btn-default btn-danger"
+          .row
+            .col-md-4
+              .label-checkbox-left.clearfix
+                = cs.input :works_as_subcontractor, label: "Is subcontractor"
+            .col-md-4
+              = cs.input :subcontractor_hourly_rate, as: :string, label: 'External rate'
+            .col-md-4
+              = cs.input :subcontractor_shown_name, label: 'Name', placeholder: 'i.e. custom name'
+          .row
+            .col-md-2 style="margin-bottom: 20px;"
+              = cs.link_to_remove "<i class='fa fa-remove'></i> Remove coworker".html_safe, class: "btn btn-default btn-danger"
+
         = f.link_to_add "Add coworker", :client_shares, class: "btn btn-default", model_object: @client_share_base
 
 

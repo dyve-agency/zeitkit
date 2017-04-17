@@ -25,7 +25,11 @@ table.table.table-bordered.table-condensed
   tbody
     - @worklogs.sort_by{|w| w.timeframes.map(&:started).min }.each do |worklog|
       tr
-        td= worklog.user.username
+        td
+          - if worklog.client_share.present? && worklog.client_share.subcontractor_shown_name.present?
+            = worklog.client_share.subcontractor_shown_name.present?
+          - else
+            = worklog.user.username
         td
           ul.table-list
             - worklog.timeframes.sort_by(&:started).each do |tf|
