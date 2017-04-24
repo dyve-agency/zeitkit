@@ -32,11 +32,17 @@ class Expense < ActiveRecord::Base
   end
 
   def invoice_title(invoice)
-    "Expense: #{reason}"
+    markdown(reason)
   end
+
+  private
 
   def invoiced?
     invoice_id
+  end
+
+  def markdown(content)
+    Redcarpet::Markdown.new(Redcarpet::Render::HTML).render(content).html_safe
   end
 
 end
