@@ -60,7 +60,7 @@
               td.last= with_currency @invoice.total_worklogs
           - (@invoice.products.oldest_first.uniq + @invoice.expenses.oldest_first).each do |entry|
             tr
-              td= entry.invoice_title(@invoice)
+              td= entry.invoice_title(@invoice).html_safe
               - if entry.is_a?(Product)
                 td.last= entry.price_tag_total(@invoice)
               - else
