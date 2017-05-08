@@ -31,6 +31,7 @@ class WorklogForm
   end
 
   def save
+    set_correct_hourly_rate
     if valid?
       wl = worklog || to_worklog
       wl = assign_new_attributes(wl)
@@ -102,6 +103,16 @@ class WorklogForm
 
   def timeframes_correct_start_end_time?
     timeframes.any? {|tf| t}
+  end
+
+  def set_correct_hourly_rate
+    return unless user
+    return unless client
+    share = user.client_shares.where(client_id: client.id).first
+    if share
+      self.hourly_rate = share.hourly_rate
+    end
+    true
   end
 
 end
