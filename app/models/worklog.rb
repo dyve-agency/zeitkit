@@ -176,7 +176,7 @@ class Worklog < ActiveRecord::Base
 
   # Freshly calculate the total from each timeframe of the worklog.
   def calc_total
-    duration / 1.hour * hourly_rate
+    duration.to_f / 1.hour.to_f * hourly_rate.to_f
   end
 
   def set_client_share
