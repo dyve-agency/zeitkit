@@ -21,6 +21,24 @@ class ClientAggregator
     end
   end
 
+  def start_date=(new_val)
+    result = nil
+    begin
+      result = new_val.is_a?(String) ? Date.parse(new_val) : new_val
+    rescue
+    end
+    super result
+  end
+
+  def end_date=(new_val)
+    result = nil
+    begin
+      result = new_val.is_a?(String) ? Date.parse(new_val) : new_val
+    rescue
+    end
+    super result
+  end
+
   private
 
   def set_dates
@@ -45,24 +63,6 @@ class ClientAggregator
       self.end_date = 1.year.ago.end_of_year
     else
     end
-  end
-
-  def start_date=(new_val)
-    result = nil
-    begin
-      result = new_val.is_a?(String) ? Date.parse(new_val) : new_val
-    rescue
-    end
-    super result
-  end
-
-  def end_date=(new_val)
-    result = nil
-    begin
-      result = new_val.is_a?(String) ? Date.parse(new_val) : new_val
-    rescue
-    end
-    super result
   end
 
   def results
