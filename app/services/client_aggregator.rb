@@ -43,6 +43,18 @@ class ClientAggregator
     results.sort_by {|r| r.started }.reverse
   end
 
+  def total_time
+    seconds = results.map(&:seconds_worked).inject(:+) || 0
+    minutes = (seconds / 60) % 60
+    hours = seconds / (60 * 60)
+    format("%02dH:%02dM", hours, minutes) #=> "01:00:00"
+  end
+
+  def total_costs
+    cents = results.map(&:total_cents).inject(:+) || 0
+    Money.new cents, client.currency
+  end
+
   private
 
   def set_dates
@@ -96,18 +108,6 @@ class ClientAggregator
       where("timeframes.started <= ?", end_date.to_datetime).
       preload(:timeframes, :client_share, :user).
       group("worklogs.id")
-  end
-
-  def total_time
-    seconds = results.map(&:seconds_worked).inject(:+) || 0 #results.map{ |res| res.seconds_worked }
-    minutes = (seconds / 60) % 60
-    hours = seconds / (60 * 60)
-    format("%02dH:%02dM", hours, minutes) #=> "01:00:00"
-  end
-
-  def total_costs
-    cents = results.map(&:total_cents).inject(:+) || 0
-    Money.new cents, client.currency
   end
 
   # returns the username to be used in the aggregration
