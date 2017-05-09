@@ -21,6 +21,8 @@ class ClientAggregator
     end
   end
 
+  private
+
   def set_dates
     case specific_range
     when "this_week"
@@ -77,7 +79,7 @@ class ClientAggregator
 
   def generate_result_data worklog
     {
-      username: worklog.user.username,
+      username: username_for_worklog(worklog),
       seconds_worked: worklog.duration,
       total_cents: worklog.total_cents,
       currency: (worklog.user.currency || Money.default_currency),
@@ -93,7 +95,7 @@ class ClientAggregator
     client.worklogs.joins(:timeframes).
       where("timeframes.ended >= ?", start_date.to_datetime).
       where("timeframes.started <= ?", end_date.to_datetime).
-      preload(:timeframes).
+      preload(:timeframes, :client_share, :user).
       group("worklogs.id")
   end
 
@@ -107,6 +109,16 @@ class ClientAggregator
   def total_costs
     cents = results.map(&:total_cents).inject(:+) || 0
     Money.new cents, client.currency
+  end
+
+  # returns the username to be used in the aggregration
+  def username_for_worklog(worklog)
+    return worklog.user.username if worklog.client_share.blank?
+    if worklog.client_share.works_as_subcontractor
+      worklog.client_share.subcontractor_shown_name
+    else
+      worklog.user.username
+    end
   end
 
   class ResultEntry
