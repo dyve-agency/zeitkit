@@ -39,6 +39,10 @@ class ClientAggregator
     super result
   end
 
+  def sorted_results
+    results.sort_by {|r| r.started }.reverse
+  end
+
   private
 
   def set_dates
@@ -70,11 +74,6 @@ class ClientAggregator
       result_data = generate_result_data worklog
       ResultEntry.new(result_data)
     end
-  end
-
-
-  def sorted_results
-    results.sort_by {|r| r.started }.reverse
   end
 
   def generate_result_data worklog
