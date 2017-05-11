@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170417195659) do
+ActiveRecord::Schema.define(version: 20170511175415) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -84,8 +84,9 @@ ActiveRecord::Schema.define(version: 20170417195659) do
     t.text     "payment_info"
     t.text     "note"
     t.integer  "user_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.text     "custom_css",    default: ""
   end
 
   create_table "invoices", force: :cascade do |t|
