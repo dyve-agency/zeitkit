@@ -1,6 +1,6 @@
 class InvoiceDefault < ActiveRecord::Base
   include NilStrings
-  attr_accessible :includes_vat, :note, :payment_info, :payment_terms, :vat, :user_id
+  attr_accessible :includes_vat, :note, :payment_info, :payment_terms, :vat, :user_id, :custom_css
 
   belongs_to :user
   validates_uniqueness_of :user_id

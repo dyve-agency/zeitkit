@@ -65,6 +65,7 @@ en:
         payment_terms: "e.g. * Amount is due opon invoice receival."
         note: "e.g. * VAT-Number: 502123 or other important info in your country."
         vat: "e.g. 19.00"
+        custom_css: "e.g. .colored-text { color: #333; }"
       client:
         name: e.g. George Washington
         company_name: e.g. Evil Powers Ltd.

@@ -23,5 +23,11 @@
       #wmd-button-bar-third
       = f.input :note, label: false
     .col-md-12
+      h4
+        | Custom CSS for the invoice
+        '
+        small Apply custom rules to customize the look of your invoice.
+      = f.input :custom_css, label: false
+    .col-md-12
       hr.colorgraph
       = f.button :submit, "Save"
