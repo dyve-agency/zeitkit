@@ -58,7 +58,7 @@
             tr
               td Hours worked: #{@invoice.hours_worked}
               td.last= with_currency @invoice.total_worklogs
-          - (@invoice.products.oldest_first.uniq + @invoice.expenses.oldest_first).each do |entry|
+          - (@invoice.products.oldest_first.uniq + @invoice.expenses.order(reason: :asc, created_at: :asc)).each do |entry|
             tr
               td= entry.invoice_title(@invoice).html_safe
               - if entry.is_a?(Product)
