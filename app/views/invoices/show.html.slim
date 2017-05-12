@@ -86,11 +86,11 @@
   .col-xs-4
     h4.colored-text Payment
     p= markdown @invoice.payment_info
-  .col-xs-4.colored-text
+  .col-xs-4
     - if @invoice.payment_terms
       h4.colored-text Terms
       p= markdown @invoice.payment_terms
-  .col-xs-4.colored-text
+  .col-xs-4
     - if @invoice.note
       h4.colored-text Notes
       = markdown @invoice.note
