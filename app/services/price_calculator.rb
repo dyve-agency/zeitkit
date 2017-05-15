@@ -8,7 +8,8 @@ class PriceCalculator
   # worklog.
   def total
     if client_share.present?
-      client_share_rate
+      data = client_share_rate.to_f / 3600.0 * worklog.duration
+      Money.new(data * 100, worklog.currency)
     else
       worklog.total
     end
