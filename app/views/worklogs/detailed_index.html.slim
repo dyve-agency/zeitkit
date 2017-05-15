@@ -6,7 +6,7 @@ table.table.table-bordered
       th Duration (HH:MM:SS)
       th Price
   tbody
-    - @worklogs.group_by {|wl| wl.client_share.try(:subcontractor_shown_name) || wl.user.username }.each do |name, worklogs|
+    - @worklogs.group_by {|wl| wl.client_share.try(:subcontractor_shown_name) || wl.user.username }.sort_by{|name, _| name}.each do |name, worklogs|
       tr
         td= name
         td = hours_minutes_combined_from_seconds(worklogs.map(&:duration).inject(:+) || 0)
