@@ -104,6 +104,10 @@ gem 'dotiw'
 # Moment.js lib
 gem 'momentjs-rails'
 
+# Business hours / holidays
+gem 'business_time'
+gem 'holidays'
+
 group :development do
   gem 'quiet_assets'
   gem 'sqlite3'

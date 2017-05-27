@@ -7,12 +7,12 @@
       .row
         .col-md-6
           ul
-            li Hours worked today: #{current_user.hours_today}
-            li Hours worked this week: #{current_user.hours_this_week}
+            li Hours worked today: #{current_user.hours_today} #{current_user.holiday_setting.use_holidays ? '(' + current_user.business_hours_left_today + ' left)' : ""}
+            li Hours worked this week: #{current_user.hours_this_week} #{current_user.holiday_setting.use_holidays ? '(' + current_user.business_hours_left_this_week + ' left)' : ""}
         .col-md-6
           ul
-            li Hours worked this month: #{current_user.hours_this_month}
-            li Hours worked last month: #{current_user.hours_last_month}
+            li Hours worked this month: #{current_user.hours_this_month} #{current_user.holiday_setting.use_holidays ? '(' + current_user.business_hours_left_this_month + ' left)' : ""}
+            li Hours worked last month: #{current_user.hours_last_month} #{current_user.holiday_setting.use_holidays ? '(' + current_user.business_hours_left_last_month + ' left)' : ""}
 table.table.table-bordered
   thead
     tr

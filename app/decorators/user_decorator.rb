@@ -29,6 +29,22 @@ class UserDecorator < Draper::Decorator
       map(&:duration).inject(0, :+).to_f
   end
 
+  def business_time_today
+    DateTime.now.beginning_of_day.to_time.business_time_until(DateTime.now.end_of_day.to_time)
+  end
+
+  def business_time_this_week
+    DateTime.now.beginning_of_week.to_time.business_time_until(DateTime.now.end_of_week.to_time)
+  end
+
+  def business_time_this_month
+    DateTime.now.beginning_of_month.to_time.business_time_until(DateTime.now.end_of_month.to_time)
+  end
+
+  def business_time_last_month
+    1.month.ago.beginning_of_month.to_time.business_time_until(1.month.ago.end_of_month.to_time)
+  end
+
   def hours_today
     h.number_with_precision (time_worked_today / 3600), precision: 2
   end
@@ -43,6 +59,22 @@ class UserDecorator < Draper::Decorator
 
   def hours_last_month
     h.number_with_precision (time_worked_last_month / 3600), precision: 2
+  end
+
+  def business_hours_left_today
+    h.number_with_precision ((business_time_today / 3600) - (time_worked_today / 3600)), precision: 2
+  end
+
+  def business_hours_left_this_week
+    h.number_with_precision ((business_time_this_week / 3600) - (time_worked_this_week / 3600)), precision: 2
+  end
+
+  def business_hours_left_this_month
+    h.number_with_precision ((business_time_this_month / 3600) - (time_worked_this_month / 3600)), precision: 2
+  end
+
+  def business_hours_left_last_month
+    h.number_with_precision ((business_time_last_month / 3600) - (time_worked_last_month / 3600)), precision: 2
   end
 
 end

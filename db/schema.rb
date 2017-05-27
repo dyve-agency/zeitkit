@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170511175415) do
+ActiveRecord::Schema.define(version: 20170527104439) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,17 @@ ActiveRecord::Schema.define(version: 20170511175415) do
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
+
+  create_table "business_hours", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "workday"
+    t.time     "start_time"
+    t.time     "end_time"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "business_hours", ["user_id"], name: "index_business_hours_on_user_id", using: :btree
 
   create_table "client_shares", force: :cascade do |t|
     t.integer  "client_id"
@@ -76,6 +87,25 @@ ActiveRecord::Schema.define(version: 20170511175415) do
     t.datetime "updated_at",  null: false
     t.integer  "invoice_id"
   end
+
+  create_table "holiday_settings", force: :cascade do |t|
+    t.integer  "user_id"
+    t.boolean  "use_holidays",   default: false
+    t.string   "holiday_region"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+  end
+
+  add_index "holiday_settings", ["user_id"], name: "index_holiday_settings_on_user_id", using: :btree
+
+  create_table "holidays", force: :cascade do |t|
+    t.integer  "user_id"
+    t.date     "day"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "holidays", ["user_id"], name: "index_holidays_on_user_id", using: :btree
 
   create_table "invoice_defaults", force: :cascade do |t|
     t.float    "vat"
@@ -244,5 +274,8 @@ ActiveRecord::Schema.define(version: 20170511175415) do
     t.integer  "team_id"
   end
 
+  add_foreign_key "business_hours", "users"
+  add_foreign_key "holiday_settings", "users"
+  add_foreign_key "holidays", "users"
   add_foreign_key "worklogs", "teams"
 end

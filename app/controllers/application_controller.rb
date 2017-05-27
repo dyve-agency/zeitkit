@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   around_filter :set_time_zone
+  before_filter :set_holidays_and_business_hours
   before_filter :require_login, :except => [:not_authenticated]
   before_filter :check_and_set_mac_design
   before_filter :init_gon, if: :current_user
@@ -41,6 +42,22 @@ class ApplicationController < ActionController::Base
     yield
   ensure
     Time.zone = old_time_zone
+  end
+
+  def set_holidays_and_business_hours
+    if current_user.present? && current_user.holiday_setting.use_holidays
+      BusinessTime::Config.work_week = current_user.business_hours.map(&:workday).map(&:to_sym)
+      BusinessTime::Config.work_hours = current_user.business_hours.map do |bh|
+        [bh.workday.to_sym, [bh.start_time.strftime("%H:%M"), bh.end_time.strftime("%H:%M")]]
+      end.to_h
+      BusinessTime::Config.holidays = current_user.holidays.map(&:day)
+
+      if current_user.holiday_setting.holiday_region.present?
+        Holidays.between(Date.civil(2013, 1, 1), Date.today, current_user.holiday_setting.holiday_region.to_sym, :observed).map do |holiday|
+          BusinessTime::Config.holidays << holiday[:date]
+        end
+      end
+    end
   end
 
   def init_gon

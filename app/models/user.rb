@@ -32,9 +32,12 @@ class User < ActiveRecord::Base
   has_many :client_shares, dependent: :destroy
   has_many :teams, through: :team_users
   has_many :team_users
+  has_many :holidays
+  has_many :business_hours
 
   has_one :temp_worklog_save
   has_one :invoice_default
+  has_one :holiday_setting
 
   before_validation :set_initial_currency!, on: :create
   before_validation :set_email_sent_false!, on: :create
@@ -54,6 +57,7 @@ class User < ActiveRecord::Base
   before_create :get_name_from_api
   after_create :build_invoice_default
   after_create :build_initial_temp_worklog_save
+  after_create :build_holiday_setting
 
   scope :paid, -> { where(invoice_id: !nil) }
   scope :no_demo_user, -> { where("email NOT LIKE 'demo%@zeitkit.com'") }
@@ -114,6 +118,11 @@ class User < ActiveRecord::Base
   def build_invoice_default
     id = InvoiceDefault.new(user_id: self.id)
     id.save
+  end
+
+  def build_holiday_setting
+    hs = HolidaySetting.new(user_id: self.id)
+    hs.save
   end
 
   def demo?
