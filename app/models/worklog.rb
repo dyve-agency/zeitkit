@@ -138,6 +138,10 @@ class Worklog < ActiveRecord::Base
     client.client_shares.where(user_id: self.user_id).first
   end
 
+  def client_subcontractor_name_or_username
+    client_share.try(:subcontractor_shown_name).present? ? client_share.subcontractor_shown_name : user.username
+  end
+
   def created_for_shared_client?
     # We own the client
     if user.clients.where(id: client_id).any?
