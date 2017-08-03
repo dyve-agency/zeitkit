@@ -7,7 +7,7 @@ class InvoicesController < ApplicationController
   def index
     @chart_data = current_user.invoices.where("invoice_date >= ?", 1.year.ago).group_by_month(:invoice_date).sum("total_cents / 100")
     @invoices = @invoices
-      .order("NULLIF(number, '')::int DESC, created_at DESC")
+      .order("created_at DESC")
       .paginate(:page => params[:page])
     respond_with @invoices
   end
