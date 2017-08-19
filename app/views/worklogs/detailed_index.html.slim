@@ -11,44 +11,54 @@ table.table.table-bordered
         td= name
         td = hours_minutes_combined_from_seconds(worklogs.map(&:duration).inject(:+) || 0)
         td= with_currency (worklogs.map(&:total).inject(:+) || 0)
+  tfoot.hidden-phone
+    tr
+      td
+        strong Sums:
+      td.lower-case
+        strong= hours_minutes_combined @hours, @minutes
+      td.nowrap
+        strong= with_currency @sum
 
 hr
 
-h1 All worklogs detailed
-table.table.table-bordered.table-condensed
-  thead
-    tr
-      th User
-      th Duration
-      th Details
-      th Price
-  tbody
-    - @worklogs.sort_by{|w| [w.user.username, w.timeframes.map(&:started).min]}.each do |worklog|
-      tr
-        td
-          - if worklog.client_share.present? && worklog.client_share.subcontractor_shown_name.present?
-            = worklog.client_share.subcontractor_shown_name
-          - else
-            = worklog.user.username
-        td
-          ul.table-list
-            - worklog.timeframes.sort_by(&:started).each do |tf|
-              li
-                = tf.started_formatted
-                '
-                |-
-                '
-                = tf.ended_formatted
-                br
-                strong
-                  |=
-                  '
-                  = tf.hours_minutes_seconds
-        td.markdown-table-cell style="width: 300px;"= markdown worklog.summary
-        td.nowrap= with_currency worklog.total
-  tfoot.hidden-phone
-    tr
-      td Sums:
-      td.lower-case= hours_minutes_combined @hours, @minutes
-      td
-      td.nowrap= with_currency @sum
+- @sorted_worklogs.each do |key, worklogs|
+  .page
+    h1 All worklogs detailed for #{key}
+    table.table.table-bordered.table-condensed
+      thead
+        tr
+          th User
+          th Duration
+          th Details
+          th Price
+      tbody
+        - worklogs.each do |worklog|
+          tr
+            td
+              - if worklog.client_share.present? && worklog.client_share.subcontractor_shown_name.present?
+                = worklog.client_share.subcontractor_shown_name
+              - else
+                = worklog.user.username
+            td
+              ul.table-list
+                - worklog.timeframes.sort_by(&:started).each do |tf|
+                  li
+                    = tf.started_formatted
+                    '
+                    |-
+                    '
+                    = tf.ended_formatted
+                    br
+                    strong
+                      |=
+                      '
+                      = tf.hours_minutes_seconds
+            td.markdown-table-cell style="width: 300px;"= markdown worklog.summary
+            td.nowrap= with_currency worklog.total
+      tfoot.hidden-phone
+        tr
+          td Sums:
+          td.lower-case= hours_minutes_combined_from_seconds(worklogs.map(&:duration).inject(:+) || 0)
+          td
+          td.nowrap= with_currency worklogs.map(&:total).inject(:+)
