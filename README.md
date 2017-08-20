@@ -1,5 +1,8 @@
 # Zeitkit
 
+[ ![Codeship Status for ZEITIO/zeitkit](https://app.codeship.com/projects/69fd01f0-67fd-0135-baf2-1ed4579c2b28/status)](https://app.codeship.com/projects/241143)
+
+
 The goal of Zeitkit has been to develop a super simple time tracking software that is highly adjusted to the needs of developers.
 
 * Track time for your clients
