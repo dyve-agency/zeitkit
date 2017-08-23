@@ -44,6 +44,7 @@ class InvoicesController < ApplicationController
   def show
     @invoice = @invoice.decorate
     @client = @invoice.client
+    @worklogs = @invoice.worklogs.order("start_time DESC").includes(:user).sort_by{|w| w.user.username}.group_by{ |w| w.user.username }
     render :show, layout: "application_print"
   end
 
