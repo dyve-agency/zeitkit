@@ -52,15 +52,29 @@
         thead
           tr
             td Description
+            td Duration
             td.last Subtotal
         tbody
-          - if @invoice.worklogs.any?
+          - if @worklogs.any?
+            - @worklogs.each do |username, worklogs|
+              tr
+                td
+                  | Hours worked by
+                  '
+                  strong #{username}
+                td= hours_minutes_combined_from_seconds(worklogs.map(&:duration).inject(:+) || 0)
+                td.last= with_currency(worklogs.map(&:total).inject(:+))
             tr
-              td Hours worked: #{@invoice.hours_worked}
-              td.last= with_currency @invoice.total_worklogs
+              td
+                strong Summary:
+              td
+                strong= @invoice.hours_worked
+              td.last
+                strong= with_currency @invoice.total_worklogs
           - (@invoice.products.oldest_first.uniq + @invoice.expenses.order(reason: :asc, created_at: :asc)).each do |entry|
             tr
               td= entry.invoice_title(@invoice).html_safe
+              td -
               - if entry.is_a?(Product)
                 td.last= entry.price_tag_total(@invoice)
               - else

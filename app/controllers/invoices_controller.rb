@@ -34,6 +34,7 @@ class InvoicesController < ApplicationController
     seconds = @worklogs.map(&:duration).inject(:+) || 0
     @hours = Worklog.hours_from_seconds seconds
     @minutes = Worklog.remaining_minutes_from_seconds seconds
+    @sorted_worklogs = @worklogs.sort_by{|w| [w.user.username, w.timeframes.map(&:started).min]}.group_by{ |w| w.user.username }
 
     @worklogs_pdf = PDFKit.new(render_to_string(action: "../worklogs/detailed_index", layout: 'application_print'))
     @worklogs_pdf.stylesheets << temp_stylesheet
@@ -43,6 +44,7 @@ class InvoicesController < ApplicationController
   def show
     @invoice = @invoice.decorate
     @client = @invoice.client
+    @worklogs = @invoice.worklogs.order("start_time DESC").includes(:user).sort_by{|w| w.user.username}.group_by{ |w| w.user.username }
     render :show, layout: "application_print"
   end
 
