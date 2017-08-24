@@ -88,24 +88,12 @@ ActiveRecord::Schema.define(version: 20170527104439) do
     t.integer  "invoice_id"
   end
 
-  create_table "holiday_settings", force: :cascade do |t|
-    t.integer  "user_id"
-    t.boolean  "use_holidays",   default: false
-    t.string   "holiday_region"
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
-  end
-
-  add_index "holiday_settings", ["user_id"], name: "index_holiday_settings_on_user_id", using: :btree
-
   create_table "holidays", force: :cascade do |t|
     t.integer  "user_id"
     t.date     "day"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
-
-  add_index "holidays", ["user_id"], name: "index_holidays_on_user_id", using: :btree
 
   create_table "invoice_defaults", force: :cascade do |t|
     t.float    "vat"
@@ -275,8 +263,6 @@ ActiveRecord::Schema.define(version: 20170527104439) do
   end
 
   add_foreign_key "business_hours", "users"
-  add_foreign_key "holiday_settings", "users"
-  add_foreign_key "holidays", "users"
   add_foreign_key "worklogs", "teams"
   add_foreign_key "worklogs", "teams"
 end
