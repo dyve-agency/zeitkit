@@ -13,7 +13,6 @@ class User < ActiveRecord::Base
     :street,
     :city,
     :currency,
-    :first_name,
     :last_name,
     :authentications_attributes,
     :time_zone,
@@ -258,4 +257,11 @@ class User < ActiveRecord::Base
     true
   end
 
+  def full_name
+    "#{first_name} #{last_name}".strip
+  end
+
+  def full_name_or_username
+    full_name.present? ? full_name : username
+  end
 end
