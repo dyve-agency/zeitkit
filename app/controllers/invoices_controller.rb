@@ -31,7 +31,6 @@ class InvoicesController < ApplicationController
     @hours = Worklog.hours_from_seconds seconds
     @minutes = Worklog.remaining_minutes_from_seconds seconds
     @sorted_worklogs = worklogs.sort_by{|w| [w.user.full_name_or_username, w.timeframes.map(&:started).min]}.group_by{ |w| w.user.full_name_or_username }
-    render 'worklogs/detailed_index', layout: 'application_print'
     @worklogs_pdf = PDFKit.new(render_to_string(action: "../worklogs/detailed_index", layout: 'application_print'))
     @worklogs_pdf.stylesheets << temp_stylesheet
     send_data(@worklogs_pdf.to_pdf, filename: @invoice.worklogs_export_file_name, type: 'application/pdf')
