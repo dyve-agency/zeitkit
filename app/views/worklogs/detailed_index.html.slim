@@ -6,7 +6,7 @@ table.table.table-bordered
       th Duration (HH:MM:SS)
       th Price
   tbody
-    - @worklogs.group_by {|wl| wl.client_subcontractor_name_or_username }.sort_by{|name, _| name}.each do |name, worklogs|
+    - @sorted_worklogs.each do |name, worklogs|
       tr
         td= name
         td = hours_minutes_combined_from_seconds(worklogs.map(&:duration).inject(:+) || 0)
@@ -22,9 +22,9 @@ table.table.table-bordered
 
 hr
 
-- @sorted_worklogs.each do |key, worklogs|
+- @sorted_worklogs.each do |username, worklogs|
   .page
-    h1 All worklogs detailed for #{key}
+    h1 All worklogs detailed for #{username}
     table.table.table-bordered.table-condensed
       thead
         tr
@@ -35,11 +35,7 @@ hr
       tbody
         - worklogs.each do |worklog|
           tr
-            td
-              - if worklog.client_share.present? && worklog.client_share.subcontractor_shown_name.present?
-                = worklog.client_share.subcontractor_shown_name
-              - else
-                = worklog.user.username
+            td= username
             td
               ul.table-list
                 - worklog.timeframes.sort_by(&:started).each do |tf|
