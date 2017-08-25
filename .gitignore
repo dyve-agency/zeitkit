@@ -18,7 +18,7 @@
 /public/assets
 
 # Ignore rbenv-vars related files
-.rbenv-vars
+.rbenv-var
 
 # SimpleCoverage
 coverage
