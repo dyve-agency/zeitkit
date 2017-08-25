@@ -15,7 +15,7 @@ class InvoicesController < ApplicationController
   def pdf_export
     @invoice = @invoice.decorate
     @client = @invoice.client
-    @worklogs = @invoice.worklogs.order("start_time DESC").includes(:user, :timeframes).decorate
+    @worklogs = @invoice.worklogs.order("start_time DESC").includes(:user).sort_by{|w| w.user.username}.group_by{ |w| w.user.username }
     @sum = Money.new @worklogs.map(&:total).inject(:+)
     seconds = Worklog.range_duration_seconds(@worklogs)
     @hours = Worklog.hours_from_seconds seconds
