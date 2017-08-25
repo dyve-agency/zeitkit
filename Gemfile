@@ -114,9 +114,9 @@ group :development do
   gem 'binding_of_caller'
 end
 
-group :development, :test do
+group :test do
+  gem 'simplecov'
   gem 'rspec-rails', '~> 3.6'
-  gem 'railroady'
 end
 
 gem 'datetimepicker-rails', github: 'zpaulovics/datetimepicker-rails', branch: 'master', submodules: true

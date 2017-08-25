@@ -7,6 +7,10 @@ class ApplicationController < ActionController::Base
   before_filter :check_and_set_mac_design
   before_filter :init_gon, if: :current_user
 
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to root_path, :alert => exception.message
+  end
+
   # FIX issue with rails responding with plain json. See:
   # http://stackoverflow.com/questions/16400639/back-button-chrome-gets-json-instead-of-html-in-play-framework
   before_filter do
