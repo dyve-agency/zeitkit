@@ -15,7 +15,7 @@ gem 'simple_form', git: "https://github.com/plataformatec/simple_form.git"
 gem 'jquery-rails'
 
 gem 'cancancan', git: "https://github.com/CanCanCommunity/cancancan.git", branch: "develop"
-gem 'newrelic_rpm'
+gem 'airbrake', '~> 6.2'
 gem 'redcarpet'
 gem 'rack-force_domain'
 gem 'money-rails'
@@ -115,7 +115,6 @@ group :development do
 end
 
 group :development, :test do
-  gem 'dotenv-rails'
   gem 'rspec-rails', '~> 3.6'
   gem 'railroady'
 end

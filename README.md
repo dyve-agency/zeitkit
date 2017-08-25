@@ -29,11 +29,10 @@ The goal of Zeitkit has been to develop a super simple time tracking software th
 ## Setup
 
 Prerequisite: 
-```
-Ruby 2.2.2
-Postgresql 9.3+
-Redis server
-```
+* Ruby 2.2.2
+* Postgresql 9.3+
+* Redis server
+* [rbenv-vars](https://github.com/rbenv/rbenv-vars)
 
 Make sure you have mailcatcher installed:
 
