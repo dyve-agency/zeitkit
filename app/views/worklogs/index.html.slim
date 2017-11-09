@@ -41,5 +41,5 @@ table.table.table-bordered
           .btn-group.pull-right
             = link_to 'Edit', edit_worklog_path(worklog), class: "btn btn-default"
             = link_to 'Delete', worklog, :confirm => 'Are you sure?', :method => :delete,
-              class: "btn btn-default hidden-phone"
+              class: "btn btn-default hidden-phone", :data => { confirm: 'Are you sure?' }
 = render "below_worklog_index"
