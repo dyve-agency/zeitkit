@@ -15,15 +15,6 @@ GIT
       momentjs-rails (>= 2.9.0)
 
 GIT
-  remote: git@github.com:rails-api/active_model_serializers.git
-  revision: e2ded594d31fa97201c3e2fa1106708d68d86751
-  specs:
-    active_model_serializers (0.10.0.rc5)
-      actionpack (>= 4.0)
-      activemodel (>= 4.0)
-      railties (>= 4.0)
-
-GIT
   remote: https://github.com/CanCanCommunity/cancancan.git
   revision: fbff9a114ccb76205b164c85a9b2f7d211e95171
   branch: develop
@@ -103,41 +94,50 @@ GIT
       actionpack (> 4, < 5.1)
       activemodel (> 4, < 5.1)
 
-GEM
-  remote: http://rubygems.org/
+GIT
+  remote: https://github.com/rails-api/active_model_serializers.git
+  revision: e2ded594d31fa97201c3e2fa1106708d68d86751
+  branch: e2ded594d31fa97201c3e2fa1106708d68d86751
   specs:
-    actionmailer (4.2.0)
-      actionpack (= 4.2.0)
-      actionview (= 4.2.0)
-      activejob (= 4.2.0)
+    active_model_serializers (0.10.0.rc5)
+      actionpack (>= 4.0)
+      activemodel (>= 4.0)
+      railties (>= 4.0)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    actionmailer (4.2.10)
+      actionpack (= 4.2.10)
+      actionview (= 4.2.10)
+      activejob (= 4.2.10)
       mail (~> 2.5, >= 2.5.4)
       rails-dom-testing (~> 1.0, >= 1.0.5)
-    actionpack (4.2.0)
-      actionview (= 4.2.0)
-      activesupport (= 4.2.0)
-      rack (~> 1.6.0)
+    actionpack (4.2.10)
+      actionview (= 4.2.10)
+      activesupport (= 4.2.10)
+      rack (~> 1.6)
       rack-test (~> 0.6.2)
       rails-dom-testing (~> 1.0, >= 1.0.5)
-      rails-html-sanitizer (~> 1.0, >= 1.0.1)
-    actionview (4.2.0)
-      activesupport (= 4.2.0)
+      rails-html-sanitizer (~> 1.0, >= 1.0.2)
+    actionview (4.2.10)
+      activesupport (= 4.2.10)
       builder (~> 3.1)
       erubis (~> 2.7.0)
       rails-dom-testing (~> 1.0, >= 1.0.5)
-      rails-html-sanitizer (~> 1.0, >= 1.0.1)
-    activejob (4.2.0)
-      activesupport (= 4.2.0)
+      rails-html-sanitizer (~> 1.0, >= 1.0.3)
+    activejob (4.2.10)
+      activesupport (= 4.2.10)
       globalid (>= 0.3.0)
-    activemodel (4.2.0)
-      activesupport (= 4.2.0)
+    activemodel (4.2.10)
+      activesupport (= 4.2.10)
       builder (~> 3.1)
-    activerecord (4.2.0)
-      activemodel (= 4.2.0)
-      activesupport (= 4.2.0)
+    activerecord (4.2.10)
+      activemodel (= 4.2.10)
+      activesupport (= 4.2.10)
       arel (~> 6.0)
-    activesupport (4.2.0)
+    activesupport (4.2.10)
       i18n (~> 0.7)
-      json (~> 1.7, >= 1.7.7)
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
@@ -147,7 +147,7 @@ GEM
     airbrake-ruby (2.3.2)
     angularjs-rails (1.5.0)
     angularjs-rails-resource (1.1.1)
-    arel (6.0.3)
+    arel (6.0.4)
     autoprefixer-rails (6.3.6)
       execjs
     axiom-types (0.1.1)
@@ -167,7 +167,7 @@ GEM
     bourbon (4.2.6)
       sass (~> 3.4)
       thor (~> 0.19)
-    builder (3.2.2)
+    builder (3.2.3)
     chronic (0.10.2)
     coderay (1.1.1)
     coercible (1.0.0)
@@ -179,14 +179,16 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.10.0)
-    concurrent-ruby (1.0.1)
+    concurrent-ruby (1.0.5)
     contact_us (1.0.1)
       rails (>= 4.2.0)
+    crass (1.0.4)
     debug_inspector (0.0.2)
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
     diff-lcs (1.3)
     docile (1.1.5)
+    dotenv (2.4.0)
     dotiw (3.1.1)
       actionpack (>= 3)
       i18n
@@ -204,8 +206,8 @@ GEM
       faraday_middleware (>= 0.9)
       hashie (>= 2.0, < 4.0)
       plissken
-    globalid (0.3.6)
-      activesupport (>= 4.1.0)
+    globalid (0.4.1)
+      activesupport (>= 4.2.0)
     gon (6.0.1)
       actionpack (>= 3.0)
       json
@@ -221,18 +223,17 @@ GEM
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
-    json (1.8.3)
+    json (2.1.0)
     jwt (1.5.1)
-    loofah (2.0.3)
+    loofah (2.2.2)
+      crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
-    mail (2.6.4)
-      mime-types (>= 1.16, < 4)
+    mail (2.7.0)
+      mini_mime (>= 0.1.1)
     method_source (0.8.2)
-    mime-types (3.0)
-      mime-types-data (~> 3.2015)
-    mime-types-data (3.2016.0221)
-    mini_portile2 (2.0.0)
-    minitest (5.8.4)
+    mini_mime (1.0.0)
+    mini_portile2 (2.3.0)
+    minitest (5.11.3)
     momentjs-rails (2.11.1)
       railties (>= 3.1)
     monetize (1.4.0)
@@ -249,8 +250,8 @@ GEM
     multi_xml (0.5.5)
     multipart-post (2.0.0)
     ng-rails-csrf (0.1.0)
-    nokogiri (1.6.7.2)
-      mini_portile2 (~> 2.0.0.rc2)
+    nokogiri (1.8.2)
+      mini_portile2 (~> 2.3.0)
     oauth (0.5.1)
     oauth2 (1.1.0)
       faraday (>= 0.8, < 0.10)
@@ -284,37 +285,43 @@ GEM
       slop (~> 3.4)
     pry-rails (0.3.4)
       pry (>= 0.9.10)
+    puma (3.11.4)
     quiet_assets (1.1.0)
       railties (>= 3.1, < 5.0)
-    rack (1.6.4)
+    rack (1.6.10)
     rack-force_domain (0.3.0)
     rack-test (0.6.3)
       rack (>= 1.0)
-    rails (4.2.0)
-      actionmailer (= 4.2.0)
-      actionpack (= 4.2.0)
-      actionview (= 4.2.0)
-      activejob (= 4.2.0)
-      activemodel (= 4.2.0)
-      activerecord (= 4.2.0)
-      activesupport (= 4.2.0)
+    rails (4.2.10)
+      actionmailer (= 4.2.10)
+      actionpack (= 4.2.10)
+      actionview (= 4.2.10)
+      activejob (= 4.2.10)
+      activemodel (= 4.2.10)
+      activerecord (= 4.2.10)
+      activesupport (= 4.2.10)
       bundler (>= 1.3.0, < 2.0)
-      railties (= 4.2.0)
+      railties (= 4.2.10)
       sprockets-rails
     rails-deprecated_sanitizer (1.0.3)
       activesupport (>= 4.2.0.alpha)
-    rails-dom-testing (1.0.7)
-      activesupport (>= 4.2.0.beta, < 5.0)
-      nokogiri (~> 1.6.0)
+    rails-dom-testing (1.0.9)
+      activesupport (>= 4.2.0, < 5.0)
+      nokogiri (~> 1.6)
       rails-deprecated_sanitizer (>= 1.0.1)
-    rails-html-sanitizer (1.0.3)
-      loofah (~> 2.0)
-    railties (4.2.0)
-      actionpack (= 4.2.0)
-      activesupport (= 4.2.0)
+    rails-html-sanitizer (1.0.4)
+      loofah (~> 2.2, >= 2.2.2)
+    rails_12factor (0.0.3)
+      rails_serve_static_assets
+      rails_stdout_logging
+    rails_serve_static_assets (0.0.5)
+    rails_stdout_logging (0.0.5)
+    railties (4.2.10)
+      actionpack (= 4.2.10)
+      activesupport (= 4.2.10)
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
-    rake (11.1.2)
+    rake (12.3.1)
     redcarpet (3.3.4)
     redis (3.2.2)
     redis-actionpack (4.0.1)
@@ -379,10 +386,10 @@ GEM
       railties (>= 3.1, < 5.0)
       slim (~> 3.0)
     slop (3.6.0)
-    sprockets (3.6.0)
+    sprockets (3.7.1)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
-    sprockets-rails (3.0.4)
+    sprockets-rails (3.2.1)
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
@@ -394,11 +401,11 @@ GEM
       activesupport (>= 3.2, < 5)
       i18n
     temple (0.7.6)
-    thor (0.19.1)
-    thread_safe (0.3.5)
+    thor (0.19.4)
+    thread_safe (0.3.6)
     tilt (2.0.2)
     ttfunk (1.4.0)
-    tzinfo (1.2.2)
+    tzinfo (1.2.5)
       thread_safe (~> 0.1)
     uglifier (3.0.0)
       execjs (>= 0.3.0, < 3)
@@ -426,11 +433,13 @@ DEPENDENCIES
   binding_of_caller
   bootstrap-sass (~> 3.3.1)
   bourbon
+  bundler
   cancancan!
   chartkick!
   coffee-rails
   contact_us (~> 1.0.1)
   datetimepicker-rails!
+  dotenv
   dotiw
   draper!
   font-awesome-rails!
@@ -453,10 +462,12 @@ DEPENDENCIES
   prawn
   protected_attributes!
   pry-rails
+  puma
   quiet_assets
   rack-force_domain
-  rails (= 4.2.0)
+  rails (~> 4.2.0)
   rails-bootstrap-helpers!
+  rails_12factor
   redcarpet
   redis-rails
   responders
@@ -477,7 +488,7 @@ DEPENDENCIES
   wkhtmltopdf-binary (~> 0.9.9.3)
 
 RUBY VERSION
-   ruby 2.2.2p95
+   ruby 2.5.1p57
 
 BUNDLED WITH
-   1.14.5
+   1.16.1

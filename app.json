@@ -1,0 +1,61 @@
+{
+  "name": "zeitkit",
+  "scripts": {
+    "postdeploy": "rake db:setup"
+  },
+  "env": {
+    "MAILER_ADDRESS": {
+      "required": true
+    },
+    "MAILER_PORT": {
+      "required": true
+    },
+    "MAILER_DOMAIN": {
+      "required": true
+    },
+    "MAILER_USERNAME": {
+      "required": true
+    },
+    "MAILER_PASSWORD": {
+      "required": true
+    },
+    "MAILER_AUTHENTICATION": {
+      "required": true
+    },
+    "MAILER_DEFAULT_FROM": "info@zeitkit.com",
+    "AIRBRAKE_PROJECT_ID": "0000",
+    "AIRBRAKE_PROJECT_KEY": "",
+    "GOOGLE_ANALYTICS_ID": "UA-XXXXXXXX-X",
+    "WEB_PROCESSES": 1,
+    "WEB_THREADS_MIN": 2,
+    "WEB_THREADS_MAX": 4,
+    "SECRET_SESSION_TOKEN": {
+      "generator": "secret"
+    },
+    "SECRET_KEY_BASE": {
+      "generator": "secret"
+    }
+  },
+  "formation": {
+    "web": {
+      "size": "hobby",
+      "quantity": 1
+    }
+  },
+  "addons": [
+    {
+      "plan": "heroku-postgresql:hobby-dev",
+      "options": {
+        "version": "10"
+      }
+    },
+    {
+      "plan": "heroku-redis:hobby-dev"
+    }
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/ruby"
+    }
+  ]
+}

@@ -1,8 +1,9 @@
-ruby "2.2.2"
+ruby "2.5.1"
 
-source 'http://rubygems.org'
+source 'https://rubygems.org'
 
-gem 'rails', '4.2.0'
+gem 'bundler'
+gem 'rails', '~> 4.2.0'
 
 gem 'pg'
 gem 'slim'
@@ -90,7 +91,7 @@ gem 'protected_attributes', github: 'rails/protected_attributes'
 gem "virtus"
 
 # Serializers for models
-gem 'active_model_serializers', git: "git@github.com:rails-api/active_model_serializers.git"
+gem 'active_model_serializers', git: "https://github.com/rails-api/active_model_serializers.git", branch: 'e2ded594d31fa97201c3e2fa1106708d68d86751'
 
 # Decorators
 gem 'draper', git: "https://github.com/drapergem/draper.git"
@@ -103,20 +104,26 @@ gem 'dotiw'
 
 # Moment.js lib
 gem 'momentjs-rails'
+gem 'coffee-rails'
 
 group :development do
   gem 'quiet_assets'
   gem 'sqlite3'
   gem 'pry-rails'
-  gem 'coffee-rails'
   gem 'uglifier'
   gem "better_errors"
   gem 'binding_of_caller'
+  gem 'dotenv'
 end
 
 group :test do
   gem 'simplecov'
   gem 'rspec-rails', '~> 3.6'
+end
+
+group :production do
+  gem 'puma'
+  gem 'rails_12factor'
 end
 
 gem 'datetimepicker-rails', github: 'zpaulovics/datetimepicker-rails', branch: 'master', submodules: true
