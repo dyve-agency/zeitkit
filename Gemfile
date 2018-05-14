@@ -30,7 +30,8 @@ gem "responders"
 gem 'contact_us', '~> 1.0.1'
 
 # Session store and cache
-gem 'redis-rails'
+gem 'redis-rails', '~> 5.0.2'
+gem 'redis-store', '>= 1.4.0'
 
 # Wkhtmltopdf
 gem 'wkhtmltopdf-binary', '~> 0.9.9.3'
