@@ -2,6 +2,11 @@ module Api
   class WorklogsController < BaseController
 
     def create
+      unless (params[:client_id].present? && params[:team_id].present? && params[:worklogs].present? && params[:description].present?)
+        render status: 400
+        return
+      end
+
       client = Client.find(params[:client_id])
       team = Team.find(params[:team_id])
 
@@ -9,15 +14,24 @@ module Api
         Timeframe.new(started: Time.at(timeframe[0]).to_datetime, ended: Time.at(timeframe[1]).to_datetime)
       end
 
-      form = WorklogForm.new_from_params({}, user: @current_user, team: team)
+      worklog = Worklog.new(
+        user_id: @current_user.id,
+        client_id: client.id,
+        team_id: team.id,
+      )
 
-      form.client_id = client.id
-      form.timesframes = timeframes
+      form = WorklogForm.new_from_params({ client: client,
+        comment: params[:description],
+        hourly_rate: client.hourly_rate,
+      }, user: @current_user, worklog: worklog, team: team)
+
+      # form.client_id = client.id
+      form.timeframes = timeframes
 
       if form.save
-        render json: {worklog: form.worklog}.to_json, status: 200
+        render json: { worklog: form.worklog }.to_json, status: 200
       else
-        render json: {errors: form.errors.full_messages}.to_json, status: 422
+        render json: { errors: form.errors.full_messages }.to_json, status: 422
       end
 
       # worklog = Worklog.new(

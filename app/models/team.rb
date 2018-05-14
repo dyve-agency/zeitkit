@@ -3,7 +3,7 @@ class Team < ActiveRecord::Base
   has_many :team_users
   belongs_to :creator, class_name: "User"
 
-  attr_accessible :name
+  attr_accessible :name, :creator_id
   validates :name, presence: true
   validates :creator, presence: true, on: :create
 
