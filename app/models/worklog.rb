@@ -16,7 +16,8 @@ class Worklog < ActiveRecord::Base
     :from_time,
     :to_date,
     :to_time,
-    :team_id
+    :team_id,
+    :timeframes
 
   attr_accessor :from_date,
     :from_time,
