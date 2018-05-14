@@ -13,7 +13,8 @@ module TotalHelper
 
       # defines a dynamic getter for the currency, i.e total
       define_method "#{attribute_name}" do
-        Money.new send(cents_attribute), currency || Money.default_currency
+        cents = send(cents_attribute).presence || 0
+        Money.new cents, currency || Money.default_currency
       end
 
       # defines a dynamic setter fot the attribute name
