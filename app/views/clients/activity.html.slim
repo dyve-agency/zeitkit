@@ -1,8 +1,8 @@
 h1.page-header Client: #{@client.name}
 - if logged_in? && !is_shared?(@client)
   p Share this link with your clients. They can then stay up to date on expenses and your daily work.
-  p = link_to "http://#{absolute_path activity_client_path(@client, client_token: @client.client_token)}" do
-    | http://#{absolute_path activity_client_path(@client, client_token: @client.client_token)}
+  p = link_to "https://#{absolute_path activity_client_path(@client, client_token: @client.client_token)}" do
+    | https://#{absolute_path activity_client_path(@client, client_token: @client.client_token)}
 = simple_form_for @form, url: activity_client_path(@client), method: :get do |f|
   = hidden_field_tag "client_token", @client.client_token
   .row
