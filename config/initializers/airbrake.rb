@@ -7,6 +7,7 @@
 #
 # Configuration details:
 # https://github.com/airbrake/airbrake-ruby#configuration
+
 if ENV['AIRBRAKE_PROJECT_ID'] != '0000'
   Airbrake.configure do |c|
     # You must set both project_id & project_key. To find your project_id and
