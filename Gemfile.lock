@@ -206,7 +206,6 @@ GEM
       json
       multi_json
       request_store (>= 1.0)
-    hashie (3.4.3)
     i18n (0.7.0)
     ice_nine (0.11.2)
     jbuilder (2.4.1)
@@ -254,15 +253,6 @@ GEM
       rack (>= 1.2, < 3)
     octokit (4.3.0)
       sawyer (~> 0.7.0, >= 0.5.3)
-    omniauth (1.3.1)
-      hashie (>= 1.2, < 4)
-      rack (>= 1.0, < 3)
-    omniauth-github (1.1.2)
-      omniauth (~> 1.0)
-      omniauth-oauth2 (~> 1.1)
-    omniauth-oauth2 (1.4.0)
-      oauth2 (~> 1.0)
-      omniauth (~> 1.2)
     pdf-core (0.6.1)
     permanent_records (3.1.6)
       activerecord (>= 3.0.0)
@@ -440,8 +430,6 @@ DEPENDENCIES
   nested_form!
   ng-rails-csrf
   octokit
-  omniauth
-  omniauth-github
   pdfkit!
   permanent_records (~> 3.1.3)
   pg
