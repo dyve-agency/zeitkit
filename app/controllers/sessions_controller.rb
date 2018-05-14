@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
     )
     respond_to do |format|
       format.html { login_user_response(user) }
-      format.json { login_json_response(user) }
+      format.json { login_json_response }
     end
   end
 
@@ -42,25 +42,11 @@ class SessionsController < ApplicationController
     end
   end
 
-  def login_json_response(user)
-    if user
-      api_access_token = retrieve_or_create_token(user)
-      render :json => {:access_token => api_access_token }
+  def login_json_response
+    if @api_access_token
+      render :json => {:access_token => @api_access_token.token }
     else
       head :unauthorized
     end
   end
-
-  def auth_hash
-    request.env['omniauth.auth']
-  end
-
-  def retrieve_or_create_token(user)
-    if user.token.nil?
-      user.token = SecureRandom.hex
-      user.save
-    end
-    user.token
-  end
-
 end
