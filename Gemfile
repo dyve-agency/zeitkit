@@ -100,7 +100,6 @@ gem 'dotiw'
 
 # Moment.js lib
 gem 'momentjs-rails'
-gem 'coffee-rails'
 
 group :development do
   gem 'quiet_assets'
