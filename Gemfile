@@ -91,7 +91,7 @@ gem 'protected_attributes', github: 'rails/protected_attributes'
 gem "virtus"
 
 # Serializers for models
-gem 'active_model_serializers', git: "https://github.com/rails-api/active_model_serializers.git"
+gem 'active_model_serializers', git: "https://github.com/rails-api/active_model_serializers.git", branch: 'e2ded594d31fa97201c3e2fa1106708d68d86751'
 
 # Decorators
 gem 'draper', git: "https://github.com/drapergem/draper.git"
