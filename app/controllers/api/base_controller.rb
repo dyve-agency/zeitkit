@@ -1,25 +1,18 @@
 module Api
   class BaseController < ActionController::Base
-    # TODO: Do not parase'access_token' from get-string,
-    # but rather some header field
 
-    before_filter :check_authentication
-
-    def check_authentication
-      if params[:access_token].present?
-        validate_token(params[:access_token])
-        unless @current_user
-          return head :unauthorized
-        end
-      else
-        return head :unauthorized
-      end
-    end
+    before_filter :authenticate
 
     private
 
-    def validate_token(token)
-      @current_user = User.find_by_token(token)
+    def authenticate
+      authenticate_or_request_with_http_token do |token, options|
+        @current_user = User.find_by(token: token)
+      end
+
+      unless @current_user
+        return head :unauthorized
+      end
     end
   end
 end
