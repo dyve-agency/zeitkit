@@ -104,12 +104,12 @@ gem 'dotiw'
 
 # Moment.js lib
 gem 'momentjs-rails'
+gem 'coffee-rails'
 
 group :development do
   gem 'quiet_assets'
   gem 'sqlite3'
   gem 'pry-rails'
-  gem 'coffee-rails'
   gem 'uglifier'
   gem "better_errors"
   gem 'binding_of_caller'
