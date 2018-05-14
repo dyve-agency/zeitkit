@@ -1,7 +1,7 @@
 {
   "name": "zeitkit",
   "scripts": {
-    "postdeploy": "rake db:setup"
+    "postdeploy": "rake db:schema:load && rake db:seed"
   },
   "env": {
     "MAILER_ADDRESS": {
