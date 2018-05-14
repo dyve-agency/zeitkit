@@ -46,7 +46,20 @@
 
           let x = new Date(time);
 
-          return (time - x.setHours(0, 0, 0, 0)) / 1000 / 60;
+          return (time - x.setHours(0, 0, 0, 0));
+        }
+
+        sameDay() {
+          return new Date(this.started).setHours(0, 0, 0, 0) === new Date(this.ended).setHours(0, 0, 0, 0);
+        }
+
+        get date() {
+          return this.started;
+        }
+
+        set date(val) {
+          this.started = val;
+          this.endedMinutes = this.endedMinutes;
         }
 
         get startedMinutes() {
@@ -58,11 +71,11 @@
         }
 
         set startedMinutes(val) {
-          this.started = new Date(new Date(this.started).setHours(0, 0, 0, 0) + val * 60 * 1000);
+          this.started = new Date(new Date(this.started).setHours(0, 0, 0, 0) + val);
         }
 
         set endedMinutes(val) {
-          this.ended = new Date(new Date(this.ended).setHours(0, 0, 0, 0) + val * 60 * 1000);
+          this.ended = new Date(new Date(this.started).setHours(0, 0, 0, 0) + val);
         }
 
         durationSeconds() {
