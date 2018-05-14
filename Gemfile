@@ -21,7 +21,6 @@ gem 'redcarpet'
 gem 'rack-force_domain'
 gem 'money-rails'
 gem 'pdfkit', git: "https://github.com/pdfkit/pdfkit.git"
-gem 'fullcontact'
 gem 'jbuilder'
 gem "permanent_records", "~> 3.1.3"
 gem 'validates_email_format_of'
