@@ -31,6 +31,9 @@
     "WEB_THREADS_MAX": 4,
     "SECRET_SESSION_TOKEN": {
       "generator": "secret"
+    },
+    "SECRET_KEY_BASE": {
+      "generator": "secret"
     }
   },
   "formation": {

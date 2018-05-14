@@ -123,6 +123,7 @@ end
 
 group :production do
   gem 'puma'
+  gem 'rails_12factor'
 end
 
 gem 'datetimepicker-rails', github: 'zpaulovics/datetimepicker-rails', branch: 'master', submodules: true
