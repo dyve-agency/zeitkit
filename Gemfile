@@ -1,6 +1,6 @@
 ruby "2.5.1"
 
-source 'http://rubygems.org'
+source 'https://rubygems.org'
 
 gem 'bundler'
 gem 'rails', '~> 4.2.0'
@@ -91,7 +91,7 @@ gem 'protected_attributes', github: 'rails/protected_attributes'
 gem "virtus"
 
 # Serializers for models
-gem 'active_model_serializers', git: "git@github.com:rails-api/active_model_serializers.git"
+gem 'active_model_serializers', git: "https://github.com/rails-api/active_model_serializers.git"
 
 # Decorators
 gem 'draper', git: "https://github.com/drapergem/draper.git"
