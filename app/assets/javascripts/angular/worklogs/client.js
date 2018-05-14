@@ -1,4 +1,4 @@
-function() {
+(function() {
   /*
    * decaffeinate suggestions:
    * DS001: Remove Babel/TypeScript constructor workaround
@@ -46,4 +46,4 @@ function() {
     return Client;
   }
   ]);
-}();
+})();
