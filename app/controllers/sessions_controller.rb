@@ -22,11 +22,6 @@ class SessionsController < ApplicationController
   def new
   end
 
-  def destroy
-    logout
-    redirect_to root_url
-  end
-
   def auth_provider_callback
     auth = auth_hash
     if auth && current_user.update_attribute(:github_token, auth_hash["credentials"]["token"])
