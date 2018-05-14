@@ -201,18 +201,6 @@ class User < ActiveRecord::Base
   def get_name_from_api
     if Rails.env.test? || Rails.env.development? || demo?
       true
-    else
-      begin
-        person = FullContact.person(email: email)
-      rescue
-        person = nil
-      ensure
-        return true if (!person || person.status != 200 || !person.contact_info || !person.contact_info.given_name || person.contact_info.given_name.length == 0)
-        self.first_name = person.contact_info.given_name
-        self.last_name = person.contact_info.family_name
-        person
-        true
-      end
     end
   end
 

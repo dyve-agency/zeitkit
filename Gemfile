@@ -21,7 +21,6 @@ gem 'redcarpet'
 gem 'rack-force_domain'
 gem 'money-rails'
 gem 'pdfkit', git: "https://github.com/pdfkit/pdfkit.git"
-gem 'fullcontact'
 gem 'jbuilder'
 gem "permanent_records", "~> 3.1.3"
 gem 'validates_email_format_of'
@@ -31,7 +30,8 @@ gem "responders"
 gem 'contact_us', '~> 1.0.1'
 
 # Session store and cache
-gem 'redis-rails'
+gem 'redis-rails', '~> 5.0.2'
+gem 'redis-store', '>= 1.4.0'
 
 # Wkhtmltopdf
 gem 'wkhtmltopdf-binary', '~> 0.9.9.3'
@@ -42,10 +42,6 @@ gem 'foreman'
 
 # Octokit gem for github
 gem 'octokit'
-
-# Omniauth Github
-gem 'omniauth'
-gem 'omniauth-github'
 
 # Use bootstrap as the style framework
 gem 'bootstrap-sass', '~> 3.3.1'

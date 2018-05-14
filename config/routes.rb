@@ -65,7 +65,6 @@ Timetracker::Application.routes.draw do
   post "hide_tutorial" => "tutorial#hide", as: "hide_tutorial"
   get "show_tutorial" => "tutorial#show", as: "show_tutorial"
 
-  get "/auth/:provider/callback" => "sessions#auth_provider_callback"
 
   # Development routes
   match "/dev/:action" => "dev#:action", :via => :all, :as => 'dev'

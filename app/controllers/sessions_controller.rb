@@ -27,15 +27,6 @@ class SessionsController < ApplicationController
     redirect_to root_url
   end
 
-  def auth_provider_callback
-    auth = auth_hash
-    if auth && current_user.update_attribute(:github_token, auth_hash["credentials"]["token"])
-      redirect_to edit_user_path(current_user), notice: "Successfuly authed GitHub."
-    else
-      redirect_to edit_user_path(current_user), flash: { error: "Could not auth with GitHub." }
-    end
-  end
-
   private
 
   def login_user_response(user)
@@ -53,10 +44,6 @@ class SessionsController < ApplicationController
     else
       head :unauthorized
     end
-  end
-
-  def auth_hash
-    request.env['omniauth.auth']
   end
 
 end
