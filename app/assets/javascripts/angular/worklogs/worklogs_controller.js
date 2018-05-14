@@ -74,6 +74,20 @@
         return timeframe.openedEnded = true;
       };
 
+      $scope.sliderOptions = {
+        floor: 0,
+        ceil: 1440,
+        step: 5,
+        draggableRange: true,
+        translate: (value, id, label) => {
+          let minutes = value;
+          let hours = (minutes / 60) | 0;
+          minutes = minutes % 60;
+
+          return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+        },
+      };
+
       return $scope.init();
     }
 

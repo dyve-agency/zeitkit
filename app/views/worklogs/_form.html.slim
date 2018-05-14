@@ -49,6 +49,9 @@ div ng-controller="WorklogsController"
   hr
   .well ng-repeat="time in worklog.timeframes"
     .row
+      .col-md-12.col-xs-12
+        rzslider rz-slider-model="time.startedMinutes" rz-slider-high="time.endedMinutes" rz-slider-options="sliderOptions"
+    .row
       .col-xs-12.col-md-6
         .row
           .col-xs-6.col-lg-4

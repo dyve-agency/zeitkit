@@ -40,6 +40,31 @@
           }
         }
 
+        _convertToMinutes(time) {
+          if (typeof time === 'string')
+            time = Date.parse(time);
+
+          let x = new Date(time);
+
+          return (time - x.setHours(0, 0, 0, 0)) / 1000 / 60;
+        }
+
+        get startedMinutes() {
+          return this._convertToMinutes(this.started);
+        }
+
+        get endedMinutes() {
+          return this._convertToMinutes(this.ended);
+        }
+
+        set startedMinutes(val) {
+          this.started = new Date(new Date(this.started).setHours(0, 0, 0, 0) + val * 60 * 1000);
+        }
+
+        set endedMinutes(val) {
+          this.ended = new Date(new Date(this.ended).setHours(0, 0, 0, 0) + val * 60 * 1000);
+        }
+
         durationSeconds() {
           // For some reason the provided @ended and @started formats aren't working.
           // It's necessary to recreate a new Date, based on the dates provided.
