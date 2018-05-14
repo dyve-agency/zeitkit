@@ -3,7 +3,7 @@ module Api
 
     def create
       timeframes = params[:worklogs].map do |timeframe|
-        Timeframe.create(started: Time.at(timeframe[0]).to_datetime, ended: Time.at(timeframe[1]).to_datetime).id
+        Timeframe.new(started: Time.at(timeframe[0]).to_datetime, ended: Time.at(timeframe[1]).to_datetime)
       end
 
       worklog = Worklog.new(client_id: params[:client_id], team_id: params[:team_id], timeframes: timeframes)
