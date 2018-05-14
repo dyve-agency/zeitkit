@@ -1,8 +1,9 @@
-ruby "2.2.2"
+ruby "2.5.1"
 
 source 'http://rubygems.org'
 
-gem 'rails', '4.2.0'
+gem 'bundler'
+gem 'rails', '~> 4.2.0'
 
 gem 'pg'
 gem 'slim'
@@ -112,11 +113,16 @@ group :development do
   gem 'uglifier'
   gem "better_errors"
   gem 'binding_of_caller'
+  gem 'dotenv'
 end
 
 group :test do
   gem 'simplecov'
   gem 'rspec-rails', '~> 3.6'
+end
+
+group :production do
+  gem 'puma'
 end
 
 gem 'datetimepicker-rails', github: 'zpaulovics/datetimepicker-rails', branch: 'master', submodules: true
