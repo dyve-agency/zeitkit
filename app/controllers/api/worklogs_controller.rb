@@ -33,17 +33,6 @@ module Api
       else
         render json: { errors: form.errors.full_messages }.to_json, status: 422
       end
-
-      # worklog = Worklog.new(
-      #   user_id: @current_user.id,
-      #   client_id: client.id,
-      #   team_id: params[:team_id],
-      #   summary: params[:description],
-      #   timeframes: timeframes,
-      #   hourly_rate_cents: client.hourly_rate
-      # )
-      #
-      # render json: { success: worklog.save! }
     end
   end
 end
