@@ -12,7 +12,7 @@ The goal of Zeitkit has been to develop a super simple time tracking software th
 * Manage a whole team with shared clients
 * Reporting to see how your team is doing
 * Fully fledged PDF invoice generation. 100% compliant with German law.
-* View the demo: [http://zeitkit.com](http://zeitkit.com)
+* View the demo: [https://zeitkit.herokuapp.com/](https://zeitkit.herokuapp.com/)
 
 ## Screenshots
 
