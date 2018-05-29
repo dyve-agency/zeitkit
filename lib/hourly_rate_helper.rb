@@ -3,7 +3,8 @@ module HourlyRateHelper
   include CurrencyHelper
 
   def hourly_rate
-    Money.new hourly_rate_cents
+    cents = hourly_rate_cents.presence || 0
+    Money.new cents
   end
 
   def hourly_rate_with_currency

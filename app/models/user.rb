@@ -53,6 +53,7 @@ class User < ActiveRecord::Base
   before_create :get_name_from_api
   after_create :build_invoice_default
   after_create :build_initial_temp_worklog_save
+  before_create :set_token
 
   scope :paid, -> { where(invoice_id: !nil) }
   scope :no_demo_user, -> { where("email NOT LIKE 'demo%@zeitkit.com'") }
@@ -81,6 +82,10 @@ class User < ActiveRecord::Base
   def added_team_members
     client_ids = clients.map(&:id)
     ClientShare.where(client_id: client_ids).includes(:user).map(&:user).uniq
+  end
+
+  def set_token
+    self.token = SecureRandom.hex
   end
 
   def set_temp_password(temp_pw)

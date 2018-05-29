@@ -112,6 +112,7 @@ group :development do
 end
 
 group :test do
+  gem 'pry-rails'
   gem 'simplecov'
   gem 'rspec-rails', '~> 3.6'
 end
