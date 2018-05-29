@@ -12,6 +12,12 @@
     .form-actions
       = f.button :submit, "Register"
 - else
+  .row
+    .col-md-4
+      label API Key
+      input#api_key.form-control value="#{current_user.token}" readonly=""
+      button.btn.btn-primary.margin-top-5 onclick="var copyText = document.getElementById('api_key'); copyText.select(); document.execCommand('copy');" Copy
+
   h1 Edit contact info
   = simple_form_for @user do |f|
     .row

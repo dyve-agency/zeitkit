@@ -11,23 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170527104439) do
+ActiveRecord::Schema.define(version: 20180514124219) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "access_tokens", force: :cascade do |t|
-    t.string   "token"
-    t.boolean  "expirable",        default: true
+    t.string   "token",            limit: 255
+    t.boolean  "expirable",                    default: true
     t.datetime "last_activity_at"
     t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
   end
 
   create_table "add_attributes_to_users", force: :cascade do |t|
-    t.string   "first_name"
-    t.string   "last_name"
+    t.string   "first_name", limit: 255
+    t.string   "last_name",  limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -35,46 +35,35 @@ ActiveRecord::Schema.define(version: 20170527104439) do
   create_table "authentications", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "uid"
-    t.string   "provider"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string   "provider",   limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
-
-  create_table "business_hours", force: :cascade do |t|
-    t.integer  "user_id"
-    t.string   "workday"
-    t.time     "start_time"
-    t.time     "end_time"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "business_hours", ["user_id"], name: "index_business_hours_on_user_id", using: :btree
 
   create_table "client_shares", force: :cascade do |t|
     t.integer  "client_id"
     t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "username"
+    t.datetime "created_at",                                                  null: false
+    t.datetime "updated_at",                                                  null: false
+    t.string   "username",                        limit: 255
     t.integer  "hourly_rate_cents"
-    t.boolean  "works_as_subcontractor",          default: false
-    t.integer  "subcontractor_hourly_rate_cents", default: 0
+    t.boolean  "works_as_subcontractor",                      default: false
+    t.integer  "subcontractor_hourly_rate_cents",             default: 0
     t.string   "subcontractor_shown_name"
   end
 
   create_table "clients", force: :cascade do |t|
-    t.string   "name"
+    t.string   "name",                         limit: 255
     t.integer  "hourly_rate_cents"
-    t.integer  "user_id",                      null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "city"
-    t.string   "street"
-    t.string   "zip"
-    t.string   "company_name"
+    t.integer  "user_id",                                  null: false
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+    t.string   "city",                         limit: 255
+    t.string   "street",                       limit: 255
+    t.string   "zip",                          limit: 255
+    t.string   "company_name",                 limit: 255
     t.boolean  "email_when_team_adds_worklog"
-    t.string   "client_token"
+    t.string   "client_token",                 limit: 255
     t.text     "credit_block_reason"
   end
 
@@ -83,16 +72,9 @@ ActiveRecord::Schema.define(version: 20170527104439) do
     t.integer  "client_id"
     t.integer  "total_cents"
     t.text     "reason"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.integer  "invoice_id"
-  end
-
-  create_table "holidays", force: :cascade do |t|
-    t.integer  "user_id"
-    t.date     "day"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "invoice_defaults", force: :cascade do |t|
@@ -102,22 +84,22 @@ ActiveRecord::Schema.define(version: 20170527104439) do
     t.text     "payment_info"
     t.text     "note"
     t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.text     "custom_css",    default: ""
   end
 
   create_table "invoices", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "client_id"
-    t.string   "number"
+    t.string   "number",         limit: 255
     t.integer  "total_cents"
     t.boolean  "includes_vat"
     t.datetime "paid_on"
     t.float    "vat"
     t.text     "note"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.text     "content"
     t.text     "payment_terms"
     t.text     "payment_info"
@@ -135,9 +117,9 @@ ActiveRecord::Schema.define(version: 20170527104439) do
     t.text     "content"
     t.integer  "user_id"
     t.integer  "client_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "share_token"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.string   "share_token", limit: 255
   end
 
   create_table "products", force: :cascade do |t|
@@ -145,8 +127,8 @@ ActiveRecord::Schema.define(version: 20170527104439) do
     t.integer  "total_cents"
     t.float    "charge"
     t.text     "title"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "starburst_announcement_views", force: :cascade do |t|
@@ -172,7 +154,7 @@ ActiveRecord::Schema.define(version: 20170527104439) do
   create_table "team_users", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "team_id"
-    t.string   "state"
+    t.string   "state",      limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -181,7 +163,7 @@ ActiveRecord::Schema.define(version: 20170527104439) do
   add_index "team_users", ["user_id"], name: "index_team_users_on_user_id", using: :btree
 
   create_table "teams", force: :cascade do |t|
-    t.string   "name"
+    t.string   "name",       limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "creator_id"
@@ -199,13 +181,13 @@ ActiveRecord::Schema.define(version: 20170527104439) do
 
   create_table "temp_worklog_saves", force: :cascade do |t|
     t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
     t.text     "summary"
-    t.string   "from_date"
-    t.string   "from_time"
-    t.string   "to_date"
-    t.string   "to_time"
+    t.string   "from_date",         limit: 255
+    t.string   "from_time",         limit: 255
+    t.string   "to_date",           limit: 255
+    t.string   "to_time",           limit: 255
     t.integer  "client_id"
     t.boolean  "show_user"
     t.integer  "hourly_rate_cents"
@@ -220,28 +202,29 @@ ActiveRecord::Schema.define(version: 20170527104439) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                                          null: false
-    t.string   "crypted_password"
-    t.string   "salt"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "remember_me_token"
+    t.string   "email",                           limit: 255,                null: false
+    t.string   "crypted_password",                limit: 255
+    t.string   "salt",                            limit: 255
+    t.datetime "created_at",                                                 null: false
+    t.datetime "updated_at",                                                 null: false
+    t.string   "remember_me_token",               limit: 255
     t.datetime "remember_me_token_expires_at"
-    t.string   "reset_password_token"
+    t.string   "reset_password_token",            limit: 255
     t.datetime "reset_password_token_expires_at"
     t.datetime "reset_password_email_sent_at"
-    t.string   "city"
-    t.string   "street"
-    t.string   "zip"
-    t.string   "company_name"
-    t.string   "currency"
+    t.string   "city",                            limit: 255
+    t.string   "street",                          limit: 255
+    t.string   "zip",                             limit: 255
+    t.string   "company_name",                    limit: 255
+    t.string   "currency",                        limit: 255
     t.boolean  "signup_email_sent"
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "time_zone"
-    t.string   "github_token"
-    t.string   "username"
-    t.boolean  "show_tutorial",                   default: true
+    t.string   "first_name",                      limit: 255
+    t.string   "last_name",                       limit: 255
+    t.string   "time_zone",                       limit: 255
+    t.string   "github_token",                    limit: 255
+    t.string   "username",                        limit: 255
+    t.boolean  "show_tutorial",                               default: true
+    t.string   "token"
   end
 
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", using: :btree
@@ -251,8 +234,8 @@ ActiveRecord::Schema.define(version: 20170527104439) do
     t.datetime "end_time"
     t.integer  "user_id"
     t.integer  "client_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
     t.integer  "hourly_rate_cents"
     t.integer  "total_cents"
     t.text     "summary"
@@ -262,7 +245,5 @@ ActiveRecord::Schema.define(version: 20170527104439) do
     t.integer  "team_id"
   end
 
-  add_foreign_key "business_hours", "users"
-  add_foreign_key "worklogs", "teams"
   add_foreign_key "worklogs", "teams"
 end

@@ -18,7 +18,7 @@ class WorklogForm
   validates :user, presence: true
   validates :client, presence: true
   validates :hourly_rate, numericality: {greater_than: 0}
-  validates :total, numericality: {greater_than: 0}
+  validates :total, numericality: {greater_than: 0}, allow_nil: true
   validates :comment, presence: true
   validate :timeframes_validator
 
@@ -76,7 +76,7 @@ class WorklogForm
     use_worklog.client      = client
     use_worklog.team        = team
     use_worklog.timeframes  = timeframes
-    use_worklog.total       = Money.new total.to_f * 100
+    use_worklog.total       = Money.new(total&.to_f || use_worklog.calc_total ) * 100
     use_worklog
   end
 

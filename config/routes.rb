@@ -1,6 +1,10 @@
 Timetracker::Application.routes.draw do
   root :to => "static#home"
 
+  namespace :api do
+    resources :worklogs, only: [:create]
+  end
+
   resources :users, only: [:new, :create, :show, :edit, :update] do
     collection do
       get :usernames
