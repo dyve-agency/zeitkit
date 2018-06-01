@@ -39,7 +39,7 @@ div ng-controller="WorklogsController"
       label Total
       div.margin-top-5
         span.label.label-success
-          | {{ worklog.total | currency: worklog.client.currency.symbol}}
+          | {{ worklog.total | currency: currentUser.currency.symbol}}
   .row ng-show="worklog.creditBlocked()"
     .col-xs-12
       .alert.alert-danger.margin-top-15.margin-bottom-0
