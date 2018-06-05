@@ -49,42 +49,32 @@ div ng-controller="WorklogsController"
   hr
   .well ng-repeat="time in worklog.timeframes"
     .row
-      .col-xs-12.col-md-6
+      .col-xs-12.col-md-12.col-lg-4
+        p.input-group
+          div uib-datepicker=true ng-model="time.date" max-date="maxDate" datepicker-options="dateOptions"
+      .col-md-12.col-xs-12.col-lg-8
+        rzslider rz-slider-model="time.startedMinutes" rz-slider-high="time.endedMinutes" rz-slider-options="sliderOptions"
         .row
-          .col-xs-6.col-lg-4
-            h4 Start
-            p.input-group
-              input type="text" class="form-control" datepicker-popup="{{'yyyy-MM-dd'}}" ng-model="time.started" is-open="time.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close"
-              span.input-group-btn
-                button.btn.btn-default ng-click="open($event, time)" type="button"
-                  i.glyphicon.glyphicon-calendar
-
-          .col-xs-6.col-lg-4
-            .timeframe-picker
-              timepicker ng-model="time.started" hour-step="1" minute-step="10" show-meridian="false"
-          .col-xs-12.col-lg-4
-            span.btn.btn-default.aligned-set-now ng-click="time.setStartedNow()"
-              i.fa.fa-clock-o
-              '
-              | Set to now
-
-      .col-xs-12.col-md-6
-        .row
-          .col-xs-6.col-lg-4
-            h4 End
-            p.input-group
-              input type="text" class="form-control" datepicker-popup="{{'yyyy-MM-dd'}}" ng-model="time.ended" is-open="time.openedEnded" datepicker-options="dateOptions" ng-required="true" close-text="Close"
-              span.input-group-btn
-                button.btn.btn-default ng-click="openEnded($event, time)" type="button"
-                  i.glyphicon.glyphicon-calendar
-          .col-xs-6.col-lg-4
-            .timeframe-picker
-              timepicker ng-model="time.ended" hour-step="1" minute-step="10" show-meridian="false"
-          .col-xs-12.col-lg-4
-            span.btn.btn-default.aligned-set-now ng-click="time.setEndedNow()"
-              i.fa.fa-clock-o
-              '
-              | Set to now
+          .col-md-6
+            .row
+              .col-xs-6.col-lg-4
+                .timeframe-picker
+                  div uib-timepicker=true ng-model="time.started" hour-step="1" minute-step="5" show-meridian="false" mousewheel="false" max="time.ended"
+              .col-xs-12.col-lg-4
+                span.btn.btn-default.aligned-set-now ng-click="time.setStartedNow()"
+                  i.fa.fa-clock-o
+                  '
+                  | Set to now
+          .col-md-6
+            .row
+              .col-xs-6.col-lg-4
+                .timeframe-picker
+                  div uib-timepicker=true ng-model="time.ended" hour-step="1" minute-step="5" show-meridian="false" mousewheel="false" min="time.started"
+              .col-xs-12.col-lg-4
+                span.btn.btn-default.aligned-set-now ng-click="time.setEndedNow()"
+                  i.fa.fa-clock-o
+                  '
+                  | Set to now
       .col-xs-12
         hr
           span.btn.btn-default ng-click="worklog.removeTimeframe(time)"

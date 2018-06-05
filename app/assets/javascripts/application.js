@@ -31,6 +31,7 @@
 //= require angular-ui-bootstrap
 //= require ng-quick-date
 //= require angular-marked
+//= require rzslider
 
 //= require_tree ./public/
 //= require ./angular_init

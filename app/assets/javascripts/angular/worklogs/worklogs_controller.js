@@ -16,7 +16,8 @@
         $scope.currentUser = null;
         $scope.dateOptions = {
           formatYear: "yy",
-          startingDay: 1
+          startingDay: 1,
+          maxDate: new Date(), // today
         };
         const idPresent = (typeof gon !== 'undefined' && gon !== null) && gon && gon.worklog_id;
 
@@ -72,6 +73,20 @@
         $event.preventDefault();
         $event.stopPropagation();
         return timeframe.openedEnded = true;
+      };
+
+      $scope.sliderOptions = {
+        floor: 0,
+        ceil: 24 * 60 * 60 * 1000 - 1,
+        step: 5 * 60 * 1000,
+        draggableRange: true,
+        translate: (value, id, label) => {
+          let minutes = (value / 60 / 1000) | 0;
+          let hours = (minutes / 60) | 0;
+          minutes = minutes % 60;
+
+          return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+        },
       };
 
       return $scope.init();
