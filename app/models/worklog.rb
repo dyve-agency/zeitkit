@@ -65,9 +65,7 @@ class Worklog < ActiveRecord::Base
 
   def self.range_duration_seconds(worklogs)
     return 0 if worklogs.empty?
-    sum_start = worklogs.map{|w| w.start_time.to_i}.reduce(:+)
-    sum_end = worklogs.map{|w| w.end_time.to_i}.reduce(:+)
-    sum_end - sum_start
+    worklogs.map(&:duration).inject(:+)
   end
 
   def self.hours_from_seconds(seconds)
