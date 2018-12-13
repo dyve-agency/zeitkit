@@ -23,17 +23,26 @@ class InvoicesController < ApplicationController
   end
 
   def worklogs_export
-    @invoice = @invoice.decorate
-    @client = @invoice.client
-    worklogs = @invoice.worklogs.order("start_time DESC").includes(:user, :timeframes).decorate
-    @sum = worklogs.map(&:total).inject(:+)
-    seconds = Worklog.range_duration_seconds(worklogs)
-    @hours = Worklog.hours_from_seconds seconds
-    @minutes = Worklog.remaining_minutes_from_seconds seconds
-    @sorted_worklogs = worklogs.sort_by{|w| [w.user.full_name_or_username, w.timeframes.map(&:started).min]}.group_by{ |w| w.user.full_name_or_username }
-    @worklogs_pdf = PDFKit.new(render_to_string(action: "../worklogs/detailed_index", layout: 'application_print'))
-    @worklogs_pdf.stylesheets << temp_stylesheet
-    send_data(@worklogs_pdf.to_pdf, filename: @invoice.worklogs_export_file_name, type: 'application/pdf')
+    @invoice         = @invoice.decorate
+    @client          = @invoice.client
+    worklogs         = @invoice.worklogs.order("start_time DESC").includes(:user, :timeframes).decorate
+    @sum             = worklogs.map(&:total).inject(:+)
+    seconds          = Worklog.range_duration_seconds(worklogs)
+    @hours           = Worklog.hours_from_seconds seconds
+    @minutes         = Worklog.remaining_minutes_from_seconds seconds
+    @sorted_worklogs = worklogs.sort_by do |w|
+      [w.user.full_name_or_username, w.timeframes.map(&:started).min]
+    end.group_by { |w| w.user.full_name_or_username }
+    respond_to do |format|
+      format.html do
+        render "/worklogs/detailed_index", layout: 'application_print'
+      end
+      format.pdf do
+        @worklogs_pdf    = PDFKit.new(render_to_string(template: "/worklogs/detailed_index", layout: 'application_print', formats: 'html'))
+        @worklogs_pdf.stylesheets << temp_stylesheet
+        send_data(@worklogs_pdf.to_pdf, filename: @invoice.worklogs_export_file_name, type: 'application/pdf')
+      end
+    end
   end
 
   def show

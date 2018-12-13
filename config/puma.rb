@@ -4,7 +4,7 @@ max_threads = ENV.fetch('WEB_THREADS_MAX', 16).to_i
 min_threads = ENV.fetch('WEB_THREADS_MIN', max_threads).to_i
 threads min_threads, max_threads
 
-bind 'tcp://0.0.0.0:' + ENV['PORT']
+bind 'tcp://0.0.0.0:' + ENV.fetch("PORT", "3000")
 preload_app!
 
 # Don't wait for workers to finish their work. We might have long-running HTTP requests.

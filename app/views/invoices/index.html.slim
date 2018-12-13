@@ -39,7 +39,7 @@ table.table.table-bordered
             li= link_to "Download PDF".html_safe,
               pdf_export_invoice_path(invoice)
             li= link_to "Download Worklogs PDF".html_safe,
-              worklogs_export_invoice_path(invoice)
+              worklogs_export_invoice_path(invoice, format: :pdf)
             li= link_to 'Delete', invoice, confirm: 'Are you sure? This can not be undone.', method: :delete
 
 .pull-right
