@@ -10,7 +10,7 @@ gem 'slim'
 gem 'slim-rails'
 gem 'sorcery', git: 'https://github.com/NoamB/sorcery.git'
 
-gem 'simple_form', git: "https://github.com/plataformatec/simple_form.git"
+gem 'simple_form', '< 4.0'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -90,7 +90,7 @@ gem "virtus"
 gem 'active_model_serializers', git: "https://github.com/rails-api/active_model_serializers.git", branch: 'e2ded594d31fa97201c3e2fa1106708d68d86751'
 
 # Decorators
-gem 'draper', git: "https://github.com/drapergem/draper.git"
+gem 'draper', '~> 2.1.0'
 
 # CSS mixins
 gem 'bourbon'

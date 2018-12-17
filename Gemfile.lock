@@ -65,16 +65,6 @@ GIT
       will_paginate (>= 3.0.3)
 
 GIT
-  remote: https://github.com/drapergem/draper.git
-  revision: 57a514133bc241e74cc4e8877d014cad4e1f12c6
-  specs:
-    draper (2.1.0)
-      actionpack (>= 3.0)
-      activemodel (>= 3.0)
-      activesupport (>= 3.0)
-      request_store (~> 1.0)
-
-GIT
   remote: https://github.com/hendricius/nested_form.git
   revision: ca85dfbb040391fc3eb4f48cb91c4af70a904733
   specs:
@@ -85,14 +75,6 @@ GIT
   revision: 57658c789524aaf2196515c07a74542c41acf1e2
   specs:
     pdfkit (0.8.2)
-
-GIT
-  remote: https://github.com/plataformatec/simple_form.git
-  revision: ac63da0f0b38df82385493f25f649e320b0acb4a
-  specs:
-    simple_form (3.2.1)
-      actionpack (> 4, < 5.1)
-      activemodel (> 4, < 5.1)
 
 GIT
   remote: https://github.com/rails-api/active_model_serializers.git
@@ -185,6 +167,11 @@ GEM
     dotiw (3.1.1)
       actionpack (>= 3)
       i18n
+    draper (2.1.0)
+      actionpack (>= 3.0)
+      activemodel (>= 3.0)
+      activesupport (>= 3.0)
+      request_store (~> 1.0)
     equalizer (0.0.11)
     erubis (2.7.0)
     execjs (2.6.0)
@@ -344,6 +331,9 @@ GEM
     sawyer (0.7.0)
       addressable (>= 2.3.5, < 2.5)
       faraday (~> 0.8, < 0.10)
+    simple_form (3.5.1)
+      actionpack (> 4, < 5.2)
+      activemodel (> 4, < 5.2)
     simplecov (0.15.0)
       docile (~> 1.1.0)
       json (>= 1.8, < 3)
@@ -410,7 +400,7 @@ DEPENDENCIES
   datetimepicker-rails!
   dotenv
   dotiw
-  draper!
+  draper (~> 2.1.0)
   font-awesome-rails!
   foreman
   gon
@@ -440,7 +430,7 @@ DEPENDENCIES
   responders
   rspec-rails (~> 3.6)
   sass-rails (>= 3.2)
-  simple_form!
+  simple_form (< 4.0)
   simplecov
   slim
   slim-rails
@@ -458,4 +448,4 @@ RUBY VERSION
    ruby 2.5.1p57
 
 BUNDLED WITH
-   1.16.1
+   1.16.5

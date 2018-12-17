@@ -22,3 +22,5 @@
 
 # SimpleCoverage
 coverage
+/.env
+/.env.test
