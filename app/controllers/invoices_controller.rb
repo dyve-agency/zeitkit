@@ -42,6 +42,9 @@ class InvoicesController < ApplicationController
         @worklogs_pdf.stylesheets << temp_stylesheet
         send_data(@worklogs_pdf.to_pdf, filename: @invoice.worklogs_export_file_name, type: 'application/pdf')
       end
+      format.csv do
+        render text: Worklog.to_csv(worklogs)
+      end
     end
   end
 
