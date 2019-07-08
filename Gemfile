@@ -9,14 +9,14 @@ gem 'rails', '~> 4.2.0'
 gem 'pg'
 gem 'slim'
 gem 'slim-rails'
-gem 'sorcery', git: 'https://github.com/NoamB/sorcery.git'
+gem 'sorcery', git: 'https://github.com/NoamB/sorcery.git', tag: 'v0.9.1'
 
 gem 'simple_form', '< 4.0'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 
-gem 'cancancan', git: "https://github.com/CanCanCommunity/cancancan.git", branch: "develop"
+gem 'cancancan', git: "https://github.com/CanCanCommunity/cancancan.git", tag: 'v1.13.1'
 gem 'airbrake', '~> 6.2'
 gem 'redcarpet'
 gem 'rack-force_domain'
@@ -61,14 +61,14 @@ gem "prawn"
 # gem "therubyracer"
 
 # Pagination
-gem 'will_paginate-bootstrap', git: "https://github.com/bootstrap-ruby/will_paginate-bootstrap.git"
+gem 'will_paginate-bootstrap', git: "https://github.com/bootstrap-ruby/will_paginate-bootstrap.git", tag: 'v1.0.1'
 
 # Creating nested forms easily
 gem "nested_form", git: "https://github.com/hendricius/nested_form.git"
 
 # Creating charts
-gem 'chartkick', git: "https://github.com/ankane/chartkick.git"
-gem 'groupdate', git: "https://github.com/ankane/groupdate.git"
+gem 'chartkick', git: "https://github.com/ankane/chartkick.git", tag: 'v2.2.5'
+gem 'groupdate', git: "https://github.com/ankane/groupdate.git", tag: 'v2.5.3'
 
 # Angular JS
 gem 'angularjs-rails'
@@ -95,7 +95,7 @@ gem 'draper', '~> 2.1.0'
 
 # CSS mixins
 gem 'bourbon'
-gem "font-awesome-rails", git: "https://github.com/bokmann/font-awesome-rails.git"
+gem "font-awesome-rails", git: "https://github.com/bokmann/font-awesome-rails.git", tag: 'v4.6.1.0'
 
 gem 'dotiw'
 
@@ -123,4 +123,4 @@ group :production do
   gem 'rails_12factor'
 end
 
-gem 'datetimepicker-rails', github: 'zpaulovics/datetimepicker-rails', branch: 'master', submodules: true
+gem 'datetimepicker-rails', github: 'zpaulovics/datetimepicker-rails', tag: 'v4.7.16', submodules: true

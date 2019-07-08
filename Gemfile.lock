@@ -1,14 +1,14 @@
 GIT
   remote: git://github.com/rails/protected_attributes.git
-  revision: ef8ffc4b6c3d34a226a23595cb2ed199d02198d0
+  revision: a1e6dfd39cc106939a2f96ec98cfff4950eb3e7e
   specs:
-    protected_attributes (1.1.3)
+    protected_attributes (1.1.4)
       activemodel (>= 4.0.1, < 5.0)
 
 GIT
   remote: git://github.com/zpaulovics/datetimepicker-rails.git
-  revision: 36d21cec5da7f5b214925804f60e63c61c747023
-  branch: master
+  revision: 7ed798be8a611efcca5b828f296b3b66144c0f43
+  tag: v4.7.16
   submodules: true
   specs:
     datetimepicker-rails (4.7.16)
@@ -16,14 +16,15 @@ GIT
 
 GIT
   remote: https://github.com/CanCanCommunity/cancancan.git
-  revision: fbff9a114ccb76205b164c85a9b2f7d211e95171
-  branch: develop
+  revision: 921bb333470006b9eae860aba25c86e0ffc405ad
+  tag: v1.13.1
   specs:
     cancancan (1.13.1)
 
 GIT
   remote: https://github.com/NoamB/sorcery.git
-  revision: c5138780d0f2cc23b19641913b6c6d613177e0dd
+  revision: 6f88171d4b69483ae54965f2f3daf94a2b8c2cce
+  tag: v0.9.1
   specs:
     sorcery (0.9.1)
       bcrypt (~> 3.1)
@@ -39,27 +40,31 @@ GIT
 
 GIT
   remote: https://github.com/ankane/chartkick.git
-  revision: 0a5923e1f2c302279f8bad2b9d45db95c0758db7
+  revision: 65fcbf2c79f02eaa406e34e80f3e5a4d9627851b
+  tag: v2.2.5
   specs:
-    chartkick (2.2.2)
+    chartkick (2.2.5)
 
 GIT
   remote: https://github.com/ankane/groupdate.git
-  revision: f514b84370b2c180b42f30511232e5725104e2da
+  revision: aeeb321022884c86fe4d4c7cc04c232c117e52e5
+  tag: v2.5.3
   specs:
-    groupdate (2.5.2)
+    groupdate (2.5.3)
       activesupport (>= 3)
 
 GIT
   remote: https://github.com/bokmann/font-awesome-rails.git
-  revision: cf18e0018a893ef8b8679c187f041c48386f5b05
+  revision: 928dad6aa4b0316f45618c4f8fe9aa532c4d9b80
+  tag: v4.6.1.0
   specs:
     font-awesome-rails (4.6.1.0)
       railties (>= 3.2, < 5.1)
 
 GIT
   remote: https://github.com/bootstrap-ruby/will_paginate-bootstrap.git
-  revision: 5fb486741b975f0971a7ab71bcb7b2b3162b5c0b
+  revision: 2b27ff3a03e8ebee839112e4c0222de574ac2f95
+  tag: v1.0.1
   specs:
     will_paginate-bootstrap (1.0.1)
       will_paginate (>= 3.0.3)
@@ -72,9 +77,9 @@ GIT
 
 GIT
   remote: https://github.com/pdfkit/pdfkit.git
-  revision: 57658c789524aaf2196515c07a74542c41acf1e2
+  revision: 40e4b629d03215e5bb463f2d4465dd0bbf13775a
   specs:
-    pdfkit (0.8.2)
+    pdfkit (0.8.4.1)
 
 GIT
   remote: https://github.com/rails-api/active_model_serializers.git
