@@ -227,7 +227,7 @@ GEM
     multi_xml (0.5.5)
     multipart-post (2.0.0)
     ng-rails-csrf (0.1.0)
-    nokogiri (1.10.1)
+    nokogiri (1.10.5)
       mini_portile2 (~> 2.4.0)
     oauth (0.5.1)
     oauth2 (1.1.0)
