@@ -70,7 +70,7 @@ class TeamAggregator
   end
 
   def sorted_results
-    results.sort_by {|r| r.total }.reverse
+    results.sort_by {|r| r.total_cents }.reverse
   end
 
   def generate_result_data user
