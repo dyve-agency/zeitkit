@@ -1,20 +1,4 @@
 GIT
-  remote: git://github.com/rails/protected_attributes.git
-  revision: a1e6dfd39cc106939a2f96ec98cfff4950eb3e7e
-  specs:
-    protected_attributes (1.1.4)
-      activemodel (>= 4.0.1, < 5.0)
-
-GIT
-  remote: git://github.com/zpaulovics/datetimepicker-rails.git
-  revision: 7ed798be8a611efcca5b828f296b3b66144c0f43
-  tag: v4.7.16
-  submodules: true
-  specs:
-    datetimepicker-rails (4.7.16)
-      momentjs-rails (>= 2.9.0)
-
-GIT
   remote: https://github.com/CanCanCommunity/cancancan.git
   revision: 921bb333470006b9eae860aba25c86e0ffc405ad
   tag: v1.13.1
@@ -90,6 +74,22 @@ GIT
       actionpack (>= 4.0)
       activemodel (>= 4.0)
       railties (>= 4.0)
+
+GIT
+  remote: https://github.com/rails/protected_attributes.git
+  revision: a1e6dfd39cc106939a2f96ec98cfff4950eb3e7e
+  specs:
+    protected_attributes (1.1.4)
+      activemodel (>= 4.0.1, < 5.0)
+
+GIT
+  remote: https://github.com/zpaulovics/datetimepicker-rails.git
+  revision: 7ed798be8a611efcca5b828f296b3b66144c0f43
+  tag: v4.7.16
+  submodules: true
+  specs:
+    datetimepicker-rails (4.7.16)
+      momentjs-rails (>= 2.9.0)
 
 GEM
   remote: https://rubygems.org/
@@ -227,6 +227,7 @@ GEM
     multi_xml (0.5.5)
     multipart-post (2.0.0)
     ng-rails-csrf (0.1.0)
+    nio4r (2.5.8)
     nokogiri (1.10.1)
       mini_portile2 (~> 2.4.0)
     oauth (0.5.1)
@@ -251,7 +252,8 @@ GEM
       slop (~> 3.4)
     pry-rails (0.3.4)
       pry (>= 0.9.10)
-    puma (3.11.4)
+    puma (5.6.4)
+      nio4r (~> 2.0)
     quiet_assets (1.1.0)
       railties (>= 3.1, < 5.0)
     rack (1.6.12)
