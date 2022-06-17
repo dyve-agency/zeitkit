@@ -1,20 +1,4 @@
 GIT
-  remote: git://github.com/rails/protected_attributes.git
-  revision: a1e6dfd39cc106939a2f96ec98cfff4950eb3e7e
-  specs:
-    protected_attributes (1.1.4)
-      activemodel (>= 4.0.1, < 5.0)
-
-GIT
-  remote: git://github.com/zpaulovics/datetimepicker-rails.git
-  revision: 7ed798be8a611efcca5b828f296b3b66144c0f43
-  tag: v4.7.16
-  submodules: true
-  specs:
-    datetimepicker-rails (4.7.16)
-      momentjs-rails (>= 2.9.0)
-
-GIT
   remote: https://github.com/CanCanCommunity/cancancan.git
   revision: 921bb333470006b9eae860aba25c86e0ffc405ad
   tag: v1.13.1
@@ -90,6 +74,22 @@ GIT
       actionpack (>= 4.0)
       activemodel (>= 4.0)
       railties (>= 4.0)
+
+GIT
+  remote: https://github.com/rails/protected_attributes.git
+  revision: a1e6dfd39cc106939a2f96ec98cfff4950eb3e7e
+  specs:
+    protected_attributes (1.1.4)
+      activemodel (>= 4.0.1, < 5.0)
+
+GIT
+  remote: https://github.com/zpaulovics/datetimepicker-rails.git
+  revision: 7ed798be8a611efcca5b828f296b3b66144c0f43
+  tag: v4.7.16
+  submodules: true
+  specs:
+    datetimepicker-rails (4.7.16)
+      momentjs-rails (>= 2.9.0)
 
 GEM
   remote: https://rubygems.org/
@@ -191,7 +191,8 @@ GEM
       json
       multi_json
       request_store (>= 1.0)
-    i18n (0.7.0)
+    i18n (0.9.5)
+      concurrent-ruby (~> 1.0)
     ice_nine (0.11.2)
     jbuilder (2.4.1)
       activesupport (>= 3.0.0, < 5.1)
@@ -210,14 +211,13 @@ GEM
     method_source (0.8.2)
     mini_mime (1.0.1)
     mini_portile2 (2.4.0)
-    minitest (5.11.3)
+    minitest (5.15.0)
     momentjs-rails (2.11.1)
       railties (>= 3.1)
     monetize (1.4.0)
       money (~> 6.7)
-    money (6.7.0)
-      i18n (>= 0.6.4, <= 0.7.0)
-      sixarm_ruby_unaccent (>= 1.1.1, < 2)
+    money (6.16.0)
+      i18n (>= 0.6.4, <= 2)
     money-rails (1.6.0)
       activesupport (>= 3.0)
       monetize (~> 1.4.0)
@@ -344,7 +344,6 @@ GEM
       json (>= 1.8, < 3)
       simplecov-html (~> 0.10.0)
     simplecov-html (0.10.2)
-    sixarm_ruby_unaccent (1.1.1)
     slim (3.0.6)
       temple (~> 0.7.3)
       tilt (>= 1.3.3, < 2.1)
@@ -370,7 +369,7 @@ GEM
     thread_safe (0.3.6)
     tilt (2.0.2)
     ttfunk (1.4.0)
-    tzinfo (1.2.5)
+    tzinfo (1.2.9)
       thread_safe (~> 0.1)
     uglifier (3.0.0)
       execjs (>= 0.3.0, < 3)
